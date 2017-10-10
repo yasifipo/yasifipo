@@ -1,0 +1,12 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		{% block additional_scripts %}{% endblock %}
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/cucumber.css')}}">
+	</head>
+
+	<body>
+		{% block body %}{% endblock %}
+	</body>
+</html>

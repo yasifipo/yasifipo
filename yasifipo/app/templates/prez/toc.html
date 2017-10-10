@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% if display_toc == True %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/toc.css')}}">
+{% endif %}
+{% endblock %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block body %}
+<div class='cucumber'>
+{% for i in cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> {% if i != cucumber[cucumber|length -1] %} > {% endif %}
+{% endfor %}
+</div>
+{% if langs|length > 1 %}
+<div>
+	{% for lang in langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+{{content}}
+
+{% if display_toc == True %}
+{{toc}}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+# Posts
+  # Gestion accès
+    # Public
+    # Accessible par mot de passe
+    # Accessible pour certains users seulement
+    # Accessible pour certains groupes de users seulement
+  # lien direct extérieur
+# Pages
+  # Pagination
+# Commentaires
+  # Modération
+# Menu
+  # lien interne
+  # lien direct extérieur
+# Catégories
+  # Gestion
+  # Multilangue
+# Tags
+  # Gestion
+  # Multilangue
+# Série
+  # Comment on fait ?
+# Users
+  # Roles
+# Plugins
+  # A définir comment on fait ?
+# Templates
+  # Switch entre templates
+# Admin
+
+
+
+# Multisite
+  # Site par défaut : tous ?
+# Multiuser
+  # User par défaut ?

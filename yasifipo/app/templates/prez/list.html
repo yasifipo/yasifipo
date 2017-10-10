@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+List of Prez<!-- TODO -->
+{% endblock %}
+
+{% block body %}
+<!-- TODO lang -->
+{% for prez in list_ %}
+<a href="{{prez['url']}}">{{prez['title']}}</a><br/>
+{% endfor %}
+
+{% endblock %}

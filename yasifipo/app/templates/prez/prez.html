@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reveal.css')}}">
+<link rel="stylesheet" href="{{ theme }}" id="theme">
+<script src="{{ url_for('static', filename='js/conf.js')}}"></script>
+{% endblock %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block body %}
+<div class='cucumber'>
+{% for i in cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> >
+{% endfor %}
+{{title}}
+</div>
+{% if category %}
+<a href="{{category['url']}}">{{category['descr']}}</a>
+{% endif %}
+{% if langs|length > 1 %}
+<div>
+	{% for lang in langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+<div class="reveal">
+	<div class="slides">
+		<section data-markdown data-separator="^\n~~~\n$" data-separator-vertical="^\n~~\n$" data-notes="^Note:" data-element-attributes="{_\s*?([^}]+?)}">>
+			<script type="text/template">
+{{ content }}
+			</script>
+		</section>
+	</div>
+</div>
+
+<script src="{{ url_for('static', filename='lib/js/head.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/reveal.js')}}"></script>
+<script src="{{ url_for('static', filename='plugin/markdown/marked.js')}}"></script>
+<script src="{{ url_for('static', filename='plugin/markdown/markdown.js')}}"></script>
+
+<script>
+	Reveal.initialize(conf);
+</script>
+{% endblock %}
