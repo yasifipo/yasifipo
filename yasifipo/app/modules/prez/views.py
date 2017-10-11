@@ -8,6 +8,7 @@ from flask import render_template
 from flask import Markup
 
 from os.path import dirname
+from markdown import markdown
 
 def display_prez_list(lang):
 	list_ = []
@@ -77,4 +78,4 @@ def display_chapter(file_, up, lang):
 		langs = get_langs_from_ref('display_chapter', ref=up, up=up)
 	else:
 		langs = []
-	return render_template('prez/toc.html', title=yaml['title'], content=Markup(yaml.content), toc=Markup(data), display_toc=display_toc, cucumber=cucumber, langs=langs)
+	return render_template('prez/toc.html', title=yaml['title'], content=Markup(markdown(yaml.content)), toc=Markup(data), display_toc=display_toc, cucumber=cucumber, langs=langs)
