@@ -16,7 +16,7 @@ def init_categories_data():
 		# set url for each category
 		for cat in app.yasifipo['categories'].values():
 			for lg in cat.keys():
-				yasifipo_register(yaml['cat'][lg] + cat[lg]['slug'], display_category, 'display_category', {'category': cat[lg]['cat'], 'lang': lg})
+				yasifipo_register(yaml['cat'][lg] + cat[lg]['slug'] + '/', display_category, 'display_category', {'category': cat[lg]['cat'], 'lang': lg})
 
 def manage_category(yaml, type_, lang_=None):
 	if 'lang' not in yaml.keys():

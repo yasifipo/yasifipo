@@ -4,7 +4,7 @@ from modules.site import *
 
 from modules.site.langs import *
 
-from flask import render_template
+from flask import render_template, request
 from flask import Markup
 
 from os.path import dirname
@@ -55,12 +55,21 @@ def display_prez(file_, lang):
 
 		#TODO lang ?
 
+		theme = {}
 		if 'theme' in yaml.keys():
-			theme = url_for('static', filename='css/theme/'+yaml['theme']+'.css')
+			theme['theme'] = yasifipo_url_for('static', filename='css/theme/'+yaml['theme']+'.css')
 		else:
-			theme = url_for('static', filename='css/theme/'+ app.config['REVEAL_DEFAULT_THEME'] +'.css')
+			theme['theme'] = yasifipo_url_for('static', filename='css/theme/'+ app.config['REVEAL_DEFAULT_THEME'] +'.css')
+		theme['reveal_css'] = yasifipo_url_for('static', filename='css/reveal.css')
+		theme['conf']   = yasifipo_url_for('static', filename='js/conf.js')
 
-		return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=Markup(yaml.content), cucumber=cucumber, category=category)
+
+		theme['head'] = yasifipo_url_for('static', filename='lib/js/head.min.js')
+		theme['reveal_js'] = yasifipo_url_for('static', filename='js/reveal.js')
+		theme['marked'] = yasifipo_url_for('static', filename='plugin/markdown/marked.js')
+		theme['markdown'] = yasifipo_url_for('static', filename='plugin/markdown/markdown.js')
+
+		return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=img_convert(Markup(yaml.content), request.url_rule.rule), cucumber=cucumber, category=category)
 
 
 # Generate ToC page
@@ -84,4 +93,7 @@ def display_chapter(file_, up, lang):
 		langs = get_langs_from_ref('display_chapter', ref=up, up=up)
 	else:
 		langs = []
-	return render_template('prez/toc.html', title=yaml['title'], content=Markup(markdown(yaml.content)), toc=Markup(data), display_toc=display_toc, cucumber=cucumber, langs=langs)
+
+	toc_css = yasifipo_url_for('static', filename='css/toc.css')
+
+	return render_template('prez/toc.html', title=yaml['title'], content=Markup(markdown(yaml.content)), toc=Markup(data), display_toc=display_toc, cucumber=cucumber, langs=langs, toc_css=toc_css)

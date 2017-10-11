@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block additional_scripts %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/reveal.css')}}">
-<link rel="stylesheet" href="{{ theme }}" id="theme">
-<script src="{{ url_for('static', filename='js/conf.js')}}"></script>
+<link rel="stylesheet" href="{{ theme['reveal_css']}}">
+<link rel="stylesheet" href="{{ theme['theme'] }}" id="theme">
+<script src="{{ theme['conf'] }}"></script>
 {% endblock %}
 
 {% block title %}
@@ -37,10 +37,10 @@
 	</div>
 </div>
 
-<script src="{{ url_for('static', filename='lib/js/head.min.js')}}"></script>
-<script src="{{ url_for('static', filename='js/reveal.js')}}"></script>
-<script src="{{ url_for('static', filename='plugin/markdown/marked.js')}}"></script>
-<script src="{{ url_for('static', filename='plugin/markdown/markdown.js')}}"></script>
+<script src="{{ theme['head']}}"></script>
+<script src="{{ theme['reveal_js'] }}"></script>
+<script src="{{ theme['marked'] }}"></script>
+<script src="{{ theme['markdown'] }}"></script>
 
 <script>
 	Reveal.initialize(conf);
