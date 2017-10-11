@@ -1,5 +1,6 @@
-#TODO: PREZ: change slug by an automatic slug from directoryname/filename, but with possibility to be overwritten
-#TODO: ALL: merge with yasifipo (category / tags / pages / blog)
+#TODO: ALL: merge with yasifipo (tags / blog)
 #TODO: ALL: verify that a slug/rule is not used already
 #TODO: PREZ: css
 #TODO: PREZ: page for list of prez
+#TODO: example _data
+#TODO: quand une prez n'a pas de yaml --> le rajouter automatiquement
