@@ -26,6 +26,12 @@ def display_prez_list(lang):
 			with open(app.config['PREZ_DIR'] + prez['slug'] + "/.chapter.md") as prez_:
 				yaml_prez = load(prez_)
 
+				if check_server(prez) == False:
+					continue
+
+				if 'draft' in prez.keys() and prez['draft'] == True:
+					continue
+
 				title = yaml_prez['title']
 				list_.append({
 					'title': title,
