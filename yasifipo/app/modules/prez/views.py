@@ -69,7 +69,7 @@ def display_prez(file_, lang):
 		theme['marked'] = yasifipo_url_for('static', filename='plugin/markdown/marked.js')
 		theme['markdown'] = yasifipo_url_for('static', filename='plugin/markdown/markdown.js')
 
-		return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=img_convert(Markup(yaml.content), request.url_rule.rule), cucumber=cucumber, category=category)
+		return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=img_convert(Markup(yaml.content), request.url_rule.rule), cucumber=cucumber, category=category, own=request.url_rule.rule)
 
 
 # Generate ToC page
