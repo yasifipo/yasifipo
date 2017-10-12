@@ -21,4 +21,4 @@ class Configuration(object):
 	FREEZER_RELATIVE_URLS = True
 
 	DEFAULT_LANG = 'en'
-	REVEAL_DEFAULT_THEME = "black"
+	REVEAL_DEFAULT_THEME = "yasifipo"
