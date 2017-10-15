@@ -30,6 +30,15 @@ def get_pages_data(toc, frozen, directory):
 			with open(directory + "/" + file_) as fil_:
 				yaml = load(fil_)
 
+				#if there is no header on file, create it
+				if len(yaml.keys()) == 0:
+					with open(directory + "/" + file_, "w") as fil_write:
+						fil_write.write('---\n')
+						fil_write.write('slug: ' + slugify(file_) + "\n")
+						fil_write.write('title: ' + file_ + "\n")
+						fil_write.write('---\n')
+						fil_write.write(yaml.content)
+
 				if check_server(yaml) == False:
 					continue
 
