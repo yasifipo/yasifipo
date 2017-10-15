@@ -123,6 +123,18 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 			with open(directory + "/" + file_) as fil_:
 				yaml = load(fil_)
 
+				#if there is no header on file, create it
+				if len(yaml.keys()) == 0:
+					with open(directory + "/" + file_, "w") as fil_write:
+						fil_write.write('---\n')
+						fil_write.write('slug: ' + slugify(file_) + "\n")
+						fil_write.write('title: ' + file_ + "\n")
+						fil_write.write('---\n')
+						fil_write.write(yaml.content)
+
+				with open(directory + "/" + file_) as fil_:
+					yaml = load(fil_)
+
 				# Do not use draft files
 				if 'draft' in yaml.keys() and yaml['draft'] == True:
 					continue
