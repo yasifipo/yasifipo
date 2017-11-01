@@ -16,3 +16,19 @@
   color: #8dcffc;
   text-shadow: none;
   border: none; }
+
+.cucumber-toc {
+  height: 30px;
+}
+
+.cucumber-toc a {
+  color: #42affa;
+  text-decoration: none;
+  -webkit-transition: color .15s ease;
+  -moz-transition: color .15s ease;
+  transition: color .15s ease; }
+
+.cucumber-toc a:hover {
+  color: #8dcffc;
+  text-shadow: none;
+  border: none; }

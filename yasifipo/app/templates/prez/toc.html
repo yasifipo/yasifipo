@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-<div class='cucumber'>
+<div class='cucumber-toc'>
 {% for i in cucumber %}
 <a href="{{i['url']}}">{{i['title']}}</a> {% if i != cucumber[cucumber|length -1] %} > {% endif %}
 {% endfor %}
