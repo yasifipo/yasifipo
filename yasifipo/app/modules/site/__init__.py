@@ -30,7 +30,7 @@ def yasifipo_register(rule, view_func, view_func_name, defaults):
 
 	app.yasifipo['frozen'].append([view_func_name, defaults])
 
-def set_ref(yaml, file_, lang_=None):
+def set_ref(yaml, file_, lang_=None, up=None):
 	if 'ref' in yaml.keys():
 		# store ref in order to get all langs of an object
 		if yaml["ref"] not in app.yasifipo["refs"].keys():
@@ -43,7 +43,7 @@ def set_ref(yaml, file_, lang_=None):
 				lang = lang_
 		else:
 			lang = yaml['lang']
-		app.yasifipo["refs"][yaml["ref"]][lang] = {'lang': lang, 'file':file_}
+		app.yasifipo["refs"][yaml["ref"]][lang] = {'lang': lang, 'file':file_, 'up':up}
 
 def check_server(yaml):
 	if 'server' in yaml.keys():

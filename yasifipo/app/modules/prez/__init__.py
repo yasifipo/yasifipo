@@ -25,23 +25,44 @@ def init_prez_data():
 				continue
 
 			set_lang(prez)
-			set_ref(prez, app.config['PREZ_DIR'] + prez['slug'] + "/")
-			if 'ref' in prez.keys():
-				ref = prez['ref']
-			else:
-				ref = None
-
-			if 'lang' in prez.keys():
-				lang = prez['lang']
-			else:
-				lang = app.config['DEFAULT_LANG']
 
 			if app.config['PREZ_URL_PREFIX'] == "":
 				init_slug = '/'
 			else:
 				init_slug = "/" + app.config['PREZ_URL_PREFIX'] + "/"
 
-			app.yasifipo['toc'], app.yasifipo['frozen'] = get_prez_data(app.yasifipo['toc'], app.yasifipo['frozen'], app.config['PREZ_DIR']  + prez['slug'] + "/", None, init_slug, ref, lang)
+			if 'lang' in prez.keys():
+				lang = prez['lang']
+			else:
+				lang = app.config['DEFAULT_LANG']
+
+			if 'single' in prez.keys():
+				# check if single value is an existing file
+				if not isfile(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']):
+					print("ERROR: single file " + prez['single'] + " for prez " + prez['slug'])
+					continue
+
+				manage_category(prez, "prez-single", lang)
+				set_ref(prez, app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'])
+
+				# register
+				with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']) as single_file:
+					yaml_single = load(single_file)
+					#TODO create yaml if not exist in 'single' file
+					rule = init_slug + yaml_single['slug'] + "/"
+					yasifipo_register(rule, display_prez, 'display_prez', {'file_':app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'] , 'lang': lang, 'single':True})
+			else:
+
+				set_ref(prez, app.config['PREZ_DIR'] + prez['slug'] + "/")
+				manage_category(prez, "course", lang)
+
+				if 'ref' in prez.keys():
+					ref = prez['ref']
+				else:
+					ref = None
+
+				# go for recursive stuff
+				app.yasifipo['toc'], app.yasifipo['frozen'] = get_prez_data(app.yasifipo['toc'], app.yasifipo['frozen'], app.config['PREZ_DIR']  + prez['slug'] + "/", None, init_slug, ref, lang)
 
 
 		# register pages for list of prez
@@ -85,6 +106,8 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 		else:
 			up   = None
 
+		set_ref(yaml_chapter, directory , lang, up)
+		manage_category(yaml_chapter, "toc", lang)
 		yasifipo_register(rule, display_chapter, 'display_chapter', {'file_': directory, 'up': up, 'lang': lang})
 
 	files = listdir(directory)
@@ -151,7 +174,7 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 				toc[directory]['children'].append({'type':'file', 'data':directory + "/" + file_})
 				manage_category(yaml, "prez", lang)
 				set_ref(yaml, directory + "/" + file_, lang)
-				yasifipo_register(rule, display_prez, 'display_prez', {'file_': directory + '/' + file_ , 'lang': lang})
+				yasifipo_register(rule, display_prez, 'display_prez', {'file_': directory + '/' + file_ , 'lang': lang, 'single': False})
 
 		# This is the file used for current directory data
 		elif isfile(directory + "/" + file_) and file_ == ".chapter.md":

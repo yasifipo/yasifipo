@@ -48,7 +48,7 @@ def get_children_data(file_, data, first_level, lang):
 			data = data + "<li>"
 			with open(child['data']) as data_file:
 				yaml = load(data_file)
-				data = data + "<a href='" + yasifipo_url_for('display_prez', file_=child['data'], lang=lang)  +"'>" + yaml['title'] + "</a>"
+				data = data + "<a href='" + yasifipo_url_for('display_prez', file_=child['data'], lang=lang, single=False)  +"'>" + yaml['title'] + "</a>"
 			data = data + "</li>"
 	data = data + "</ol>"
 

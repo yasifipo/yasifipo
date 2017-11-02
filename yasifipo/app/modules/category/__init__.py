@@ -60,7 +60,7 @@ def manage_category(yaml, type_, lang_=None):
 				fil_.write('descr:\n')
 				fil_.write('  ' + lang +':\n')
 				fil_.write('    descr: ' + yaml['category'] + '\n')
-				fil_.write('    slug: ' + slugify(aml['category']) + '\n')
+				fil_.write('    slug: ' + slugify(yaml['category']) + '\n')
 				fil_.write('---\n')
 				fil_.close()
 				print("New category detected : " + yaml['category'])
