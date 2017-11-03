@@ -168,7 +168,8 @@ body {
 .reveal table {
   margin: auto;
   border-collapse: collapse;
-  border-spacing: 0; }
+  border-spacing: 0;
+	color: #fff; }
 
 .reveal table th {
   font-weight: bold; }
