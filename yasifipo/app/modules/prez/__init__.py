@@ -48,7 +48,20 @@ def init_prez_data():
 				# register
 				with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']) as single_file:
 					yaml_single = load(single_file)
-					#TODO create yaml if not exist in 'single' file
+
+					#if there is no header on file, create it
+					if len(yaml_single.keys()) == 0:
+						with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'], "w") as fil_write:
+							fil_write.write('---\n')
+							fil_write.write('slug: ' + slugify(prez['single']) + "\n")
+							fil_write.write('title: ' + prez['single'] + "\n")
+							fil_write.write('---\n')
+							fil_write.write(yaml_single.content)
+
+
+						with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']) as single_file:
+							yaml_single = load(single_file)
+
 					rule = init_slug + yaml_single['slug'] + "/"
 					yasifipo_register(rule, display_prez, 'display_prez', {'file_':app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'] , 'lang': lang, 'single':True})
 			else:
