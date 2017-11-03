@@ -8,6 +8,9 @@
 {% endblock %}
 
 {% block body %}
+
+<h1>{{cat['descr']}}</h1>
+
 {% if langs|length > 1 %}
 <div>
 	{% for lang in langs %}
