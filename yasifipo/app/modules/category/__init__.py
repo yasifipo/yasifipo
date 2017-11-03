@@ -54,6 +54,7 @@ def manage_category(yaml, type_, lang_=None):
 				fil_ = open(app.config["CAT_DIR"] + yaml['category'], "w")
 				fil_.write('---\n')
 				fil_.write('category: ' + yaml['category'] + '\n')
+				fil_.write('sort: 99' + '\n')
 				fil_.write('descr:\n')
 				fil_.write('  ' + lang +':\n')
 				fil_.write('    descr: ' + yaml['category'] + '\n')
