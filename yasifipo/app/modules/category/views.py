@@ -45,6 +45,14 @@ def display_category(category, lang):
 				items[type_]['items'].append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_chapter', file_= app.yasifipo["refs"][item][lang]['file'], up=app.yasifipo["refs"][item][lang]['up'], lang=lang)})
 
 
+	# Sorting items in each type
+	#TODO
+	# for blog --> sorting by date / alphabetically / modif date / sort tag ?
+	# for pages --> sorting alphabetically / modif date / sort tag ?
+	# for course --> sorting alphabetically / modif date of any file in course / sort tag ?
+	# for single prez --> sorting alphabetically / modif date of single prez / sort tag ?
+	# for toc --> sorting alphabetically / order in corresponding course / modif date of any file in course / sort tag ?
+
 	# retrieve type_ sorting & labels
 	with open(app.config["CONFIG_DIR"] + "types") as fil_:
 		yaml = load(fil_)

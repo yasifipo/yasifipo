@@ -85,4 +85,4 @@ def manage_category(yaml, type_, lang_=None):
 		if type_ not in app.yasifipo["cat_ref"][yaml['category']][lang].keys():
 			app.yasifipo["cat_ref"][yaml['category']][lang][type_] = []
 		if yaml["ref"] not in app.yasifipo["cat_ref"][yaml['category']][lang][type_]:
-			app.yasifipo["cat_ref"][yaml['category']][lang][type_].append(yaml["ref"]) #TODO order ?
+			app.yasifipo["cat_ref"][yaml['category']][lang][type_].append(yaml["ref"])
