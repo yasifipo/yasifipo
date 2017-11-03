@@ -16,8 +16,11 @@
 </div>
 {% endif %}
 
-{% for item in list_ %}
+{% for typ in list_ %}
+{{typ['descr']}}<br/>
+{% for item in typ['items'] %}
 <a href="{{item['url']}}">{{item['title']}}</a><br/>
+{% endfor %}
 {% endfor %}
 
 {% endblock %}

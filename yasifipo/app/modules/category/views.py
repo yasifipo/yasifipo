@@ -19,8 +19,7 @@ def display_category(category, lang):
 
 	langs = get_category_langs(category)
 
-	items = []
-	#TODO sort by type_, and get some labels (using a global dict ?)
+	items = {}
 	for type_ in app.yasifipo["cat_ref"][category][lang].keys():
 		for item in app.yasifipo["cat_ref"][category][lang][type_]:
 			if type_ in ["course", "toc"]:
@@ -30,15 +29,31 @@ def display_category(category, lang):
 				with open(app.yasifipo["refs"][item][lang]['file']) as fil_:
 					yaml = load(fil_)
 
+			if type_ not in items.keys():
+				items[type_] = {}
+				items[type_]['items'] = []
+
 			if type_ == "page":
-				items.append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_page', file_= app.yasifipo["refs"][item][lang]['file'] )})
+				items[type_]['items'].append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_page', file_= app.yasifipo["refs"][item][lang]['file'] )})
 			elif type_ == "prez":
-				items.append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_prez', file_= app.yasifipo["refs"][item][lang]['file'], lang=lang, single=False )})
+				items[type_]['items'].append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_prez', file_= app.yasifipo["refs"][item][lang]['file'], lang=lang, single=False )})
 			elif type_ == "prez-single":
-				items.append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_prez', file_= app.yasifipo["refs"][item][lang]['file'], lang=lang, single=True )})
+				items[type_]['items'].append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_prez', file_= app.yasifipo["refs"][item][lang]['file'], lang=lang, single=True )})
 			elif type_ == "course":
-				items.append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_chapter', file_= app.yasifipo["refs"][item][lang]['file'], lang=lang)})
+				items[type_]['items'].append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_chapter', file_= app.yasifipo["refs"][item][lang]['file'], lang=lang)})
 			elif type_ == "toc":
-				items.append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_chapter', file_= app.yasifipo["refs"][item][lang]['file'], up=app.yasifipo["refs"][item][lang]['up'], lang=lang)})
+				items[type_]['items'].append({ 'title': yaml['title'] , 'url': yasifipo_url_for('display_chapter', file_= app.yasifipo["refs"][item][lang]['file'], up=app.yasifipo["refs"][item][lang]['up'], lang=lang)})
+
+
+	# retrieve type_ sorting & labels
+	with open(app.config["CONFIG_DIR"] + "types") as fil_:
+		yaml = load(fil_)
+
+		for typ in yaml['types']:
+			if typ['name'] in items.keys():
+				items[typ['name']]['sort'] = int(typ['sort'])
+				items[typ['name']]['descr'] = typ['descr'][lang]
+
+	items = sorted([i for i in items.values()], key=lambda k: k['sort'])
 
 	return render_template('category/category.html', cat=cat, langs=langs, list_=items)
