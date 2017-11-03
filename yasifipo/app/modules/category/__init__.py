@@ -30,7 +30,6 @@ def manage_category(yaml, type_, lang_=None):
 	#TODO if a new lang is detected, update config/url.md file
 
 	# Category management
-	#TODO default cat if not provided ?
 	if 'category' in yaml.keys():
 		# check we didn't read the file yet
 		if not yaml['category'] in app.yasifipo['categories'].keys():
