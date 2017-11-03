@@ -8,3 +8,4 @@
 #TODO: children for pages (to be able to construct ToC)
 #TODO: put config from flask config to yasifipo config
 #TODO: default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost ?
+#TODO: multiple URLs
