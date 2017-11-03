@@ -19,7 +19,6 @@ def set_lang(yaml):
 		if isfile(app.config["LANGS_DIR"] + lang):
 			with open(app.config["LANGS_DIR"] + lang) as fil_:
 				lang = load(fil_)
-				#TODO check sort is INT
 				app.yasifipo['langs'][lang['lang']] = {'lang':lang['lang'], 'descr': lang['descr'], 'sort':int(lang['sort'])}
 		# if not, create file for this lang
 		else:

@@ -12,9 +12,6 @@ def display_category(category, lang):
 	langs    = []
 	list_    = []
 
-	#TODO category parents
-
-	#TODO check if cat exists
 	cat = {'category': category,
 				'descr': app.yasifipo["categories"][category][lang]['descr'],
 				'lang': lang

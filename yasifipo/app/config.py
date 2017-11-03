@@ -5,7 +5,6 @@ class Configuration(object):
 	SECRET_KEY = 'secret key here!!!'
 	APPLICATION_DIR = os.path.dirname(os.path.realpath(__file__))
 
-	#TODO put to yasifipo config file
 	YASIFIPO_SERVER = 'test.julienduroure.com'
 
 	DATA_DIR = APPLICATION_DIR + '/_data/' # / before and after

@@ -27,8 +27,6 @@ def manage_category(yaml, type_, lang_=None):
 	else:
 		lang = yaml['lang']
 
-	#TODO check there is a ref
-
 	#TODO if a new lang is detected, update config/url.md file
 
 	# Category management

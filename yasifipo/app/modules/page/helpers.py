@@ -21,7 +21,7 @@ def get_page_cucumber(initial_parent, lang):
 		with open(i['file']) as data:
 			yaml       = load(data)
 			i['url']   = yasifipo_url_for('display_page', file_=i['file'])
-			i['title'] = yaml['title'] #TODO if no title ?
+			i['title'] = yaml['title']
 			cucumber.append(i)
 
 	return cucumber

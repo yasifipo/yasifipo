@@ -57,10 +57,8 @@ def get_pages_data(toc, frozen, directory):
 						lang = yaml['lang']
 					toc[directory + "/" + file_]['father']['lang'] = lang
 
-				# no children for pages (for now) #TODO
+				# no children for pages
 
-				#TODO check yasifipo server
-				#TODO verify that there is an yaml['url']
 				set_lang(yaml)
 				set_ref(yaml, directory + "/" + file_)
 				manage_category(yaml, "page")

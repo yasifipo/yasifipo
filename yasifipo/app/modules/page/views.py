@@ -35,5 +35,4 @@ def display_page(file_):
             category['descr'] = app.yasifipo['categories'][yaml['category']][lang]['descr']
             category['url']   = yasifipo_url_for('display_category', category=yaml['category'], lang=lang)
 
-        #TODO check title exists
         return render_template('page/page.html', title=yaml['title'], content=Markup(markdown(yaml.content)), cucumber=cucumber, langs=langs, category=category)

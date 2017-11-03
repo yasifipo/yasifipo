@@ -2,5 +2,8 @@
 #TODO: ALL: verify that a slug/rule is not used already
 #TODO: PREZ: css
 #TODO: example _data
-#TODO: simple prez without directories
 #TODO: toc: to be managed by template, parameter only tree
+#TODO: check all yaml, that mandatory are present / format (exple: sort is INT)
+#TODO: category parents
+#TODO: children for pages (to be able to construct ToC)
+#TODO: put config from flask config to yasifipo config

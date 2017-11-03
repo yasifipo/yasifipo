@@ -69,7 +69,7 @@ def display_prez(file_, lang, single):
 			category['descr'] = app.yasifipo['categories'][yaml['category']][lang]['descr']
 			category['url']   = yasifipo_url_for('display_category', category=yaml['category'], lang=lang)
 
-		#TODO lang ?
+		#TODO lang
 
 		theme = {}
 		if 'theme' in yaml.keys():
