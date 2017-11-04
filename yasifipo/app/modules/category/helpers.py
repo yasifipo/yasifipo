@@ -16,6 +16,9 @@ def get_categories_langs():
 
 def get_category_items(category, lang):
 	items = {}
+	if lang not in app.yasifipo["cat_ref"][category].keys():
+		return items
+	
 	for type_ in app.yasifipo["cat_ref"][category][lang].keys():
 		for item in app.yasifipo["cat_ref"][category][lang][type_]:
 			if type_ in ["course", "toc"]:
