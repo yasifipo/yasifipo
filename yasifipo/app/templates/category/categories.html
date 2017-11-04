@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+TODO
+{% endblock %}
+
+{% block body %}
+
+{% for cat in list_ %}
+	<h1>{{ cat['category']['descr'] }}</h1>
+	{% for typ in cat['items'] %}
+	{{typ['descr']}}<br/>
+		{% for item in typ['items'] %}
+		<a href="{{item['url']}}">{{item['title']}}</a><br/>
+		{% endfor %}
+	{% endfor %}
+
+{% endfor %}
+
+{% endblock %}

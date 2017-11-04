@@ -39,7 +39,7 @@ def manage_category(yaml, type_, lang_=None):
 					cat = load(fil_)
 					app.yasifipo['categories'][yaml['category']] = {}
 					for lg in cat['descr'].keys():
-						app.yasifipo['categories'][yaml['category']][lg] = {'cat': yaml['category'], 'lang': lg,'descr': cat['descr'][lg]['descr'], 'slug': cat['descr'][lg]['slug']}
+						app.yasifipo['categories'][yaml['category']][lg] = {'cat': yaml['category'], 'lang': lg,'descr': cat['descr'][lg]['descr'], 'slug': cat['descr'][lg]['slug'], 'sort': int(cat['sort'])}
 					# check if lang is known on file
 					if lang not in app.yasifipo['categories'][yaml['category']].keys():
 						print('New lang ' + lang + ' detected for category ' + yaml['category'])
@@ -48,7 +48,7 @@ def manage_category(yaml, type_, lang_=None):
 						fil_write = open(app.config["CAT_DIR"] + yaml['category'], "w")
 						fil_write.write(dumps(cat))
 						fil_write.close()
-						app.yasifipo['categories'][yaml['category']][lang] = {'cat': yaml['category'], 'lang': lang,'descr': cat['descr'][lang]['descr'], 'slug': cat['descr'][lang]['slug']}
+						app.yasifipo['categories'][yaml['category']][lang] = {'cat': yaml['category'], 'lang': lang,'descr': cat['descr'][lang]['descr'], 'slug': cat['descr'][lang]['slug'], 'sort': int(cat['sort'])}
 			else:
 				# create new cat file
 				fil_ = open(app.config["CAT_DIR"] + yaml['category'], "w")
@@ -65,7 +65,7 @@ def manage_category(yaml, type_, lang_=None):
 				if yaml['category'] not in app.yasifipo['categories'].keys():
 					app.yasifipo['categories'][yaml['category']] = {}
 
-				app.yasifipo['categories'][yaml['category']][lang] = {'cat': yaml['category'], 'lang': lang, 'descr': yaml['category'], 'slug': slugify(yaml['category'])}
+				app.yasifipo['categories'][yaml['category']][lang] = {'cat': yaml['category'], 'lang': lang, 'descr': yaml['category'], 'slug': slugify(yaml['category']), 'sort': int(99)}
 		else:
 			# We already read the file. Check the lang is known
 			if lang not in app.yasifipo['categories'][yaml['category']].keys():
@@ -77,7 +77,7 @@ def manage_category(yaml, type_, lang_=None):
 					fil_write = open(app.config["CAT_DIR"] + yaml['category'], "w")
 					fil_write.write(dumps(cat))
 					fil_write.close()
-					app.yasifipo['categories'][yaml['category']][lang] = {'cat': yaml['category'], 'lang': lang,'descr': cat['descr'][lang]['descr'], 'slug': cat['descr'][lang]['slug']}
+					app.yasifipo['categories'][yaml['category']][lang] = {'cat': yaml['category'], 'lang': lang,'descr': cat['descr'][lang]['descr'], 'slug': cat['descr'][lang]['slug'], 'sort': int(cat['sort'])}
 
 		if yaml['category'] not in app.yasifipo["cat_ref"].keys():
 			app.yasifipo["cat_ref"][yaml['category']] = {}
