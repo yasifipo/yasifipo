@@ -1,6 +1,6 @@
 # v0.01
-  * LANG stuff for any existing type / url (list of prez...)
 	* ALL: new lang --> update auto of corresponding files
+	* ROC: lang stuff for any chapter (cf ref stuff missing ?)
   * TOC: to be managed by template, parameter only tree
   * ALL: Tags
   * ALL: blog type
