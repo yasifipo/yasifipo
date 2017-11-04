@@ -1,12 +1,24 @@
-#TODO: ALL: merge with yasifipo (tags / blog)
-#TODO: ALL: verify that a slug/rule is not used already
-#TODO: PREZ: css
-#TODO: example _data
-#TODO: toc: to be managed by template, parameter only tree
-#TODO: check all yaml, that mandatory are present / format (exple: sort is INT)
-#TODO: category parents
-#TODO: children for pages (to be able to construct ToC)
-#TODO: put config from flask config to yasifipo config
-#TODO: default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost ?
-#TODO: multiple URLs
-#TODO: first initialisation
+# v0.01
+  * CATEGORIE: lang stuff
+  * LANG stuff for any existing type / url (list of prez...)
+  * TOC: to be managed by template, parameter only tree
+  * ALL: Tags
+  * ALL: blog type
+  * CATEGORY & TAG: sorting stuff
+  * ALL: basic template + css
+  * ALL: example _data
+  * ALL: first initialisation
+  * ALL: excluding some file stuff
+  * ALL: label management, by lang
+
+  * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
+  * ALL: ALL: verify that a slug/rule is not used already
+  * ALL: put config from flask config to yasifipo config
+  * ALL: multiple URLs
+  * ALL: draft lang
+
+# next
+  * ALL: category parents
+  * PAGE: children for pages (to be able to construct ToC)
+  * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost ?
+  * ALL: see TARGET file
