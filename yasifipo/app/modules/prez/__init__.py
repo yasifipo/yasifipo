@@ -79,7 +79,7 @@ def init_prez_data():
 
 
 		# register pages for list of prez
-		with open(app.config['CONFIG_DIR'] + "/url") as fil_url:
+		with open(app.config['CONFIG_DIR'] + "url") as fil_url:
 			urls = load(fil_url)
 
 			for lang in urls['prez'].keys():
