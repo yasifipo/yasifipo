@@ -9,6 +9,14 @@ TODO
 
 {% block body %}
 
+{% if langs|length > 1 %}
+<div>
+	{% for lang in langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+
 {% for cat in list_ %}
 	<h1><a href="{{ cat['category']['url'] }}">{{ cat['category']['descr'] }}</a></h1>
 	{% for typ in cat['items'] %}

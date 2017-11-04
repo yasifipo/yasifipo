@@ -43,8 +43,9 @@ def display_categories(lang):
 
 	list_ = sorted([i for i in cats.values()], key=lambda k: k['sort'])
 
-	#TODO langs
-	return render_template('category/categories.html', list_=list_)
+	langs = get_categories_langs()
+
+	return render_template('category/categories.html', list_=list_, langs=langs)
 
 def display_category(category, lang):
 

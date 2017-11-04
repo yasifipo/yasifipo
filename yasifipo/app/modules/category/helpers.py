@@ -8,6 +8,12 @@ def get_category_langs(category):
 		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('display_category', category=category, lang=lang['lang'] )})
 	return sorted(langs, key=lambda k: k['sort'])
 
+def get_categories_langs():
+	langs = []
+	for lang in app.yasifipo["urls"]["cats"].keys():
+		langs.append({'descr':app.yasifipo["langs"][lang]['descr'], 'sort': app.yasifipo["langs"][lang]['sort'], 'url': yasifipo_url_for('display_categories', lang=lang)})
+	return sorted(langs, key=lambda k: k['sort'])
+
 def get_category_items(category, lang):
 	items = {}
 	for type_ in app.yasifipo["cat_ref"][category][lang].keys():
