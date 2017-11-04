@@ -1,6 +1,6 @@
 # v0.01
-  * CATEGORIE: lang stuff
   * LANG stuff for any existing type / url (list of prez...)
+	* ALL: new lang --> update auto of corresponding files
   * TOC: to be managed by template, parameter only tree
   * ALL: Tags
   * ALL: blog type
