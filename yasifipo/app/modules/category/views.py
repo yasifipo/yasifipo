@@ -15,7 +15,8 @@ def display_categories(lang):
 
 		cat = {'category': categ[lang]['cat'],
 					'descr': categ[lang]['descr'],
-					'lang': lang
+					'lang': lang,
+					'url': yasifipo_url_for('display_category', category=categ[lang]['cat'], lang=lang)
 					}
 
 		items = get_category_items(categ[lang]['cat'], lang)

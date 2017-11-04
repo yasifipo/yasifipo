@@ -10,7 +10,7 @@ TODO
 {% block body %}
 
 {% for cat in list_ %}
-	<h1>{{ cat['category']['descr'] }}</h1>
+	<h1><a href="{{ cat['category']['url'] }}">{{ cat['category']['descr'] }}</a></h1>
 	{% for typ in cat['items'] %}
 	{{typ['descr']}}<br/>
 		{% for item in typ['items'] %}
