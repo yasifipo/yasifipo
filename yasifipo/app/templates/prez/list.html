@@ -8,7 +8,15 @@ List of Prez<!-- TODO -->
 {% endblock %}
 
 {% block body %}
-<!-- TODO lang -->
+
+{% if langs|length > 1 %}
+<div>
+	{% for lang in langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+
 {% for prez in list_ %}
 <a href="{{prez['url']}}">{{prez['title']}}</a><br/>
 {% endfor %}

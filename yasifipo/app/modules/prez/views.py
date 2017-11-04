@@ -56,7 +56,9 @@ def display_prez_list(lang):
 						'url':  yasifipo_url_for('display_chapter', file_= app.config['PREZ_DIR'] + prez['slug'] + "/", up=prez['ref'], lang=lang)
 					})
 
-		return render_template('prez/list.html', list_=list_)
+		langs = get_list_of_prez_langs()
+
+		return render_template('prez/list.html', list_=list_, langs=langs)
 
 # Generate prez page
 def display_prez(file_, lang, single):
