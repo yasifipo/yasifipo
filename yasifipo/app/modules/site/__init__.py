@@ -6,6 +6,8 @@ from flask_frozen import relative_url_for
 import sys
 import re
 
+from frontmatter import load
+
 def img_convert(text, route):
 	if len(sys.argv) >= 2 and sys.argv[1] == "freeze":
 		nb = len(route.split('/'))
@@ -57,3 +59,28 @@ def check_server(yaml):
 			return False
 
 	return True
+
+def init_url_data():
+	with open(app.config['CONFIG_DIR'] + "url") as fil_url:
+		urls = load(fil_url)
+
+		app.yasifipo['urls']['prez'] = {}
+		app.yasifipo['urls']['cats'] = {}
+		app.yasifipo['urls']['cat']  = {}
+		app.yasifipo['urls']['tags'] = {}
+		app.yasifipo['urls']['tag']  = {}
+
+		for lang in urls['prez'].keys():
+			app.yasifipo['urls']['prez'][lang] = urls['prez'][lang]
+
+		for lang in urls['cats'].keys():
+			app.yasifipo['urls']['cats'][lang] = urls['cats'][lang]
+
+		for lang in urls['cat'].keys():
+			app.yasifipo['urls']['cat'][lang] = urls['cat'][lang]
+
+		for lang in urls['tags'].keys():
+			app.yasifipo['urls']['tags'][lang] = urls['tags'][lang]
+
+		for lang in urls['tag'].keys():
+			app.yasifipo['urls']['tag'][lang] = urls['tag'][lang]

@@ -7,16 +7,14 @@ from .views import *
 from slugify import slugify
 
 def init_categories_data():
-	# set global url
-	with open(app.config["CONFIG_DIR"] + "url") as fil_:
-		yaml = load(fil_)
-		for lg in yaml['cats'].keys():
-			yasifipo_register(yaml['cats'][lg], display_categories, 'display_categories', {'lang': lg})
-
 		# set url for each category
 		for cat in app.yasifipo['categories'].values():
 			for lg in cat.keys():
-				yasifipo_register(yaml['cat'][lg] + cat[lg]['slug'] + '/', display_category, 'display_category', {'category': cat[lg]['cat'], 'lang': lg})
+				yasifipo_register(app.yasifipo['urls']['cat'][lg] + cat[lg]['slug'] + '/', display_category, 'display_category', {'category': cat[lg]['cat'], 'lang': lg})
+
+		# set global url for categories
+		for lang in app.yasifipo['urls']['cats'].keys():
+			yasifipo_register(app.yasifipo['urls']['cats'][lang], display_categories, 'display_categories', {'lang': lang})
 
 def manage_category(yaml, type_, lang_=None):
 	if 'lang' not in yaml.keys():

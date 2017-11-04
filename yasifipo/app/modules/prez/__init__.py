@@ -78,12 +78,8 @@ def init_prez_data():
 				app.yasifipo['toc'], app.yasifipo['frozen'] = get_prez_data(app.yasifipo['toc'], app.yasifipo['frozen'], app.config['PREZ_DIR']  + prez['slug'] + "/", None, init_slug, ref, lang)
 
 
-		# register pages for list of prez
-		with open(app.config['CONFIG_DIR'] + "url") as fil_url:
-			urls = load(fil_url)
-
-			for lang in urls['prez'].keys():
-				yasifipo_register(urls['prez'][lang], display_prez_list, 'display_prez_list', {'lang': lang})
+			for lang in app.yasifipo['urls']['prez'].keys():
+				yasifipo_register(app.yasifipo['urls']['prez'][lang], display_prez_list, 'display_prez_list', {'lang': lang})
 
 
 
