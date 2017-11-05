@@ -8,6 +8,7 @@ from app import app
 from .views import *
 
 from modules.site.langs import *
+from modules.site.views import *
 from modules.category import *
 
 from slugify import slugify
@@ -64,6 +65,14 @@ def init_prez_data():
 
 					rule = init_slug + yaml_single['slug'] + "/"
 					yasifipo_register(rule, display_prez, 'display_prez', {'file_':app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'] , 'lang': lang, 'single':True})
+
+					# register static folder if needed
+					if 'static' in prez.keys():
+						listfile = listdir(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['static'])
+						for file_ in listfile:
+							rule_ = rule + prez['static'] + "/" + file_
+							yasifipo_register(rule_, return_file, 'return_file', {'path_':app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['static'], 'file_':file_})
+
 			else:
 
 				set_ref(prez, app.config['PREZ_DIR'] + prez['slug'] + "/")

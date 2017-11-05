@@ -26,6 +26,7 @@ Contains list of all available prez (table of __prez__ in yaml)
 *  category: optional (but _ref_ is mandatory if category is set)
 *  server: optional, can be a str or list: server (or list of server) where presentation will be published
 *  single: optional. If set, is name of single file in directory. No TOC in this case, only 1 prez is available
+*  static: optional. Will register all files inside as static files (works only for single-prez for now)
 *  content (not part of yaml): not taken into account
 
 ## .chapter in any path of prez

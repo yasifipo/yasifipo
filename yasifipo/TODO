@@ -1,7 +1,8 @@
 # v0.01
 	* ALL: new lang --> update auto of corresponding files
-	* ROC: lang stuff for any chapter (cf ref stuff missing ?)
+	* TOC: lang stuff for any chapter (cf ref stuff missing ?)
   * TOC: to be managed by template, parameter only tree
+	* ALL: better img static way of working, as done for single-prez
   * ALL: Tags
   * ALL: blog type
   * CATEGORY & TAG: sorting stuff
