@@ -8,6 +8,7 @@ import re
 
 from frontmatter import load
 
+#TODO: after 'static' for all prez, this will be no more needed
 def img_convert(text, route):
 	if len(sys.argv) >= 2 and sys.argv[1] == "freeze":
 		nb = len(route.split('/'))

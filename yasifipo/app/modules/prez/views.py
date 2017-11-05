@@ -91,8 +91,10 @@ def display_prez(file_, lang, single):
 			if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
 				cucumber  = get_prez_cucumber(dirname(file_), None, lang)
 
-		return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=img_convert(Markup(yaml.content), request.url_rule.rule), cucumber=cucumber, category=category, own=request.url_rule.rule)
-
+		#TODO: after 'static' for all prez, img_convert will be no more needed
+			return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=img_convert(Markup(yaml.content), request.url_rule.rule), cucumber=cucumber, category=category, own=request.url_rule.rule)
+		else:
+			return render_template('prez/prez.html', theme=theme, title=yaml['title'], content=Markup(yaml.content), cucumber=cucumber, category=category, own=request.url_rule.rule)
 
 
 
