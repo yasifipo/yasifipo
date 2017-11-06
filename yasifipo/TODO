@@ -1,6 +1,4 @@
 # v0.01
-	* ALL: new lang --> update auto of corresponding files
-	* TOC: lang stuff for any chapter (cf ref stuff missing ?)
   * TOC: to be managed by template, parameter only tree
 	* ALL: better img static way of working, as done for single-prez
   * ALL: Tags
@@ -12,6 +10,7 @@
   * ALL: excluding some file stuff
   * ALL: label management, by lang
 	* PAGE: auto slug by path
+	* TOC: lang stuff for any chapter (cf ref stuff missing ?)
 
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already

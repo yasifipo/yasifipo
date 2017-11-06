@@ -4,6 +4,8 @@ from os.path import isfile
 from app import app
 from .views import *
 
+from modules.site.langs import *
+
 from slugify import slugify
 
 def init_categories_data():
@@ -25,8 +27,6 @@ def manage_category(yaml, type_, lang_=None):
 	else:
 		lang = yaml['lang']
 
-	#TODO if a new lang is detected, update config/url.md file & config/types.md
-
 	# Category management
 	if 'category' in yaml.keys():
 		# check we didn't read the file yet
@@ -41,6 +41,7 @@ def manage_category(yaml, type_, lang_=None):
 					# check if lang is known on file
 					if lang not in app.yasifipo['categories'][yaml['category']].keys():
 						print('New lang ' + lang + ' detected for category ' + yaml['category'])
+						new_lang(lang)
 						cat['descr'][lang] = {'descr': yaml['category'], 'slug':slugify(yaml['category'])}
 						#Write category file back with lang
 						fil_write = open(app.config["CAT_DIR"] + yaml['category'], "w")
@@ -68,6 +69,7 @@ def manage_category(yaml, type_, lang_=None):
 			# We already read the file. Check the lang is known
 			if lang not in app.yasifipo['categories'][yaml['category']].keys():
 				print('New lang ' + lang + ' detected for category ' + yaml['category'])
+				new_lang(lang)
 				with open(app.config["CAT_DIR"] + yaml['category']) as fil_:
 					cat = load(fil_)
 					cat['descr'][lang] = {'descr': yaml['category'], 'slug':slugify(yaml['category'])}

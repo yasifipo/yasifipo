@@ -1,9 +1,10 @@
 from app import app
 
 from os.path import isfile
-from frontmatter import load
+from frontmatter import load, dumps
 
 from . import *
+
 
 def set_lang(yaml):
 	lang = ''
@@ -40,4 +41,28 @@ def get_langs_from_ref(type_, ref, **values):
 	return sorted(langs, key=lambda k: k['sort'])
 
 def new_lang(lang):
-	pass
+	with open(app.config['CONFIG_DIR'] + "url") as fil_url:
+		urls = load(fil_url)
+
+		urls['cats'][lang] = "/" + lang + "/categories/"
+		urls['tags'][lang] = "/" + lang + "/tags/"
+		urls['cat'][lang]  = "/" + lang + "/category/"
+		urls['tag'][lang]  = "/" + lang + "/tag/"
+		urls['prez'][lang] = "/" + lang + "/prez/"
+
+		fil_write = open(app.config['CONFIG_DIR'] + "url", "w")
+		fil_write.write(dumps(urls))
+		fil_write.close()
+
+
+	with open(app.config['CONFIG_DIR'] + "types") as fil_types:
+		types = load(fil_types)
+
+		for typ_ in types['types']:
+			typ_['descr'][lang] = typ_['descr'][app.config['DEFAULT_LANG']]
+
+		fil_write = open(app.config['CONFIG_DIR'] + "types", "w")
+		fil_write.write(dumps(types))
+		fil_write.close()
+
+	init_url_data()
