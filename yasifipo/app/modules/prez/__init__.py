@@ -101,7 +101,12 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 		chapter_.write("---\n")
 		chapter_.write("slug: " + slugify(directory.split('/')[len(directory.split('/'))-2]) + "\n")
 		chapter_.write('title: ' + directory.split('/')[len(directory.split('/'))-2] + "\n")
+		chapter_.write('static: img' + "\n")
 		chapter_.write("---\n")
+
+		# create static folder too
+		if not os.path.exists(directory + "/img/"):
+			os.makedirs(directory + "/img/")
 
 	with open(directory  + '/.chapter.md') as chapter_:
 		yaml_chapter = load(chapter_)
@@ -128,18 +133,28 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 		manage_category(yaml_chapter, "toc", lang)
 		yasifipo_register(rule, display_chapter, 'display_chapter', {'file_': directory, 'up': up, 'lang': lang})
 
+		# register static files if needed
+		if 'static' in yaml_chapter.keys():
+			listfile_static = listdir(directory + "/" + yaml_chapter['static'])
+			for file_ in listfile_static:
+				rule_ = rule + yaml_chapter['static'] + "/" + file_
+				yasifipo_register(rule_, return_file, 'return_file', {'path_':directory + "/" + yaml_chapter['static'], 'file_':file_})
+		else:
+			yaml_chapter['static'] = ""
+
 	files = listdir(directory)
 	#TODO Exclude some file. Example : saved file with ~
 	for file_ in files:
 
 		# children directory in current directory
-		if isdir(directory + "/" + file_):
+		if isdir(directory + "/" + file_) and file_ != yaml_chapter['static']:
 			# if .chapter.md does'nt exist --> create it
 			if not isfile(directory + "/" + file_ + '/.chapter.md'):
 				chapter_ = open(directory + "/" + file_ + '/.chapter.md', "w")
 				chapter_.write("---\n")
 				chapter_.write("slug: "  + slugify(file_) + "\n")
 				chapter_.write('title: ' + file_ + "\n")
+				chapter_.write('static: img' + "\n")
 				chapter_.write("---\n")
 
 			with open(directory + "/" + file_ + '/.chapter.md') as chapter_:
@@ -196,6 +211,9 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 
 		# This is the file used for current directory data
 		elif isfile(directory + "/" + file_) and file_ == ".chapter.md":
+			pass
+		# static dir
+		elif isdir(directory + "/" + file_) and file_ == yaml_chapter['static']:
 			pass
 		else:
 			print("ERROR, something wrong with type of " + directory + "/" + file_)

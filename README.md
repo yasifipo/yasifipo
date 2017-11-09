@@ -26,7 +26,7 @@ Contains list of all available prez (table of __prez__ in yaml)
 *  category: optional (but _ref_ is mandatory if category is set)
 *  server: optional, can be a str or list: server (or list of server) where presentation will be published
 *  single: optional. If set, is name of single file in directory. No TOC in this case, only 1 prez is available
-*  static: optional. Will register all files inside as static files (works only for single-prez for now)
+*  static: optional. Will register all files inside as static files (works only for single-prez)
 *  content (not part of yaml): not taken into account
 
 ## .chapter in any path of prez
@@ -38,6 +38,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  cucumber: optional, will not display cucumber if set to False
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
 *  category: optional (but _ref_ is mandatory if category is set)
+*  static: mandatory, name of folder that can contains files like images
 *  content (not part of yaml): will be displayed in chapter page
 
 ## any prez file
