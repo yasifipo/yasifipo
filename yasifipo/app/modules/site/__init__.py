@@ -8,18 +8,6 @@ import re
 
 from frontmatter import load
 
-#TODO: after 'static' for all prez, this will be no more needed
-def img_convert(text, route):
-	if len(sys.argv) >= 2 and sys.argv[1] == "freeze":
-		nb = len(route.split('/'))
-		prefix = ""
-		for i in range(0, nb-1):
-			prefix = prefix + "../"
-		prefix = prefix[:len(prefix)-1]
-		return re.sub(r"\!\[(.*)\]\((.*)\)", r"![\1](" + prefix + r"\2)", text)
-	else:
-		return text
-
 def yasifipo_url_for(target, **values):
 	if len(sys.argv) >= 2 and sys.argv[1] == "freeze":
 		return relative_url_for(target, **values)
