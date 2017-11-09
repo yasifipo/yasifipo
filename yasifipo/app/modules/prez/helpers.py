@@ -30,32 +30,32 @@ def get_prez_cucumber(initial_parent, ref, lang):
 
 	return cucumber
 
-
-
 # recursive fonction to construct ToC
-def get_children_data(file_, data, first_level, lang):
+def get_children(file_, first_level, lang):
+	current = {}
+	current['typ'] = 'dir'
+	current['first_level'] = first_level
 	if first_level == False:
-		data = data + "<li>"
 		with open(file_ + "/.chapter.md") as data_file:
 			yaml = load(data_file)
-			data = data + "<a href='" + yasifipo_url_for('display_chapter', file_=file_, up=None, lang=lang)  +"'>" + yaml['title'] + "</a>"
+			current['chapter_url'] = yasifipo_url_for('display_chapter', file_=file_, up=None, lang=lang)
+			current['chapter_title'] = yaml['title']
 
-	data = data + "<ol>"
+	if len(app.yasifipo['toc'][file_]['children']) > 0:
+		current['children'] = []
 	for child in app.yasifipo['toc'][file_]['children']:
 		if child['type'] == 'dir':
-			data = get_children_data(child['data'], data, False, lang)
+			current['children'].append(get_children(child['data'], False, lang))
 		else:
-			data = data + "<li>"
 			with open(child['data']) as data_file:
 				yaml = load(data_file)
-				data = data + "<a href='" + yasifipo_url_for('display_prez', file_=child['data'], lang=lang, single=False)  +"'>" + yaml['title'] + "</a>"
-			data = data + "</li>"
-	data = data + "</ol>"
+				child_ = {}
+				child_['typ'] = 'prez'
+				child_['url'] = yasifipo_url_for('display_prez', file_=child['data'], lang=lang, single=False)
+				child_['title'] = yaml['title']
+				current['children'].append(child_)
 
-	if first_level == False:
-		data = data + "</li>"
-
-	return data
+	return current
 
 def get_list_of_prez_langs():
 	langs = []

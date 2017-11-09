@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 
+{% macro display_node(node) %}
+{% if node['first_level'] == False %}
+<li><a href="{{node['chapter_url']}}">{{node['chapter_title']}}</a>
+{% endif %}
+<ol>
+{% for child in node['children'] %}
+	{% if child['typ'] == 'dir' %}
+		{{ display_node(child) }}
+	{% else %}
+	<li>
+	<a href="{{child['url']}}">{{child['title']}}</a>
+	</li>
+	{% endif %}
+{% endfor %}
+</ol>
+{% if node['first_level'] == False %}
+</li>
+{% endif %}
+{% endmacro %}
+
 {% block additional_scripts %}
 {% if display_toc == True %}
 <link rel="stylesheet" href="{{ toc_css }}">
@@ -26,6 +46,8 @@
 {{content}}
 
 {% if display_toc == True %}
-{{toc}}
+<div class='toc'>
+{{display_node(toc_nodes)}}
+</div>
 {% endif %}
 {% endblock %}

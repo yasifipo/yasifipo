@@ -104,13 +104,10 @@ def display_chapter(file_, up, lang):
 	with open(file_ + "/.chapter.md") as data_file:
 		yaml = load(data_file)
 		display_toc = True
-		data = ""
 		if 'display-toc' in yaml.keys() and yaml['display-toc'] == False:
 			display_toc = False
 		else:
-			data = data + "<div class='toc'>"
-			data = get_children_data(file_, data, True, lang)
-			data = data + "</div>"
+			toc = get_children(file_, True, lang)
 
 	cucumber = []
 	if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
@@ -123,4 +120,4 @@ def display_chapter(file_, up, lang):
 
 	toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
-	return render_template('prez/toc.html', title=yaml['title'], content=Markup(markdown(yaml.content)), toc=Markup(data), display_toc=display_toc, cucumber=cucumber, langs=langs, toc_css=toc_css)
+	return render_template('prez/toc.html', title=yaml['title'], content=Markup(markdown(yaml.content)), display_toc=display_toc, cucumber=cucumber, langs=langs, toc_css=toc_css, toc_nodes=toc)
