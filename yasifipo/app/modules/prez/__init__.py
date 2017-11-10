@@ -39,20 +39,20 @@ def init_prez_data():
 
 			if 'single' in prez.keys():
 				# check if single value is an existing file
-				if not isfile(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']):
-					print("ERROR: single file " + prez['single'] + " for prez " + prez['slug'])
+				if not isfile(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']):
+					print("ERROR: single file " + prez['single'] + " for prez " + prez['directory'])
 					continue
 
 				manage_category(prez, "prez-single", lang)
-				set_ref(prez, app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'])
+				set_ref(prez, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'])
 
 				# register
-				with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']) as single_file:
+				with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']) as single_file:
 					yaml_single = load(single_file)
 
 					#if there is no header on file, create it
 					if len(yaml_single.keys()) == 0:
-						with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'], "w") as fil_write:
+						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], "w") as fil_write:
 							fil_write.write('---\n')
 							fil_write.write('slug: ' + slugify(prez['single']) + "\n")
 							fil_write.write('title: ' + prez['single'] + "\n")
@@ -60,22 +60,22 @@ def init_prez_data():
 							fil_write.write(yaml_single.content)
 
 
-						with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']) as single_file:
+						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']) as single_file:
 							yaml_single = load(single_file)
 
 					rule = init_slug + yaml_single['slug'] + "/"
-					yasifipo_register(rule, display_prez, 'display_prez', {'file_':app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'] , 'lang': lang, 'single':True})
+					yasifipo_register(rule, display_prez, 'display_prez', {'file_':app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'] , 'lang': lang, 'single':True})
 
 					# register static folder if needed
 					if 'static' in prez.keys():
-						listfile = listdir(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['static'])
+						listfile = listdir(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'])
 						for file_ in listfile:
 							rule_ = rule + prez['static'] + "/" + file_
-							yasifipo_register(rule_, return_file, 'return_file', {'path_':app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['static'], 'file_':file_})
+							yasifipo_register(rule_, return_file, 'return_file', {'path_':app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'], 'file_':file_})
 
 			else:
 
-				set_ref(prez, app.config['PREZ_DIR'] + prez['slug'] + "/")
+				set_ref(prez, app.config['PREZ_DIR'] + prez['directory'] + "/")
 				manage_category(prez, "course", lang)
 
 				if 'ref' in prez.keys():
@@ -84,7 +84,7 @@ def init_prez_data():
 					ref = None
 
 				# go for recursive stuff
-				app.yasifipo['toc'], app.yasifipo['frozen'] = get_prez_data(app.yasifipo['toc'], app.yasifipo['frozen'], app.config['PREZ_DIR']  + prez['slug'] + "/", None, init_slug, ref, lang)
+				app.yasifipo['toc'], app.yasifipo['frozen'] = get_prez_data(app.yasifipo['toc'], app.yasifipo['frozen'], app.config['PREZ_DIR']  + prez['directory'] + "/", None, init_slug, ref, lang)
 
 
 			for lang in app.yasifipo['urls']['prez'].keys():

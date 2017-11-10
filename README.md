@@ -23,7 +23,7 @@ List of all existing yaml files
 
 ## _data/prez/summary.md
 Contains list of all available prez (table of __prez__ in yaml)
-*  slug: mandatory, must be path to presentation (in filesystem), without any slash
+*  directory: mandatory, must be path to presentation (in filesystem), without any slash
 *  lang: optional, lang of prez. DEFAULT_LANG will be used if not set
 *  draft: optional, html files are not generated if set to True
 *  ref: used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field), mandatory here

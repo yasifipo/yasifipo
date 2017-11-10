@@ -24,7 +24,7 @@ def display_prez_list(lang):
 				continue
 
 			if 'single' in prez.keys():
-				with open(app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single']) as prez_:
+				with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']) as prez_:
 					yaml_prez = load(prez_)
 
 					if check_server(prez) == False:
@@ -36,12 +36,12 @@ def display_prez_list(lang):
 					title = yaml_prez['title']
 					list_.append({
 						'title': title,
-						'url':  yasifipo_url_for('display_prez', file_= app.config['PREZ_DIR'] + prez['slug'] + "/" + prez['single'], lang=lang, single=True)
+						'url':  yasifipo_url_for('display_prez', file_= app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], lang=lang, single=True)
 					})
 
 			else:
 
-				with open(app.config['PREZ_DIR'] + prez['slug'] + "/.chapter.md") as prez_:
+				with open(app.config['PREZ_DIR'] + prez['directory'] + "/.chapter.md") as prez_:
 					yaml_prez = load(prez_)
 
 					if check_server(prez) == False:
@@ -53,7 +53,7 @@ def display_prez_list(lang):
 					title = yaml_prez['title']
 					list_.append({
 						'title': title,
-						'url':  yasifipo_url_for('display_chapter', file_= app.config['PREZ_DIR'] + prez['slug'] + "/", up=prez['ref'], lang=lang)
+						'url':  yasifipo_url_for('display_chapter', file_= app.config['PREZ_DIR'] + prez['directory'] + "/", up=prez['ref'], lang=lang)
 					})
 
 		langs = get_list_of_prez_langs()
