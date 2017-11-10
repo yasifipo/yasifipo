@@ -14,6 +14,10 @@ No database, using only filesystem
 *  pages, generate pages website
 *  blog, generate blog posts
 
+# how to run
+*  python app/manage.py run -d path/to/data/
+*  python app/manage.py freeze -d path/to/data/
+
 # Docs
 List of all existing yaml files
 

@@ -73,3 +73,10 @@ def init_url_data():
 
 		for lang in urls['tag'].keys():
 			app.yasifipo['urls']['tag'][lang] = urls['tag'][lang]
+
+def load_config():
+	app.config['CONFIG_DIR'] = app.config['DATA_DIR'] + "config/" # / after
+	app.config['LANGS_DIR']  = app.config['DATA_DIR'] + "langs/" # / after
+	app.config['PREZ_DIR']   = app.config['DATA_DIR'] + "prez/" # / after
+	app.config['PAGE_DIR']   = app.config['DATA_DIR'] + "pages/" # / after
+	app.config['CAT_DIR']    = app.config['DATA_DIR'] + "categories/" # / after
