@@ -35,7 +35,7 @@ Contains list of all available prez (table of __prez__ in yaml)
 
 ## .chapter in any path of prez
 Create your table of content by creating a directory tree. Each path must have a .chapter.md file, or it will be created automatically:  
-*  slug: mandatory, url part of the current chapter
+*  slug: mandatory, url part of the current chapter (can be '' for displaying at url root)
 *  title: mandatory, title of chapter
 *  draft: optional, will not be taken into account if set to True
 *  display-toc: optional, will not display ToC if set to False

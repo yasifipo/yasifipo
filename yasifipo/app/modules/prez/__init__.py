@@ -63,7 +63,10 @@ def init_prez_data():
 						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']) as single_file:
 							yaml_single = load(single_file)
 
-					rule = init_slug + yaml_single['slug'] + "/"
+					if yaml_single['slug'] == '':
+						rule = init_slug
+					else:
+						rule = init_slug + yaml_single['slug'] + "/"
 					yasifipo_register(rule, display_prez, 'display_prez', {'file_':app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'] , 'lang': lang, 'single':True})
 
 					# register static folder if needed
