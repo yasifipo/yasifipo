@@ -1,5 +1,7 @@
 # v0.01
 	* BUG: file type when recreating with new lang
+	* BUG: direct markdown link need rewriting for freeze
+	* BUG/TODO: recurive in img folder / exclude some path ?
 	*	PAGE: img static folder stuff (like for prez)
   * ALL: Tags
   * ALL: blog type
