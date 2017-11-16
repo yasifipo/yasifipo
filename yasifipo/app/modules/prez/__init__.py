@@ -1,5 +1,6 @@
 from os.path import isfile, isdir
-from os import listdir
+from os import listdir, makedirs
+from os.path import exists
 
 from frontmatter import load
 
@@ -108,8 +109,8 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 		chapter_.write("---\n")
 
 		# create static folder too
-		if not os.path.exists(directory + "/img/"):
-			os.makedirs(directory + "/img/")
+		if not exists(directory + "/img/"):
+			makedirs(directory + "/img/")
 
 	with open(directory  + '/.chapter.md') as chapter_:
 		yaml_chapter = load(chapter_)
@@ -159,6 +160,10 @@ def get_prez_data(toc, frozen, directory, up_directory, current_slug, ref, lang)
 				chapter_.write('title: ' + file_ + "\n")
 				chapter_.write('static: img' + "\n")
 				chapter_.write("---\n")
+
+				# create static folder too
+				if not exists(directory + "/" + file_ + "/img/"):
+					makedirs(directory + "/" + file_ + "/img/")
 
 			with open(directory + "/" + file_ + '/.chapter.md') as chapter_:
 				yaml_chapter_dir = load(chapter_)
