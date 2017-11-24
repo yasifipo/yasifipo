@@ -8,18 +8,30 @@ import re
 
 from frontmatter import load
 
-def yasifipo_url_for(target, **values):
+
+def yasifipo_is_server():
 	if len(sys.argv) >= 2 and sys.argv[1] == "freeze":
+		return False
+	else:
+		return True
+
+def yasifipo_url_for(target, **values):
+	if yasifipo_is_server() == False:
 		return relative_url_for(target, **values)
 	else:
 		return url_for(target, **values)
 
-def yasifipo_register(rule, view_func, view_func_name, defaults):
+def yasifipo_register(rule, view_func, view_func_name, defaults, methods=['GET'], store=True):
 	app.add_url_rule(	rule=rule,
 						view_func=view_func,
-						defaults= defaults)
+						defaults= defaults,
+						methods=methods)
 
-	app.yasifipo['frozen'].append([view_func_name, defaults])
+	if store == True:
+		if [view_func_name, defaults, rule] in app.yasifipo['old_frozen']:
+			app.yasifipo['old_frozen'].remove([view_func_name, defaults, rule])
+
+		app.yasifipo['frozen'].append([view_func_name, defaults, rule])
 
 def set_ref(yaml, file_, lang_=None, up=None):
 	if 'ref' in yaml.keys():

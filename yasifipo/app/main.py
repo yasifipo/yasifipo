@@ -9,6 +9,7 @@ freezer = Freezer(app)
 app.yasifipo = {}
 app.yasifipo['toc'] = {}
 app.yasifipo['frozen'] = []
+app.yasifipo['old_frozen'] = []
 app.yasifipo['langs'] = {}
 app.yasifipo["refs"] = {}
 app.yasifipo["categories"] = {}
