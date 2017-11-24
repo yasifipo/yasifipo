@@ -60,5 +60,6 @@ def get_children(file_, first_level, lang):
 def get_list_of_prez_langs():
 	langs = []
 	for lang in app.yasifipo["urls"]["prez"].keys():
-		langs.append({'descr':app.yasifipo["langs"][lang]['descr'], 'sort': app.yasifipo["langs"][lang]['sort'], 'url': yasifipo_url_for('display_prez_list', lang=lang)})
+		if lang in app.yasifipo["langs"]:
+			langs.append({'descr':app.yasifipo["langs"][lang]['descr'], 'sort': app.yasifipo["langs"][lang]['sort'], 'url': yasifipo_url_for('display_prez_list', lang=lang)})
 	return sorted(langs, key=lambda k: k['sort'])
