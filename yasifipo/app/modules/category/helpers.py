@@ -11,14 +11,15 @@ def get_category_langs(category):
 def get_categories_langs():
 	langs = []
 	for lang in app.yasifipo["urls"]["cats"].keys():
-		langs.append({'descr':app.yasifipo["langs"][lang]['descr'], 'sort': app.yasifipo["langs"][lang]['sort'], 'url': yasifipo_url_for('display_categories', lang=lang)})
+		if lang in app.yasifipo["langs"]:
+			langs.append({'descr':app.yasifipo["langs"][lang]['descr'], 'sort': app.yasifipo["langs"][lang]['sort'], 'url': yasifipo_url_for('display_categories', lang=lang)})
 	return sorted(langs, key=lambda k: k['sort'])
 
 def get_category_items(category, lang):
 	items = {}
 	if lang not in app.yasifipo["cat_ref"][category].keys():
 		return items
-	
+
 	for type_ in app.yasifipo["cat_ref"][category][lang].keys():
 		for item in app.yasifipo["cat_ref"][category][lang][type_]:
 			if type_ in ["course", "toc"]:
