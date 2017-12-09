@@ -6,15 +6,17 @@ from flask_script import Option
 
 from modules.site import *
 from modules.prez import *
-from modules.page import *
-from modules.admin import *
+from modules.tag import *
 
 freezer = Freezer(app)
 
 @freezer.register_generator
 def url_generator():
-	for i in app.yasifipo['frozen']:
-		yield i[0], i[1]
+	for i in app.yasifipo['ids'].keys():
+		if app.yasifipo['ids'][i]['type'] == 'img':
+			yield 'return_file', {'id_': i}
+		else:
+			yield 'render_file', {'path': i}
 
 @manager.command
 def freeze(data_path=None):
@@ -45,12 +47,10 @@ def run(data_path=None):
 	app.run()
 
 def run_data_read():
-	# TODO: factorize with reloading
-	init_url_data()
+	init_lang_data()
+	init_tag_data()
+	init_site_data()
 	init_prez_data()
-	init_pages_data()
-	init_categories_data()
-	init_admin_data()
 
 if __name__ == '__main__':
 	manager.run()

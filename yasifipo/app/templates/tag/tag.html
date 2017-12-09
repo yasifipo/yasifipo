@@ -4,12 +4,13 @@
 {% endblock %}
 
 {% block title %}
-{{cat['descr']}}
+{{tag['descr']}}
 {% endblock %}
 
 {% block body %}
 
-<h1>{{cat['descr']}}</h1>
+<h1><a href="{{ tag_type['url'] }}">{{tag_type['descr']}}</a></h1>
+<h1><a href="{{ tag['url'] }}">{{tag['descr']}}</a></h1>
 
 {% if langs|length > 1 %}
 <div>
@@ -19,11 +20,8 @@
 </div>
 {% endif %}
 
-{% for typ in list_ %}
-{{typ['descr']}}<br/>
-{% for item in typ['items'] %}
-<a href="{{item['url']}}">{{item['title']}}</a><br/>
-{% endfor %}
+{% for item in items %}
+<a href="{{item['url']}}">{{item['title']}}</a> ({{ item['type'] }})<br/>
 {% endfor %}
 
 {% endblock %}

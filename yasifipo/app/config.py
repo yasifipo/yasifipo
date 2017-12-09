@@ -1,7 +1,7 @@
 import os
 
 class Configuration(object):
-	DEBUG = False # reloading can't work with debug = True
+	DEBUG = True
 	SECRET_KEY = 'secret key here!!!'
 	APPLICATION_DIR = os.path.dirname(os.path.realpath(__file__))
 

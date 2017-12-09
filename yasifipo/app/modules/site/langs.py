@@ -1,10 +1,20 @@
 from app import app
 
 from os.path import isfile
+from os import listdir
 from frontmatter import load, dumps
 
 from . import *
+from .urls import *
 
+def init_lang_data():
+
+	listfile = listdir(app.config["LANGS_DIR"])
+	for lang in listfile:
+		if isfile(app.config["LANGS_DIR"] + lang):
+			with open(app.config["LANGS_DIR"] + lang) as fil_:
+				lang_ = load(fil_)
+				app.yasifipo['langs'][lang_['lang']] = {'lang':lang_['lang'], 'descr': lang_['descr'], 'sort':int(lang_['sort'])}
 
 def set_lang(yaml):
 	lang = ''
@@ -16,53 +26,38 @@ def set_lang(yaml):
 
 	# check if lang is already loaded
 	if lang not in [lg['lang'] for lg in app.yasifipo['langs'].values()]:
-		# if not, check if file already exists
-		if isfile(app.config["LANGS_DIR"] + lang):
-			with open(app.config["LANGS_DIR"] + lang) as fil_:
-				lang = load(fil_)
-				app.yasifipo['langs'][lang['lang']] = {'lang':lang['lang'], 'descr': lang['descr'], 'sort':int(lang['sort'])}
 		# if not, create file for this lang
-		else:
-			# create new lang file
-			fil_ = open(app.config["LANGS_DIR"] + lang, "w")
-			fil_.write('---\n')
-			fil_.write('lang: ' + lang + '\n')
-			fil_.write('descr: ' + lang + '\n')
-			fil_.write('sort: 99' + '\n')
-			fil_.write('---\n')
-			fil_.close()
-			print("New language detected : " + lang)
-			app.yasifipo['langs'][lang] = {'lang':lang, 'descr': lang, 'sort':99}
+		fil_ = open(app.config["LANGS_DIR"] + lang, "w")
+		fil_.write('---\n')
+		fil_.write('lang: ' + lang + '\n')
+		fil_.write('descr: ' + lang + '\n')
+		fil_.write('sort: 99' + '\n')
+		fil_.write('---\n')
+		fil_.close()
+		print("New language detected : " + lang)
+		app.yasifipo['langs'][lang] = {'lang':lang, 'descr': lang, 'sort':99}
 
-def get_langs_from_ref(type_, ref, **values):
+    # TODO update files needed (category, etc...)
+	return lang
+
+def get_langs_from_ref(ref_):
 	langs = []
-	for lang in app.yasifipo["refs"][ref].values():
-		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for(type_, file_=app.yasifipo["refs"][ref][lang['lang']]['file'], lang=lang['lang'], **values)})
+	if 'ref' in ref_.keys():
+		ref = ref_['ref']
+		for lang in app.yasifipo["refs"][ref].values():
+			langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["files"][app.yasifipo["refs"][ref][lang['lang']]['file']])})
 	return sorted(langs, key=lambda k: k['sort'])
 
-def new_lang(lang):
-	with open(app.config['CONFIG_DIR'] + "url") as fil_url:
-		urls = load(fil_url)
+def get_langs_from_tag(tag_type, tag):
+	langs = []
+	for lang in app.yasifipo['langs'].values():
+		#TODO only if there is some tags for this lang
+		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["tags"]["data"][tag_type][tag]['url'][lang['lang']])})
+	return sorted(langs, key=lambda k: k['sort'])
 
-		urls['cats'][lang] = "/" + lang + "/categories/"
-		urls['tags'][lang] = "/" + lang + "/tags/"
-		urls['cat'][lang]  = "/" + lang + "/category/"
-		urls['tag'][lang]  = "/" + lang + "/tag/"
-		urls['prez'][lang] = "/" + lang + "/prez/"
-
-		fil_write = open(app.config['CONFIG_DIR'] + "url", "w")
-		fil_write.write(dumps(urls))
-		fil_write.close()
-
-
-	with open(app.config['CONFIG_DIR'] + "types") as fil_types:
-		types = load(fil_types)
-
-		for typ_ in types['types']:
-			typ_['descr'][lang] = typ_['descr'][app.config['DEFAULT_LANG']]
-
-		fil_write = open(app.config['CONFIG_DIR'] + "types", "w")
-		fil_write.write(dumps(types))
-		fil_write.close()
-
-	init_url_data()
+def get_langs_from_tag_type(tag_type):
+	langs = []
+	for lang in app.yasifipo['langs'].values():
+		#TODO only if there is some tag_type for this lang
+		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["tags"]["conf"][tag_type]['urls']['mass'][lang['lang']])})
+	return sorted(langs, key=lambda k: k['sort'])

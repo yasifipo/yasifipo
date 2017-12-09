@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+{{tag_type['descr']}}
+{% endblock %}
+
+{% block body %}
+
+<h1><a href="{{ tag_type['url'] }}">{{tag_type['descr']}}</a></h1>
+
+{% if langs|length > 1 %}
+<div>
+	{% for lang in langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+
+{% for tag in items %}
+<h1><a href="{{tag['url']}}">{{tag['title']}}</a><br/></h1>
+{% for item in tag['items'] %}
+<a href="{{item['url']}}">{{item['title']}}</a> ({{ item['type'] }})<br/>
+{% endfor %}
+{% endfor %}
+
+{% endblock %}

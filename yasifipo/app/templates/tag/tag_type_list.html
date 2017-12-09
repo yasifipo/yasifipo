@@ -4,11 +4,11 @@
 {% endblock %}
 
 {% block title %}
-TODO
+#TODO
 {% endblock %}
 
 {% block body %}
-
+#TODO
 {% if langs|length > 1 %}
 <div>
 	{% for lang in langs %}
@@ -17,15 +17,8 @@ TODO
 </div>
 {% endif %}
 
-{% for cat in list_ %}
-	<h1><a href="{{ cat['category']['url'] }}">{{ cat['category']['descr'] }}</a></h1>
-	{% for typ in cat['items'] %}
-	{{typ['descr']}}<br/>
-		{% for item in typ['items'] %}
-		<a href="{{item['url']}}">{{item['title']}}</a><br/>
-		{% endfor %}
-	{% endfor %}
-
+{% for item in items %}
+<a href="{{tag['url']}}">{{tag['title']}}</a><br/>
 {% endfor %}
 
 {% endblock %}
