@@ -76,7 +76,10 @@ def render_prez_chapter(file_, data):
 		lang = yaml['lang']
 	langs = get_langs_from_ref(yaml)
 
-	cucumber = get_prez_cucumber(file_, lang)
+	if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+		cucumber = get_prez_cucumber(file_, lang)
+	else:
+		cucumber = []
 
 	toc_css = yasifipo_url_for('static', filename='css/toc.css')
 	return render_template('prez/toc.html',
@@ -121,6 +124,8 @@ def render_prez_prez(file_, data):
 		else:
 			if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
 				cucumber  = get_prez_cucumber(dirname(file_) + '/.chapter.md', lang)
+			else:
+				cucumber = []
 
 		return render_template('prez/prez.html',
 								theme=theme,
