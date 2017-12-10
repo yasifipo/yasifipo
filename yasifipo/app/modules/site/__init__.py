@@ -1,7 +1,6 @@
 from app import app
 
 from .views import *
-from .helpers_render_prez import *
 from .urls import *
 from .langs import *
 
