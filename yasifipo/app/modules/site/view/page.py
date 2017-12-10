@@ -8,29 +8,38 @@ from markdown import markdown
 from urls import *
 from langs import *
 
+from modules.site.objects import *
+
 def render_page(file_):
 
 	with open(file_) as data:
 		yaml = load(data)
 
-		lang = set_lang(yaml)
+		page = Page('page')
+
+		page.lang = set_lang(yaml)
+
 		#TODO tags
+		#TODO langs
 
 		if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+			page.display['cucumber'] = True
+
 			if 'parent' in yaml.keys() and 'ref' in yaml.keys():
-				cucumber = get_page_cucumber(app.yasifipo["refs"][yaml['ref']][lang]['file'], lang)
+				page.cucumber = get_page_cucumber(app.yasifipo["refs"][yaml['ref']][page.lang]['file'], page.lang)
 			else:
-				cucumber = []
+				page.cucumber = []
 		else:
-			cucumber = []
+			page.cucumber = []
 
 
-		title=yaml['title']
+		page.title   = yaml['title']
+		page.content = Markup(markdown(yaml.content))
+
+		print(page.cucumber)
 
 	return render_template('page/page.html',
-							title=title,
-							content=Markup(markdown(yaml.content)),
-							cucumber=cucumber
+							page=page
 							)
 
 

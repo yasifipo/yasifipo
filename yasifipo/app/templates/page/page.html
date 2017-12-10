@@ -4,25 +4,29 @@
 {% endblock %}
 
 {% block title %}
-{{title}}
+{{page.title}}
 {% endblock %}
 
 {% block body %}
-{% if cucumber|length > 1 %}
+{% if page.display['cucumber'] == True %}
+{% if page.cucumber|length > 1 %}
 <div class='cucumber-toc'>
-{% for i in cucumber %}
-<a href="{{i['url']}}">{{i['title']}}</a> {% if i != cucumber[cucumber|length -1] %} > {% endif %}
+{% for i in page.cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> {% if i != page.cucumber[page.cucumber|length -1] %} > {% endif %}
 {% endfor %}
 </div>
 {% endif %}
-{% if langs|length > 1 %}
+{% endif %}
+{% if page.display['langs'] %}
+{% if page.langs|length > 1 %}
 <div>
-	{% for lang in langs %}
+	{% for lang in page.langs %}
 	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
 	{% endfor %}
 </div>
 {% endif %}
+{% endif %}
 
-{{content}}
+{{page.content}}
 
 {% endblock %}

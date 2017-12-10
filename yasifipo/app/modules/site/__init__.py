@@ -1,6 +1,7 @@
 from app import app
 
 from .views import *
+from objects import *
 
 
 def init_site_data():
