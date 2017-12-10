@@ -60,7 +60,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  url: mandatory, url of page
 *  title: mandatory, title of page
 *  lang: optionnal, lang of page. DEFAULT_LANG will be used if not set
-*  ref: optional (but mandatory if category is set), used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
+*  ref: optional (but mandatory if to display cucumber), used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
 *  parent: optional, ref of parent page (for cucumber display)
 *  cucumber: optional, will not display cucumber if set to False
 *  server: optional, can be a str or list: server (or list of server) where page will be published

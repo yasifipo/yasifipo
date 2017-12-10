@@ -83,3 +83,4 @@ def load_config():
 	app.config['PREZ_DIR']   = app.config['DATA_DIR'] + "prez/"  # / after
 	app.config['LANGS_DIR']  = app.config['DATA_DIR'] + "langs/" # / after
 	app.config['TAG_DIR']    = app.config['DATA_DIR'] + "tags/" # / after
+	app.config['PAGE_DIR']    = app.config['DATA_DIR'] + "page/" # / after

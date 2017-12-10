@@ -4,6 +4,7 @@ from flask import send_from_directory
 from .helpers_render_prez import *
 from .helpers_render_mass_tag import *
 from .helpers_render_tag import *
+from .helpers_render_page import *
 
 import os.path
 
@@ -24,6 +25,8 @@ def render_file(path):
 			return render_mass_tag(app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "tag":
 			return render_tag(app.yasifipo["ids"][path]["data"])
+		elif app.yasifipo["ids"][path]['type'] == "page":
+			return render_page(app.yasifipo["ids"][path]['id'])
 		else:
 			return 'Bad type' #TODO
 	else:
@@ -43,6 +46,8 @@ def render_root():
 			return render_mass_tag(app.yasifipo["root"]["data"])
 		elif app.yasifipo["root"]["type"] == "tag":
 			return render_tag(app.yasifipo["root"]["data"])
+		elif app.yasifipo["root"]["type"] == "page":
+			return render_page(app.yasifipo["root"]['id'])
 		else:
 			return 'Bad type' #TODO
 	else:

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block body %}
+{% if cucumber|length > 1 %}
+<div class='cucumber-toc'>
+{% for i in cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> {% if i != cucumber[cucumber|length -1] %} > {% endif %}
+{% endfor %}
+</div>
+{% endif %}
+{% if langs|length > 1 %}
+<div>
+	{% for lang in langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+
+{{content}}
+
+{% endblock %}

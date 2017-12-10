@@ -7,6 +7,7 @@ from flask_script import Option
 from modules.site import *
 from modules.prez import *
 from modules.tag import *
+from modules.page import *
 
 freezer = Freezer(app)
 
@@ -51,6 +52,7 @@ def run_data_read():
 	init_tag_data()
 	init_site_data()
 	init_prez_data()
+	init_page_data()
 
 if __name__ == '__main__':
 	manager.run()

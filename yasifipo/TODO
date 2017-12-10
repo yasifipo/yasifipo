@@ -3,7 +3,6 @@
 	* BUG: direct markdown link need rewriting for freeze
 	* BUG/TODO: recursive in img folder / exclude some path ?
 	*	PAGE: img static folder stuff (like for prez)
-  * ALL: Tags
   * ALL: blog type
   * CATEGORY & TAG: sorting stuff
   * ALL: basic template + css
@@ -11,15 +10,14 @@
   * ALL: first initialisation
   * ALL: excluding some file stuff
   * ALL: label management, by lang
-	* PAGE: auto slug by path
-	* TOC: lang stuff for any chapter (cf ref stuff missing ?)
-  * ALL: test carefully new lang detection (at item level instead of category ?)
+  * ALL: new lang detection stuff
 
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
   * ALL: put config from flask config to yasifipo config
   * ALL: multiple URLs
   * ALL: draft lang
+	* ALL: option to display draft stuff
 
 # next
   * ALL: category parents
