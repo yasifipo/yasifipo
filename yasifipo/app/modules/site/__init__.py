@@ -49,7 +49,6 @@ def yasifipo_register(type_, rule, id_, data={}):
 		app.yasifipo["root"]['data'] = data
 
 def check_server(yaml):
-	#TODO tab of servers
 	if 'server' in yaml.keys():
 		if type(yaml['server']).__name__ == 'str':
 			if (yaml['server'] != app.config["YASIFIPO_SERVER"]):

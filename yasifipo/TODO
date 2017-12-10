@@ -1,8 +1,6 @@
 # v0.01
-	* BUG: file type when recreating with new lang
 	* BUG: direct markdown link need rewriting for freeze
 	* BUG/TODO: recursive in img folder / exclude some path ?
-	*	PAGE: img static folder stuff (like for prez)
   * ALL: blog type
   * CATEGORY & TAG: sorting stuff
   * ALL: basic template + css
@@ -11,6 +9,8 @@
   * ALL: excluding some file stuff
   * ALL: label management, by lang
   * ALL: new lang detection stuff
+	* TAG: Using Objects stuff
+	* ALL: Multiple server stuff
 
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
