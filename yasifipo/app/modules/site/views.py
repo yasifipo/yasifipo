@@ -1,10 +1,7 @@
 from app import app
 from flask import send_from_directory
 
-from .helpers_render_prez import *
-from .helpers_render_mass_tag import *
-from .helpers_render_tag import *
-from .helpers_render_page import *
+from .view import *
 
 import os.path
 

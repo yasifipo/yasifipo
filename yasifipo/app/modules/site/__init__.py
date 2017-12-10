@@ -1,8 +1,6 @@
 from app import app
 
 from .views import *
-from .urls import *
-from .langs import *
 
 
 def init_site_data():

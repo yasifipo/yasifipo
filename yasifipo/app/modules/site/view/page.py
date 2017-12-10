@@ -5,7 +5,8 @@ from frontmatter import load
 from flask import Markup
 from markdown import markdown
 
-from .__init__ import *
+from urls import *
+from langs import *
 
 def render_page(file_):
 

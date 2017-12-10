@@ -4,8 +4,7 @@ from os.path import isfile
 from os import listdir
 from frontmatter import load, dumps
 
-from . import *
-from .urls import *
+from urls import *
 
 def init_lang_data():
 

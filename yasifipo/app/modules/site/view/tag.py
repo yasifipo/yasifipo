@@ -1,7 +1,8 @@
 from app import app
 from flask import render_template, request
 
-from .__init__ import *
+from urls import *
+from langs import *
 
 def render_tag(data):
 	# retrieve tag description

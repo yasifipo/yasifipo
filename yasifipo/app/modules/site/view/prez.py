@@ -7,7 +7,8 @@ from markdown import markdown
 
 from os.path import dirname
 
-from .__init__ import *
+from urls import *
+from langs import *
 
 # recursive fonction to construct ToC
 def get_children(file_, first_level):
