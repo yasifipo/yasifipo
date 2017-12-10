@@ -3,6 +3,8 @@ from app import app
 from .views import *
 from objects import *
 
+from os.path import isdir, isfile
+
 
 def init_site_data():
 
@@ -60,6 +62,19 @@ def check_server(yaml):
 			return False
 
 	return True
+
+def register_static_img(directory, current_url, static_url):
+	listfile_static = listdir(directory)
+	if current_url == "":
+		url =  "/" + static_url
+	else:
+		url = "/" + current_url + "/" + static_url
+	for file_img in listfile_static:
+		if isfile(directory + "/" + file_img):
+			rule_ = url + "/" + file_img
+			yasifipo_register('img', rule_, directory + "/" + file_img)
+		elif isdir(directory + "/" + file_img):
+			register_static_img(directory + "/" + file_img, url[1:], file_img)
 
 def set_ref(yaml, file_, lang_=None):
 	if 'ref' in yaml.keys():

@@ -79,14 +79,7 @@ def get_page_data(directory, current_slug):
 				# register static folder if needed
 				if 'static' in yaml.keys():
 					statics.append(yaml['static'])
-					listfile_static = listdir(directory + "/" + yaml['static'])
-					for file_img in listfile_static:
-						if yaml['url'] == "":
-							rule_ =  "/" + yaml['static'] + "/" + file_img
-						else:
-							rule_ = "/" + yaml['url'] + "/" + yaml['static'] + "/" + file_img
-						yasifipo_register('img', rule_, directory + "/" + yaml['static'] + "/" + file_img)
-
+					register_static_img(directory + "/" + yaml['static'], yaml['url'], yaml['static'])
 
 			else:
 				print("WARNING : page without url defined : " + directory + "/" + file_)

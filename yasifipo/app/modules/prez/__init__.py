@@ -64,10 +64,7 @@ def init_prez_data():
 
 					# register static folder if needed
 					if 'static' in prez.keys():
-						listfile_static = listdir(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'])
-						for file_ in listfile_static:
-							rule_ = rule + prez['static'] + "/" + file_
-							yasifipo_register('img', rule_, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'] + "/" + file_)
+						register_static_img(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'], rule[1:-1], prez['static'])
 
 					manage_tags(prez, "prez-single", app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], lang_=lang)
 
@@ -124,10 +121,7 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 
 		# register static files if needed
 		if 'static' in yaml_chapter.keys():
-			listfile_static = listdir(directory + "/" + yaml_chapter['static'])
-			for file_ in listfile_static:
-				rule_ = rule + yaml_chapter['static'] + "/" + file_
-				yasifipo_register('img', rule_, directory + yaml_chapter['static'] + "/" + file_)
+			register_static_img(directory + "/" + yaml_chapter['static'], rule[1:-1], yaml_chapter['static'])
 		else:
 			yaml_chapter['static'] = ""
 
