@@ -17,9 +17,7 @@
 {% endfor %}
 <a href="">{{title}}</a>
 </div>
-{% if category %}
-<a href="{{category['url']}}">{{category['descr']}}</a>
-{% endif %}
+
 {% if langs|length > 1 %}
 <div>
 	{% for lang in langs %}
