@@ -10,6 +10,9 @@ from os.path import dirname
 from urls import *
 from langs import *
 
+
+from modules.site.objects import *
+
 # recursive fonction to construct ToC
 def get_children(file_, first_level):
 	current = {}
@@ -99,12 +102,16 @@ def render_prez_prez(file_, data):
 
 		#TODO tags
 
-		if 'lang' not in yaml.keys():
-			lang = app.config['DEFAULT_LANG']
-		else:
-			lang = yaml['lang']
 
-		langs = get_langs_from_ref(yaml)
+
+		if 'single' in data.keys() and data['single'] == True:
+			page = Page('prez-single')
+		else:
+			page = Page('prez')
+
+		page.lang = set_lang(yaml)
+
+		page.langs = get_langs_from_ref(yaml)
 
 		theme = {}
 		if 'theme' in yaml.keys():
@@ -120,17 +127,19 @@ def render_prez_prez(file_, data):
 		theme['marked'] = yasifipo_url_for('static', filename='plugin/markdown/marked.js') #TODO to check
 		theme['markdown'] = yasifipo_url_for('static', filename='plugin/markdown/markdown.js') #TODO to check
 
+		page.theme = theme
+
 		if 'single' in data.keys() and data['single'] == True:
-			cucumber = [] # No cucumber for single
+			page.cucumber = [] # No cucumber for single
 		else:
 			if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
-				cucumber  = get_prez_cucumber(dirname(file_) + '/.chapter.md', lang)
+				page.display['cucumber'] = True
+				page.cucumber  = get_prez_cucumber(dirname(file_) + '/.chapter.md', page.lang)
 			else:
-				cucumber = []
+				page.cucumber = []
+
+		page.title   = yaml['title']
+		page.content = Markup(yaml.content)
 
 		return render_template('prez/prez.html',
-								theme=theme,
-								title=yaml['title'],
-								content=Markup(yaml.content),
-								cucumber=cucumber,
-								langs=langs)
+								page=page)

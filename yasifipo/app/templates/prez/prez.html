@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 
 {% block additional_scripts %}
-<link rel="stylesheet" href="{{ theme['reveal_css']}}">
-<link rel="stylesheet" href="{{ theme['theme'] }}" id="theme">
-<script src="{{ theme['conf'] }}"></script>
+<link rel="stylesheet" href="{{ page.theme['reveal_css']}}">
+<link rel="stylesheet" href="{{ page.theme['theme'] }}" id="theme">
+<script src="{{ page.theme['conf'] }}"></script>
 {% endblock %}
 
 {% block title %}
-{{title}}
+{{page.title}}
 {% endblock %}
 
 {% block body %}
+{% if page.display['cucumber'] == True %}
 <div class='cucumber'>
-{% for i in cucumber %}
+{% for i in page.cucumber %}
 <a href="{{i['url']}}">{{i['title']}}</a> >
 {% endfor %}
-<a href="">{{title}}</a>
+<a href="">{{page.title}}</a>
 </div>
+{% endif %}
 
+{% if page.display['langs'] == True %}
 {% if langs|length > 1 %}
 <div>
 	{% for lang in langs %}
@@ -25,20 +28,21 @@
 	{% endfor %}
 </div>
 {% endif %}
+{% endif %}
 <div class="reveal">
 	<div class="slides">
 		<section data-markdown data-separator="^\n~~~\n$" data-separator-vertical="^\n~~\n$" data-notes="^Note:" data-element-attributes="{_\s*?([^}]+?)}">>
 			<script type="text/template">
-{{ content }}
+{{ page.content }}
 			</script>
 		</section>
 	</div>
 </div>
 
-<script src="{{ theme['head']}}"></script>
-<script src="{{ theme['reveal_js'] }}"></script>
-<script src="{{ theme['marked'] }}"></script>
-<script src="{{ theme['markdown'] }}"></script>
+<script src="{{ page.theme['head']}}"></script>
+<script src="{{ page.theme['reveal_js'] }}"></script>
+<script src="{{ page.theme['marked'] }}"></script>
+<script src="{{ page.theme['markdown'] }}"></script>
 
 <script>
 	Reveal.initialize(conf);
