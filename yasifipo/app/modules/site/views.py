@@ -39,10 +39,10 @@ def render_root():
 			return render_prez_prez(app.yasifipo["root"]['id'], app.yasifipo["root"]["data"])
 		elif app.yasifipo["root"]["type"] == "img":
 			return return_file(app.yasifipo["root"]['id'])
-		elif app.yasifipo["ids"][path]['type'] == "tag_type":
-			return render_mass_tag(app.yasifipo["ids"][path]["data"])
-		elif app.yasifipo["ids"][path]['type'] == "tag":
-			return render_tag(app.yasifipo["ids"][path]["data"])
+		elif app.yasifipo["root"]["type"] == "tag_type":
+			return render_mass_tag(app.yasifipo["root"]["data"])
+		elif app.yasifipo["root"]["type"] == "tag":
+			return render_tag(app.yasifipo["root"]["data"])
 		else:
 			return 'Bad type' #TODO
 	else:
