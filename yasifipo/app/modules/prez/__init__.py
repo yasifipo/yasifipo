@@ -2,6 +2,7 @@ from app import app
 
 from os.path import isfile, isdir
 from os import listdir, makedirs
+from os.path import exists
 
 from modules.site import *
 from modules.tag import *
