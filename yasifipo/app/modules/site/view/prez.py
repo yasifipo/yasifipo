@@ -66,34 +66,32 @@ def get_prez_cucumber(initial_parent, lang):
 def render_prez_chapter(file_, data):
 	with open(file_) as data_file:
 		yaml = load(data_file)
-		display_toc = True
-		if 'display-toc' in yaml.keys() and yaml['display-toc'] == False:
-			display_toc = False
-		else:
-			toc = get_children(file_, True)
 
 	#TODO tags
 
-	if 'lang' not in yaml.keys():
-		lang = app.config['DEFAULT_LANG']
+	page = Page(data['type'])
+
+	page.display['toc'] = True
+	if 'display-toc' in yaml.keys() and yaml['display-toc'] == False:
+		page.display['toc'] = False
 	else:
-		lang = yaml['lang']
-	langs = get_langs_from_ref(yaml)
+		page.toc = get_children(file_, True)
+
+	page.lang = set_lang(yaml)
+	page.langs = get_langs_from_ref(yaml)
 
 	if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
-		cucumber = get_prez_cucumber(file_, lang)
+		page.display['cucumber'] = True
+		page.cucumber = get_prez_cucumber(file_, page.lang)
 	else:
-		cucumber = []
+		page.cucumber = []
 
-	toc_css = yasifipo_url_for('static', filename='css/toc.css')
+	page.title = yaml['title']
+	page.content = Markup(markdown(yaml.content))
+
+	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 	return render_template('prez/toc.html',
-							title=yaml['title'],
-							content=Markup(markdown(yaml.content)),
-							display_toc=display_toc,
-							toc_css=toc_css,
-							toc_nodes=toc,
-							cucumber=cucumber,
-							langs=langs)
+							page=page)
 
 
 def render_prez_prez(file_, data):

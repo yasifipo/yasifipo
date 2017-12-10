@@ -116,7 +116,10 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 		set_ref(yaml_chapter, directory + ".chapter.md" , lang)
 		manage_tags(yaml_chapter, "chapter", directory + ".chapter.md", lang_=lang)
 
-		yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md')
+		if up_directory:
+			yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md', {'type':'prez-chapter'})
+		else:
+			yasifipo_register('prez-course', rule,  directory  + '.chapter.md', {'type':'prez-course'})
 
 
 		# register static files if needed

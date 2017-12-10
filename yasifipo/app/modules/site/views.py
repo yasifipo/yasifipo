@@ -12,6 +12,8 @@ def render_file(path):
 	if path in app.yasifipo["ids"].keys():
 		if app.yasifipo["ids"][path]['type'] == "prez-chapter":
 			return render_prez_chapter(app.yasifipo["ids"][path]['id'], app.yasifipo["ids"][path]["data"])
+		elif app.yasifipo["ids"][path]['type'] == "prez-course":
+			return render_prez_chapter(app.yasifipo["ids"][path]['id'], app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "prez":
 			return render_prez_prez(app.yasifipo["ids"][path]['id'], app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "prez-single":
@@ -32,6 +34,8 @@ def render_file(path):
 def render_root():
 	if app.yasifipo["root"]:
 		if app.yasifipo["root"]["type"] == "prez-chapter":
+			return render_prez_chapter(app.yasifipo["root"]['id'], app.yasifipo["root"]["data"])
+		elif app.yasifipo["root"]["type"] == "prez-course":
 			return render_prez_chapter(app.yasifipo["root"]['id'], app.yasifipo["root"]["data"])
 		elif app.yasifipo["root"]["type"] == "prez":
 			return render_prez_prez(app.yasifipo["root"]['id'], app.yasifipo["root"]["data"])
