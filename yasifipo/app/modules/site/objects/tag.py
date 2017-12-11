@@ -47,7 +47,7 @@ class Tag():
 				yaml = load(fil_)
 				item.title = yaml['title']
 				item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
-				item.type  = obj['type'] #TODO type descr
+				item.type  = obj['type']
 				item.type_description = app.yasifipo["i18n"]["page-type"][item.type][self.lang]
 			self.items.append(item)
 
