@@ -8,13 +8,15 @@
   * ALL: excluding some file stuff
 	* ALL: display tags on templates
 	* PREZ: add a page tag to be able to have some pages in toc of a course
+	* ALL: multiple URLs
+  * ALL: draft lang
+	* ALL: option to display draft stuff
 
+# v0.02
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
   * ALL: put config from flask config to yasifipo config
-  * ALL: multiple URLs
-  * ALL: draft lang
-	* ALL: option to display draft stuff
+
 
 # next
   * ALL: category parents
