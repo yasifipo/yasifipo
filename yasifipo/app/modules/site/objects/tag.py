@@ -16,12 +16,19 @@ class TagType():
 		self.tags = []
 
 	def get_tags(self):
-		pass #TODO
+		#TODO how to sort ?
+		for tag_it in app.yasifipo["tags"]["data"][self.tagtype].keys():
+			tag = Tag(self.tagtype, tag_it, self.lang)
+			self.tags.append(tag)
+
+	def get_tags_items(self):
+		for tag in self.tags:
+			tag.get_items()
 
 class Tag():
 	def __init__(self, tag_type_, tag_, lang_):
 		self.type = TagType(tag_type_, lang_)
-		self.tag     = tag_
+		self.tag  = tag_
 
 		self.lang = lang_
 
@@ -35,10 +42,14 @@ class Tag():
 		# retrieve all objects linked to this tag
 		#TODO how to sort ?
 		for obj in app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['data'][self.lang].values():
-			item = {}
+			item = Item()
 			with open(obj['file']) as fil_:
 				yaml = load(fil_)
-				item['title'] = yaml['title']
-				item['url']   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
-				item['type']  = obj['type'] #TODO type descr
+				item.title = yaml['title']
+				item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
+				item.type  = obj['type'] #TODO type descr
 			self.items.append(item)
+
+class Item():
+	def __init__(self):
+		pass
