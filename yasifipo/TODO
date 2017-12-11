@@ -1,8 +1,7 @@
 # v0.01
 	* BUG: direct markdown link need rewriting for freeze
-	* BUG/TODO: recursive in img folder / exclude some path ?
   * ALL: blog type
-  * CATEGORY & TAG: sorting stuff
+  * TAG: sorting stuff
   * ALL: basic template + css
   * ALL: example _data
   * ALL: first initialisation
@@ -10,7 +9,6 @@
   * ALL: label management, by lang
   * ALL: new lang detection stuff
 	* TAG: Using Objects stuff
-	* ALL: Multiple server stuff
 
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
