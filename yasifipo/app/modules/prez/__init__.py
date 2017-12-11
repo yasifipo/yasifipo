@@ -69,7 +69,7 @@ def init_prez_data():
 					manage_tags(prez, "prez-single", app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], lang_=lang)
 
 			else:
-				manage_tags(prez, "course", app.config['PREZ_DIR']  + prez['directory'] + "/.chapter.md", lang_=lang)
+				manage_tags(prez, "prez-course", app.config['PREZ_DIR']  + prez['directory'] + "/.chapter.md", lang_=lang)
 
 				#recursive stuff
 				read_prez_data(app.config['PREZ_DIR']  + prez['directory'] + "/", None, init_slug, lang)
@@ -111,7 +111,7 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 			rule = current_slug + slugify(yaml_chapter['slug']) + '/'
 
 		set_ref(yaml_chapter, directory + ".chapter.md" , lang)
-		manage_tags(yaml_chapter, "chapter", directory + ".chapter.md", lang_=lang)
+		manage_tags(yaml_chapter, "prez-chapter", directory + ".chapter.md", lang_=lang)
 
 		if up_directory:
 			yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md', {'type':'prez-chapter'})
