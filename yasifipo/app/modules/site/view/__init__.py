@@ -1,4 +1,4 @@
-from .mass_tag import *
+from .tag_type import *
 from .page import *
 from .prez import *
 from .tag import *

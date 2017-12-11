@@ -21,7 +21,7 @@ def render_file(path):
 		elif app.yasifipo["ids"][path]['type'] == "img":
 			return return_file(app.yasifipo["ids"][path]['id'])
 		elif app.yasifipo["ids"][path]['type'] == "tag_type":
-			return render_mass_tag(app.yasifipo["ids"][path]["data"])
+			return render_tag_type(app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "tag":
 			return render_tag(app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "page":
@@ -44,7 +44,7 @@ def render_root():
 		elif app.yasifipo["root"]["type"] == "img":
 			return return_file(app.yasifipo["root"]['id'])
 		elif app.yasifipo["root"]["type"] == "tag_type":
-			return render_mass_tag(app.yasifipo["root"]["data"])
+			return render_tag_type(app.yasifipo["root"]["data"])
 		elif app.yasifipo["root"]["type"] == "tag":
 			return render_tag(app.yasifipo["root"]["data"])
 		elif app.yasifipo["root"]["type"] == "page":
