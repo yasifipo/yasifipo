@@ -90,7 +90,7 @@ def get_langs_from_ref(ref_):
 	if 'ref' in ref_.keys():
 		ref = ref_['ref']
 		for lang in app.yasifipo["refs"][ref].values():
-			if app.yasifipo["langs"][lang]["draft"] == True:
+			if app.yasifipo["langs"][lang['lang']]["draft"] == True:
 				continue
 			langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["files"][app.yasifipo["refs"][ref][lang['lang']]['file']])})
 	return sorted(langs, key=lambda k: k['sort'])
