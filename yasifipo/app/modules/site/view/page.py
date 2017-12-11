@@ -5,8 +5,8 @@ from frontmatter import load
 from flask import Markup
 from markdown import markdown
 
-from urls import *
-from langs import *
+from .urls import *
+from .langs import *
 
 from modules.site.objects import *
 

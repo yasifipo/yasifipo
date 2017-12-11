@@ -4,23 +4,23 @@
 {% endblock %}
 
 {% block title %}
-{{tag['descr']}}
+{{page.title}}
 {% endblock %}
 
 {% block body %}
 
-<h1><a href="{{ tag_type['url'] }}">{{tag_type['descr']}}</a></h1>
-<h1><a href="{{ tag['url'] }}">{{tag['descr']}}</a></h1>
+<h1><a href="{{ page.tag.type.url }}">{{page.tag.type.description}}</a></h1>
+<h1><a href="{{ page.tag.url }}">{{page.tag.description}}</a></h1>
 
-{% if langs|length > 1 %}
+{% if page.langs|length > 1 %}
 <div>
-	{% for lang in langs %}
+	{% for lang in page.langs %}
 	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
 	{% endfor %}
 </div>
 {% endif %}
 
-{% for item in items %}
+{% for item in page.tag.items %}
 <a href="{{item['url']}}">{{item['title']}}</a> ({{ item['type'] }})<br/>
 {% endfor %}
 

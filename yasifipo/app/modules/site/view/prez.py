@@ -7,8 +7,8 @@ from markdown import markdown
 
 from os.path import dirname
 
-from urls import *
-from langs import *
+from .urls import *
+from .langs import *
 
 
 from modules.site.objects import *

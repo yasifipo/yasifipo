@@ -1,7 +1,7 @@
 from app import app
 
 from .views import *
-from objects import *
+from .objects import *
 
 from os.path import isdir, isfile
 

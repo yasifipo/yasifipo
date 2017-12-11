@@ -1,8 +1,8 @@
 from app import app
 from flask import render_template, request
 
-from urls import *
-from langs import *
+from .urls import *
+from .langs import *
 
 def render_mass_tag(data):
 
