@@ -6,7 +6,6 @@
   * ALL: example _data
   * ALL: first initialisation
   * ALL: excluding some file stuff
-  * ALL: new lang detection stuff
 	* ALL: display tags on templates
 	* PREZ: add a page tag to be able to have some pages in toc of a course
 
