@@ -23,6 +23,8 @@ def init_prez_data():
 				continue
 
 			lang = set_lang(prez)
+			if app.yasifipo["langs"][lang]['draft'] == True:
+				continue
 
 			if app.config['PREZ_URL_PREFIX'] == "":
 				init_slug = '/'

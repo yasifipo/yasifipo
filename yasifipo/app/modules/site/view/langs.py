@@ -15,6 +15,10 @@ def init_lang_data():
 			with open(app.config["LANGS_DIR"] + lang) as fil_:
 				lang_ = load(fil_)
 				app.yasifipo['langs'][lang_['lang']] = {'lang':lang_['lang'], 'descr': lang_['descr'], 'sort':int(lang_['sort'])}
+				if not 'draft' in lang_.keys() or ('draft' in lang_.keys() and lang_['draft'] == False):
+					app.yasifipo['langs'][lang_['lang']]['draft'] = False
+				else:
+					app.yasifipo['langs'][lang_['lang']]['draft'] = True
 
 def set_lang(yaml):
 	lang = ''
@@ -108,12 +112,16 @@ def get_langs_from_ref(ref_):
 	if 'ref' in ref_.keys():
 		ref = ref_['ref']
 		for lang in app.yasifipo["refs"][ref].values():
+			if app.yasifipo["langs"][lang]["draft"] == True:
+				continue
 			langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["files"][app.yasifipo["refs"][ref][lang['lang']]['file']])})
 	return sorted(langs, key=lambda k: k['sort'])
 
 def get_langs_from_tag(tag_type, tag):
 	langs = []
 	for lang in app.yasifipo['langs'].values():
+		if app.yasifipo["langs"][lang['lang']]["draft"] == True:
+			continue
 		#TODO only if there is some tags for this lang
 		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["tags"]["data"][tag_type][tag]['url'][lang['lang']])})
 	return sorted(langs, key=lambda k: k['sort'])
@@ -121,6 +129,8 @@ def get_langs_from_tag(tag_type, tag):
 def get_langs_from_tag_type(tag_type):
 	langs = []
 	for lang in app.yasifipo['langs'].values():
+		if app.yasifipo["langs"][lang['lang']]["draft"] == True:
+			continue
 		#TODO only if there is some tag_type for this lang
 		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["tags"]["conf"][tag_type]['urls']['mass'][lang['lang']])})
 	return sorted(langs, key=lambda k: k['sort'])

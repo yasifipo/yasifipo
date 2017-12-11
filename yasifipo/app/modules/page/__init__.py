@@ -57,6 +57,8 @@ def get_page_data(directory, current_slug):
 				continue
 
 			lang = set_lang(yaml)
+			if app.yasifipo["langs"][lang]['draft'] == True:
+				continue
 			set_ref(yaml, directory + "/" + file_)
 
 			# toc

@@ -76,6 +76,8 @@ def init_tag_data():
 			app.yasifipo["tags"]["conf"][tag['slug']] = {}
 			app.yasifipo["tags"]["conf"][tag['slug']]['descr'] = {}
 			for lang in tag['descr'].keys():
+				if app.yasifipo["langs"][lang]["draft"] == True:
+					continue
 				app.yasifipo["tags"]["conf"][tag['slug']]['descr'][lang] = tag['descr'][lang]
 
 			app.yasifipo["tags"]["conf"][tag['slug']]['directory'] = tag['directory']
@@ -84,15 +86,21 @@ def init_tag_data():
 
 			app.yasifipo["tags"]["conf"][tag['slug']]['urls']['mass'] = {}
 			for lang in tag['url']['mass'].keys():
+				if app.yasifipo["langs"][lang]["draft"] == True:
+					continue
 				app.yasifipo["tags"]["conf"][tag['slug']]['urls']['mass'][lang] = tag['url']['mass'][lang]
 
 			app.yasifipo["tags"]["conf"][tag['slug']]['urls']['url'] = {}
 			for lang in tag['url']['url'].keys():
+				if app.yasifipo["langs"][lang]["draft"] == True:
+					continue
 				app.yasifipo["tags"]["conf"][tag['slug']]['urls']['url'][lang] = tag['url']['url'][lang]
 
 	# register mass urls
 	for tag in app.yasifipo["tags"]["conf"].keys():
 		for lang in app.yasifipo["tags"]["conf"][tag]["urls"]['mass'].keys():
+			if app.yasifipo["langs"][lang]["draft"] == True:
+				continue
 			rule = app.yasifipo["tags"]["conf"][tag]["urls"]['mass'][lang]
 			yasifipo_register("tag_type", rule, None, {'tag_type': tag, 'lang':lang})
 
@@ -111,6 +119,8 @@ def init_tag_data():
 	for tag_type in app.yasifipo["tags"]["data"].keys():
 		for tag in app.yasifipo["tags"]["data"][tag_type].keys():
 			for lang in app.yasifipo["tags"]["data"][tag_type][tag]['url'].keys():
+				if app.yasifipo["langs"][lang]["draft"] == True:
+					continue
 				rule = app.yasifipo["tags"]["data"][tag_type][tag]['url'][lang]
 				yasifipo_register("tag", rule, None, {'tag_type': tag_type, 'tag': tag, 'lang': lang })
 
@@ -128,9 +138,13 @@ def fill_tag_data(file_, tag_type):
 
 		app.yasifipo["tags"]["data"][tag_type][yaml['slug']]['descr'] = {}
 		for lang in	yaml['descr'].keys():
+			if app.yasifipo["langs"][lang]["draft"] == True:
+				continue
 			app.yasifipo["tags"]["data"][tag_type][yaml['slug']]['descr'][lang] = yaml['descr'][lang]
 			app.yasifipo["tags"]["data"][tag_type][yaml['slug']]['data'][lang] = {}
 
 		app.yasifipo["tags"]["data"][tag_type][yaml['slug']]['url'] = {}
 		for lang in	yaml['url'].keys():
+			if app.yasifipo["langs"][lang]["draft"] == True:
+				continue
 			app.yasifipo["tags"]["data"][tag_type][yaml['slug']]['url'][lang] = app.yasifipo["tags"]["conf"][tag_type]['urls']['url'][lang] + "/" + yaml['url'][lang]
