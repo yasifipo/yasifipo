@@ -6,8 +6,8 @@
   * ALL: example _data
   * ALL: first initialisation
   * ALL: excluding some file stuff
-  * ALL: label management, by lang
   * ALL: new lang detection stuff
+	* ALL: display tags on templates
 	* PREZ: add a page tag to be able to have some pages in toc of a course
 
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
@@ -20,5 +20,6 @@
 # next
   * ALL: category parents
   * PAGE: children for pages (to be able to construct ToC)
-  * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost ?
+  * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost (by plugin)?
+	* PLUGIN management
   * ALL: see TARGET file
