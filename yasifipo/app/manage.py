@@ -48,6 +48,7 @@ def run(data_path=None):
 	app.run()
 
 def run_data_read():
+	init_i18n_data()
 	init_lang_data()
 	init_tag_data()
 	init_site_data()

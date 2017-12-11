@@ -29,6 +29,21 @@ def init_site_data():
 						methods=['GET']
 						)
 
+def init_i18n_data():
+	listfile = listdir(app.config["I18N_DIR"])
+	for file_ in listfile:
+		if isfile(app.config["I18N_DIR"] + "/" + file_):
+			with open(app.config["I18N_DIR"] + "/" + file_) as fil_data:
+				yaml = load(fil_data)
+
+				app.yasifipo["i18n"][yaml['slug']] = {}
+				for slug in yaml['labels'].keys():
+					app.yasifipo["i18n"][yaml['slug']][slug] = {}
+					for lang in yaml['labels'][slug].keys():
+						app.yasifipo["i18n"][yaml['slug']][slug][lang] = yaml['labels'][slug][lang]
+
+
+
 def yasifipo_register(type_, rule, id_, data={}):
 
 	if rule != "/" and type_ in ["prez-chapter", "prez", "prez-single", "prez-course"]:
@@ -96,3 +111,4 @@ def load_config():
 	app.config['LANGS_DIR']  = app.config['DATA_DIR'] + "langs/" # / after
 	app.config['TAG_DIR']    = app.config['DATA_DIR'] + "tags/" # / after
 	app.config['PAGE_DIR']    = app.config['DATA_DIR'] + "page/" # / after
+	app.config['I18N_DIR']    = app.config['DATA_DIR'] + "i18n/" # / after

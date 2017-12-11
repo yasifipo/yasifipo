@@ -14,3 +14,4 @@ app.yasifipo['files'] = {} # file --> rule
 app.yasifipo['langs'] = {} # langs data
 app.yasifipo['refs'] = {} # refs used for retrieve all langs of an object
 app.yasifipo['tags'] = {}
+app.yasifipo['i18n'] = {}
