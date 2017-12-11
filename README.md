@@ -43,6 +43,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  category: optional
 *  static: mandatory, name of folder that can contains files like images
 *  content (not part of yaml): will be displayed in chapter page
+*  redirect (str or tab) : urls redirected to url by 301 redirection 
 
 ## any prez file
 *  slug: mandatory, url part of the current presentation
@@ -55,6 +56,7 @@ Create your table of content by creating a directory tree. Each path must have a
   *  ~~~ is used for horizontal separator
   *  ~~ is used for vertical separator
 *  theme:(optional) use a specific reveal.js theme. If not set, will use global config REVEAL_DEFAULT_THEME
+*  redirect (str or tab) : urls redirected to url by 301 redirection
 
 ## page file
 *  url: mandatory, url of page
@@ -66,3 +68,4 @@ Create your table of content by creating a directory tree. Each path must have a
 *  server: optional, can be a str or list: server (or list of server) where page will be published
 *  category: optional
 *  content (not part of yaml): content of page (in markdown language)
+*  redirect (str or tab) : urls redirected to url by 301 redirection

@@ -64,6 +64,16 @@ def init_prez_data():
 					# register
 					yasifipo_register('prez-single', rule, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], {'single':True})
 
+					# redirect
+					if 'redirect' in yaml_single.keys():
+						reds = []
+						if type(yaml_single['redirect']).__name__ == "str":
+							reds.append(yaml_single['redirect'])
+						else:
+							reds = yaml_single['redirect']
+						for red in reds:
+							yasifipo_register('redirect', red, None, {'url': rule[1:-1]})
+
 					# register static folder if needed
 					if 'static' in prez.keys():
 						register_static_img(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'], rule[1:-1], prez['static'])
@@ -119,6 +129,16 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 			yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md', {'type':'prez-chapter'})
 		else:
 			yasifipo_register('prez-course', rule,  directory  + '.chapter.md', {'type':'prez-course'})
+
+		# redirect
+		if 'redirect' in yaml_chapter.keys():
+			reds = []
+			if type(yaml_chapter['redirect']).__name__ == "str":
+				reds.append(yaml_chapter['redirect'])
+			else:
+				reds = yaml_chapter['redirect']
+			for red in reds:
+				yasifipo_register('redirect', red, None, {'url': rule[1:-1]})
 
 
 		# register static files if needed
@@ -199,6 +219,16 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 				manage_tags(yaml, "prez", directory + "/" + file_, lang_=lang)
 				set_ref(yaml, directory + "/" + file_, lang)
 				yasifipo_register('prez', rule, directory + '/' + file_)
+
+				# redirect
+				if 'redirect' in yaml.keys():
+					reds = []
+					if type(yaml['redirect']).__name__ == "str":
+						reds.append(yaml['redirect'])
+					else:
+						reds = yaml['redirect']
+					for red in reds:
+						yasifipo_register('redirect', red, None, {'url': rule[1:-1]})
 
 		# This is the file used for current directory data
 		elif isfile(directory + "/" + file_) and file_ == ".chapter.md":

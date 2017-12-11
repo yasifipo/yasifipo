@@ -78,6 +78,15 @@ def get_page_data(directory, current_slug):
 					url = yaml['url']
 				yasifipo_register('page', url, directory + "/" + file_, {})
 
+				if 'redirect' in yaml.keys():
+					reds = []
+					if type(yaml['redirect']).__name__ == "str":
+						reds.append(yaml['redirect'])
+					else:
+						reds = yaml['redirect']
+					for red in reds:
+						yasifipo_register('redirect', red, None, {'url': url})
+
 				# register static folder if needed
 				if 'static' in yaml.keys():
 					statics.append(yaml['static'])
