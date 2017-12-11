@@ -19,29 +19,33 @@ def url_generator():
 		else:
 			yield 'render_file', {'path': i}
 
-@manager.command
-def freeze(data_path=None):
-
-	option_list = (
-        Option('--data', '-d', dest='data_path', required=False),
-		)
+@manager.option('-d', '--data', dest='data_path', default=None)
+@manager.option('-a', '--all', dest='display_all', default=False)
+def freeze(data_path, display_all):
 
 	if data_path:
 		app.config['DATA_DIR'] = os.path.abspath(data_path) + "/"
+
+	if display_all:
+		app.config['DISPLAY_ALL'] = True
+	else:
+		app.config['DISPLAY_ALL'] = False
 
 	load_config()
 	run_data_read()
 	freezer.freeze()
 
-@manager.command
-def run(data_path=None):
-
-	option_list = (
-        Option('--data', '-d', dest='data_path', required=False),
-		)
+@manager.option('-d', '--data', dest='data_path', default=None)
+@manager.option('-a', '--all', dest='display_all', default=False)
+def run(data_path, display_all):
 
 	if data_path:
 		app.config['DATA_DIR'] = os.path.abspath(data_path) + "/"
+
+	if display_all:
+		app.config['DISPLAY_ALL'] = True
+	else:
+		app.config['DISPLAY_ALL'] = False
 
 	load_config()
 	run_data_read()

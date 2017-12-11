@@ -20,11 +20,13 @@ def init_prez_data():
 				continue
 
 			if 'draft' in prez.keys() and prez['draft'] == True:
-				continue
+				if app.config['DISPLAY_ALL'] == False:
+					continue
 
 			lang = set_lang(prez)
 			if app.yasifipo["langs"][lang]['draft'] == True:
-				continue
+				if app.config['DISPLAY_ALL'] == False:
+					continue
 
 			if app.config['PREZ_URL_PREFIX'] == "":
 				init_slug = '/'
@@ -172,7 +174,8 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 
 				# Do not use draft directory
 				if 'draft' in yaml_chapter_dir.keys() and yaml_chapter_dir['draft'] == True:
-					continue
+					if app.config['DISPLAY_ALL'] == False:
+						continue
 
 			#toc
 			app.yasifipo["toc"][directory + '.chapter.md']['children'].append({'type':'dir', 'data':directory + "/" + file_ + "/.chapter.md"})
@@ -204,7 +207,8 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 
 				# Do not use draft files
 				if 'draft' in yaml.keys() and yaml['draft'] == True:
-					continue
+					if app.config['DISPLAY_ALL'] == False:
+						continue
 
 				if up_directory is None:
 					if yaml_chapter['slug'] == "":

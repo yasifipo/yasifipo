@@ -91,7 +91,8 @@ def get_langs_from_ref(ref_):
 		ref = ref_['ref']
 		for lang in app.yasifipo["refs"][ref].values():
 			if app.yasifipo["langs"][lang['lang']]["draft"] == True:
-				continue
+				if app.config['DISPLAY_ALL'] == False:
+					continue
 			langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["files"][app.yasifipo["refs"][ref][lang['lang']]['file']])})
 	return sorted(langs, key=lambda k: k['sort'])
 
@@ -99,7 +100,8 @@ def get_langs_from_tag(tag_type, tag):
 	langs = []
 	for lang in app.yasifipo['langs'].values():
 		if app.yasifipo["langs"][lang['lang']]["draft"] == True:
-			continue
+			if app.config['DISPLAY_ALL'] == False:
+				continue
 		#TODO only if there is some tags for this lang
 		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["tags"]["data"][tag_type][tag]['url'][lang['lang']])})
 	return sorted(langs, key=lambda k: k['sort'])
@@ -108,7 +110,8 @@ def get_langs_from_tag_type(tag_type):
 	langs = []
 	for lang in app.yasifipo['langs'].values():
 		if app.yasifipo["langs"][lang['lang']]["draft"] == True:
-			continue
+			if app.config['DISPLAY_ALL'] == False:
+				continue
 		#TODO only if there is some tag_type for this lang
 		langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["tags"]["conf"][tag_type]['urls']['mass'][lang['lang']])})
 	return sorted(langs, key=lambda k: k['sort'])

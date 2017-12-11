@@ -54,11 +54,13 @@ def get_page_data(directory, current_slug):
 				continue
 
 			if 'draft' in yaml.keys() and yaml['draft'] == True:
-				continue
+				if app.config['DISPLAY_ALL'] == False:
+					continue
 
 			lang = set_lang(yaml)
 			if app.yasifipo["langs"][lang]['draft'] == True:
-				continue
+				if app.config['DISPLAY_ALL'] == False:
+					continue
 			set_ref(yaml, directory + "/" + file_)
 
 			# toc
