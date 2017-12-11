@@ -21,7 +21,7 @@
 {% endif %}
 
 {% for item in page.tag.items %}
-<a href="{{item.url}}">{{item.title}}</a> ({{ item.type }})<br/>
+<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
 {% endfor %}
 
 {% endblock %}

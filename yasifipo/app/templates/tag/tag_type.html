@@ -22,7 +22,7 @@
 {% for tag in page.tag_type.tags %}
 <h1><a href="{{tag.url}}">{{tag.description}}</a><br/></h1>
 {% for item in tag.items %}
-<a href="{{item.url}}">{{item.title}}</a> ({{ item.type }})<br/>
+<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
 {% endfor %}
 {% endfor %}
 
