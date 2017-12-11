@@ -8,6 +8,7 @@
   * ALL: excluding some file stuff
   * ALL: label management, by lang
   * ALL: new lang detection stuff
+	* PREZ: add a page tag to be able to have some pages in toc of a course
 
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
