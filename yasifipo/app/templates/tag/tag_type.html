@@ -11,12 +11,14 @@
 
 <h1><a href="{{ page.tag_type.url }}">{{page.tag_type.description}}</a></h1>
 
+{% if page.display['langs'] %}
 {% if page.langs|length > 1 %}
 <div>
 	{% for lang in page.langs %}
 	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
 	{% endfor %}
 </div>
+{% endif %}
 {% endif %}
 
 {% for tag in page.tag_type.tags %}
