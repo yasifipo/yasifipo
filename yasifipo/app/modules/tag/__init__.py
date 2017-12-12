@@ -69,6 +69,8 @@ def init_tag_data():
 
 	with open(app.config['TAG_DIR'] + "/summary.md") as fil_tag:
 		yaml = load(fil_tag)
+		if not yaml['tags']:
+			return
 		for tag in yaml['tags']:
 
 			app.yasifipo["tags"]["data"][tag['slug']] = {}

@@ -14,6 +14,8 @@ from slugify import slugify
 def init_prez_data():
 	with open(app.config['PREZ_DIR'] + "/summary.md") as fil_prez:
 		yaml = load(fil_prez)
+		if not yaml['presentations']:
+			return
 		for prez in yaml['presentations']:
 
 			if check_server(yaml) == False:
