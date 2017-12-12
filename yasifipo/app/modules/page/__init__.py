@@ -10,10 +10,15 @@ from modules.site import *
 from modules.tag import *
 
 def init_page_data():
-	get_page_data(app.config['PAGE_DIR'], "")
+	parenting = get_page_data(app.config['PAGE_DIR'], "", [])
+	for item in parenting:
+		app.yasifipo["toc"][item[0]] = {}
+		app.yasifipo["toc"][item[0]]['type'] = 'page'
+		app.yasifipo["toc"][item[0]]['father'] = app.yasifipo["refs"][item[1]][item[2]]['file']
+
 
 # recursive function
-def get_page_data(directory, current_slug):
+def get_page_data(directory, current_slug, parenting):
 
 	files_ = listdir(directory)
 
@@ -67,9 +72,11 @@ def get_page_data(directory, current_slug):
 
 			# toc
 			if 'parent' in yaml.keys():
-				app.yasifipo["toc"][directory + "/" + file_] = {}
-				app.yasifipo["toc"][directory + "/" + file_]['type'] = 'page'
-				app.yasifipo["toc"][directory + "/" + file_]['father'] = app.yasifipo["refs"][yaml['parent']][lang]['file']
+				item_tmp = []
+				item_tmp.append(directory + "/" + file_)
+				item_tmp.append(yaml['parent'])
+				item_tmp.append(lang)
+				parenting.append(item_tmp)
 
 			# no children for pages (for now)
 
@@ -113,4 +120,6 @@ def get_page_data(directory, current_slug):
 			next_slug = slugify(file_)
 		else:
 			next_slug = current_slug + "/" + slugify(file_)
-		get_page_data(directory + "/" + file_, next_slug)
+		parenting = get_page_data(directory + "/" + file_, next_slug, parenting)
+
+	return parenting
