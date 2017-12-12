@@ -16,7 +16,7 @@ def admin_root():
 #TODO login required
 def reloading():
 
-	#TODO maintenance mode
+	app.maintenance = True
 
 	app.yasifipo = {}
 	app.yasifipo['toc'] = {} # toc for prez
@@ -35,5 +35,7 @@ def reloading():
 	#No init_site_data --> path already registered
 	init_prez_data()
 	init_page_data()
+
+	app.maintenance = False
 
 	return redirect(url_for('admin.admin_root'))

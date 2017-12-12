@@ -1,5 +1,5 @@
 from app import app
-from flask import send_from_directory, redirect
+from flask import send_from_directory, redirect, render_template
 
 from .view import *
 
@@ -9,6 +9,8 @@ def return_file(id_):
 	return send_from_directory(os.path.split(id_)[0], os.path.split(id_)[1])
 
 def render_file(path):
+	if app.maintenance == True:
+		return render_template('admin/maintenance.html')
 	if path in app.yasifipo["ids"].keys():
 		if app.yasifipo["ids"][path]['type'] == "redirect":
 			return redirect(yasifipo_url_for('render_file', path=app.yasifipo["ids"][path]["data"]['url']), code=301)
@@ -36,6 +38,8 @@ def render_file(path):
 		return '404' #TODO
 
 def render_root():
+	if app.maintenance == True:
+		return render_template('admin/maintenance.html')
 	if app.yasifipo["root"]:
 		if app.yasifipo["root"]["type"] == "prez-chapter":
 			return render_prez_chapter(app.yasifipo["root"]['id'], app.yasifipo["root"]["data"])
