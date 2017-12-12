@@ -80,6 +80,8 @@ def init_prez_data():
 
 					# register static folder if needed
 					if 'static' in prez.keys():
+						if not exists(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'] + "/"):
+							makedirs(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'] + "/")
 						register_static_img(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['static'], rule[1:-1], prez['static'])
 
 					manage_tags(prez, "prez-single", app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], lang_=lang)
@@ -147,6 +149,8 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 
 		# register static files if needed
 		if 'static' in yaml_chapter.keys():
+			if not exists(directory + "/" + yaml_chapter['static'] + "/"):
+				makedirs(directory + "/" + yaml_chapter['static'] + "/")
 			register_static_img(directory + "/" + yaml_chapter['static'], rule[1:-1], yaml_chapter['static'])
 		else:
 			yaml_chapter['static'] = ""
