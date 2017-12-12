@@ -1,18 +1,20 @@
-# v0.01
+# v0.01a
 	* BUG: direct markdown link need rewriting for freeze
   * ALL: blog type
-  * TAG: sorting stuff
+  * TAG: sorting stuff for items
   * ALL: basic template + css
   * ALL: example _data
   * ALL: first initialisation
 
-# v0.02
+# v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
   * ALL: put config from flask config to yasifipo config
 
 
+
 # next
+  * ALL: yaml editor
   * ALL: category parents
   * PAGE: children for pages (to be able to construct ToC)
   * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost (by plugin)?
