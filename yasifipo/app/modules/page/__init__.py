@@ -93,6 +93,8 @@ def get_page_data(directory, current_slug):
 
 				# register static folder if needed
 				if 'static' in yaml.keys():
+					if not exists(directory + "/" + yaml['static'] + "/"):
+						makedirs(directory + "/" + yaml['static'] + "/")
 					statics.append(yaml['static'])
 					register_static_img(directory + "/" + yaml['static'], yaml['url'], yaml['static'])
 
