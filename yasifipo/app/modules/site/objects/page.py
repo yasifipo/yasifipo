@@ -15,8 +15,8 @@ class Page():
 
 		self.display = {}
 		self.display['cucumber'] = False
-		self.display['langs']    = False
-		self.display['tags']     = False
+		self.display['langs']    = True
+		self.display['tags']     = True
 
 	def get_generated_time(self):
 		now =  datetime.now()
