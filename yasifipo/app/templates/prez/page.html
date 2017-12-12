@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+{{page.title}}
+{% endblock %}
+
+{% block body %}
+{% if page.display['cucumber'] == True %}
+{% if page.cucumber|length > 1 %}
+<div class='cucumber'>
+{% for i in page.cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> >
+{% endfor %}
+<a href="">{{page.title}}</a>
+</div>
+{% endif %}
+{% endif %}
+{% if page.display['langs'] %}
+{% if page.langs|length > 1 %}
+<div>
+	{% for lang in page.langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+{% endif %}
+
+{{page.content}}
+
+{% endblock %}

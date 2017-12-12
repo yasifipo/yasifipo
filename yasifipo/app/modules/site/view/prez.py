@@ -141,3 +141,29 @@ def render_prez_prez(file_, data):
 
 		return render_template('prez/prez.html',
 								page=page)
+
+def render_prez_page(file_, data):
+	with open(file_) as data_:
+		yaml = load(data_)
+
+		page = Page('prez-page')
+
+		#TODO tags
+
+		page.lang = set_lang(yaml)
+
+		page.langs = get_langs_from_ref(yaml)
+
+
+
+		if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+			page.display['cucumber'] = True
+			page.cucumber  = get_prez_cucumber(dirname(file_) + '/.chapter.md', page.lang)
+		else:
+			page.cucumber = []
+
+		page.title   = yaml['title']
+		page.content = Markup(markdown(yaml.content))
+
+		return render_template('prez/page.html',
+								page=page)

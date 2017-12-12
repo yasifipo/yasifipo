@@ -43,12 +43,12 @@ Create your table of content by creating a directory tree. Each path must have a
 *  category: optional
 *  static: mandatory, name of folder that can contains files like images
 *  content (not part of yaml): will be displayed in chapter page
-*  redirect (str or tab) : urls redirected to url by 301 redirection 
+*  redirect (str or tab) : urls redirected to url by 301 redirection
 
 ## any prez file
 *  slug: mandatory, url part of the current presentation
 *  title: mandatory, title of presentation
-*  draft: optionnal, will not be taken into account if set to True
+*  draft: optional, will not be taken into account if set to True
 *  cucumber: optional, will not display cucumber if set to False, never displayed for single prez
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
 *  category: optional
@@ -57,6 +57,7 @@ Create your table of content by creating a directory tree. Each path must have a
   *  ~~ is used for vertical separator
 *  theme:(optional) use a specific reveal.js theme. If not set, will use global config REVEAL_DEFAULT_THEME
 *  redirect (str or tab) : urls redirected to url by 301 redirection
+*  page: optional, prez is displayed as a page, not with reveal presentation mode
 
 ## page file
 *  url: mandatory, url of page

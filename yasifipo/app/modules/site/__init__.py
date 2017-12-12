@@ -46,7 +46,7 @@ def init_i18n_data():
 
 def yasifipo_register(type_, rule, id_, data={}):
 
-	if rule != "/" and type_ in ["prez-chapter", "prez", "prez-single", "prez-course"]:
+	if rule != "/" and type_ in ["prez-chapter", "prez", "prez-single", "prez-course", "prez-page"]:
 		rule = rule[1:-1]
 	elif rule != "/" and type_ in ["img"]:
 		rule = rule[1:]

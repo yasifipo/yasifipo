@@ -7,7 +7,6 @@
   * ALL: first initialisation
   * ALL: excluding some file stuff
 	* ALL: display tags on templates
-	* PREZ: add a page tag to be able to have some pages in toc of a course
 
 # v0.02
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)

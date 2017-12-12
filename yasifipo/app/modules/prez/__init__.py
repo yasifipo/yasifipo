@@ -222,7 +222,10 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 				app.yasifipo["toc"][directory + ".chapter.md"]['children'].append({'type':'file', 'data':directory + "/" + file_})
 				manage_tags(yaml, "prez", directory + "/" + file_, lang_=lang)
 				set_ref(yaml, directory + "/" + file_, lang)
-				yasifipo_register('prez', rule, directory + '/' + file_)
+				if 'page' in yaml.keys() and yaml['page'] == True:
+					yasifipo_register('prez-page', rule, directory + '/' + file_)
+				else:
+					yasifipo_register('prez', rule, directory + '/' + file_)
 
 				# redirect
 				if 'redirect' in yaml.keys():
