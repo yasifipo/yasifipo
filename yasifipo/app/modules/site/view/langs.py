@@ -12,6 +12,8 @@ def init_lang_data():
 	listfile = listdir(app.config["LANGS_DIR"])
 	for lang in listfile:
 		if isfile(app.config["LANGS_DIR"] + lang):
+			if app.spec.match_file(lang):
+				continue
 			with open(app.config["LANGS_DIR"] + lang) as fil_:
 				lang_ = load(fil_)
 				app.yasifipo['langs'][lang_['lang']] = {'lang':lang_['lang'], 'descr': lang_['descr'], 'sort':int(lang_['sort'])}
@@ -48,6 +50,8 @@ def set_lang(yaml):
 		listfile = listdir(app.config["I18N_DIR"])
 		for file_ in listfile:
 			if isfile(app.config["I18N_DIR"] + "/" + file_):
+				if app.spec.match_file(file_):
+					continue
 				with open(app.config["I18N_DIR"] + "/" + file_) as fil_data:
 					yaml = load(fil_data)
 					for slug in yaml['labels'].keys():
@@ -74,6 +78,8 @@ def set_lang(yaml):
 
 				files = listdir(app.config['TAG_DIR'] + "/" + tag['directory'])
 				for file_ in files:
+					if app.spec.match_file(file_):
+						continue
 					with open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_) as fil_tag:
 						yaml = load(fil_tag)
 						yaml['descr'][lang] = app.yasifipo["tags"]["data"][tag['slug']][yaml['slug']]['descr'][app.config["DEFAULT_LANG"]]

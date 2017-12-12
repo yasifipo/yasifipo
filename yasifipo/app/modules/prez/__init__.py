@@ -152,7 +152,7 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 	files = listdir(directory)
 	#TODO Exclude some file. Example : saved file with ~
 	for file_ in files:
-
+		
 		# children directory in current directory
 		if isdir(directory + "/" + file_) and file_ != yaml_chapter['static']:
 			# if .chapter.md does'nt exist --> create it
@@ -190,6 +190,8 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 
 		# children file in current directory
 		elif isfile(directory + "/" + file_) and file_ != ".chapter.md":
+			if app.spec.match_file(file_):
+				continue
 			with open(directory + "/" + file_) as fil_:
 				yaml = load(fil_)
 

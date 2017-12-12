@@ -116,6 +116,8 @@ def init_tag_data():
 		files = listdir(app.config['TAG_DIR'] + "/" + app.yasifipo["tags"]["conf"][tag_type]['directory'])
 
 		for file_ in files:
+			if app.spec.match_file(file_):
+				continue
 			fill_tag_data(file_, tag_type)
 
 

@@ -5,8 +5,17 @@ from .objects import *
 
 from os.path import isdir, isfile
 
+import pathspec
+
 
 def init_site_data():
+	register_rules()
+
+def init_file_data():
+	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', 'r') as fh:
+		app.spec = pathspec.PathSpec.from_lines('gitignore', fh)
+
+def register_rules():
 
 	app.add_url_rule(
 						rule='/<path:path>/',
@@ -33,6 +42,8 @@ def init_i18n_data():
 	listfile = listdir(app.config["I18N_DIR"])
 	for file_ in listfile:
 		if isfile(app.config["I18N_DIR"] + "/" + file_):
+			if app.spec.match_file(file_):
+				continue
 			with open(app.config["I18N_DIR"] + "/" + file_) as fil_data:
 				yaml = load(fil_data)
 
@@ -85,6 +96,8 @@ def register_static_img(directory, current_url, static_url):
 	else:
 		url = "/" + current_url + "/" + static_url
 	for file_img in listfile_static:
+		if app.spec.match_file(file_img):
+			continue
 		if isfile(directory + "/" + file_img):
 			rule_ = url + "/" + file_img
 			yasifipo_register('img', rule_, directory + "/" + file_img)
@@ -107,8 +120,9 @@ def set_ref(yaml, file_, lang_=None):
 		app.yasifipo["refs"][yaml["ref"]][lang] = {'lang': lang, 'file':file_}
 
 def load_config():
-	app.config['PREZ_DIR']   = app.config['DATA_DIR'] + "prez/"  # / after
-	app.config['LANGS_DIR']  = app.config['DATA_DIR'] + "langs/" # / after
-	app.config['TAG_DIR']    = app.config['DATA_DIR'] + "tags/" # / after
+	app.config['PREZ_DIR']    = app.config['DATA_DIR'] + "prez/"  # / after
+	app.config['LANGS_DIR']   = app.config['DATA_DIR'] + "langs/" # / after
+	app.config['TAG_DIR']     = app.config['DATA_DIR'] + "tags/" # / after
 	app.config['PAGE_DIR']    = app.config['DATA_DIR'] + "page/" # / after
 	app.config['I18N_DIR']    = app.config['DATA_DIR'] + "i18n/" # / after
+	app.config['CONFIG_DIR']  = app.config['DATA_DIR'] + "config/"  # / after

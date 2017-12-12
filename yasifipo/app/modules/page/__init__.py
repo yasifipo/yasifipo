@@ -22,6 +22,8 @@ def get_page_data(directory, current_slug):
 	statics = []
 	for file_ in files_:
 		if isfile(directory + "/" + file_):
+			if app.spec.match_file(file_):
+				continue
 			files.append(file_)
 		elif isdir(directory + "/" + file_):
 			dirs.append(file_)

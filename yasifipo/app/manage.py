@@ -52,6 +52,7 @@ def run(data_path, display_all):
 	app.run()
 
 def run_data_read():
+	init_file_data()
 	init_i18n_data()
 	init_lang_data()
 	init_tag_data()
