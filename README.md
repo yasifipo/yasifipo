@@ -26,11 +26,12 @@ Contains list of all available prez (table of __prez__ in yaml)
 *  directory: mandatory, must be path to presentation (in filesystem), without any slash
 *  lang: optional, lang of prez. DEFAULT_LANG will be used if not set
 *  draft: optional, html files are not generated if set to True
-*  category: optional
+*  (any tag): optional
 *  server: optional, can be a str or list: server (or list of server) where presentation will be published
 *  single: optional. If set, is name of single file in directory. No TOC in this case, only 1 prez is available
 *  static: optional. Will register all files inside as static files (works only for single-prez)
 *  content (not part of yaml): not taken into account
+*  tags: optional. If set to False, tags are not displayed
 
 ## .chapter in any path of prez
 Create your table of content by creating a directory tree. Each path must have a .chapter.md file, or it will be created automatically:  
@@ -40,8 +41,9 @@ Create your table of content by creating a directory tree. Each path must have a
 *  display-toc: optional, will not display ToC if set to False
 *  cucumber: optional, will not display cucumber if set to False
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
-*  category: optional
+*  (any tag): optional
 *  static: mandatory, name of folder that can contains files like images
+*  tags: optional. If set to False, tags are not displayed
 *  content (not part of yaml): will be displayed in chapter page
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 
@@ -51,13 +53,14 @@ Create your table of content by creating a directory tree. Each path must have a
 *  draft: optional, will not be taken into account if set to True
 *  cucumber: optional, will not display cucumber if set to False, never displayed for single prez
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
-*  category: optional
+*  (any tag): optional
 *  content (not part of yaml): content of reveal.js presentation. By default:
   *  ~~~ is used for horizontal separator
   *  ~~ is used for vertical separator
 *  theme:(optional) use a specific reveal.js theme. If not set, will use global config REVEAL_DEFAULT_THEME
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  page: optional, prez is displayed as a page, not with reveal presentation mode
+*  tags: optional. If set to False, tags are not displayed
 
 ## page file
 *  url: mandatory, url of page
@@ -67,6 +70,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  parent: optional, ref of parent page (for cucumber display)
 *  cucumber: optional, will not display cucumber if set to False
 *  server: optional, can be a str or list: server (or list of server) where page will be published
-*  category: optional
+*  (any tag): optional
 *  content (not part of yaml): content of page (in markdown language)
+*  tags: optional. If set to False, tags are not displayed
 *  redirect (str or tab) : urls redirected to url by 301 redirection

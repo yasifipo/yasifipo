@@ -77,7 +77,11 @@ def render_prez_chapter(file_, data):
 
 	page.lang = set_lang(yaml)
 	page.langs = get_langs_from_ref(yaml)
-	page.tags_display = page.get_tags_display(yaml)
+
+	if 'tags' in yaml.keys() and yaml['tags'] == False:
+		page.display['tags'] = False
+	else:
+		page.tags_display = page.get_tags_display(yaml)
 
 	if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
 		page.display['cucumber'] = True
@@ -107,7 +111,11 @@ def render_prez_prez(file_, data):
 		page.lang = set_lang(yaml)
 
 		page.langs = get_langs_from_ref(yaml)
-		page.tags_display = page.get_tags_display(yaml)
+
+		if 'tags' in yaml.keys() and yaml['tags'] == False:
+			page.display['tags'] = False
+		else:
+			page.tags_display = page.get_tags_display(yaml)
 
 		theme = {}
 		if 'theme' in yaml.keys():
@@ -149,8 +157,11 @@ def render_prez_page(file_, data):
 		page.lang = set_lang(yaml)
 
 		page.langs = get_langs_from_ref(yaml)
-		page.tags_display = page.get_tags_display(yaml)
 
+		if 'tags' in yaml.keys() and yaml['tags'] == False:
+			page.display['tags'] = False
+		else:
+			page.tags_display = page.get_tags_display(yaml)
 
 
 		if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):

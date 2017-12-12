@@ -5,7 +5,6 @@
   * ALL: basic template + css
   * ALL: example _data
   * ALL: first initialisation
-	* ALL: display tags on templates
 
 # v0.02
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
