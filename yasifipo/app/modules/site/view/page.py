@@ -19,7 +19,7 @@ def render_page(file_):
 
 		page.lang = set_lang(yaml)
 
-		#TODO tags
+		page.tags_display = page.get_tags_display(yaml)
 		page.langs = get_langs_from_ref(yaml)
 
 		if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):

@@ -28,6 +28,16 @@
 {% endif %}
 {% endif %}
 
+{% if page.display['tags'] %}
+{% for tag_type in page.tags_display.values() %}
+<a href="{{ tag_type['url'] }}">{{ tag_type['description'] }}</a><br/>
+{% for tag in tag_type['tags'].values() %}
+<a href="{{tag['url']}}">{{ tag['description'] }}</a> {% if loop.last == False %} - {% endif %}
+{% endfor %}
+<br/>
+{% endfor %}
+{% endif %}
+
 {{page.content}}
 
 {% endblock %}

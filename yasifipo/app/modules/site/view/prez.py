@@ -67,8 +67,6 @@ def render_prez_chapter(file_, data):
 	with open(file_) as data_file:
 		yaml = load(data_file)
 
-	#TODO tags
-
 	page = Page(data['type'])
 
 	page.display['toc'] = True
@@ -79,6 +77,7 @@ def render_prez_chapter(file_, data):
 
 	page.lang = set_lang(yaml)
 	page.langs = get_langs_from_ref(yaml)
+	page.tags_display = page.get_tags_display(yaml)
 
 	if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
 		page.display['cucumber'] = True
@@ -100,10 +99,6 @@ def render_prez_prez(file_, data):
 	with open(file_) as data_:
 		yaml = load(data_)
 
-		#TODO tags
-
-
-
 		if 'single' in data.keys() and data['single'] == True:
 			page = Page('prez-single')
 		else:
@@ -112,6 +107,7 @@ def render_prez_prez(file_, data):
 		page.lang = set_lang(yaml)
 
 		page.langs = get_langs_from_ref(yaml)
+		page.tags_display = page.get_tags_display(yaml)
 
 		theme = {}
 		if 'theme' in yaml.keys():
@@ -150,11 +146,10 @@ def render_prez_page(file_, data):
 
 		page = Page('prez-page')
 
-		#TODO tags
-
 		page.lang = set_lang(yaml)
 
 		page.langs = get_langs_from_ref(yaml)
+		page.tags_display = page.get_tags_display(yaml)
 
 
 
