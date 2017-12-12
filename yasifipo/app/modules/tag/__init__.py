@@ -83,6 +83,8 @@ def init_tag_data():
 
 			app.yasifipo["tags"]["conf"][tag['slug']]['directory'] = tag['directory']
 
+			app.yasifipo["tags"]["conf"][tag['slug']]['sort'] = int(tag['sort'])
+
 			app.yasifipo["tags"]["conf"][tag['slug']]['urls'] = {}
 
 			app.yasifipo["tags"]["conf"][tag['slug']]['urls']['mass'] = {}

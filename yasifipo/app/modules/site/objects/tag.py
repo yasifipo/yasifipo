@@ -12,14 +12,15 @@ class TagType():
 
 		self.description = app.yasifipo["tags"]["conf"][self.tagtype]['descr'][self.lang]
 		self.url         = yasifipo_url_for('render_file', path=app.yasifipo["tags"]["conf"][self.tagtype]['urls']['mass'][self.lang])
+		self.sort 		 = app.yasifipo["tags"]["conf"][self.tagtype]['sort']
 
 		self.tags = []
 
 	def get_tags(self):
-		#TODO how to sort ?
 		for tag_it in app.yasifipo["tags"]["data"][self.tagtype].keys():
 			tag = Tag(self.tagtype, tag_it, self.lang)
 			self.tags.append(tag)
+		self.tags = sorted(self.tags, key=lambda k: k.sort)
 
 	def get_tags_items(self):
 		for tag in self.tags:
@@ -34,6 +35,7 @@ class Tag():
 
 		self.description = app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['descr'][self.lang]
 		self.url         = yasifipo_url_for('render_file', path=app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['url'][self.lang])
+		self.sort        = app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['sort']
 
 		self.items = []
 
