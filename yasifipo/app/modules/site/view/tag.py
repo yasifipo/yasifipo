@@ -20,6 +20,6 @@ def render_tag(data):
 	page.langs = get_langs_from_tag(data['tag_type'], data['tag'])
 
 	page.tag.get_items()
-
+	page.get_generated_time()
 	return render_template('tag/tag.html',
 							page=page)

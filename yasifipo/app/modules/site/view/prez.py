@@ -90,6 +90,8 @@ def render_prez_chapter(file_, data):
 	page.content = Markup(markdown(yaml.content))
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
+
+	page.get_generated_time()
 	return render_template('prez/toc.html',
 							page=page)
 
@@ -138,7 +140,7 @@ def render_prez_prez(file_, data):
 
 		page.title   = yaml['title']
 		page.content = Markup(yaml.content)
-
+		page.get_generated_time()
 		return render_template('prez/prez.html',
 								page=page)
 
@@ -164,6 +166,6 @@ def render_prez_page(file_, data):
 
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content))
-
+		page.get_generated_time()
 		return render_template('prez/page.html',
 								page=page)
