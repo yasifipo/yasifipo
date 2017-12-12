@@ -8,6 +8,7 @@ from modules.site import *
 from modules.prez import *
 from modules.tag import *
 from modules.page import *
+from modules.init import *
 
 freezer = Freezer(app)
 
@@ -50,6 +51,15 @@ def run(data_path, display_all):
 	load_config()
 	run_data_read()
 	app.run()
+
+@manager.option('-d', '--data', dest='data_path', required=True)
+def init(data_path):
+
+	if isdir(os.path.abspath(data_path)):
+		print('Path already exists ... Exiting wihout initialisation')
+		return
+
+	init_yasifipo_minimal(os.path.abspath(data_path))
 
 def run_data_read():
 	app.maintenance = False
