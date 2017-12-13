@@ -10,6 +10,7 @@ class Configuration(object):
 	DATA_DIR = APPLICATION_DIR + '/_data/' # / before and after
 
 	PREZ_URL_PREFIX = '' # 'slug' without any /
+	POST_URL_PREFIX = '' # 'slug' without any /
 
 	FREEZER_RELATIVE_URLS = True
 
