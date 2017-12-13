@@ -6,6 +6,7 @@ from modules.site import *
 from modules.page import *
 from modules.tag import *
 from modules.prez import *
+from modules.post import *
 
 @admin.route('/')
 #TODO login required
