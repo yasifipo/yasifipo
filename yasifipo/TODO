@@ -6,6 +6,11 @@
   * TAG: sorting stuff for items
   * ALL: basic template + css
   * ALL: example _data : to be completed
+  * ALL: 404 page
+  * ALL: bad type page
+  * PREZ: list of prez
+  * TAG: list of tagtypes
+  * ALL: check TODO label in code :)
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
