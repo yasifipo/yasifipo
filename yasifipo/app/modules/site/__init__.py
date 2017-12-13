@@ -126,3 +126,4 @@ def load_config():
 	app.config['PAGE_DIR']    = app.config['DATA_DIR'] + "page/" # / after
 	app.config['I18N_DIR']    = app.config['DATA_DIR'] + "i18n/" # / after
 	app.config['CONFIG_DIR']  = app.config['DATA_DIR'] + "config/"  # / after
+	app.config['POST_DIR']  = app.config['DATA_DIR'] + "post/"  # / after

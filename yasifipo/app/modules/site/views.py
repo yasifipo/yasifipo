@@ -32,6 +32,8 @@ def render_file(path):
 			return render_tag(app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "page":
 			return render_page(app.yasifipo["ids"][path]['id'])
+		elif app.yasifipo["ids"][path]['type'] == "post":
+			return render_post(app.yasifipo["ids"][path]['id'])
 		else:
 			return 'Bad type' #TODO
 	else:
@@ -59,6 +61,8 @@ def render_root():
 			return render_tag(app.yasifipo["root"]["data"])
 		elif app.yasifipo["root"]["type"] == "page":
 			return render_page(app.yasifipo["root"]['id'])
+		elif app.yasifipo["root"]["type"] == "post":
+			return render_post(app.yasifipo["root"]['id'])
 		else:
 			return 'Bad type' #TODO
 	else:

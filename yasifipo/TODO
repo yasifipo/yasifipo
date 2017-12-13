@@ -1,5 +1,9 @@
 # v0.01a
   * ALL: blog type
+	  *  date stuff
+		*  list of posts
+		*  post url prefix
+		*  date in future management (option all)
   * TAG: sorting stuff for items
   * ALL: basic template + css
   * ALL: example _data : to be completed

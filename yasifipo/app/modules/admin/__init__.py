@@ -35,6 +35,7 @@ def reloading():
 	#No init_site_data --> path already registered
 	init_prez_data()
 	init_page_data()
+	init_post_data()
 
 	app.maintenance = False
 
