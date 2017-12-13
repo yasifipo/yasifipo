@@ -90,7 +90,7 @@ def render_prez_chapter(file_, data):
 		page.cucumber = []
 
 	page.title = yaml['title']
-	page.content = Markup(markdown(yaml.content))
+	page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
@@ -171,7 +171,7 @@ def render_prez_page(file_, data):
 			page.cucumber = []
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content))
+		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 		page.get_generated_time()
 		return render_template('prez/page.html',
 								page=page)

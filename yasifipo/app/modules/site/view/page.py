@@ -39,7 +39,7 @@ def render_page(file_):
 
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content))
+		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 
 	page.get_generated_time()
 	return render_template('page/page.html',
