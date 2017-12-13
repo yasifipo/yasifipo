@@ -70,7 +70,6 @@ def get_post_data(directory):
 						url = yaml['url']
 					else:
 						url = app.config['POST_URL_PREFIX'] + '/' + yaml['url']
-				print(url)
 				yasifipo_register('post', url, directory + "/" + file_, {})
 
 				if 'redirect' in yaml.keys():
