@@ -1,6 +1,6 @@
 from app import app
 
-from os.path import isfile, isdir, exists
+from os.path import isfile, isdir, exists, splitext
 from os import listdir, makedirs
 
 from frontmatter import load
@@ -8,6 +8,8 @@ from slugify import slugify
 
 from modules.site import *
 from modules.tag import *
+from .url import *
+from .date import *
 
 def init_post_data():
 	get_post_data(app.config['POST_DIR'])
@@ -70,27 +72,46 @@ def get_post_data(directory):
 						url = yaml['url']
 					else:
 						url = app.config['POST_URL_PREFIX'] + '/' + yaml['url']
-				yasifipo_register('post', url, directory + "/" + file_, {})
-
-				if 'redirect' in yaml.keys():
-					reds = []
-					if type(yaml['redirect']).__name__ == "str":
-						reds.append(yaml['redirect'])
-					else:
-						reds = yaml['redirect']
-					for red in reds:
-						yasifipo_register('redirect', red, None, {'url': url})
-
-				# register static folder if needed
-				if 'static' in yaml.keys():
-					if not exists(directory + "/" + yaml['static'] + "/"):
-						makedirs(directory + "/" + yaml['static'] + "/")
-					statics.append(yaml['static'])
-					register_static_img(directory + "/" + yaml['static'], yaml['url'], yaml['static'])
-
 			else:
-				pass
-				#TODO construct url based on date & slug
+				# construct default url
+				# prefix/<year>/<month>/<day>/title
+				if app.config['POST_URL_PREFIX'] == "":
+					url = "<year>/<month>/<day>/"
+				else:
+					url = app.config['POST_URL_PREFIX'] + '/' + "<year>/<month>/<day>/"
+				date, in_key, in_filename = get_date(yaml, file_)
+				if date is None:
+					print("WARNING: can't generate url for file " + file_)
+					continue
+				else:
+					if in_filename == True:
+						url = url + file_[9:len(file_)-len(os.path.splitext(os.path.basename(file_))[1])]
+					else:
+						url = url + os.path.splitext(file_)[0]
+
+			new_url = url_mapping(yaml, file_, url)
+			if new_url is None:
+				url = url
+			else:
+				url = new_url
+			yasifipo_register('post', url, directory + "/" + file_, {})
+
+			if 'redirect' in yaml.keys():
+				reds = []
+				if type(yaml['redirect']).__name__ == "str":
+					reds.append(yaml['redirect'])
+				else:
+					reds = yaml['redirect']
+				for red in reds:
+					yasifipo_register('redirect', red, None, {'url': url})
+
+			# register static folder if needed
+			if 'static' in yaml.keys():
+				if not exists(directory + "/" + yaml['static'] + "/"):
+					makedirs(directory + "/" + yaml['static'] + "/")
+				statics.append(yaml['static'])
+				register_static_img(directory + "/" + yaml['static'], url, yaml['static'])
+
 
 
 	# children directory in current directory
