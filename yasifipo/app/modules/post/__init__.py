@@ -61,6 +61,15 @@ def get_post_data(directory):
 			set_ref(yaml, directory + "/" + file_)
 			manage_tags(yaml, "post", directory + "/" + file_)
 
+			date, in_key, in_filename = get_date(yaml, file_)
+			if date is None:
+				print("WARNING: can't get date for file " + file_)
+				continue
+
+			if is_in_future(date):
+				if app.config['DISPLAY_ALL'] == False:
+					continue
+
 			if 'url' in yaml.keys():
 				if yaml['url'] == "":
 					if app.config['POST_URL_PREFIX'] == "":
@@ -79,21 +88,18 @@ def get_post_data(directory):
 					url = "<year>/<month>/<day>/"
 				else:
 					url = app.config['POST_URL_PREFIX'] + '/' + "<year>/<month>/<day>/"
-				date, in_key, in_filename = get_date(yaml, file_)
-				if date is None:
-					print("WARNING: can't generate url for file " + file_)
-					continue
-				else:
-					if in_filename == True:
-						url = url + file_[9:len(file_)-len(os.path.splitext(os.path.basename(file_))[1])]
-					else:
-						url = url + os.path.splitext(file_)[0]
 
-			new_url = url_mapping(yaml, file_, url)
+				if in_filename == True:
+					url = url + file_[9:len(file_)-len(os.path.splitext(os.path.basename(file_))[1])]
+				else:
+					url = url + os.path.splitext(file_)[0]
+
+			new_url = url_mapping(date, yaml, file_, url)
 			if new_url is None:
 				url = url
 			else:
 				url = new_url
+				
 			yasifipo_register('post', url, directory + "/" + file_, {})
 
 			if 'redirect' in yaml.keys():

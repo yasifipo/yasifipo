@@ -30,3 +30,9 @@ def get_date(yaml, filename):
         except:
             in_filename = False
             return None, in_key, in_filename
+
+def is_in_future(date):
+    today = datetime.now().date()
+    if date.date() > today:
+        return True
+    return False

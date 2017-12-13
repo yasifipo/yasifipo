@@ -1,9 +1,8 @@
 from datetime import datetime
 from .date import *
 
-def url_mapping(yaml, filename, url):
+def url_mapping(date, yaml, filename, url):
 
-    date, in_key, in_filename = get_date(yaml, filename)
     if date is None:
         return None
 

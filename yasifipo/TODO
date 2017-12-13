@@ -1,8 +1,8 @@
 # v0.01a
   * ALL: blog type
 		*  list of posts
-		*  date in future management (option all)
     *  default url if not defined --> put it in config file
+    *  Post obj stuff
   * TAG: sorting stuff for items
   * ALL: basic template + css
   * ALL: example _data : to be completed
