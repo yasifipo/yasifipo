@@ -26,7 +26,7 @@ def set_lang(yaml):
 	lang = ''
 	# if no lang in file, set to default lang
 	if 'lang' not in yaml.keys():
-		lang = app.config['DEFAULT_LANG']
+		lang = app.yasifipo["config"]["default_lang"]
 	else:
 		lang = yaml['lang']
 
@@ -55,7 +55,7 @@ def set_lang(yaml):
 				with open(app.config["I18N_DIR"] + "/" + file_) as fil_data:
 					yaml = load(fil_data)
 					for slug in yaml['labels'].keys():
-						yaml['labels'][slug][lang] = app.yasifipo["i18n"][yaml['slug']][slug][app.config["DEFAULT_LANG"]]
+						yaml['labels'][slug][lang] = app.yasifipo["i18n"][yaml['slug']][slug][app.yasifipo["config"]["default_lang"]]
 				fil_write = open(app.config["I18N_DIR"] + "/" + file_, "w")
 				fil_write.write(dumps(yaml))
 				fil_write.close()
@@ -64,7 +64,7 @@ def set_lang(yaml):
 		with open(app.config["TAG_DIR"] + "/summary.md") as fil_data:
 			yaml = load(fil_data)
 			for tag in yaml['tags']:
-				tag['descr'][lang] = app.yasifipo["tags"]["conf"][tag['slug']]['descr'][app.config["DEFAULT_LANG"]]
+				tag['descr'][lang] = app.yasifipo["tags"]["conf"][tag['slug']]['descr'][app.yasifipo["config"]["default_lang"]]
 				tag['url']['mass'][lang] = lang + "/" + tag['slug']
 				tag['url']['url'][lang] = lang + "/" + tag['slug']
 
@@ -82,7 +82,7 @@ def set_lang(yaml):
 						continue
 					with open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_) as fil_tag:
 						yaml = load(fil_tag)
-						yaml['descr'][lang] = app.yasifipo["tags"]["data"][tag['slug']][yaml['slug']]['descr'][app.config["DEFAULT_LANG"]]
+						yaml['descr'][lang] = app.yasifipo["tags"]["data"][tag['slug']][yaml['slug']]['descr'][app.yasifipo["config"]["default_lang"]]
 						yaml['url'][lang] = lang + "/" + yaml['slug']
 
 						fil_write = open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_, "w")

@@ -97,22 +97,22 @@ def get_post_data(directory):
 
 			if 'url' in yaml.keys():
 				if yaml['url'] == "":
-					if app.config['POST_URL_PREFIX'] == "":
+					if app.yasifipo["config"]["post_url_prefix"] == "":
 						url = "/"
 					else:
-						url = app.config['POST_URL_PREFIX']
+						url = app.yasifipo["config"]["post_url_prefix"]
 				else:
-					if app.config['POST_URL_PREFIX'] == "":
+					if app.yasifipo["config"]["post_url_prefix"] == "":
 						url = yaml['url']
 					else:
-						url = app.config['POST_URL_PREFIX'] + '/' + yaml['url']
+						url = app.yasifipo["config"]["post_url_prefix"] + '/' + yaml['url']
 			else:
 				# construct default url
 				# prefix/<year>/<month>/<day>/title
-				if app.config['POST_URL_PREFIX'] == "":
+				if app.yasifipo["config"]["post_url_prefix"] == "":
 					url = "<year>/<month>/<day>/"
 				else:
-					url = app.config['POST_URL_PREFIX'] + '/' + "<year>/<month>/<day>/"
+					url = app.yasifipo["config"]["post_url_prefix"] + '/' + "<year>/<month>/<day>/"
 
 				if in_filename == True:
 					url = url + file_[9:len(file_)-len(os.path.splitext(os.path.basename(file_))[1])]

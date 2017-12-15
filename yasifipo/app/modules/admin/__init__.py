@@ -20,6 +20,7 @@ def reloading():
 	app.maintenance = True
 
 	app.yasifipo = {}
+	app.yasifipo['config'] = {} #config
 	app.yasifipo['toc'] = {} # toc for prez
 	app.yasifipo['ids'] = {} # rule --> file
 	app.yasifipo['root'] = {} # website root info

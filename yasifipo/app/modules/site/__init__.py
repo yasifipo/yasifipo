@@ -4,6 +4,7 @@ from .views import *
 from .objects import *
 
 from os.path import isdir, isfile
+from frontmatter import load
 
 import pathspec
 
@@ -14,6 +15,16 @@ def init_site_data():
 def init_file_data():
 	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', 'r') as fh:
 		app.spec = pathspec.PathSpec.from_lines('gitignore', fh)
+
+	with open(app.config['CONFIG_DIR'] + 'config.md', 'r') as file_:
+		yaml = load(file_)
+		for key in yaml.keys():
+			if type(yaml[key]).__name__ != 'list':
+				app.yasifipo['config'][key] = yaml[key]
+			else:
+				app.yasifipo['config'][key] = []
+				for it in yaml[key]:
+					app.yasifipo['config'][key].append(it)
 
 def register_rules():
 
@@ -79,10 +90,10 @@ def yasifipo_register(type_, rule, id_, data={}):
 def check_server(yaml):
 	if 'server' in yaml.keys():
 		if type(yaml['server']).__name__ == 'str':
-			if (yaml['server'] != app.config["YASIFIPO_SERVER"]):
+			if (yaml['server'] != app.yasifipo["config"]["yasifipo_server"]):
 				return False
 		elif type(yaml['server']).__name__ == 'list':
-			if app.config["YASIFIPO_SERVER"] not in yaml['server']:
+			if app.yasifipo["config"]["yasifipo_server"] not in yaml['server']:
 				return False
 		else:
 			return False
@@ -112,7 +123,7 @@ def set_ref(yaml, file_, lang_=None):
 		lang = ''
 		if 'lang' not in yaml.keys():
 			if lang_ is None:
-				lang = app.config['DEFAULT_LANG']
+				lang = app.yasifipo["config"]["default_lang"]
 			else:
 				lang = lang_
 		else:
@@ -126,4 +137,4 @@ def load_config():
 	app.config['PAGE_DIR']    = app.config['DATA_DIR'] + "page/" # / after
 	app.config['I18N_DIR']    = app.config['DATA_DIR'] + "i18n/" # / after
 	app.config['CONFIG_DIR']  = app.config['DATA_DIR'] + "config/"  # / after
-	app.config['POST_DIR']  = app.config['DATA_DIR'] + "post/"  # / after
+	app.config['POST_DIR']    = app.config['DATA_DIR'] + "post/"  # / after

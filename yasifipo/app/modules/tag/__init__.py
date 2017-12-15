@@ -12,7 +12,7 @@ from slugify import slugify
 def manage_tags(yaml, type_, file_, lang_=None):
 	if 'lang' not in yaml.keys():
 		if lang_ is None:
-			lang = app.config['DEFAULT_LANG']
+			lang = app.yasifipo["config"]["default_lang"]
 		else:
 			lang = lang_
 	else:

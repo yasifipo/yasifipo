@@ -126,7 +126,7 @@ def render_prez_prez(file_, data):
 		if 'theme' in yaml.keys():
 			theme['theme'] = yasifipo_url_for('static', filename='css/theme/'+yaml['theme']+'.css')
 		else:
-			theme['theme'] = yasifipo_url_for('static', filename='css/theme/'+ app.config['REVEAL_DEFAULT_THEME'] +'.css')
+			theme['theme'] = yasifipo_url_for('static', filename='css/theme/'+ app.yasifipo["config"]["reveal_default_theme"] +'.css')
 		theme['reveal_css'] = yasifipo_url_for('static', filename='css/reveal.css')
 		theme['conf']   = yasifipo_url_for('static', filename='js/conf.js')
 

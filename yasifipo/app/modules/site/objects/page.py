@@ -13,7 +13,7 @@ class Page():
 
 		self.title = ''
 		self.content = ''
-		self.lang = app.config['DEFAULT_LANG']
+		self.lang = app.yasifipo["config"]["default_lang"]
 
 		self.generated_datetime_ = datetime.now()
 		self.generated_datetime = str(self.generated_datetime_)

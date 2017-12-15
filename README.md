@@ -24,7 +24,7 @@ List of all existing yaml files
 ## _data/prez/summary.md
 Contains list of all available prez (table of __prez__ in yaml)
 *  directory: mandatory, must be path to presentation (in filesystem), without any slash
-*  lang: optional, lang of prez. DEFAULT_LANG will be used if not set
+*  lang: optional, lang of prez. default_lang will be used if not set
 *  draft: optional, html files are not generated if set to True
 *  (any tag): optional
 *  server: optional, can be a str or list: server (or list of server) where presentation will be published
@@ -58,7 +58,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  content (not part of yaml): content of reveal.js presentation. By default:
   *  ~~~ is used for horizontal separator
   *  ~~ is used for vertical separator
-*  theme:(optional) use a specific reveal.js theme. If not set, will use global config REVEAL_DEFAULT_THEME
+*  theme:(optional) use a specific reveal.js theme. If not set, will use global config reveal_default_theme
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  page: optional, prez is displayed as a page, not with reveal presentation mode
 *  tags: optional. If set to False, tags are not displayed
@@ -67,7 +67,7 @@ Create your table of content by creating a directory tree. Each path must have a
 ## page file
 *  url: mandatory, url of page
 *  title: mandatory, title of page
-*  lang: optionnal, lang of page. DEFAULT_LANG will be used if not set
+*  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional (but mandatory if to display cucumber), used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
 *  parent: optional, ref of parent page (for cucumber display)
 *  cucumber: optional, will not display cucumber if set to False

@@ -30,10 +30,10 @@ def init_prez_data():
 				if app.config['DISPLAY_ALL'] == False:
 					continue
 
-			if app.config['PREZ_URL_PREFIX'] == "":
+			if app.yasifipo["config"]["prez_url_prefix"] == "":
 				init_slug = '/'
 			else:
-				init_slug = "/" + app.config['PREZ_URL_PREFIX'] + "/"
+				init_slug = "/" + app.yasifipo["config"]["prez_url_prefix"] + "/"
 
 			if 'single' in prez.keys():
 				# check if single value is an existing file
