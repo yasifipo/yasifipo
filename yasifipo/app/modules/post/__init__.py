@@ -58,7 +58,7 @@ def get_post_data(directory):
 				with open(directory + "/" + file_, "w") as fil_write:
 					fil_write.write("---\n")
 					fil_write.write('date: ' + datetime.now().strftime("%Y%m%d") + "\n")
-					fil_write.write('url: <year>/<month>/<day>/' + slugify(os.path.splitext(os.path.basename(file_))[0]) + "\n") #TODO : put in default config
+					fil_write.write('url: ' + app.yasifipo["config"]["post_default_url"] + slugify(os.path.splitext(os.path.basename(file_))[0]) + "\n")
 					fil_write.write('title: ' + os.path.splitext(os.path.basename(file_))[0] + "\n")
 					fil_write.write('static: img' + "\n")
 					fil_write.write("---\n")
@@ -108,11 +108,11 @@ def get_post_data(directory):
 						url = app.yasifipo["config"]["post_url_prefix"] + '/' + yaml['url']
 			else:
 				# construct default url
-				# prefix/<year>/<month>/<day>/title
+				# prefix/<lang>/<year>/<month>/title
 				if app.yasifipo["config"]["post_url_prefix"] == "":
-					url = "<year>/<month>/<day>/"
+					url = app.yasifipo["config"]["post_default_url"]
 				else:
-					url = app.yasifipo["config"]["post_url_prefix"] + '/' + "<year>/<month>/<day>/"
+					url = app.yasifipo["config"]["post_url_prefix"] + '/' + app.yasifipo["config"]["post_default_url"]
 
 				if in_filename == True:
 					url = url + file_[9:len(file_)-len(os.path.splitext(os.path.basename(file_))[1])]
