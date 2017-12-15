@@ -43,11 +43,11 @@ class Page():
 		self.posts = []
 		if self.lang not in app.yasifipo["posts"].keys():
 			return
-		for post_it in app.yasifipo["posts"][self.lang].keys():
-			post = Post(app.yasifipo["posts"][self.lang][post_it]['file'], app.yasifipo["posts"][self.lang][post_it]['date'])
+		for post_it in app.yasifipo["posts"][self.lang]:
+			post = Post(post_it['file'],post_it['date'])
+			post.get_prev_next(post_it['prev'], post_it['next'])
+
 			self.posts.append(post)
-		self.posts = sorted(self.posts, key= lambda k: k.date)
-		self.posts.reverse()
 
 	def get_full_posts(self):
 		for post in self.posts:

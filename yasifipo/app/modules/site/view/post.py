@@ -33,6 +33,10 @@ def render_post(file_):
 		else:
 			layout = 'post/post.html'
 
+		post = [ i for i in app.yasifipo["posts"][page.lang] if i['file'] == file_][0] #TODO check perf issue here
+		page.post = Post(post['file'], post['date'])
+		page.post.get_prev_next(post['prev'], post['next'])
+
 	page.get_generated_time()
 	return render_template( layout,
 							page=page

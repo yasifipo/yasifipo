@@ -15,6 +15,21 @@ from .date import *
 def init_post_data():
 	get_post_data(app.config['POST_DIR'])
 
+	for lang in app.yasifipo["posts"].keys():
+		app.yasifipo["posts"][lang] = sorted(app.yasifipo["posts"][lang], key=lambda k: k['date'])
+		app.yasifipo["posts"][lang].reverse()
+		cpt = 0
+		for it in app.yasifipo["posts"][lang]:
+			if cpt != 0:
+				it['next'] = {'file': app.yasifipo["posts"][lang][cpt-1]['file'], 'date': app.yasifipo["posts"][lang][cpt-1]['date']}
+			else:
+				it['next'] = None
+			if cpt != len(app.yasifipo["posts"][lang])-1:
+				it['prev'] = {'file': app.yasifipo["posts"][lang][cpt+1]['file'], 'date': app.yasifipo["posts"][lang][cpt+1]['date']}
+			else:
+				it['prev'] = None
+			cpt += 1
+
 # recursive function
 def get_post_data(directory):
 
@@ -133,10 +148,10 @@ def get_post_data(directory):
 
 def set_post(lang, file_, date):
 	if lang not in app.yasifipo["posts"].keys():
-		app.yasifipo["posts"][lang] = {}
+		app.yasifipo["posts"][lang] = []
 
-	app.yasifipo["posts"][lang][file_] = {
+	app.yasifipo["posts"][lang].append({
 									'file': file_,
 									'lang': lang,
 									'date': date
-									}
+									})

@@ -30,4 +30,11 @@
 
 {{page.content}}
 
+{% if page.post.prev %}
+<a href="{{page.post.prev.url}}">Previous</a>
+{% endif %}
+{% if page.post.next %}
+<a href="{{page.post.next.url}}">Next</a>
+{% endif %}
+
 {% endblock %}
