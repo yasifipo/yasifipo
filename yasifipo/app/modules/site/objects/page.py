@@ -7,8 +7,9 @@ from .tag import *
 from .post import *
 
 class Page():
-	def __init__(self, type_):
+	def __init__(self, type_, yaml={}):
 		self.type = type_
+		self.data = Data(yaml)
 
 		self.title = ''
 		self.content = ''
@@ -93,3 +94,8 @@ class Page():
 	def get_full_posts(self):
 		for post in self.posts:
 			post.get_full()
+
+class Data():
+	def __init__(self, yaml):
+		for k in yaml.keys():
+			setattr(self, k, yaml[k])

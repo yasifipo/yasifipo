@@ -67,7 +67,7 @@ def render_prez_chapter(file_, data):
 	with open(file_) as data_file:
 		yaml = load(data_file)
 
-	page = Page(data['type'])
+	page = Page(data['type'], yaml)
 
 	page.display['toc'] = True
 	if 'display-toc' in yaml.keys() and yaml['display-toc'] == False:
@@ -109,9 +109,9 @@ def render_prez_prez(file_, data):
 		yaml = load(data_)
 
 		if 'single' in data.keys() and data['single'] == True:
-			page = Page('prez-single')
+			page = Page('prez-single', yaml)
 		else:
-			page = Page('prez')
+			page = Page('prez', yaml)
 
 		page.lang = set_lang(yaml)
 
@@ -163,7 +163,7 @@ def render_prez_page(file_, data):
 	with open(file_) as data_:
 		yaml = load(data_)
 
-		page = Page('prez-page')
+		page = Page('prez-page', yaml)
 
 		page.lang = set_lang(yaml)
 

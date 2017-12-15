@@ -15,7 +15,7 @@ def render_page(file_):
 	with open(file_) as data:
 		yaml = load(data)
 
-		page = Page('page')
+		page = Page('page', yaml)
 
 		page.lang = set_lang(yaml)
 
@@ -42,7 +42,7 @@ def render_page(file_):
 			page.get_full_posts()
 		elif 'posts' in yaml.keys() and type(yaml['posts']).__name__ == "int":
 			start = request.args.get('page', default= 0, type = int)
-			
+
 			start = page.get_partial_posts(start, yaml['posts'])
 			page.get_full_posts()
 			prev_url = page.get_prev_url(start, start + yaml['posts'])

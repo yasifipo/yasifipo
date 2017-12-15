@@ -14,7 +14,7 @@ def render_post(file_):
 	with open(file_) as data:
 		yaml = load(data)
 
-		page = Page('post')
+		page = Page('post', yaml)
 
 		page.lang = set_lang(yaml)
 
