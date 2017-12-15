@@ -2,6 +2,7 @@ from app import app
 
 from os.path import isfile, isdir, exists, splitext
 from os import listdir, makedirs
+from datetime import datetime
 
 from frontmatter import load
 from slugify import slugify
@@ -55,12 +56,20 @@ def get_post_data(directory):
 			#if there is no header on file, create it
 			if len(yaml.keys()) == 0:
 				with open(directory + "/" + file_, "w") as fil_write:
-					#TODO yaml header
+					fil_write.write("---\n")
+					fil_write.write('date: ' + datetime.now().strftime("%Y%m%d") + "\n")
+					fil_write.write('url: <year>/<month>/<day>/' + slugify(os.path.splitext(os.path.basename(file_))[0]) + "\n") #TODO : put in default config
+					fil_write.write('title: ' + os.path.splitext(os.path.basename(file_))[0] + "\n")
+					fil_write.write('static: img' + "\n")
+					fil_write.write("---\n")
 					fil_write.write(yaml.content)
 
 				# create static folder too
 				if not exists(directory + "/img/"):
 					makedirs(directory + "/img/")
+
+				with open(directory + "/" + file_) as fil_:
+					yaml = load(fil_)
 
 			if check_server(yaml) == False:
 				continue
