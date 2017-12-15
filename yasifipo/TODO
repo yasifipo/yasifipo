@@ -3,13 +3,10 @@
   * TAG: sorting stuff for items (at least for posts)
   * ALL: basic template + css
   * ALL: example _data : to be completed
-  * ALL: 404 page
-  * ALL: bad type page
-  * ALL: maintenance page
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
-  * ALL: layout : put default in config file)
+  * ALL: layout : put default in config file
   * ALL: collections :
     *  init
     *  with url or not

@@ -35,9 +35,9 @@ def render_file(path):
 		elif app.yasifipo["ids"][path]['type'] == "post":
 			return render_post(app.yasifipo["ids"][path]['id'])
 		else:
-			return 'Bad type' #TODO
+			return render_template('site/bad_type.html')
 	else:
-		return '404' #TODO
+		return render_template('site/404.html')
 
 def render_root():
 	if app.maintenance == True:
@@ -64,6 +64,6 @@ def render_root():
 		elif app.yasifipo["root"]["type"] == "post":
 			return render_post(app.yasifipo["root"]['id'])
 		else:
-			return 'Bad type' #TODO
+			return render_template('site/bad_type.html')
 	else:
-		return '404' #TODO
+		return render_template('site/404.html')
