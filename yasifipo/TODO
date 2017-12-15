@@ -5,7 +5,6 @@
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
-  * ALL: layout : put default in config file
   * ALL: collections :
     *  init
     *  with url or not

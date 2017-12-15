@@ -97,7 +97,7 @@ def render_prez_chapter(file_, data):
 	if 'layout' in yaml.keys():
 		layout = 'prez/' + yaml['layout']
 	else:
-		layout = 'prez/toc.html'
+		layout = app.yasifipo["config"]["layout_chapter"]
 
 	page.get_generated_time()
 	return render_template(layout,
@@ -153,7 +153,7 @@ def render_prez_prez(file_, data):
 		if 'layout' in yaml.keys():
 			layout = 'prez/' + yaml['layout']
 		else:
-			layout = 'prez/prez.html'
+			layout = app.yasifipo["config"]["layout_prez"]
 
 		page.get_generated_time()
 		return render_template(layout,
@@ -187,7 +187,7 @@ def render_prez_page(file_, data):
 		if 'layout' in yaml.keys():
 			layout = 'prez/' + yaml['layout']
 		else:
-			layout = 'prez/page.html'
+			layout = app.yasifipo["config"]["layout_prez_page"]
 
 		page.get_generated_time()
 		return render_template( layout,

@@ -31,7 +31,7 @@ def render_post(file_):
 		if 'layout' in yaml.keys():
 			layout = 'post/' + yaml['layout']
 		else:
-			layout = 'post/post.html'
+			layout = app.yasifipo["config"]["layout_post"]
 
 		post = [ i for i in app.yasifipo["posts"][page.lang] if i['file'] == file_][0] #TODO check perf issue here
 		page.post = Post(post['file'], post['date'])

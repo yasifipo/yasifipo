@@ -56,7 +56,7 @@ def render_page(file_):
 		if 'layout' in yaml.keys():
 			layout = 'page/' + yaml['layout']
 		else:
-			layout = 'page/page.html'
+			layout = app.yasifipo["config"]["layout_page"]
 
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
