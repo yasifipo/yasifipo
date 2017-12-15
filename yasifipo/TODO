@@ -1,5 +1,4 @@
 # v0.01a
-  * POST: default url if not defined --> put it in config file
   * TAG: sorting stuff for items (at least for posts)
   * ALL: basic template + css
   * ALL: example _data : to be completed
