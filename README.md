@@ -74,3 +74,5 @@ Create your table of content by creating a directory tree. Each path must have a
 *  content (not part of yaml): content of page (in markdown language)
 *  tags: optional. If set to False, tags are not displayed
 *  redirect (str or tab) : urls redirected to url by 301 redirection
+*  layout: optional. Set the layout (in templates/page folder). If not set, default is used
+*  posts: optional. If set, posts are retrieved and available in page.posts

@@ -17,5 +17,6 @@ app.yasifipo['langs'] = {} # langs data
 app.yasifipo['refs'] = {} # refs used for retrieve all langs of an object
 app.yasifipo['tags'] = {}
 app.yasifipo['i18n'] = {}
+app.yasifipo['posts'] = {}
 
 app.register_blueprint(admin, url_prefix="/admin")

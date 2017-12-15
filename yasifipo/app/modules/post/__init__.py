@@ -7,6 +7,7 @@ from frontmatter import load
 from slugify import slugify
 
 from modules.site import *
+from modules.site.objects import *
 from modules.tag import *
 from .url import *
 from .date import *
@@ -99,7 +100,8 @@ def get_post_data(directory):
 				url = url
 			else:
 				url = new_url
-				
+
+			set_post(lang, directory + "/" + file_, date)
 			yasifipo_register('post', url, directory + "/" + file_, {})
 
 			if 'redirect' in yaml.keys():
@@ -128,3 +130,13 @@ def get_post_data(directory):
 
 		# recursive call
 		get_post_data(directory + "/" + file_)
+
+def set_post(lang, file_, date):
+	if lang not in app.yasifipo["posts"].keys():
+		app.yasifipo["posts"][lang] = {}
+
+	app.yasifipo["posts"][lang][file_] = {
+									'file': file_,
+									'lang': lang,
+									'date': date
+									}

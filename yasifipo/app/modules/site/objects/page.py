@@ -3,6 +3,7 @@ from app import app
 from datetime import datetime
 
 from .tag import *
+from .post import *
 
 class Page():
 	def __init__(self, type_):
@@ -37,3 +38,17 @@ class Page():
 			tagtype.get_tags()
 
 		return sorted([i[1] for i in items.items()], key=lambda k: k.sort)
+
+	def get_posts(self):
+		self.posts = []
+		if self.lang not in app.yasifipo["posts"].keys():
+			return
+		for post_it in app.yasifipo["posts"][self.lang].keys():
+			post = Post(app.yasifipo["posts"][self.lang][post_it]['file'], app.yasifipo["posts"][self.lang][post_it]['date'])
+			self.posts.append(post)
+		self.posts = sorted(self.posts, key= lambda k: k.date)
+		self.posts.reverse()
+
+	def get_full_posts(self):
+		for post in self.posts:
+			post.get_full()

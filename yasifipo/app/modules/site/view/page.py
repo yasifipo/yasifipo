@@ -37,6 +37,9 @@ def render_page(file_):
 		else:
 			page.cucumber = []
 
+		if 'posts' in yaml.keys() and yaml['posts'] == True:
+			page.get_posts()
+			page.get_full_posts()
 
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))

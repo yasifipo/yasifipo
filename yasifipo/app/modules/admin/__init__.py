@@ -28,6 +28,7 @@ def reloading():
 	app.yasifipo['refs'] = {} # refs used for retrieve all langs of an object
 	app.yasifipo['tags'] = {}
 	app.yasifipo['i18n'] = {}
+	app.yasifipo['posts'] = {}
 
 	init_file_data()
 	init_i18n_data()

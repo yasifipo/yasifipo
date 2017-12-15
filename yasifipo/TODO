@@ -1,16 +1,15 @@
 # v0.01a
-  * ALL: blog type
-		*  list of posts
-    *  default url if not defined --> put it in config file
-    *  Post obj stuff
-  * TAG: sorting stuff for items
+  * POST: default url if not defined --> put it in config file
+  * TAG: sorting stuff for items (at least for posts)
   * ALL: basic template + css
   * ALL: example _data : to be completed
   * ALL: 404 page
   * ALL: bad type page
+  * ALL: maintenance page
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
+  * ALL: layout tag (+ put default in config file)
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
