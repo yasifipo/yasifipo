@@ -10,6 +10,10 @@
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
   * ALL: layout : put default in config file)
+  * ALL: collections :
+    *  init
+    *  with url or not
+    *  how to retrieve data easily
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
