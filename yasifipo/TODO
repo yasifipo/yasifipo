@@ -9,7 +9,7 @@
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
-  * ALL: layout tag (+ put default in config file)
+  * ALL: layout : put default in config file)
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)

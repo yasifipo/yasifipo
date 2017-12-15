@@ -41,11 +41,16 @@ def render_page(file_):
 			page.get_posts()
 			page.get_full_posts()
 
+		if 'layout' in yaml.keys():
+			layout = 'page/' + yaml['layout']
+		else:
+			layout = 'page/page.html'
+
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 
 	page.get_generated_time()
-	return render_template('page/page.html',
+	return render_template(layout,
 							page=page
 							)
 

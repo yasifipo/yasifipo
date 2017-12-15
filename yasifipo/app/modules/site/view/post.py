@@ -28,7 +28,12 @@ def render_post(file_):
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 
+		if 'layout' in yaml.keys():
+			layout = 'post/' + yaml['layout']
+		else:
+			layout = 'post/page.html'
+
 	page.get_generated_time()
-	return render_template('post/post.html',
+	return render_template( layout,
 							page=page
 							)

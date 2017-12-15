@@ -94,8 +94,13 @@ def render_prez_chapter(file_, data):
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
+	if 'layout' in yaml.keys():
+		layout = 'prez/' + yaml['layout']
+	else:
+		layout = 'prez/toc.html'
+
 	page.get_generated_time()
-	return render_template('prez/toc.html',
+	return render_template(layout,
 							page=page)
 
 
@@ -144,8 +149,14 @@ def render_prez_prez(file_, data):
 
 		page.title   = yaml['title']
 		page.content = Markup(yaml.content)
+
+		if 'layout' in yaml.keys():
+			layout = 'prez/' + yaml['layout']
+		else:
+			layout = 'prez/prez.html'
+
 		page.get_generated_time()
-		return render_template('prez/prez.html',
+		return render_template(layout,
 								page=page)
 
 def render_prez_page(file_, data):
@@ -172,6 +183,12 @@ def render_prez_page(file_, data):
 
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
+
+		if 'layout' in yaml.keys():
+			layout = 'prez/' + yaml['layout']
+		else:
+			layout = 'prez/page.html'
+
 		page.get_generated_time()
-		return render_template('prez/page.html',
+		return render_template( layout,
 								page=page)

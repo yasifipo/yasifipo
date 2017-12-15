@@ -46,6 +46,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  tags: optional. If set to False, tags are not displayed
 *  content (not part of yaml): will be displayed in chapter page
 *  redirect (str or tab) : urls redirected to url by 301 redirection
+*  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 
 ## any prez file
 *  slug: mandatory, url part of the current presentation
@@ -61,6 +62,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  page: optional, prez is displayed as a page, not with reveal presentation mode
 *  tags: optional. If set to False, tags are not displayed
+*  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 
 ## page file
 *  url: mandatory, url of page
