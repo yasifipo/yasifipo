@@ -1,7 +1,5 @@
 # v0.01a
   * TAG: sorting stuff for items (at least for posts)
-  * ALL: basic template + css
-  * ALL: example _data : to be completed
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
@@ -10,11 +8,15 @@
     *  with url or not
     *  how to retrieve data easily
 	* POST : label for next / prev --> in i18n file
+	* POST: External posts
+	* POST: Post series
+	* ALL: basic template + css
+  * ALL: example _data : to be completed
+	* ADMIN: login required
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
-  * ALL: put config from flask config to yasifipo config
 
 
 
