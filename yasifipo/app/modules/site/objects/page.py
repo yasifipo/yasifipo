@@ -1,4 +1,5 @@
 from app import app
+from flask import request
 
 from datetime import datetime
 
@@ -48,6 +49,46 @@ class Page():
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
 			self.posts.append(post)
+
+	def get_total_post_nb(self):
+		return len(app.yasifipo["posts"][self.lang])
+
+	def get_partial_posts(self, start, nb):
+		self.posts = []
+		if self.lang not in app.yasifipo["posts"].keys():
+			return
+
+		if start < 0:
+			start = 0
+
+		if start > self.get_total_post_nb():
+			start = 0
+
+		if start + nb > self.get_total_post_nb():
+			nb = len(app.yasifipo["posts"][self.lang]) - start
+
+		for post_it in app.yasifipo["posts"][self.lang][start:start+nb]:
+			post = Post(post_it['file'],post_it['date'])
+			post.get_prev_next(post_it['prev'], post_it['next'])
+
+			self.posts.append(post)
+
+		return start
+
+	def get_prev_url(self, start, end):
+		if end >= self.get_total_post_nb():
+			return None
+		else:
+			text = '?page=' + str(end)
+			return text
+
+	def get_next_url(self, start, new_start):
+		if start == 0:
+			return None
+		if new_start < 0:
+			return "?page=0"
+		else:
+			return "?page=" + str(new_start)
 
 	def get_full_posts(self):
 		for post in self.posts:

@@ -37,9 +37,24 @@ def render_page(file_):
 		else:
 			page.cucumber = []
 
-		if 'posts' in yaml.keys() and yaml['posts'] == True:
+		if 'posts' in yaml.keys() and type(yaml['posts']).__name__ == "bool" and yaml['posts'] == True:
 			page.get_posts()
 			page.get_full_posts()
+		elif 'posts' in yaml.keys() and type(yaml['posts']).__name__ == "int":
+			start = request.args.get('page')
+			if not start:
+				start = 0
+			else:
+				start = int(start) #TODO if not int
+			start = page.get_partial_posts(start, yaml['posts'])
+			page.get_full_posts()
+			prev_url = page.get_prev_url(start, start + yaml['posts'])
+			if prev_url:
+				page.prev_url = request.base_url + prev_url
+			next_url = page.get_next_url(start, start - yaml['posts'])
+			if next_url:
+				page.next_url = request.base_url + next_url
+
 
 		if 'layout' in yaml.keys():
 			layout = 'page/' + yaml['layout']
