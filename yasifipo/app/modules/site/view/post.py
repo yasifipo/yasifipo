@@ -31,7 +31,7 @@ def render_post(file_):
 		if 'layout' in yaml.keys():
 			layout = 'post/' + yaml['layout']
 		else:
-			layout = 'post/page.html'
+			layout = 'post/post.html'
 
 	page.get_generated_time()
 	return render_template( layout,
