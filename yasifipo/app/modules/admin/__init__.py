@@ -30,6 +30,7 @@ def reloading():
 	app.yasifipo['tags'] = {}
 	app.yasifipo['i18n'] = {}
 	app.yasifipo['posts'] = {}
+	app.yasifipo["sitedata"] = None
 
 	init_file_data()
 	init_i18n_data()

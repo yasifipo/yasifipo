@@ -11,6 +11,7 @@ import pathspec
 
 def init_site_data():
 	register_rules()
+	init_site_data_files()
 
 def init_file_data():
 	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', 'r') as fh:
@@ -64,6 +65,8 @@ def init_i18n_data():
 					for lang in yaml['labels'][slug].keys():
 						app.yasifipo["i18n"][yaml['slug']][slug][lang] = yaml['labels'][slug][lang]
 
+def init_site_data_files():
+	app.yasifipo["sitedata"] = SiteData(app.config["SITEDATE_DIR"])
 
 
 def yasifipo_register(type_, rule, id_, data={}):
@@ -131,10 +134,11 @@ def set_ref(yaml, file_, lang_=None):
 		app.yasifipo["refs"][yaml["ref"]][lang] = {'lang': lang, 'file':file_}
 
 def load_config():
-	app.config['PREZ_DIR']    = app.config['DATA_DIR'] + "prez/"  # / after
-	app.config['LANGS_DIR']   = app.config['DATA_DIR'] + "langs/" # / after
-	app.config['TAG_DIR']     = app.config['DATA_DIR'] + "tags/" # / after
-	app.config['PAGE_DIR']    = app.config['DATA_DIR'] + "page/" # / after
-	app.config['I18N_DIR']    = app.config['DATA_DIR'] + "i18n/" # / after
-	app.config['CONFIG_DIR']  = app.config['DATA_DIR'] + "config/"  # / after
-	app.config['POST_DIR']    = app.config['DATA_DIR'] + "post/"  # / after
+	app.config['PREZ_DIR']     = app.config['DATA_DIR'] + "prez/"  # / after
+	app.config['LANGS_DIR']    = app.config['DATA_DIR'] + "langs/" # / after
+	app.config['TAG_DIR']      = app.config['DATA_DIR'] + "tags/" # / after
+	app.config['PAGE_DIR']     = app.config['DATA_DIR'] + "page/" # / after
+	app.config['I18N_DIR']     = app.config['DATA_DIR'] + "i18n/" # / after
+	app.config['CONFIG_DIR']   = app.config['DATA_DIR'] + "config/"  # / after
+	app.config['POST_DIR']     = app.config['DATA_DIR'] + "post/"  # / after
+	app.config['SITEDATE_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
