@@ -18,7 +18,7 @@ def init_prez_data():
 			return
 		for prez in yaml['presentations']:
 
-			if check_server(yaml) == False:
+			if check_server(prez) == False:
 				continue
 
 			if 'draft' in prez.keys() and prez['draft'] == True:
