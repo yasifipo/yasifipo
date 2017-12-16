@@ -14,4 +14,6 @@ layout_post: 'post/post.html'
 layout_prez: 'prez/prez.html'
 layout_chapter: 'prez/toc.html'
 layout_prez_page: 'prez/page.html'
+
+site_version: 0.0.1
 ---
