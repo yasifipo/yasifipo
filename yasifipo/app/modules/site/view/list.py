@@ -36,11 +36,11 @@ def get_lists(page, yaml, request):
 
 			elif type(yaml['collections'][coll]).__name__ == "int":
 				start = request.args.get('page', default= 0, type = int)
+				setattr(page, coll, Collection(coll))
 
-				start, posts = page.get_partial_collection_posts(coll,start, yaml['collections'][coll])
+				start, posts = page.get_partial_collection_posts(getattr(page, coll),start, yaml['collections'][coll])
 				page.get_full_collection_posts(coll, posts)
 
-				setattr(page, coll, Collection(coll))
 				getattr(page, coll).set_posts(posts)
 
 				prev_url = page.get_prev_url(start, start + yaml['collections'][coll], coll)

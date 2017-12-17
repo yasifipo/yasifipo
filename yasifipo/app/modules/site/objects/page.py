@@ -130,20 +130,20 @@ class Page():
 
 	def get_partial_collection_posts(self, collection, start, nb):
 		collection_posts  = []
-		if self.lang not in app.yasifipo["collections"][collection]['data'].keys():
+		if self.lang not in app.yasifipo["collections"][collection.name]['data'].keys():
 			return 0, collection_posts
 
 		if start < 0:
 			start = 0
 
-		if start > self.get_total_collection_post_nb(collection):
+		if start > self.get_total_collection_post_nb(collection.name):
 			start = 0
 
-		if start + nb > self.get_total_collection_post_nb(collection):
-			nb = len(app.yasifipo["collections"][collection]['data'][self.lang]) - start
+		if start + nb > self.get_total_collection_post_nb(collection.name):
+			nb = len(app.yasifipo["collections"][collection.name]['data'][self.lang]) - start
 
-		for coll_it in app.yasifipo["collections"][collection]['data'][self.lang][start:start+nb]:
-			coll = CollectionPost(coll_it['file'],coll_it['date'])
+		for coll_it in app.yasifipo["collections"][collection.name]['data'][self.lang][start:start+nb]:
+			coll = CollectionPost(coll_it['file'],coll_it['date'], url=collection.url_generated)
 			coll.get_prev_next(coll_it['prev'], coll_it['next'])
 
 			collection_posts.append(coll)
