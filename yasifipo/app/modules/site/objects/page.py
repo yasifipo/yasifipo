@@ -52,7 +52,7 @@ class Page():
 	def get_posts(self):
 		posts = []
 		if self.lang not in app.yasifipo["posts"].keys():
-			return
+			return []
 		for post_it in app.yasifipo["posts"][self.lang]:
 			post = Post(post_it['file'],post_it['date'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
@@ -113,24 +113,25 @@ class Page():
 
 
 	def get_collection_posts(self, collection):
-		self.collections[collection.name]  = []
+		collection_posts  = []
 		if collection.name not in app.yasifipo["collections"].keys():
-			return
+			return []
 		if self.lang not in app.yasifipo["collections"][collection.name]['data'].keys():
-			return
+			return []
 		for coll_it in app.yasifipo["collections"][collection.name]['data'][self.lang]:
 			coll = CollectionPost(coll_it['file'],coll_it['date'], url=collection.url_generated)
 			coll.get_prev_next(coll_it['prev'], coll_it['next'])
 
-			self.collections[collection.name].append(coll)
+			collection_posts.append(coll)
+		return collection_posts
 
 	def get_total_collection_post_nb(self, collection):
 		return len(app.yasifipo["collections"][collection]['data'][self.lang])
 
 	def get_partial_collection_posts(self, collection, start, nb):
-		self.collections[collection]  = []
+		collection_posts  = []
 		if self.lang not in app.yasifipo["collections"][collection]['data'].keys():
-			return
+			return 0, collection_posts
 
 		if start < 0:
 			start = 0
@@ -145,12 +146,12 @@ class Page():
 			coll = CollectionPost(coll_it['file'],coll_it['date'])
 			coll.get_prev_next(coll_it['prev'], coll_it['next'])
 
-			self.collections[collection].append(coll)
+			collection_posts.append(coll)
 
-		return start
+		return start, collection_posts
 
-	def get_full_collection_posts(self, collection):
-		for coll in self.collections[collection]:
+	def get_full_collection_posts(self, collection, posts):
+		for coll in posts:
 			coll.get_full()
 
 class Data():

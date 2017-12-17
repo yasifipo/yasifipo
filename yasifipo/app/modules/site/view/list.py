@@ -29,19 +29,19 @@ def get_lists(page, yaml, request):
 			if type(yaml['collections'][coll]).__name__ == "bool" and yaml['collections'][coll] == True:
 				setattr(page, coll, Collection(coll))
 
-				page.get_collection_posts(getattr(page, coll))
-				page.get_full_collection_posts(coll)
+				posts = page.get_collection_posts(getattr(page, coll))
+				page.get_full_collection_posts(coll, posts)
 
-				getattr(page, coll).set_posts(page.collections[coll])
+				getattr(page, coll).set_posts(posts)
 
 			elif type(yaml['collections'][coll]).__name__ == "int":
 				start = request.args.get('page', default= 0, type = int)
 
-				start = page.get_partial_collection_posts(coll,start, yaml['collections'][coll])
-				page.get_full_collection_posts(coll)
+				start, posts = page.get_partial_collection_posts(coll,start, yaml['collections'][coll])
+				page.get_full_collection_posts(coll, posts)
 
 				setattr(page, coll, Collection(coll))
-				getattr(page, coll).set_posts(page.collections[coll])
+				getattr(page, coll).set_posts(posts)
 
 				prev_url = page.get_prev_url(start, start + yaml['collections'][coll], coll)
 				if prev_url:
@@ -49,5 +49,3 @@ def get_lists(page, yaml, request):
 				next_url = page.get_next_url(start, start - yaml['collections'][coll], coll)
 				if next_url:
 					getattr(page, coll).next_url = request.base_url + next_url
-
-		del page.collections

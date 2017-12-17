@@ -13,6 +13,7 @@
 	* ALL: basic template + css
   * ALL: example _data : to be completed
 	* ADMIN: login required
+	* ALL: better template management (put in example for posts & collection ?)
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
