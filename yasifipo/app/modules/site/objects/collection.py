@@ -21,16 +21,17 @@ class CollectionPost():
 	def __init__(self, file_, date, url=False):
 		self.file_ = file_
 		self.date  = date
-		if url == True:
+		self.generate_url = url
+		if self.generate_url == True:
 			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
 		self.next  = None
 		self.prev  = None
 
 	def get_prev_next(self, prev, next):
 		if prev:
-			self.prev = CollectionPost(prev['file'], prev['date'])
+			self.prev = CollectionPost(prev['file'], prev['date'], url=self.generate_url)
 		if next:
-			self.next = CollectionPost(next['file'], next['date'])
+			self.next = CollectionPost(next['file'], next['date'], url=self.generate_url)
 
 	def get_full(self):
 		with open(self.file_) as fil_:
