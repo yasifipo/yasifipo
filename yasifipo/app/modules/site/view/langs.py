@@ -89,7 +89,15 @@ def set_lang(yaml):
 						fil_write.write(dumps(yaml))
 						fil_write.close()
 
-		#TODO update collection descriptions
+		# Update collection descriptions
+		with open(app.config["COLLECTION_DIR"] + "/summary.md") as fil_data:
+			yaml = load(fil_data)
+			for coll in yaml['collections']:
+				coll['description'][lang] = coll['description'][app.yasifipo["config"]["default_lang"]]
+
+			fil_write = open(app.config["COLLECTION_DIR"] + "/summary.md", "w")
+			fil_write.write(dumps(yaml))
+			fil_write.close()
 
 	return lang
 

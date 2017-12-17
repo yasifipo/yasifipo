@@ -3,9 +3,7 @@
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
-  * ALL: collections :
-    *  new lang
-		*  README to update
+  * COLLECTION: README to update
 	* POST: README to update
 	* POST : label for next / prev --> in i18n file
 	* POST: Post series
@@ -13,6 +11,9 @@
   * ALL: example _data : to be completed
 	* ADMIN: login required
 	* ALL: better template management (put in example for posts & collection ?)
+	* unicode stuff:
+	  *  at new lang generation
+		*  on windows
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
