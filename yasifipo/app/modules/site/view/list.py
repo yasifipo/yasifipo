@@ -29,10 +29,11 @@ def get_lists(page, yaml, request):
 	if 'collections' in yaml.keys():
 		for coll in yaml['collections'].keys():
 			if type(yaml['collections'][coll]).__name__ == "bool" and yaml['collections'][coll] == True:
-				page.get_collection_posts(coll)
+				setattr(page, coll, Collection(coll))
+
+				page.get_collection_posts(getattr(page, coll))
 				page.get_full_collection_posts(coll)
 
-				setattr(page, coll, Collection(coll))
 				getattr(page, coll).set_posts(page.collections[coll])
 
 			elif type(yaml['collections'][coll]).__name__ == "int":

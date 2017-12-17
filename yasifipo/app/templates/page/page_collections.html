@@ -40,7 +40,7 @@
 
 {% for post in page.tools.posts %}
 <div>
-{{ post.title }}
+<a href="{{post.url}}">{{ post.title }}</a>
 </div>
 {% endfor %}
 {% if page.tools.prev_url %}

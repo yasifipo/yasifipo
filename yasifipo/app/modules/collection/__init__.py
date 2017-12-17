@@ -32,6 +32,11 @@ def init_collection_data():
 				for lang in coll['description'].keys():
 					app.yasifipo["collections"][coll['slug']]['description'][lang] = coll['description'][lang]
 
+				# set configuration for this collection
+				app.yasifipo["collections"][coll['slug']]['conf'] = {}
+				app.yasifipo["collections"][coll['slug']]['conf']['generate_url'] = 'generate_url' in coll.keys() and coll['generate_url'] == True
+				app.yasifipo["collections"][coll['slug']]['conf']['sorting']      = coll['sorting']
+
 				get_collection_data(app.config['COLLECTION_DIR'] + "/" + coll['directory'], coll)
 
 				# Sorting

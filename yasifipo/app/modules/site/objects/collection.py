@@ -9,6 +9,10 @@ class Collection():
 	def __init__(self, name):
 		self.name = name
 
+		# retrieve conf for this collection
+		if self.name in app.yasifipo["collections"].keys():
+			self.url_generated = app.yasifipo["collections"][self.name]['conf']['generate_url']
+			self.sorting       = app.yasifipo["collections"][self.name]['conf']['sorting']
 
 	def set_posts(self, posts):
 		self.posts = posts
@@ -18,7 +22,7 @@ class CollectionPost():
 		self.file_ = file_
 		self.date  = date
 		if url == True:
-			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_]) #TODO only if generate_url
+			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
 		self.next  = None
 		self.prev  = None
 

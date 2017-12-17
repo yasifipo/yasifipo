@@ -6,8 +6,8 @@
   * ALL: collections :
     *  new lang
 		*  better tmp data
-		*  manage generated url or not
 		*  README to update
+		*  BUG prev / next in collection
 	* POST: README to update
 	* POST : label for next / prev --> in i18n file
 	* POST: Post series
