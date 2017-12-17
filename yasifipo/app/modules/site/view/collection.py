@@ -7,6 +7,7 @@ from markdown import markdown
 
 from .urls import *
 from .langs import *
+from .list import *
 
 from modules.site.objects import *
 
@@ -36,6 +37,8 @@ def render_collection(file_, data_):
 		coll = [ i for i in app.yasifipo["collections"][data_['collection']]['data'][page.lang] if i['file'] == file_][0] #TODO check perf issue here
 		page.collection = CollectionPost(coll['file'], coll['date'], url=True)
 		page.collection.get_prev_next(coll['prev'], coll['next'])
+
+		get_lists(page, yaml, request)
 
 	page.get_generated_time()
 	return render_template( layout,
