@@ -50,22 +50,23 @@ class Page():
 		return sorted([i[1] for i in items.items()], key=lambda k: k.sort)
 
 	def get_posts(self):
-		self.tmp_posts = []
+		posts = []
 		if self.lang not in app.yasifipo["posts"].keys():
 			return
 		for post_it in app.yasifipo["posts"][self.lang]:
 			post = Post(post_it['file'],post_it['date'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
-			self.tmp_posts.append(post)
+			posts.append(post)
+		return posts
 
 	def get_total_post_nb(self):
 		return len(app.yasifipo["posts"][self.lang])
 
 	def get_partial_posts(self, start, nb):
-		self.tmp_posts = []
+		posts = []
 		if self.lang not in app.yasifipo["posts"].keys():
-			return
+			return 0, posts
 
 		if start < 0:
 			start = 0
@@ -80,9 +81,9 @@ class Page():
 			post = Post(post_it['file'],post_it['date'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
-			self.tmp_posts.append(post)
+			posts.append(post)
 
-		return start
+		return start, posts
 
 	def get_prev_url(self, start, end, collection=None):
 		if collection is None:
@@ -106,8 +107,8 @@ class Page():
 		else:
 			return "?page=" + str(new_start)
 
-	def get_full_posts(self):
-		for post in self.tmp_posts:
+	def get_full_posts(self, posts):
+		for post in posts:
 			post.get_full()
 
 
