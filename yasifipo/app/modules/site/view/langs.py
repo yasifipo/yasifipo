@@ -89,6 +89,8 @@ def set_lang(yaml):
 						fil_write.write(dumps(yaml))
 						fil_write.close()
 
+		#TODO update collection descriptions
+
 	return lang
 
 def get_langs_from_ref(ref_):

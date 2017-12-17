@@ -5,26 +5,28 @@ from frontmatter import load
 from modules.site.view.urls import *
 
 
-class Posts():
-	def __init__(self):
-		pass
+class Collection():
+	def __init__(self, name):
+		self.name = name
+
 
 	def set_posts(self, posts):
 		self.posts = posts
 
-class Post():
-	def __init__(self, file_, date):
+class CollectionPost():
+	def __init__(self, file_, date, url=False):
 		self.file_ = file_
 		self.date  = date
-		self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
+		if url == True:
+			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_]) #TODO only if generate_url
 		self.next  = None
 		self.prev  = None
 
 	def get_prev_next(self, prev, next):
 		if prev:
-			self.prev = Post(prev['file'], prev['date'])
+			self.prev = CollectionPost(prev['file'], prev['date'])
 		if next:
-			self.next = Post(next['file'], next['date'])
+			self.next = CollectionPost(next['file'], next['date'])
 
 	def get_full(self):
 		with open(self.file_) as fil_:

@@ -9,6 +9,7 @@ from os.path import dirname
 
 from .urls import *
 from .langs import *
+from .list import *
 
 
 from modules.site.objects import *
@@ -94,6 +95,8 @@ def render_prez_chapter(file_, data):
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
+	get_lists(page, yaml, request)
+
 	if 'layout' in yaml.keys():
 		layout = 'prez/' + yaml['layout']
 	else:
@@ -151,6 +154,8 @@ def render_prez_prez(file_, data):
 		page.title   = yaml['title']
 		page.content = Markup(yaml.content)
 
+		get_lists(page, yaml, request)
+
 		if 'layout' in yaml.keys():
 			layout = 'prez/' + yaml['layout']
 		else:
@@ -185,6 +190,8 @@ def render_prez_page(file_, data):
 
 		page.title   = yaml['title']
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
+
+		get_lists(page, yaml, request)
 
 		if 'layout' in yaml.keys():
 			layout = 'prez/' + yaml['layout']

@@ -8,15 +8,6 @@
 {% endblock %}
 
 {% block body %}
-{% if page.display['cucumber'] == True %}
-{% if page.cucumber|length > 1 %}
-<div class='cucumber-toc'>
-{% for i in page.cucumber %}
-<a href="{{i['url']}}">{{i['title']}}</a> {% if i != page.cucumber[page.cucumber|length -1] %} > {% endif %}
-{% endfor %}
-</div>
-{% endif %}
-{% endif %}
 {% if page.display['langs'] %}
 {% if page.langs|length > 1 %}
 <div>
@@ -26,6 +17,7 @@
 </div>
 {% endif %}
 {% endif %}
+
 {% if page.display['tags'] %}
 {% for tag_type in page.tags_display %}
 <a href="{{ tag_type.url }}">{{ tag_type.description }}</a><br/>
@@ -38,16 +30,11 @@
 
 {{page.content}}
 
-{% for post in page.posts.posts %}
-<div>
-<a href="{{ post.url }}">{{ post.title }}</a>
-</div>
-{% endfor %}
-{% if page.posts.prev_url %}
-<a href="{{ page.posts.prev_url }}">Previous</a>
+{% if page.collection.prev %}
+<a href="{{page.collection.prev.url}}">Previous</a>
 {% endif %}
-{% if page.posts.next_url %}
-<a href="{{ page.posts.next_url }}">Next</a>
+{% if page.collection.next %}
+<a href="{{page.collection.next.url}}">Next</a>
 {% endif %}
 
 {% endblock %}

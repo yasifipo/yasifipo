@@ -9,7 +9,7 @@ from os import listdir
 from slugify import slugify
 
 
-def manage_tags(yaml, type_, file_, lang_=None):
+def manage_tags(yaml, type_, file_, lang_=None, subtype_=None):
 	if 'lang' not in yaml.keys():
 		if lang_ is None:
 			lang = app.yasifipo["config"]["default_lang"]
@@ -38,7 +38,8 @@ def manage_tags(yaml, type_, file_, lang_=None):
 			app.yasifipo["tags"]["data"][slug][tag]['data'][lang][file_] = {
 																		'type': type_,
 																		'file': file_,
-																		'lang': lang
+																		'lang': lang,
+																		'subtype': subtype_
 																	}
 
 

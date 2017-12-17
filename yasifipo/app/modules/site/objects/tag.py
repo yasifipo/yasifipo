@@ -16,10 +16,16 @@ class TagType():
 
 		self.tags = []
 
-	def get_tags(self):
-		for tag_it in app.yasifipo["tags"]["data"][self.tagtype].keys():
-			tag = Tag(self.tagtype, tag_it, self.lang)
-			self.tags.append(tag)
+	def get_tags(self, tab=None):
+		if tab is None:
+			for tag_it in app.yasifipo["tags"]["data"][self.tagtype].keys():
+				tag = Tag(self.tagtype, tag_it, self.lang)
+				self.tags.append(tag)
+		else:
+			for tag_it in app.yasifipo["tags"]["data"][self.tagtype].keys():
+				if tag_it in tab:
+					tag = Tag(self.tagtype, tag_it, self.lang)
+					self.tags.append(tag)
 		self.tags = sorted(self.tags, key=lambda k: k.sort)
 
 	def get_tags_items(self):
@@ -50,7 +56,10 @@ class Tag():
 				item.title = yaml['title']
 				item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
 				item.type  = obj['type']
-				item.type_description = app.yasifipo["i18n"]["page-type"][item.type][self.lang]
+				if item.type != "collection":
+					item.type_description = app.yasifipo["i18n"]["page-type"][item.type][self.lang]
+				else:
+					item.type_description = app.yasifipo["collections"][obj['subtype']]['description'][self.lang]
 			self.items.append(item)
 
 class Item():

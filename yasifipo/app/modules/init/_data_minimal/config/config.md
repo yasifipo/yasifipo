@@ -4,6 +4,7 @@ yasifipo_server: test.example.com
 prez_url_prefix: '' # 'slug' without any /
 post_url_prefix: '' # 'slug' without any /
 post_default_url: <lang>/<year>/<month>/ # with / at end, but without / at beginning
+collection_default_url: <lang>/<year>/<month>/ # with / at end, but without / at beginning
 
 default_lang: 'en'
 
@@ -14,6 +15,7 @@ layout_post: 'post/post.html'
 layout_prez: 'prez/prez.html'
 layout_chapter: 'prez/toc.html'
 layout_prez_page: 'prez/page.html'
+layout_collection: 'collection/collection.html'
 
 site_version: 0.0.1
 ---

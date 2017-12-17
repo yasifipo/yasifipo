@@ -34,6 +34,8 @@ def render_file(path):
 			return render_page(app.yasifipo["ids"][path]['id'])
 		elif app.yasifipo["ids"][path]['type'] == "post":
 			return render_post(app.yasifipo["ids"][path]['id'])
+		elif app.yasifipo["ids"][path]['type'] == "collection":
+			return render_collection(app.yasifipo["ids"][path]['id'], app.yasifipo["ids"][path]["data"])
 		else:
 			return render_template('site/bad_type.html')
 	else:
@@ -63,6 +65,8 @@ def render_root():
 			return render_page(app.yasifipo["root"]['id'])
 		elif app.yasifipo["root"]["type"] == "post":
 			return render_post(app.yasifipo["root"]['id'])
+		elif app.yasifipo["root"]["type"] == "collection":
+			return render_collection(app.yasifipo["root"]['id'], app.yasifipo["root"]["data"])
 		else:
 			return render_template('site/bad_type.html')
 	else:

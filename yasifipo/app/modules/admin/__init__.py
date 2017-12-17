@@ -30,6 +30,7 @@ def reloading():
 	app.yasifipo['tags'] = {}
 	app.yasifipo['i18n'] = {}
 	app.yasifipo['posts'] = {}
+	app.yasifipo['collections'] = {} #collections
 	app.yasifipo["sitedata"] = None
 
 	init_file_data()
@@ -40,6 +41,7 @@ def reloading():
 	init_prez_data()
 	init_page_data()
 	init_post_data()
+	init_collection_data()
 
 	app.maintenance = False
 

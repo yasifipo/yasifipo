@@ -4,11 +4,12 @@
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
   * ALL: collections :
-    *  init
-    *  with url or not
-    *  how to retrieve data easily
+    *  new lang
+		*  better tmp data
+		*  manage generated url or not
+		*  README to update
+	* POST: README to update
 	* POST : label for next / prev --> in i18n file
-	* POST: External posts
 	* POST: Post series
 	* ALL: basic template + css
   * ALL: example _data : to be completed

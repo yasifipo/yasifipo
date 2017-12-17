@@ -38,16 +38,16 @@
 
 {{page.content}}
 
-{% for post in page.posts.posts %}
+{% for post in page.tools.posts %}
 <div>
-<a href="{{ post.url }}">{{ post.title }}</a>
+{{ post.title }}
 </div>
 {% endfor %}
-{% if page.posts.prev_url %}
-<a href="{{ page.posts.prev_url }}">Previous</a>
+{% if page.tools.prev_url %}
+<a href="{{ page.tools.prev_url }}">Previous</a>
 {% endif %}
-{% if page.posts.next_url %}
-<a href="{{ page.posts.next_url }}">Next</a>
+{% if page.tools.next_url %}
+<a href="{{ page.tools.next_url }}">Next</a>
 {% endif %}
 
 {% endblock %}

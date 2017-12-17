@@ -10,6 +10,7 @@ from modules.tag import *
 from modules.page import *
 from modules.init import *
 from modules.post import *
+from modules.collection import *
 
 freezer = Freezer(app)
 
@@ -81,6 +82,7 @@ def run_data_read():
 	init_prez_data()
 	init_page_data()
 	init_post_data()
+	init_collection_data()
 
 if __name__ == '__main__':
 	manager.run()

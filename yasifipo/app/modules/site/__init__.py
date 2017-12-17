@@ -142,3 +142,4 @@ def load_config():
 	app.config['CONFIG_DIR']   = app.config['DATA_DIR'] + "config/"  # / after
 	app.config['POST_DIR']     = app.config['DATA_DIR'] + "post/"  # / after
 	app.config['SITEDATE_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
+	app.config['COLLECTION_DIR'] = app.config['DATA_DIR'] + "collections/" # / after

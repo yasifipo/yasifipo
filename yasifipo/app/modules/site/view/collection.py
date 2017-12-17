@@ -7,15 +7,14 @@ from markdown import markdown
 
 from .urls import *
 from .langs import *
-from .list import *
 
 from modules.site.objects import *
 
-def render_post(file_):
+def render_collection(file_, data_):
 	with open(file_) as data:
 		yaml = load(data)
 
-		page = Page('post', yaml)
+		page = Page('collection', yaml)
 
 		page.lang = set_lang(yaml)
 
@@ -30,15 +29,13 @@ def render_post(file_):
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 
 		if 'layout' in yaml.keys():
-			layout = 'post/' + yaml['layout']
+			layout = 'collection/' + yaml['layout']
 		else:
-			layout = app.yasifipo["config"]["layout_post"]
+			layout = app.yasifipo["config"]["layout_collection"]
 
-		get_lists(page, yaml, request)
-
-		post = [ i for i in app.yasifipo["posts"][page.lang] if i['file'] == file_][0] #TODO check perf issue here
-		page.post = Post(post['file'], post['date'])
-		page.post.get_prev_next(post['prev'], post['next'])
+		coll = [ i for i in app.yasifipo["collections"][data_['collection']]['data'][page.lang] if i['file'] == file_][0] #TODO check perf issue here
+		page.collection = CollectionPost(coll['file'], coll['date'], url=True)
+		page.collection.get_prev_next(coll['prev'], coll['next'])
 
 	page.get_generated_time()
 	return render_template( layout,
