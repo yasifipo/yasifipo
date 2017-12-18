@@ -73,7 +73,7 @@ def init_i18n_data():
 						app.yasifipo["i18n"][yaml['slug']][slug][lang] = yaml['labels'][slug][lang]
 
 def init_site_data_files():
-	app.yasifipo["sitedata"] = SiteData(app.config["SITEDATE_DIR"])
+	app.yasifipo["sitedata"] = SiteData(app.config["SITEDATA_DIR"])
 
 
 def yasifipo_register(type_, rule, id_, data={}):
@@ -148,7 +148,7 @@ def load_config():
 	app.config['I18N_DIR']     = app.config['DATA_DIR'] + "i18n/" # / after
 	app.config['CONFIG_DIR']   = app.config['DATA_DIR'] + "config/"  # / after
 	app.config['POST_DIR']     = app.config['DATA_DIR'] + "post/"  # / after
-	app.config['SITEDATE_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
+	app.config['SITEDATA_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
 	app.config['COLLECTION_DIR'] = app.config['DATA_DIR'] + "collections/" # / after
 	app.config['TEMPLATES_DIR'] = app.config['DATA_DIR'] + "templates/" # / after
 

@@ -15,7 +15,7 @@
 	  *  at new lang generation
 		*  on windows --> add , encoding="utf-8" for any with open(*)
   * INSTALL: download reveal.js
-  * BUG : SITEDATE --> SITEDATA
+  * favicon
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
