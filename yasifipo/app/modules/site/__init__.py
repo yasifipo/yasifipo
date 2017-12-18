@@ -1,4 +1,5 @@
 from app import app
+import jinja2
 
 from .views import *
 from .objects import *
@@ -143,3 +144,11 @@ def load_config():
 	app.config['POST_DIR']     = app.config['DATA_DIR'] + "post/"  # / after
 	app.config['SITEDATE_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
 	app.config['COLLECTION_DIR'] = app.config['DATA_DIR'] + "collections/" # / after
+	app.config['TEMPLATES_DIR'] = app.config['DATA_DIR'] + "templates/" # / after
+
+def templates_loader():
+	my_loader = jinja2.ChoiceLoader([
+	    jinja2.FileSystemLoader(app.config['TEMPLATES_DIR']),
+	    app.jinja_loader,
+	])
+	app.jinja_loader = my_loader

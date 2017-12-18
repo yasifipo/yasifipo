@@ -36,6 +36,7 @@ def freeze(data_path, display_all):
 
 	load_config()
 	run_data_read()
+	templates_loader()
 	freezer.freeze()
 
 @manager.option('-d', '--data', dest='data_path', default=None)
@@ -52,6 +53,7 @@ def run(data_path, display_all):
 
 	load_config()
 	run_data_read()
+	templates_loader()
 	app.run()
 
 @manager.option('-d', '--data', dest='data_path', required=True)
