@@ -1,5 +1,4 @@
 # v0.01a
-  * TAG: sorting stuff for item type
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
@@ -16,6 +15,7 @@
 	  *  at new lang generation
 		*  on windows --> add , encoding="utf-8" for any with open(*)
   * INSTALL: download reveal.js
+  * BUG : SITEDATE --> SITEDATA
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)

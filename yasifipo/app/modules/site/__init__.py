@@ -28,6 +28,12 @@ def init_file_data():
 				for it in yaml[key]:
 					app.yasifipo['config'][key].append(it)
 
+	with open(app.config['CONFIG_DIR'] + 'sorting_item_type.md', 'r') as file_:
+		yaml = load(file_)
+		app.yasifipo['config']['sorting_item_type'] = {}
+		for key in yaml.keys():
+			app.yasifipo['config']['sorting_item_type'][key] = int(yaml[key])
+
 def register_rules():
 
 	app.add_url_rule(

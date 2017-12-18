@@ -76,37 +76,39 @@ class Tag():
 
 					date, in_, in_2 = get_date(yaml, basename(obj['file']))
 					item.date = date
-					print(item.date)
 
 					item.type_description = app.yasifipo["collections"][obj['subtype']]['description'][self.lang]
 
 			if item.type !=  "collection":
 				if item.type not in items.keys():
-					items[item.type] = ItemType(item.type)
+					items[item.type] = ItemType(app.yasifipo['config']['sorting_item_type'][item.type], item.type)
 				items[item.type].items.append(item)
 			else:
 				if obj['subtype'] not in items.keys():
-					items[obj['subtype']] = ItemType(item.type, obj['subtype'])
+					items[obj['subtype']] = ItemType(app.yasifipo['config']['sorting_item_type'][item.type], item.type, obj['subtype'])
 				items[obj['subtype']].items.append(item)
 
+		items_list = items.values()
+		items_list = sorted(items_list, key=lambda k: k.sort)
+
 		#TODO sort type
-		for typ_ in items.keys():
-			if items[typ_]:
-				if items[typ_].type != "collection":
-					self.items.extend(sorted(items[typ_].items, key= lambda k: k.sort))
-				else:
-					if app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "sort":
-						self.items.extend(sorted(items[typ_].items, key= lambda k: k.sort))
-					elif app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "date":
-						tab = sorted(items[typ_].items, key= lambda k: k.date)
-						tab.reverse()
-						self.items.extend(tab)
+		for typ_ in items_list:
+			if typ_.type != "collection":
+				self.items.extend(sorted(typ_.items, key= lambda k: k.sort))
+			else:
+				if app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "sort":
+					self.items.extend(sorted(typ_.items, key= lambda k: k.sort))
+				elif app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "date":
+					tab = sorted(typ_.items, key= lambda k: k.date)
+					tab.reverse()
+					self.items.extend(tab)
 
 
 class ItemType():
-	def __init__(self, type_, subtype=None):
+	def __init__(self, type_, sort, subtype=None):
 		self.type = type_
 		self.subtype = subtype
+		self.sort = sort
 		self.items = []
 
 class Item():

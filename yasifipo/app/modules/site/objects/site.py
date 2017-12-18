@@ -29,4 +29,4 @@ class SiteData():
 				if app.spec.match_file(file_):
 					continue
 				attr_name = splitext(basename(file_))[0]
-				setattr(self, slugify(attr_name), SiteDateFile(app.config["SITEDATE_DIR"] + "/" + file_))
+				setattr(self, attr_name, SiteDateFile(app.config["SITEDATE_DIR"] + "/" + file_))
