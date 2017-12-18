@@ -14,6 +14,9 @@ No database, using only filesystem
 *  pages, generate pages website
 *  blog, generate blog posts
 
+# Installation
+TODO
+
 # how to run
 *  python app/manage.py run -d path/to/data/
 *  python app/manage.py freeze -d path/to/data/
@@ -61,10 +64,12 @@ Create your table of content by creating a directory tree. Each path must have a
 *  tags: optional. If set to False, tags are not displayed
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
+*  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
+*  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  all keys will be available on page.data
 *  content (not part of yaml): will be displayed in chapter page
 
-## any prez file
+## prez file
 *  slug: mandatory, url part of the current presentation
 *  title: mandatory, title of presentation
 *  draft: optional, will not be taken into account if set to True
@@ -77,6 +82,8 @@ Create your table of content by creating a directory tree. Each path must have a
 *  tags: optional. If set to False, tags are not displayed
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 *  all keys will be available on page.data
+*  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
+*  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  content (not part of yaml): content of reveal.js presentation. By default:
   *  ~~~ is used for horizontal separator
   *  ~~ is used for vertical separator
@@ -94,11 +101,44 @@ Create your table of content by creating a directory tree. Each path must have a
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
+*  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  all keys will be available on page.data
 *  content (not part of yaml): content of page (in markdown language)
+
+## Post file
+*  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
+*  date: optional. Date of publication. If not set, filename must start with the date (YYYYMMDD)
+*  title: mandatory, title of page
+*  lang: optionnal, lang of page. default_lang will be used if not set
+*  ref: optional, used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
+*  (any tag): optional
+*  tags: optional. If set to False, tags are not displayed
+*  server: optional, can be a str or list: server (or list of server) where page will be published
+*  layout: optional. Set the layout (in templates/page folder). If not set, default is used
+*  redirect (str or tab) : urls redirected to url by 301 redirection
+*  all keys will be available on page.post.data
+*  content (not part of yaml): content of post (in markdown language)
+
+## Collection file
+*  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
+*  date: optional. Date of publication. If not set, filename must start with the date (YYYYMMDD)
+*  title: mandatory, title of page
+*  lang: optionnal, lang of page. default_lang will be used if not set
+*  ref: optional, used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
+*  (any tag): optional
+*  tags: optional. If set to False, tags are not displayed
+*  server: optional, can be a str or list: server (or list of server) where page will be published
+*  layout: optional. Set the layout (in templates/page folder). If not set, default is used
+*  redirect (str or tab) : urls redirected to url by 301 redirection
+*  all keys will be available on page.post.data
+*  content (not part of yaml): content of post (in markdown language)
 
 ## _data/tags/summary.md
 TODO
 
 ## _data/tags/tags/xxx.md
+TODO
+
+## _data/collections/summary.md
+Contains list of all available collection (table of __collection__ in yaml)  
 TODO
