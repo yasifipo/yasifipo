@@ -81,17 +81,16 @@ class Tag():
 
 			if item.type !=  "collection":
 				if item.type not in items.keys():
-					items[item.type] = ItemType(app.yasifipo['config']['sorting_item_type'][item.type], item.type)
+					items[item.type] = ItemType(item.type, app.yasifipo['config']['sorting_item_type'][item.type])
 				items[item.type].items.append(item)
 			else:
 				if obj['subtype'] not in items.keys():
-					items[obj['subtype']] = ItemType(app.yasifipo['config']['sorting_item_type'][item.type], item.type, obj['subtype'])
+					items[obj['subtype']] = ItemType(item.type, app.yasifipo['config']['sorting_item_type'][item.type], obj['subtype'])
 				items[obj['subtype']].items.append(item)
 
 		items_list = items.values()
 		items_list = sorted(items_list, key=lambda k: k.sort)
 
-		#TODO sort type
 		for typ_ in items_list:
 			if typ_.type != "collection":
 				self.items.extend(sorted(typ_.items, key= lambda k: k.sort))
