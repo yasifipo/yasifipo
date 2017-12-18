@@ -197,8 +197,8 @@ def get_collection_data(directory, yaml_coll):
 						statics.append(yaml['static'])
 						register_static_img(directory + "/" + yaml['static'], url, yaml['static'])
 
-				if 'sort' in yaml_coll.keys():
-					sort = yaml_coll['sort']
+				if 'sort' in yaml.keys():
+					sort = yaml['sort']
 				else:
 					sort = None
 				set_collection(yaml_coll['slug'], lang, directory + "/" + file_, date, sort)
