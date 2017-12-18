@@ -1,8 +1,10 @@
 from app import app
 
 from modules.site.view.urls import *
+from modules.utils.date import *
 
 from frontmatter import load
+from os.path import basename
 
 class TagType():
 	def __init__(self, tag_type_, lang_):
@@ -48,20 +50,70 @@ class Tag():
 
 	def get_items(self):
 		# retrieve all objects linked to this tag
-		#TODO how to sort ?
+		items = {}
 		for obj in app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['data'][self.lang].values():
-			item = Item()
 			with open(obj['file']) as fil_:
 				yaml = load(fil_)
+				item = Item(yaml)
 				item.title = yaml['title']
 				item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
 				item.type  = obj['type']
+
 				if item.type != "collection":
+
+					if 'sort' in yaml.keys():
+						item.sort = yaml['sort']
+					else:
+						item.sort = 99
+
 					item.type_description = app.yasifipo["i18n"]["page-type"][item.type][self.lang]
 				else:
+
+					if 'sort' in yaml.keys():
+						item.sort = yaml['sort']
+					else:
+						item.sort = 99
+
+					date, in_, in_2 = get_date(yaml, basename(obj['file']))
+					item.date = date
+					print(item.date)
+
 					item.type_description = app.yasifipo["collections"][obj['subtype']]['description'][self.lang]
-			self.items.append(item)
+
+			if item.type !=  "collection":
+				if item.type not in items.keys():
+					items[item.type] = ItemType(item.type)
+				items[item.type].items.append(item)
+			else:
+				if obj['subtype'] not in items.keys():
+					items[obj['subtype']] = ItemType(item.type, obj['subtype'])
+				items[obj['subtype']].items.append(item)
+
+		#TODO sort type
+		for typ_ in items.keys():
+			if items[typ_]:
+				if items[typ_].type != "collection":
+					self.items.extend(sorted(items[typ_].items, key= lambda k: k.sort))
+				else:
+					if app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "sort":
+						self.items.extend(sorted(items[typ_].items, key= lambda k: k.sort))
+					elif app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "date":
+						tab = sorted(items[typ_].items, key= lambda k: k.date)
+						tab.reverse()
+						self.items.extend(tab)
+
+
+class ItemType():
+	def __init__(self, type_, subtype=None):
+		self.type = type_
+		self.subtype = subtype
+		self.items = []
 
 class Item():
-	def __init__(self):
-		pass
+	def __init__(self, yaml):
+		self.data = Data(yaml)
+
+class Data():
+	def __init__(self, yaml):
+		for k in yaml.keys():
+			setattr(self, k, yaml[k])

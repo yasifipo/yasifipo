@@ -8,7 +8,7 @@ from frontmatter import load
 from modules.site import *
 from modules.tag import *
 from .url import *
-from .date import *
+from modules.utils.date import *
 
 def init_collection_data():
 	with open(app.config['COLLECTION_DIR'] + "/summary.md") as fil_collection:

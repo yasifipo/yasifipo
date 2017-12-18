@@ -1,5 +1,5 @@
 # v0.01a
-  * TAG: sorting stuff for items (at least for posts)
+  * TAG: sorting stuff for item type
   * PREZ: list of prez
   * TAG: list of tagtypes
   * ALL: check TODO label in code :)
@@ -12,9 +12,10 @@
     *  each type of data
     *  templates
 	* ADMIN: login required
-	* unicode stuff:
+	* ALL: unicode stuff:
 	  *  at new lang generation
-		*  on windows
+		*  on windows --> add , encoding="utf-8" for any with open(*)
+  * INSTALL: download reveal.js
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)

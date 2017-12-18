@@ -1,6 +1,6 @@
 from app import app
 from datetime import datetime
-from .date import *
+from modules.utils.date import *
 
 def url_mapping(date, yaml, filename, url):
 

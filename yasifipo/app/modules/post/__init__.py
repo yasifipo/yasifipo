@@ -11,7 +11,7 @@ from modules.site import *
 from modules.site.objects import *
 from modules.tag import *
 from .url import *
-from .date import *
+from modules.utils.date import *
 
 def init_post_data():
 	get_post_data(app.config['POST_DIR'])

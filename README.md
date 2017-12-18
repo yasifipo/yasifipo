@@ -66,6 +66,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
+*  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data
 *  content (not part of yaml): will be displayed in chapter page
 
@@ -81,6 +82,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  page: optional, prez is displayed as a page, not with reveal presentation mode
 *  tags: optional. If set to False, tags are not displayed
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
+*  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
@@ -102,12 +104,14 @@ Create your table of content by creating a directory tree. Each path must have a
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
+*  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data
 *  content (not part of yaml): content of page (in markdown language)
 
 ## Post file
 *  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
 *  date: optional. Date of publication. If not set, filename must start with the date (YYYYMMDD)
+*  sort: optional. Will be used for sorting when displaying tag items
 *  title: mandatory, title of page
 *  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional, used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
@@ -122,6 +126,7 @@ Create your table of content by creating a directory tree. Each path must have a
 ## Collection file
 *  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
 *  date: optional. Date of publication. If not set, filename must start with the date (YYYYMMDD)
+*  sort: optional. Will be used for sorting when displaying tag items
 *  title: mandatory, title of page
 *  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional, used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
