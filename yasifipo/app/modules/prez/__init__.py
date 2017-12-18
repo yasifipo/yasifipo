@@ -92,8 +92,6 @@ def init_prez_data():
 				#recursive stuff
 				read_prez_data(app.config['PREZ_DIR']  + prez['directory'] + "/", None, init_slug, lang)
 
-	#TODO prez_list_stuff
-
 # Main recursive function for reading prez
 def read_prez_data(directory, up_directory, current_slug, lang):
 	# current directory

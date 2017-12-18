@@ -1,21 +1,27 @@
 # v0.01a
-  * PREZ: list of prez
-  * TAG: list of tagtypes
+  * PREZ: list of prez --> will be done by get_list
+  * TAG: list of tagtypes --> will be done by get_list
+	* POST : label for next / prev --> in i18n file
+
   * ALL: check TODO label in code :)
+	* ADMIN: login required
+  * ALL: unicode stuff:
+    *  at new lang generation
+    *  on windows --> add , encoding="utf-8" for any with open(*)
+  * favicon
+
+  * INSTALL: download reveal.js
   * COLLECTION: README to update
 	* POST: README to update
-	* POST : label for next / prev --> in i18n file
-	* POST: Post series
 	* ALL: basic template + css
   * ALL: example _data : to be completed:
     *  each type of data
     *  templates
-	* ADMIN: login required
-	* ALL: unicode stuff:
-	  *  at new lang generation
-		*  on windows --> add , encoding="utf-8" for any with open(*)
-  * INSTALL: download reveal.js
-  * favicon
+
+	* POST: Post series
+
+
+
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
