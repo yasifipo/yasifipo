@@ -35,12 +35,13 @@ def manage_tags(yaml, type_, file_, lang_=None, subtype_=None):
 				print("new tag '" + tag + "' of type " + slug )
 				create_new_tag(tag, slug)
 
-			app.yasifipo["tags"]["data"][slug][tag]['data'][lang][file_] = {
-																		'type': type_,
-																		'file': file_,
-																		'lang': lang,
-																		'subtype': subtype_
-																	}
+			if lang in app.yasifipo["tags"]["data"][slug][tag]['data'].keys(): #For new lang / draft langs
+				app.yasifipo["tags"]["data"][slug][tag]['data'][lang][file_] = {
+																			'type': type_,
+																			'file': file_,
+																			'lang': lang,
+																			'subtype': subtype_
+																		}
 
 
 def create_new_tag(tag, tag_type):
