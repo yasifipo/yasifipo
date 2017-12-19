@@ -2,10 +2,12 @@ from app import app
 
 from os.path import isfile, isdir
 from os import listdir
-from frontmatter import load, dumps
+from frontmatter import load
+
 
 from .urls import *
 import modules.site
+from modules.utils.util_yaml import *
 
 def init_lang_data():
 
@@ -56,8 +58,8 @@ def set_lang(yaml):
 					yaml = load(fil_data)
 					for slug in yaml['labels'].keys():
 						yaml['labels'][slug][lang] = app.yasifipo["i18n"][yaml['slug']][slug][app.yasifipo["config"]["default_lang"]]
-				fil_write = open(app.config["I18N_DIR"] + "/" + file_, "w")
-				fil_write.write(dumps(yaml))
+				fil_write = open(app.config["I18N_DIR"] + "/" + file_, "w", encoding='utf-8')
+				fil_write.write(yaml_dump(yaml))
 				fil_write.close()
 
 		# Update tags summary
@@ -68,8 +70,8 @@ def set_lang(yaml):
 				tag['url']['mass'][lang] = lang + "/" + tag['slug']
 				tag['url']['url'][lang] = lang + "/" + tag['slug']
 
-			fil_write = open(app.config["TAG_DIR"] + "/summary.md", "w")
-			fil_write.write(dumps(yaml))
+			fil_write = open(app.config["TAG_DIR"] + "/summary.md", "w", encoding='utf-8')
+			fil_write.write(yaml_dump(yaml))
 			fil_write.close()
 
 			for tag in yaml['tags']:
@@ -85,8 +87,8 @@ def set_lang(yaml):
 						yaml['descr'][lang] = app.yasifipo["tags"]["data"][tag['slug']][yaml['slug']]['descr'][app.yasifipo["config"]["default_lang"]]
 						yaml['url'][lang] = lang + "/" + yaml['slug']
 
-						fil_write = open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_, "w")
-						fil_write.write(dumps(yaml))
+						fil_write = open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_, "w", encoding='utf-8')
+						fil_write.write(yaml_dump(yaml))
 						fil_write.close()
 
 		# Update collection descriptions
@@ -95,8 +97,8 @@ def set_lang(yaml):
 			for coll in yaml['collections']:
 				coll['description'][lang] = coll['description'][app.yasifipo["config"]["default_lang"]]
 
-			fil_write = open(app.config["COLLECTION_DIR"] + "/summary.md", "w")
-			fil_write.write(dumps(yaml))
+			fil_write = open(app.config["COLLECTION_DIR"] + "/summary.md", "w", encoding='utf-8')
+			fil_write.write(yaml_dump(yaml))
 			fil_write.close()
 
 	return lang
