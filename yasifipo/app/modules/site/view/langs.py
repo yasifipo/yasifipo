@@ -24,13 +24,16 @@ def init_lang_data():
 				else:
 					app.yasifipo['langs'][lang_['lang']]['draft'] = True
 
-def set_lang(yaml):
+def set_lang(yaml, lang_=None):
 	lang = ''
 	# if no lang in file, set to default lang
-	if 'lang' not in yaml.keys():
-		lang = app.yasifipo["config"]["default_lang"]
+	if lang_ is None:
+		if 'lang' not in yaml.keys():
+			lang = app.yasifipo["config"]["default_lang"]
+		else:
+			lang = yaml['lang']
 	else:
-		lang = yaml['lang']
+		lang = lang_
 
 	# check if lang is already loaded
 	if lang not in [lg['lang'] for lg in app.yasifipo['langs'].values()]:

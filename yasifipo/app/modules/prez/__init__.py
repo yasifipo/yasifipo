@@ -66,7 +66,7 @@ def init_prez_data():
 					set_ref(yaml_single, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], lang)
 
 					# register
-					yasifipo_register('prez-single', rule, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], {'single':True})
+					yasifipo_register('prez-single', rule, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], {'single':True, 'lang':lang})
 
 					# redirect
 					if 'redirect' in yaml_single.keys():
@@ -130,9 +130,9 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 		manage_tags(yaml_chapter, "prez-chapter", directory + ".chapter.md", lang_=lang)
 
 		if up_directory:
-			yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md', {'type':'prez-chapter'})
+			yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md', {'type':'prez-chapter', 'lang':lang})
 		else:
-			yasifipo_register('prez-course', rule,  directory  + '.chapter.md', {'type':'prez-course'})
+			yasifipo_register('prez-course', rule,  directory  + '.chapter.md', {'type':'prez-course', 'lang':lang})
 
 		# redirect
 		if 'redirect' in yaml_chapter.keys():
@@ -228,9 +228,9 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 				manage_tags(yaml, "prez", directory + "/" + file_, lang_=lang)
 				set_ref(yaml, directory + "/" + file_, lang)
 				if 'page' in yaml.keys() and yaml['page'] == True:
-					yasifipo_register('prez-page', rule, directory + '/' + file_)
+					yasifipo_register('prez-page', rule, directory + '/' + file_, {'lang':lang})
 				else:
-					yasifipo_register('prez', rule, directory + '/' + file_)
+					yasifipo_register('prez', rule, directory + '/' + file_, {'lang':lang})
 
 				# redirect
 				if 'redirect' in yaml.keys():

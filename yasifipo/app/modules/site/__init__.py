@@ -131,13 +131,13 @@ def set_ref(yaml, file_, lang_=None):
 		if yaml["ref"] not in app.yasifipo["refs"].keys():
 			app.yasifipo["refs"][yaml["ref"]] = {}
 		lang = ''
-		if 'lang' not in yaml.keys():
-			if lang_ is None:
+		if lang_ is None:
+			if 'lang' not in yaml.keys():
 				lang = app.yasifipo["config"]["default_lang"]
 			else:
 				lang = lang_
 		else:
-			lang = yaml['lang']
+			lang = lang_
 		app.yasifipo["refs"][yaml["ref"]][lang] = {'lang': lang, 'file':file_}
 
 def load_config():
