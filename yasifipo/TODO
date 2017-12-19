@@ -19,6 +19,8 @@
 
 	* POST: Post series
 
+  * BUG: when a parent is draft (or corresponding lang), --> problem in toc
+
 
 
 

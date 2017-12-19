@@ -1,5 +1,9 @@
+.yasifipo {
+  position: absolute;
+  z-index: 99;
+}
+
 .cucumber {
-  height: 30px;
   background: #222;
   background-color: #222;
   color: #fff;

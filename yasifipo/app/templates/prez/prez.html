@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="yasifipo">
 {% if page.display['cucumber'] == True %}
 <div class='cucumber'>
 {% for i in page.cucumber %}
@@ -31,6 +32,7 @@
 {% endif %}
 
 {% if page.display['tags'] %}
+<div>
 {% for tag_type in page.tags_display %}
 <a href="{{ tag_type.url }}">{{ tag_type.description }}</a><br/>
 {% for tag in tag_type.tags %}
@@ -38,16 +40,19 @@
 {% endfor %}
 <br/>
 {% endfor %}
+</div>
 {% endif %}
+</div>
 
-
-<div class="reveal">
-	<div class="slides">
-		<section data-markdown data-separator="^\n~~~\n$" data-separator-vertical="^\n~~\n$" data-notes="^Note:" data-element-attributes="{_\s*?([^}]+?)}">>
-			<script type="text/template">
-{{ page.content }}
-			</script>
-		</section>
+<div class="reveal-viewport">
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown data-separator="^\n~~~\n$" data-separator-vertical="^\n~~\n$" data-notes="^Note:" data-element-attributes="{_\s*?([^}]+?)}">>
+				<script type="text/template">
+	{{ page.content }}
+				</script>
+			</section>
+		</div>
 	</div>
 </div>
 
