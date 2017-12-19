@@ -23,7 +23,11 @@
 {% endif %}
 
 {% for item in page.tag.items %}
-<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+{% if item.url %}
+	<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+{% else %}
+	{{item.title}} ({{ item.type_description }})<br/>
+{% endif %}
 {% endfor %}
 
 {% endblock %}

@@ -56,11 +56,10 @@ class Tag():
 				yaml = load(fil_)
 				item = Item(yaml)
 				item.title = yaml['title']
-				item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
 				item.type  = obj['type']
 
 				if item.type != "collection":
-
+					item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
 					if 'sort' in yaml.keys():
 						item.sort = yaml['sort']
 					else:
@@ -68,6 +67,8 @@ class Tag():
 
 					item.type_description = app.yasifipo["i18n"]["page-type"][item.type][self.lang]
 				else:
+					if app.yasifipo["collections"][obj['subtype']]['conf']['generate_url'] == True:
+						item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
 
 					if 'sort' in yaml.keys():
 						item.sort = yaml['sort']

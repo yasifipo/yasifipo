@@ -25,7 +25,11 @@
 {% if tag.items|length > 0 %}
 <h1><a href="{{tag.url}}">{{tag.description}}</a><br/></h1>
 {% for item in tag.items %}
-<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+{% if item.url %}
+	<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+{% else %}
+	{{item.title}} ({{ item.type_description }})<br/>
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}
