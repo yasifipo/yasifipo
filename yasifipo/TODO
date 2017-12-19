@@ -9,7 +9,6 @@
     *  at new lang generation
   * favicon
 
-  * INSTALL: download reveal.js --> update to 3.6.0
   * COLLECTION: README to update
 	* POST: README to update
 	* ALL: basic template + css
@@ -19,7 +18,6 @@
 
 	* POST: Post series
 
-  * BUG: when a parent is draft (or corresponding lang), --> problem in toc
 
 
 

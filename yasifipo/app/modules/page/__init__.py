@@ -14,6 +14,9 @@ def init_page_data():
 	for item in parenting:
 		app.yasifipo["toc"][item[0]] = {}
 		app.yasifipo["toc"][item[0]]['type'] = 'page'
+		if item[2] not in app.yasifipo["refs"][item[1]].keys():
+			print("WARNING: Parenting with bad language for file " + item[0])
+			continue
 		app.yasifipo["toc"][item[0]]['father'] = app.yasifipo["refs"][item[1]][item[2]]['file']
 
 
