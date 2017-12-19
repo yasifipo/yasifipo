@@ -35,7 +35,7 @@ def get_page_data(directory, current_slug, parenting):
 
 
 	for file_ in files:
-		with open(directory + "/" + file_) as fil_:
+		with open(directory + "/" + file_, encoding='utf-8') as fil_:
 			yaml = load(fil_)
 
 			if current_slug == "":
@@ -45,7 +45,7 @@ def get_page_data(directory, current_slug, parenting):
 
 			#if there is no header on file, create it
 			if len(yaml.keys()) == 0:
-				with open(directory + "/" + file_, "w") as fil_write:
+				with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:
 					fil_write.write('---\n')
 					fil_write.write('url: ' + next_slug + "\n")
 					fil_write.write('title: ' + file_ + "\n")

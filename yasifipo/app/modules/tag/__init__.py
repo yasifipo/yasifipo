@@ -68,7 +68,7 @@ def init_tag_data():
 	app.yasifipo["tags"]["conf"] = {}
 	app.yasifipo["tags"]["data"] = {}
 
-	with open(app.config['TAG_DIR'] + "/summary.md") as fil_tag:
+	with open(app.config['TAG_DIR'] + "/summary.md", encoding='utf-8') as fil_tag:
 		yaml = load(fil_tag)
 		if not yaml['tags']:
 			return
@@ -137,7 +137,7 @@ def init_tag_data():
 				yasifipo_register("tag", rule, None, {'tag_type': tag_type, 'tag': tag, 'lang': lang })
 
 def fill_tag_data(file_, tag_type):
-	with open(app.config['TAG_DIR'] + "/" + app.yasifipo["tags"]["conf"][tag_type]['directory'] + "/" + file_) as fil_tag:
+	with open(app.config['TAG_DIR'] + "/" + app.yasifipo["tags"]["conf"][tag_type]['directory'] + "/" + file_, encoding='utf-8') as fil_tag:
 		yaml = load(fil_tag)
 
 		app.yasifipo["tags"]["data"][tag_type][yaml['slug']] = {}

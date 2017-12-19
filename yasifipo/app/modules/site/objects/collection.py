@@ -34,7 +34,7 @@ class CollectionPost():
 			self.next = CollectionPost(next['file'], next['date'], url=self.generate_url)
 
 	def get_full(self):
-		with open(self.file_) as fil_:
+		with open(self.file_, encoding='utf-8') as fil_:
 			yaml = load(fil_)
 
 			self.content = yaml.content

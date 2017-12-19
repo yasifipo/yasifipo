@@ -49,13 +49,13 @@ def get_post_data(directory):
 
 
 	for file_ in files:
-		with open(directory + "/" + file_) as fil_:
+		with open(directory + "/" + file_, encoding='utf-8') as fil_:
 			yaml = load(fil_)
 
 
 			#if there is no header on file, create it
 			if len(yaml.keys()) == 0:
-				with open(directory + "/" + file_, "w") as fil_write:
+				with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:
 					fil_write.write("---\n")
 					fil_write.write('date: ' + datetime.now().strftime("%Y%m%d") + "\n")
 					fil_write.write('url: ' + app.yasifipo["config"]["post_default_url"] + slugify(os.path.splitext(os.path.basename(file_))[0]) + "\n")
@@ -68,7 +68,7 @@ def get_post_data(directory):
 				if not exists(directory + "/img/"):
 					makedirs(directory + "/img/")
 
-				with open(directory + "/" + file_) as fil_:
+				with open(directory + "/" + file_, encoding='utf-8') as fil_:
 					yaml = load(fil_)
 
 			if check_server(yaml) == False:

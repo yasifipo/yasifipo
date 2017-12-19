@@ -13,7 +13,7 @@ from modules.site.objects import *
 
 def render_page(file_):
 
-	with open(file_) as data:
+	with open(file_, encoding='utf-8') as data:
 		yaml = load(data)
 
 		page = Page('page', yaml)
@@ -71,7 +71,7 @@ def get_page_cucumber(initial_parent, lang):
 
 
 	for i in reversed(urls):
-		with open(i['file']) as data_dir:
+		with open(i['file'], encoding='utf-8') as data_dir:
 			yaml_dir = load(data_dir)
 			i['url'] = yasifipo_url_for('render_file', path=app.yasifipo["files"][i['file']])
 			i['title'] = yaml_dir['title']

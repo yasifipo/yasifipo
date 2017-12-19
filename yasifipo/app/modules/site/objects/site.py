@@ -9,7 +9,7 @@ from slugify import slugify
 
 class SiteDateFile():
 	def __init__(self, file_):
-		with open(file_) as fil_data:
+		with open(file_, encoding='utf-8') as fil_data:
 			yaml = load(fil_data)
 
 			for key in yaml.keys():

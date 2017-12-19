@@ -14,7 +14,7 @@ def init_lang_data():
 		if isfile(app.config["LANGS_DIR"] + lang):
 			if app.spec.match_file(lang):
 				continue
-			with open(app.config["LANGS_DIR"] + lang) as fil_:
+			with open(app.config["LANGS_DIR"] + lang, encoding='utf-8') as fil_:
 				lang_ = load(fil_)
 				app.yasifipo['langs'][lang_['lang']] = {'lang':lang_['lang'], 'descr': lang_['descr'], 'sort':int(lang_['sort'])}
 				if not 'draft' in lang_.keys() or ('draft' in lang_.keys() and lang_['draft'] == False):
@@ -52,7 +52,7 @@ def set_lang(yaml):
 			if isfile(app.config["I18N_DIR"] + "/" + file_):
 				if app.spec.match_file(file_):
 					continue
-				with open(app.config["I18N_DIR"] + "/" + file_) as fil_data:
+				with open(app.config["I18N_DIR"] + "/" + file_, encoding='utf-8') as fil_data:
 					yaml = load(fil_data)
 					for slug in yaml['labels'].keys():
 						yaml['labels'][slug][lang] = app.yasifipo["i18n"][yaml['slug']][slug][app.yasifipo["config"]["default_lang"]]
@@ -61,7 +61,7 @@ def set_lang(yaml):
 				fil_write.close()
 
 		# Update tags summary
-		with open(app.config["TAG_DIR"] + "/summary.md") as fil_data:
+		with open(app.config["TAG_DIR"] + "/summary.md", encoding='utf-8') as fil_data:
 			yaml = load(fil_data)
 			for tag in yaml['tags']:
 				tag['descr'][lang] = app.yasifipo["tags"]["conf"][tag['slug']]['descr'][app.yasifipo["config"]["default_lang"]]
@@ -80,7 +80,7 @@ def set_lang(yaml):
 				for file_ in files:
 					if app.spec.match_file(file_):
 						continue
-					with open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_) as fil_tag:
+					with open(app.config['TAG_DIR'] + "/" + tag['directory'] + "/" + file_, encoding='utf-8') as fil_tag:
 						yaml = load(fil_tag)
 						yaml['descr'][lang] = app.yasifipo["tags"]["data"][tag['slug']][yaml['slug']]['descr'][app.yasifipo["config"]["default_lang"]]
 						yaml['url'][lang] = lang + "/" + yaml['slug']
@@ -90,7 +90,7 @@ def set_lang(yaml):
 						fil_write.close()
 
 		# Update collection descriptions
-		with open(app.config["COLLECTION_DIR"] + "/summary.md") as fil_data:
+		with open(app.config["COLLECTION_DIR"] + "/summary.md", encoding='utf-8') as fil_data:
 			yaml = load(fil_data)
 			for coll in yaml['collections']:
 				coll['description'][lang] = coll['description'][app.yasifipo["config"]["default_lang"]]

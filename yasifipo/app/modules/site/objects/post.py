@@ -27,7 +27,7 @@ class Post():
 			self.next = Post(next['file'], next['date'])
 
 	def get_full(self):
-		with open(self.file_) as fil_:
+		with open(self.file_, encoding='utf-8') as fil_:
 			yaml = load(fil_)
 
 			self.content = yaml.content

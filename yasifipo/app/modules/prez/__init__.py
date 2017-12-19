@@ -12,7 +12,7 @@ from frontmatter import load
 from slugify import slugify
 
 def init_prez_data():
-	with open(app.config['PREZ_DIR'] + "/summary.md") as fil_prez:
+	with open(app.config['PREZ_DIR'] + "/summary.md", encoding='utf-8') as fil_prez:
 		yaml = load(fil_prez)
 		if not yaml['presentations']:
 			return
@@ -42,19 +42,19 @@ def init_prez_data():
 					continue
 
 				# register
-				with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']) as single_file:
+				with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], encoding='utf-8') as single_file:
 					yaml_single = load(single_file)
 
 					#if there is no header on file, create it
 					if len(yaml_single.keys()) == 0:
-						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], "w") as fil_write:
+						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], "w", encoding='utf-8') as fil_write:
 							fil_write.write('---\n')
 							fil_write.write('slug: ' + slugify(prez['single']) + "\n")
 							fil_write.write('title: ' + prez['single'] + "\n")
 							fil_write.write('---\n')
 							fil_write.write(yaml_single.content)
 
-						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']) as single_file:
+						with open(app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], encoding='utf-8') as single_file:
 							yaml_single = load(single_file)
 
 					if yaml_single['slug'] == '':
@@ -108,7 +108,7 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 		if not exists(directory + "/img/"):
 			makedirs(directory + "/img/")
 
-	with open(directory  + '/.chapter.md') as chapter_:
+	with open(directory  + '/.chapter.md', encoding='utf-8') as chapter_:
 		yaml_chapter = load(chapter_)
 
 		# toc
@@ -172,7 +172,7 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 					makedirs(directory + "/" + file_ + "/img/")
 
 
-			with open(directory + "/" + file_ + '/.chapter.md') as chapter_:
+			with open(directory + "/" + file_ + '/.chapter.md', encoding='utf-8') as chapter_:
 				yaml_chapter_dir = load(chapter_)
 
 				# Do not use draft directory
@@ -195,19 +195,19 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 		elif isfile(directory + "/" + file_) and file_ != ".chapter.md":
 			if app.spec.match_file(file_):
 				continue
-			with open(directory + "/" + file_) as fil_:
+			with open(directory + "/" + file_, encoding='utf-8') as fil_:
 				yaml = load(fil_)
 
 				#if there is no header on file, create it
 				if len(yaml.keys()) == 0:
-					with open(directory + "/" + file_, "w") as fil_write:
+					with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:
 						fil_write.write('---\n')
 						fil_write.write('slug: ' + slugify(file_) + "\n")
 						fil_write.write('title: ' + file_ + "\n")
 						fil_write.write('---\n')
 						fil_write.write(yaml.content)
 
-				with open(directory + "/" + file_) as fil_:
+				with open(directory + "/" + file_, encoding='utf-8') as fil_:
 					yaml = load(fil_)
 
 				# Do not use draft files

@@ -18,16 +18,16 @@ No database, using only filesystem
 TODO
 
 # how to run
-*  python app/manage.py run -d path/to/data/
-*  python app/manage.py freeze -d path/to/data/
+*  python3 app/manage.py run -d path/to/data/
+*  python3 app/manage.py freeze -d path/to/data/
 
 # Want some example ?  
 *  Minimal example
-  *  python app/manage.py init -d path/to/data
-  *  python app/manage.py run -d path/to/data
+  *  python3 app/manage.py init -d path/to/data
+  *  python3 app/manage.py run -d path/to/data
 *  Complete example of each feature
-  *  python app/manage.py example -d path/to/data
-  *  python app/manage.py run -d path/to/data
+  *  python3 app/manage.py example -d path/to/data
+  *  python3 app/manage.py run -d path/to/data
 
 # Docs
 List of all existing yaml files

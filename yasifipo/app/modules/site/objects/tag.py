@@ -52,7 +52,7 @@ class Tag():
 		# retrieve all objects linked to this tag
 		items = {}
 		for obj in app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['data'][self.lang].values():
-			with open(obj['file']) as fil_:
+			with open(obj['file'], encoding='utf-8') as fil_:
 				yaml = load(fil_)
 				item = Item(yaml)
 				item.title = yaml['title']

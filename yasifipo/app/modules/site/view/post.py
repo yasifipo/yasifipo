@@ -12,7 +12,7 @@ from .list import *
 from modules.site.objects import *
 
 def render_post(file_):
-	with open(file_) as data:
+	with open(file_, encoding='utf-8') as data:
 		yaml = load(data)
 
 		page = Page('post', yaml)

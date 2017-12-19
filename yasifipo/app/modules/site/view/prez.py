@@ -20,7 +20,7 @@ def get_children(file_, first_level):
 	current['typ'] = 'dir'
 	current['first_level'] = first_level
 	if first_level == False:
-		with open(file_) as data_file:
+		with open(file_, encoding='utf-8') as data_file:
 			yaml = load(data_file)
 			current['chapter_url'] = yasifipo_url_for('render_file', path=app.yasifipo["files"][file_])
 			current['chapter_title'] = yaml['title']
@@ -31,7 +31,7 @@ def get_children(file_, first_level):
 		if child['type'] == 'dir':
 			current['children'].append(get_children(child['data'], False))
 		else:
-			with open(child['data']) as data_file:
+			with open(child['data'], encoding='utf-8') as data_file:
 				yaml = load(data_file)
 				child_ = {}
 				child_['typ'] = 'prez'
@@ -56,7 +56,7 @@ def get_prez_cucumber(initial_parent, lang):
 			break
 
 	for i in reversed(urls):
-		with open(i['file']) as data_dir:
+		with open(i['file'], encoding='utf-8') as data_dir:
 			yaml_dir = load(data_dir)
 			i['url'] = yasifipo_url_for('render_file', path= app.yasifipo["files"][i['file']])
 			i['title'] = yaml_dir['title']
@@ -65,7 +65,7 @@ def get_prez_cucumber(initial_parent, lang):
 	return cucumber
 
 def render_prez_chapter(file_, data):
-	with open(file_) as data_file:
+	with open(file_, encoding='utf-8') as data_file:
 		yaml = load(data_file)
 
 	page = Page(data['type'], yaml)
@@ -109,7 +109,7 @@ def render_prez_chapter(file_, data):
 
 
 def render_prez_prez(file_, data):
-	with open(file_) as data_:
+	with open(file_, encoding='utf-8') as data_:
 		yaml = load(data_)
 
 		if 'single' in data.keys() and data['single'] == True:
@@ -167,7 +167,7 @@ def render_prez_prez(file_, data):
 								page=page)
 
 def render_prez_page(file_, data):
-	with open(file_) as data_:
+	with open(file_, encoding='utf-8') as data_:
 		yaml = load(data_)
 
 		page = Page('prez-page', yaml)

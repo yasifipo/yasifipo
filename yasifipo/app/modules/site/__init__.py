@@ -15,10 +15,10 @@ def init_site_data():
 	init_site_data_files()
 
 def init_file_data():
-	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', 'r') as fh:
+	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', encoding='utf-8') as fh:
 		app.spec = pathspec.PathSpec.from_lines('gitignore', fh)
 
-	with open(app.config['CONFIG_DIR'] + 'config.md', 'r') as file_:
+	with open(app.config['CONFIG_DIR'] + 'config.md', encoding='utf-8') as file_:
 		yaml = load(file_)
 		for key in yaml.keys():
 			if type(yaml[key]).__name__ != 'list':
@@ -28,7 +28,7 @@ def init_file_data():
 				for it in yaml[key]:
 					app.yasifipo['config'][key].append(it)
 
-	with open(app.config['CONFIG_DIR'] + 'sorting_item_type.md', 'r') as file_:
+	with open(app.config['CONFIG_DIR'] + 'sorting_item_type.md', encoding='utf-8') as file_:
 		yaml = load(file_)
 		app.yasifipo['config']['sorting_item_type'] = {}
 		for key in yaml.keys():
@@ -63,7 +63,7 @@ def init_i18n_data():
 		if isfile(app.config["I18N_DIR"] + "/" + file_):
 			if app.spec.match_file(file_):
 				continue
-			with open(app.config["I18N_DIR"] + "/" + file_) as fil_data:
+			with open(app.config["I18N_DIR"] + "/" + file_, encoding='utf-8') as fil_data:
 				yaml = load(fil_data)
 
 				app.yasifipo["i18n"][yaml['slug']] = {}

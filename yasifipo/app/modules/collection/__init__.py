@@ -11,7 +11,7 @@ from .url import *
 from modules.utils.date import *
 
 def init_collection_data():
-	with open(app.config['COLLECTION_DIR'] + "/summary.md") as fil_collection:
+	with open(app.config['COLLECTION_DIR'] + "/summary.md", encoding='utf-8') as fil_collection:
 		yaml = load(fil_collection)
 		if not yaml['collections']:
 			return
@@ -88,14 +88,14 @@ def get_collection_data(directory, yaml_coll):
 
 
 		for file_ in files:
-			with open(directory + "/" + file_) as fil_:
+			with open(directory + "/" + file_, encoding='utf-8') as fil_:
 				yaml = load(fil_)
 
 
 				#if there is no header on file, create it
 				if len(yaml.keys()) == 0:
 					if 'generate_url' in yaml_coll.keys() and yaml_coll['generate_url'] == True:
-						with open(directory + "/" + file_, "w") as fil_write:
+						with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:
 							fil_write.write("---\n")
 							fil_write.write('date: ' + datetime.now().strftime("%Y%m%d") + "\n")
 							fil_write.write('url: ' + app.yasifipo["config"]["post_default_url"] + slugify(os.path.splitext(os.path.basename(file_))[0]) + "\n")
@@ -106,7 +106,7 @@ def get_collection_data(directory, yaml_coll):
 							fil_write.write("---\n")
 							fil_write.write(yaml.content)
 					else:
-						with open(directory + "/" + file_, "w") as fil_write:
+						with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:
 							fil_write.write("---\n")
 							fil_write.write('date: ' + datetime.now().strftime("%Y%m%d") + "\n")
 							fil_write.write('title: ' + os.path.splitext(os.path.basename(file_))[0] + "\n")
@@ -120,7 +120,7 @@ def get_collection_data(directory, yaml_coll):
 					if not exists(directory + "/img/"):
 						makedirs(directory + "/img/")
 
-					with open(directory + "/" + file_) as fil_:
+					with open(directory + "/" + file_, encoding='utf-8') as fil_:
 						yaml = load(fil_)
 
 				if check_server(yaml) == False:
