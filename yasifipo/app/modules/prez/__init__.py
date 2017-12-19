@@ -111,6 +111,10 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 	with open(directory  + '/.chapter.md', encoding='utf-8') as chapter_:
 		yaml_chapter = load(chapter_)
 
+		# lang warning
+		if 'lang' in yaml_chapter.keys():
+			print("WARNING: lang will not be taken into account for file " + directory  + '/.chapter.md')
+
 		# toc
 		app.yasifipo["toc"][directory + '.chapter.md'] = {}
 		app.yasifipo["toc"][directory + '.chapter.md']['type'] = 'prez'
@@ -175,6 +179,10 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 			with open(directory + "/" + file_ + '/.chapter.md', encoding='utf-8') as chapter_:
 				yaml_chapter_dir = load(chapter_)
 
+				# lang warning
+				if 'lang' in yaml_chapter_dir.keys():
+					print("WARNING: lang will not be taken into account for file " + directory + "/" + file_ + '/.chapter.md')
+
 				# Do not use draft directory
 				if 'draft' in yaml_chapter_dir.keys() and yaml_chapter_dir['draft'] == True:
 					if app.config['DISPLAY_ALL'] == False:
@@ -209,6 +217,10 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 
 				with open(directory + "/" + file_, encoding='utf-8') as fil_:
 					yaml = load(fil_)
+
+				# lang warning
+				if 'lang' in yaml.keys():
+					print("WARNING: lang will not be taken into account for file " + directory + "/" + file_)
 
 				# Do not use draft files
 				if 'draft' in yaml.keys() and yaml['draft'] == True:
