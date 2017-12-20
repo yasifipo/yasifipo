@@ -11,7 +11,7 @@ class Collection():
 
 		# retrieve conf for this collection
 		if self.name in app.yasifipo["collections"].keys():
-			self.url_generated = app.yasifipo["collections"][self.name]['conf']['generate_url']
+			self.url_generated = app.yasifipo["collections"][self.name]['conf']['output_url']
 			self.sorting       = app.yasifipo["collections"][self.name]['conf']['sorting']
 
 	def set_posts(self, posts):
@@ -21,17 +21,17 @@ class CollectionPost():
 	def __init__(self, file_, date, url=False):
 		self.file_ = file_
 		self.date  = date
-		self.generate_url = url
-		if self.generate_url == True:
+		self.output_url = url
+		if self.output_url == True:
 			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
 		self.next  = None
 		self.prev  = None
 
 	def get_prev_next(self, prev, next):
 		if prev:
-			self.prev = CollectionPost(prev['file'], prev['date'], url=self.generate_url)
+			self.prev = CollectionPost(prev['file'], prev['date'], url=self.output_url)
 		if next:
-			self.next = CollectionPost(next['file'], next['date'], url=self.generate_url)
+			self.next = CollectionPost(next['file'], next['date'], url=self.output_url)
 
 	def get_full(self):
 		with open(self.file_, encoding='utf-8') as fil_:

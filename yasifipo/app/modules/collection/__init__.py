@@ -34,7 +34,7 @@ def init_collection_data():
 
 				# set configuration for this collection
 				app.yasifipo["collections"][coll['slug']]['conf'] = {}
-				app.yasifipo["collections"][coll['slug']]['conf']['generate_url'] = 'generate_url' in coll.keys() and coll['generate_url'] == True
+				app.yasifipo["collections"][coll['slug']]['conf']['output_url'] = 'output_url' in coll.keys() and coll['output_url'] == True
 				app.yasifipo["collections"][coll['slug']]['conf']['sorting']      = coll['sorting']
 
 				get_collection_data(app.config['COLLECTION_DIR'] + "/" + coll['directory'], coll)
@@ -94,7 +94,7 @@ def get_collection_data(directory, yaml_coll):
 
 				#if there is no header on file, create it
 				if len(yaml.keys()) == 0:
-					if 'generate_url' in yaml_coll.keys() and yaml_coll['generate_url'] == True:
+					if 'output_url' in yaml_coll.keys() and yaml_coll['output_url'] == True:
 						with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:
 							fil_write.write("---\n")
 							fil_write.write('date: ' + datetime.now().strftime("%Y%m%d") + "\n")
@@ -139,7 +139,7 @@ def get_collection_data(directory, yaml_coll):
 				manage_tags(yaml, "collection", directory + "/" + file_, subtype_=yaml_coll['slug'])
 
 				date, in_key, in_filename = get_date(yaml, file_)
-				if 'generate_url' in yaml_coll.keys() and yaml_coll['generate_url'] == True:
+				if 'output_url' in yaml_coll.keys() and yaml_coll['output_url'] == True:
 					if date is None:
 						print("WARNING: can't get date for file " + file_)
 						continue
@@ -148,7 +148,7 @@ def get_collection_data(directory, yaml_coll):
 					if app.config['DISPLAY_ALL'] == False:
 						continue
 
-				if 'generate_url' in yaml_coll.keys() and yaml_coll['generate_url'] == True:
+				if 'output_url' in yaml_coll.keys() and yaml_coll['output_url'] == True:
 					if 'url' in yaml.keys():
 						if yaml['url'] == "":
 							if 'prefix' not in yaml_coll.keys() or yaml_coll['prefix'] == "":

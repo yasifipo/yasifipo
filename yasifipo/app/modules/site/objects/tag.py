@@ -67,7 +67,7 @@ class Tag():
 
 					item.type_description = app.yasifipo["i18n"]["page-type"][item.type][self.lang]
 				else:
-					if app.yasifipo["collections"][obj['subtype']]['conf']['generate_url'] == True:
+					if app.yasifipo["collections"][obj['subtype']]['conf']['output_url'] == True:
 						item.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][obj['file']])
 
 					if 'sort' in yaml.keys():
