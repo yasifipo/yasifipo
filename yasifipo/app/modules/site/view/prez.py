@@ -84,7 +84,7 @@ def render_prez_chapter(file_, data):
 	else:
 		page.tags_display = page.get_tags_display(yaml)
 
-	if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+	if 'display_cucumber' not in yaml.keys() or ('display_cucumber' in yaml.keys() and yaml['display_cucumber'] != False):
 		page.display['cucumber'] = True
 		page.cucumber = get_prez_cucumber(file_, page.lang)
 	else:
@@ -145,7 +145,7 @@ def render_prez_prez(file_, data):
 		if 'single' in data.keys() and data['single'] == True:
 			page.cucumber = [] # No cucumber for single
 		else:
-			if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+			if 'display_cucumber' not in yaml.keys() or ('display_cucumber' in yaml.keys() and yaml['display_cucumber'] != False):
 				page.display['cucumber'] = True
 				page.cucumber  = get_prez_cucumber(dirname(file_) + '/.chapter.md', page.lang)
 			else:
@@ -182,7 +182,7 @@ def render_prez_page(file_, data):
 			page.tags_display = page.get_tags_display(yaml)
 
 
-		if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+		if 'display_cucumber' not in yaml.keys() or ('display_cucumber' in yaml.keys() and yaml['display_cucumber'] != False):
 			page.display['cucumber'] = True
 			page.cucumber  = get_prez_cucumber(dirname(file_) + '/.chapter.md', page.lang)
 		else:

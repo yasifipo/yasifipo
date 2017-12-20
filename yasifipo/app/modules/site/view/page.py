@@ -12,7 +12,7 @@ from .list import *
 from modules.site.objects import *
 
 def render_page(file_):
-	
+
 	with open(file_, encoding='utf-8') as data:
 		yaml = load(data)
 
@@ -28,7 +28,7 @@ def render_page(file_):
 		else:
 			page.tags_display = page.get_tags_display(yaml)
 
-		if 'cucumber' not in yaml.keys() or ('cucumber' in yaml.keys() and yaml['cucumber'] != False):
+		if 'display_cucumber' not in yaml.keys() or ('display_cucumber' in yaml.keys() and yaml['display_cucumber'] != False):
 			page.display['cucumber'] = True
 
 			if 'parent' in yaml.keys() and 'ref' in yaml.keys():

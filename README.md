@@ -57,7 +57,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  title: mandatory, title of chapter
 *  draft: optional, will not be taken into account if set to True
 *  display-toc: optional, will not display ToC if set to False
-*  cucumber: optional, will not display cucumber if set to False
+*  display_cucumber: optional, will not display cucumber if set to False
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
 *  (any tag): optional
 *  static: mandatory, name of folder that can contains files like images
@@ -74,7 +74,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  slug: mandatory, url part of the current presentation
 *  title: mandatory, title of presentation
 *  draft: optional, will not be taken into account if set to True
-*  cucumber: optional, will not display cucumber if set to False, never displayed for single prez
+*  display_cucumber: optional, will not display display_cucumber if set to False, never displayed for single prez
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
 *  (any tag): optional
 *  theme:(optional) use a specific reveal.js theme. If not set, will use global config reveal_default_theme
@@ -96,7 +96,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional (but mandatory if to display cucumber), used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
 *  parent: optional, ref of parent page (for cucumber display)
-*  cucumber: optional, will not display cucumber if set to False
+*  display_cucumber: optional, will not display cucumber if set to False
 *  server: optional, can be a str or list: server (or list of server) where page will be published
 *  (any tag): optional
 *  tags: optional. If set to False, tags are not displayed
