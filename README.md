@@ -47,7 +47,7 @@ Contains list of all available prez (table of __prez__ in yaml)
 *  server: optional, can be a str or list: server (or list of server) where presentation will be published
 *  single: optional. If set, is name of single file in directory. No TOC in this case, only 1 prez is available
 *  static: optional. Will register all files inside as static files (works only for single-prez)
-*  tags: optional. If set to False, tags are not displayed
+*  display_tags: optional. If set to False, tags are not displayed
 *  all keys will be available on page.data
 *  content (not part of yaml): not taken into account
 
@@ -61,7 +61,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  ref: optional (except if category is set), used to identify prez regarding language (same prez in 2 different languages must have same _ref_ field)
 *  (any tag): optional
 *  static: mandatory, name of folder that can contains files like images
-*  tags: optional. If set to False, tags are not displayed
+*  display_tags: optional. If set to False, tags are not displayed
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
@@ -80,7 +80,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  theme:(optional) use a specific reveal.js theme. If not set, will use global config reveal_default_theme
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  page: optional, prez is displayed as a page, not with reveal presentation mode
-*  tags: optional. If set to False, tags are not displayed
+*  display_tags: optional. If set to False, tags are not displayed
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 *  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data
@@ -99,7 +99,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  display_cucumber: optional, will not display cucumber if set to False
 *  server: optional, can be a str or list: server (or list of server) where page will be published
 *  (any tag): optional
-*  tags: optional. If set to False, tags are not displayed
+*  display_tags: optional. If set to False, tags are not displayed
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
@@ -116,7 +116,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional, used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
 *  (any tag): optional
-*  tags: optional. If set to False, tags are not displayed
+*  display_tags: optional. If set to False, tags are not displayed
 *  server: optional, can be a str or list: server (or list of server) where page will be published
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  redirect (str or tab) : urls redirected to url by 301 redirection
@@ -131,7 +131,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional, used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
 *  (any tag): optional
-*  tags: optional. If set to False, tags are not displayed
+*  display_tags: optional. If set to False, tags are not displayed
 *  server: optional, can be a str or list: server (or list of server) where page will be published
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  redirect (str or tab) : urls redirected to url by 301 redirection
