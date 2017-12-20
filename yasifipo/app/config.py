@@ -8,5 +8,6 @@ class Configuration(object):
 	DATA_DIR = APPLICATION_DIR + '/_data/' # / before and after
 
 	FREEZER_RELATIVE_URLS = True
+	FREEZER_DESTINATION = 'build'
 
 	VERSION = "0.0.1"

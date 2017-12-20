@@ -18,6 +18,14 @@ def yasifipo_is_server():
 		return True
 
 def yasifipo_url_for(target, **values):
+
+	if yasifipo_is_server() and ('yasifipo_subdirectory' in app.yasifipo['config'].keys() and app.yasifipo['config']['yasifipo_subdirectory'] != ''):
+		if 'path' in values.keys():
+			if values['path'] != "/":
+				values['path'] = app.yasifipo['config']['yasifipo_subdirectory'] + '/' + values['path']
+			else:
+				values['path'] = app.yasifipo['config']['yasifipo_subdirectory']
+				target = 'render_file'
 	if yasifipo_is_server() == False:
 		return relative_url_for(target, **values)
 	else:

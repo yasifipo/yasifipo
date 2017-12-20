@@ -3,6 +3,7 @@ import jinja2
 
 from .views import *
 from .objects import *
+from .view.urls import *
 
 from os.path import isdir, isfile
 from frontmatter import load
@@ -36,6 +37,20 @@ def init_file_data():
 
 def register_rules():
 
+
+# static rule
+	app.static_folder = 'static'
+	if not yasifipo_is_server() or ('yasifipo_subdirectory' not in app.yasifipo['config'] or app.yasifipo['config']['yasifipo_subdirectory'] == ''):
+		app.static_url_path = '/static'
+	else:
+		app.static_url_path = '/' + app.yasifipo['config']['yasifipo_subdirectory'] + '/static'
+
+	app.add_url_rule(
+						rule=app.static_url_path + '/<path:filename>',
+						endpoint='static', view_func=app.send_static_file
+						)
+
+# General rule
 	app.add_url_rule(
 						rule='/<path:path>/',
 						view_func=render_file,
@@ -43,13 +58,23 @@ def register_rules():
 						methods=['GET']
 						)
 
-	app.add_url_rule(
-						rule='/',
-						view_func=render_root,
-						defaults={},
-						methods=['GET']
-						)
-
+# Root rule
+	if yasifipo_is_server():
+		if 'yasifipo_subdirectory' not in app.yasifipo['config'] or app.yasifipo['config']['yasifipo_subdirectory'] == '':
+			app.add_url_rule(
+								rule='/',
+								view_func=render_root,
+								defaults={},
+								methods=['GET']
+								)
+	else:
+		app.add_url_rule(
+							rule='/',
+							view_func=render_root,
+							defaults={},
+							methods=['GET']
+							)
+# File rule
 	app.add_url_rule(
 						rule='/<path:id_>',
 						view_func=return_file,
@@ -135,7 +160,7 @@ def set_ref(yaml, file_, lang_=None):
 			if 'lang' not in yaml.keys():
 				lang = app.yasifipo["config"]["default_lang"]
 			else:
-				lang = lang_
+				lang = yaml['lang']
 		else:
 			lang = lang_
 		app.yasifipo["refs"][yaml["ref"]][lang] = {'lang': lang, 'file':file_}

@@ -1,5 +1,6 @@
 ---
 yasifipo_server: test.example.com
+yasifipo_subdirectory: '' # without any /, or '' for using root 
 
 prez_url_prefix: '' # 'slug' without any /
 post_url_prefix: '' # 'slug' without any /

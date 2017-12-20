@@ -37,6 +37,10 @@ def freeze(data_path, display_all):
 	load_config()
 	run_data_read()
 	templates_loader()
+
+	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
+		app.config['FREEZER_DESTINATION'] = app.config['FREEZER_DESTINATION'] + "/" + app.yasifipo['config']['yasifipo_subdirectory']
+
 	freezer.freeze()
 
 @manager.option('-d', '--data', dest='data_path', default=None)

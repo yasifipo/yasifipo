@@ -11,6 +11,12 @@ def return_file(id_):
 def render_file(path):
 	if app.maintenance == True:
 		return render_template('admin/maintenance.html')
+
+	if yasifipo_is_server() and 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
+		path = path[len(app.yasifipo['config']['yasifipo_subdirectory'])+1:]
+		if path == "":
+			return render_root()
+
 	if path in app.yasifipo["ids"].keys():
 		if app.yasifipo["ids"][path]['type'] == "redirect":
 			return redirect(yasifipo_url_for('render_file', path=app.yasifipo["ids"][path]["data"]['url']), code=301)

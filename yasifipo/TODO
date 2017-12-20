@@ -16,6 +16,7 @@
 
 	* POST: Post series
 
+  * BUG with parenting with page where lang is Draft --> Warning is not enough
 
 
 
