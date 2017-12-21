@@ -68,6 +68,14 @@ def init_prez_data():
 					# register
 					yasifipo_register('prez-single', rule, app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single'], {'single':True, 'lang':lang})
 
+					if lang not in app.yasifipo['prezs'].keys():
+						app.yasifipo['prezs'][lang] = []
+					file_prez = app.config['PREZ_DIR'] + prez['directory'] + "/" + prez['single']
+					prez_it = {}
+					prez_it['file'] = file_prez
+					app.yasifipo['prezs'][lang].append(prez_it)
+
+
 					# redirect
 					if 'redirect' in yaml_single.keys():
 						reds = []
@@ -91,6 +99,20 @@ def init_prez_data():
 
 				#recursive stuff
 				read_prez_data(app.config['PREZ_DIR']  + prez['directory'] + "/", None, init_slug, lang)
+
+		for lang in app.yasifipo['prezs'].keys():
+			app.yasifipo['prezs'][lang].reverse()
+			cpt = 0
+			for it in app.yasifipo["prezs"][lang]:
+				if cpt !=0:
+					it['next'] = {'file': app.yasifipo["prezs"][lang][cpt-1]['file'] }
+				else:
+					it['next'] = None
+				if cpt != len(app.yasifipo["prezs"][lang])-1:
+					it['prev'] = {'file': app.yasifipo["prezs"][lang][cpt+1]['file'] }
+				else:
+					it['prev'] = None
+				cpt += 1
 
 # Main recursive function for reading prez
 def read_prez_data(directory, up_directory, current_slug, lang):
@@ -137,6 +159,14 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 			yasifipo_register('prez-chapter', rule,  directory  + '.chapter.md', {'type':'prez-chapter', 'lang':lang})
 		else:
 			yasifipo_register('prez-course', rule,  directory  + '.chapter.md', {'type':'prez-course', 'lang':lang})
+
+			if lang not in app.yasifipo['prezs'].keys():
+				app.yasifipo['prezs'][lang] = []
+			file_prez = directory  + '.chapter.md'
+			prez_it = {}
+			prez_it['file'] = file_prez
+			app.yasifipo['prezs'][lang].append(prez_it)
+
 
 		# redirect
 		if 'redirect' in yaml_chapter.keys():

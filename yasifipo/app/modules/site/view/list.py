@@ -17,7 +17,7 @@ def get_lists(page, yaml, request):
 		page.posts = Posts()
 		page.posts.set_posts(posts)
 
-		prev_url = page.get_prev_url(start, start + yaml['posts'])
+		prev_url = page.get_prev_url('post', start, start + yaml['posts'])
 		if prev_url:
 			page.posts.prev_url = request.base_url + prev_url
 		next_url = page.get_next_url(start, start - yaml['posts'])
@@ -43,9 +43,32 @@ def get_lists(page, yaml, request):
 
 				getattr(page, coll).set_posts(posts)
 
-				prev_url = page.get_prev_url(start, start + yaml['collections'][coll], coll)
+				prev_url = page.get_prev_url('collection', start, start + yaml['collections'][coll], coll)
 				if prev_url:
 					getattr(page, coll).prev_url = request.base_url + prev_url
 				next_url = page.get_next_url(start, start - yaml['collections'][coll], coll)
 				if next_url:
 					getattr(page, coll).next_url = request.base_url + next_url
+
+	if 'prezs' in yaml.keys() and type(yaml['prezs']).__name__ == "bool" and yaml['prezs'] == True:
+		prezs = page.get_prezs()
+		page.get_full_prezs(prezs)
+
+		page.prezs = Prezs()
+		page.prezs.set_prezs(prezs)
+
+	elif 'prezs' in yaml.keys() and type(yaml['prezs']).__name__ == "int":
+		start = request.args.get('page', default= 0, type = int)
+
+		start, prezs = page.get_partial_prezs(start, yaml['prezs'])
+		page.get_full_prezs(prezs)
+
+		page.prezs = Prezs()
+		page.prezs.set_prezs(prezs)
+
+		prev_url = page.get_prev_url('prez', start, start + yaml['prezs'])
+		if prev_url:
+			page.prezs.prev_url = request.base_url + prev_url
+		next_url = page.get_next_url(start, start - yaml['prezs'])
+		if next_url:
+			page.prezs.next_url = request.base_url + next_url

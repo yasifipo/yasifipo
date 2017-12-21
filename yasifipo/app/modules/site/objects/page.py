@@ -2,10 +2,12 @@ from app import app
 from flask import request
 
 from datetime import datetime
+from frontmatter import load
 
 from .tag import *
 from .post import *
 from .collection import *
+from .prez import *
 
 class Page():
 	def __init__(self, type_, yaml={}):
@@ -60,58 +62,6 @@ class Page():
 			posts.append(post)
 		return posts
 
-	def get_total_post_nb(self):
-		return len(app.yasifipo["posts"][self.lang])
-
-	def get_partial_posts(self, start, nb):
-		posts = []
-		if self.lang not in app.yasifipo["posts"].keys():
-			return 0, posts
-
-		if start < 0:
-			start = 0
-
-		if start > self.get_total_post_nb():
-			start = 0
-
-		if start + nb > self.get_total_post_nb():
-			nb = len(app.yasifipo["posts"][self.lang]) - start
-
-		for post_it in app.yasifipo["posts"][self.lang][start:start+nb]:
-			post = Post(post_it['file'],post_it['date'])
-			post.get_prev_next(post_it['prev'], post_it['next'])
-
-			posts.append(post)
-
-		return start, posts
-
-	def get_prev_url(self, start, end, collection=None):
-		if collection is None:
-			if end >= self.get_total_post_nb():
-				return None
-			else:
-				text = '?page=' + str(end)
-				return text
-		else:
-			if end >= self.get_total_collection_post_nb(collection):
-				return None
-			else:
-				text = '?page=' + str(end)
-				return text
-
-	def get_next_url(self, start, new_start, collection=None):
-		if start == 0:
-			return None
-		if new_start < 0:
-			return "?page=0"
-		else:
-			return "?page=" + str(new_start)
-
-	def get_full_posts(self, posts):
-		for post in posts:
-			post.get_full()
-
-
 	def get_collection_posts(self, collection):
 		collection_posts  = []
 		if collection.name not in app.yasifipo["collections"].keys():
@@ -125,8 +75,51 @@ class Page():
 			collection_posts.append(coll)
 		return collection_posts
 
+	def get_prezs(self):
+		prezs = []
+
+		if self.lang not in app.yasifipo['prezs'].keys():
+			return []
+
+		for prez_it in app.yasifipo['prezs'][self.lang]:
+			prez = Prez(prez_it['file'])
+			prez.get_prev_next(prez_it['prev'], prez_it['next'])
+
+			prezs.append(prez)
+
+		return prezs
+
+
+	def get_total_post_nb(self):
+		return len(app.yasifipo["posts"][self.lang])
+
 	def get_total_collection_post_nb(self, collection):
 		return len(app.yasifipo["collections"][collection]['data'][self.lang])
+
+	def get_total_prezs_nb(self):
+		return len(app.yasifipo["prezs"][self.lang])
+
+	def get_partial_posts(self, start, nb):
+		posts = []
+		if self.lang not in app.yasifipo["posts"].keys():
+			return 0, posts
+
+		if start < 0:
+			start = 0
+
+		if start >= self.get_total_post_nb():
+			start = 0
+
+		if start + nb > self.get_total_post_nb():
+			nb = len(app.yasifipo["posts"][self.lang]) - start
+
+		for post_it in app.yasifipo["posts"][self.lang][start:start+nb]:
+			post = Post(post_it['file'],post_it['date'])
+			post.get_prev_next(post_it['prev'], post_it['next'])
+
+			posts.append(post)
+
+		return start, posts
 
 	def get_partial_collection_posts(self, collection, start, nb):
 		collection_posts  = []
@@ -136,7 +129,7 @@ class Page():
 		if start < 0:
 			start = 0
 
-		if start > self.get_total_collection_post_nb(collection.name):
+		if start >= self.get_total_collection_post_nb(collection.name):
 			start = 0
 
 		if start + nb > self.get_total_collection_post_nb(collection.name):
@@ -150,9 +143,68 @@ class Page():
 
 		return start, collection_posts
 
+	def get_partial_prezs(self, start, nb):
+		prezs  = []
+		if self.lang not in app.yasifipo['prezs'].keys():
+			return []
+
+		if start < 0:
+			start = 0
+
+		if start >= self.get_total_prezs_nb():
+			start = 0
+
+		if start + nb > self.get_total_prezs_nb():
+			nb = len(app.yasifipo["prezs"][self.lang]) - start
+
+		for prez_it in app.yasifipo["prezs"][self.lang][start:start+nb]:
+			prez = Prez(prez_it['file'])
+			prez.get_prev_next(prez_it['prev'], prez_it['next'])
+
+			prezs.append(prez)
+
+		return start, prezs
+
+
+	def get_prev_url(self, type_, start, end, collection=None):
+		if type_ == 'post':
+			if end >= self.get_total_post_nb():
+				return None
+			else:
+				text = '?page=' + str(end)
+				return text
+		elif type_ == 'collection':
+			if end >= self.get_total_collection_post_nb(collection):
+				return None
+			else:
+				text = '?page=' + str(end)
+				return text
+		elif type_ == 'prez':
+			if end >= self.get_total_prezs_nb():
+				return None
+			else:
+				text = '?page=' + str(end)
+				return text
+
+	def get_next_url(self, start, new_start):
+		if start == 0:
+			return None
+		if new_start < 0:
+			return "?page=0"
+		else:
+			return "?page=" + str(new_start)
+
+	def get_full_posts(self, posts):
+		for post in posts:
+			post.get_full()
+
 	def get_full_collection_posts(self, collection, posts):
 		for coll in posts:
 			coll.get_full()
+
+	def get_full_prezs(self, prezs):
+		for prez in prezs:
+			prez.get_full()
 
 class Data():
 	def __init__(self, yaml):

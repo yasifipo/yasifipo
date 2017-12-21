@@ -1,5 +1,4 @@
 # v0.01a
-  * PREZ: list of prez --> will be done by get_list
   * TAG: list of tagtypes --> will be done by get_list
 	* POST : label for next / prev --> in i18n file
 

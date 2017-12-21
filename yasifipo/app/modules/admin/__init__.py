@@ -31,6 +31,7 @@ def reloading():
 	app.yasifipo['i18n'] = {}
 	app.yasifipo['posts'] = {}
 	app.yasifipo['collections'] = {} #collections
+	app.yasifipo['prezs'] = {}
 	app.yasifipo["sitedata"] = None
 
 	init_file_data()

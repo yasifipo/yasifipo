@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+{{page.title}}
+{% endblock %}
+
+{% block body %}
+{% if page.display['cucumber'] == True %}
+{% if page.cucumber|length > 1 %}
+<div class='cucumber-toc'>
+{% for i in page.cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> {% if i != page.cucumber[page.cucumber|length -1] %} > {% endif %}
+{% endfor %}
+</div>
+{% endif %}
+{% endif %}
+{% if page.display['langs'] %}
+{% if page.langs|length > 1 %}
+<div>
+	{% for lang in page.langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+{% endif %}
+{% if page.display['tags'] %}
+{% for tag_type in page.tags_display %}
+<a href="{{ tag_type.url }}">{{ tag_type.description }}</a><br/>
+{% for tag in tag_type.tags %}
+<a href="{{tag.url}}">{{ tag.description }}</a> {% if loop.last == False %} - {% endif %}
+{% endfor %}
+<br/>
+{% endfor %}
+{% endif %}
+
+{{page.content}}
+
+{% for prez in page.prezs.prezs %}
+<div>
+<a href="{{ prez.url }}">{{ prez.title }}</a>
+</div>
+{% endfor %}
+{% if page.prezs.prev_url %}
+<a href="{{ page.prezs.prev_url }}">Previous</a>
+{% endif %}
+{% if page.prezs.next_url %}
+<a href="{{ page.prezs.next_url }}">Next</a>
+{% endif %}
+
+{% endblock %}
