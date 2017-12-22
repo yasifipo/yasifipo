@@ -105,6 +105,7 @@ def render_prez_chapter(file_, data):
 	page.get_generated_time()
 	return render_template(layout,
 							site=app.yasifipo["sitedata"],
+							i18n=app.yasifipo['i18n'],
 							page=page)
 
 
@@ -164,6 +165,7 @@ def render_prez_prez(file_, data):
 		page.get_generated_time()
 		return render_template(layout,
 								site=app.yasifipo["sitedata"],
+								i18n=app.yasifipo['i18n'],
 								page=page)
 
 def render_prez_page(file_, data):
@@ -201,4 +203,5 @@ def render_prez_page(file_, data):
 		page.get_generated_time()
 		return render_template( layout,
 								site=app.yasifipo["sitedata"],
+								i18n=app.yasifipo['i18n'],
 								page=page)

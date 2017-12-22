@@ -44,10 +44,10 @@
 </div>
 {% endfor %}
 {% if page.prezs.prev_url %}
-<a href="{{ page.prezs.prev_url }}">Previous</a>
+<a href="{{ page.prezs.prev_url }}">{{ i18n['navigation']['prev'][page.lang] }}</a>
 {% endif %}
 {% if page.prezs.next_url %}
-<a href="{{ page.prezs.next_url }}">Next</a>
+<a href="{{ page.prezs.next_url }}">{{ i18n['navigation']['next'][page.lang] }}</a>
 {% endif %}
 
 {% endblock %}

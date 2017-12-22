@@ -31,10 +31,10 @@
 {{page.content}}
 
 {% if page.post.prev %}
-<a href="{{page.post.prev.url}}">Previous</a>
+<a href="{{page.post.prev.url}}">{{ i18n['navigation']['prev'][page.lang] }}</a>
 {% endif %}
 {% if page.post.next %}
-<a href="{{page.post.next.url}}">Next</a>
+<a href="{{page.post.next.url}}">{{ i18n['navigation']['next'][page.lang] }}</a>
 {% endif %}
 
 {% endblock %}

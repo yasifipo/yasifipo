@@ -43,5 +43,6 @@ def render_post(file_):
 	page.get_generated_time()
 	return render_template( layout,
 							site=app.yasifipo["sitedata"],
+							i18n=app.yasifipo['i18n'],
 							page=page
 							)

@@ -1,8 +1,10 @@
 # v0.01a
-	* POST : label for next / prev --> in i18n file
 
 	* ADMIN: login required
+	* ADMIN: route <subdirectory>/admin/
   * favicon
+	  * favicon
+		* favicon for subdirectory
 
   * COLLECTION: README to update
 	* POST: README to update
@@ -12,9 +14,6 @@
     *  templates
 
 	* POST: Post series
-
-  * BUG with parenting with page where lang is Draft --> Warning is not enough
-
 
 
 

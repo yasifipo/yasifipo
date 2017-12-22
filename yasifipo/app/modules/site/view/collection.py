@@ -43,5 +43,6 @@ def render_collection(file_, data_):
 	page.get_generated_time()
 	return render_template( layout,
 							site=app.yasifipo["sitedata"],
+							i18n=app.yasifipo['i18n'],
 							page=page
 							)

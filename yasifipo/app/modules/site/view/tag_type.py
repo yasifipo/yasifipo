@@ -24,4 +24,5 @@ def render_tag_type(data):
 	page.get_generated_time()
 	return render_template('tag/tag_type.html',
 							site=app.yasifipo["sitedata"],
+							i18n=app.yasifipo['i18n'],
 							page=page)
