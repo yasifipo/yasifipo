@@ -13,7 +13,10 @@ def render_file(path):
 		return render_template('admin/maintenance.html')
 
 	if yasifipo_is_server() and 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
-		path = path[len(app.yasifipo['config']['yasifipo_subdirectory'])+1:]
+		if path[:len(app.yasifipo['config']['yasifipo_subdirectory'])] != app.yasifipo['config']['yasifipo_subdirectory']:
+			return render_template('site/404.html')
+		else:
+			path = path[len(app.yasifipo['config']['yasifipo_subdirectory'])+1:]
 		if path == "":
 			return render_root()
 

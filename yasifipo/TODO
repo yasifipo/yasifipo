@@ -1,7 +1,6 @@
 # v0.01a
 
 	* ADMIN: login required
-	* ADMIN: route <subdirectory>/admin/
   * favicon
 	  * favicon
 		* favicon for subdirectory

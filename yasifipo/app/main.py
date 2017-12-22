@@ -4,7 +4,6 @@ from frontmatter import load
 
 from flask_frozen import Freezer
 
-from modules.admin import admin
 
 freezer = Freezer(app)
 
@@ -22,5 +21,3 @@ app.yasifipo['posts'] = {} #posts
 app.yasifipo['collections'] = {} #collections
 app.yasifipo['prezs'] = {}
 app.yasifipo["sitedata"] = None
-
-app.register_blueprint(admin, url_prefix="/admin")

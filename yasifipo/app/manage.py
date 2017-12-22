@@ -11,6 +11,7 @@ from modules.page import *
 from modules.init import *
 from modules.post import *
 from modules.collection import *
+from modules.admin import admin
 
 freezer = Freezer(app)
 
@@ -58,6 +59,12 @@ def run(data_path, display_all):
 	load_config()
 	run_data_read()
 	templates_loader()
+
+	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
+		app.register_blueprint(admin, url_prefix="/" + app.yasifipo['config']['yasifipo_subdirectory'] + "/admin")
+	else:
+		app.register_blueprint(admin, url_prefix="/admin")
+
 	app.run()
 
 @manager.option('-d', '--data', dest='data_path', required=True)
