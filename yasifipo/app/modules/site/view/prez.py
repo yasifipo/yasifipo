@@ -137,8 +137,8 @@ def render_prez_prez(file_, data):
 
 		theme['head'] = yasifipo_url_for('static', filename='lib/js/head.min.js')
 		theme['reveal_js'] = yasifipo_url_for('static', filename='js/reveal.js')
-		theme['marked'] = yasifipo_url_for('static', filename='plugin/markdown/marked.js') #TODO to check
-		theme['markdown'] = yasifipo_url_for('static', filename='plugin/markdown/markdown.js') #TODO to check
+		theme['marked'] = yasifipo_url_for('static', filename='plugin/markdown/marked.js')
+		theme['markdown'] = yasifipo_url_for('static', filename='plugin/markdown/markdown.js')
 
 		page.theme = theme
 
