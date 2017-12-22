@@ -72,3 +72,6 @@ def get_lists(page, yaml, request):
 		next_url = page.get_next_url(start, start - yaml['prezs'])
 		if next_url:
 			page.prezs.next_url = request.base_url + next_url
+
+	if 'tags' in yaml.keys() and type(yaml['tags']).__name__ == "bool" and yaml['tags'] == True:
+		page.get_tags()

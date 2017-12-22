@@ -206,6 +206,14 @@ class Page():
 		for prez in prezs:
 			prez.get_full()
 
+	def get_tags(self):
+		self.tags = {}
+		for i in app.yasifipo["tags"]["conf"].keys():
+			self.tags[i] = TagType(i, self.lang)
+
+			self.tags[i].get_tags()
+			self.tags[i].get_tags_items()
+
 class Data():
 	def __init__(self, yaml):
 		for k in yaml.keys():

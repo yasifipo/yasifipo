@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block additional_scripts %}
+{% endblock %}
+
+{% block title %}
+{{page.title}}
+{% endblock %}
+
+{% block body %}
+
+{% if page.display['langs'] %}
+{% if page.langs|length > 1 %}
+<div>
+	{% for lang in page.langs %}
+	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+	{% endfor %}
+</div>
+{% endif %}
+{% endif %}
+
+{% for tag_type in page.tags.values() %}
+<h1><a href="{{tag_type.url}}">{{tag_type.description}}</a></h1>
+{% for tag in tag_type.tags %}
+{% if tag.items|length > 0 %}
+<h2><a href="{{tag.url}}">{{tag.description}}</a><br/></h2>
+{% for item in tag.items %}
+{% if item.url %}
+	<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+{% else %}
+	{{item.title}} ({{ item.type_description }})<br/>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% endblock %}
