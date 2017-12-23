@@ -46,7 +46,7 @@ def get_lists(page, yaml, request):
 				prev_url = page.get_prev_url('collection', start, start + yaml['collections'][coll], coll)
 				if prev_url:
 					getattr(page, coll).prev_url = request.base_url + prev_url
-				next_url = page.get_next_url(start, start - yaml['collections'][coll], coll)
+				next_url = page.get_next_url(start, start - yaml['collections'][coll])
 				if next_url:
 					getattr(page, coll).next_url = request.base_url + next_url
 
