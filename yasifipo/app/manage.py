@@ -1,5 +1,6 @@
 import os
 from app import manager
+from app import bcrypt
 from main import app
 from flask_frozen import Freezer
 from flask_script import Option
@@ -84,6 +85,17 @@ def example(data_path):
 		return
 
 	init_yasifipo_example(os.path.abspath(data_path))
+
+@manager.option('-p', '--password', dest='password', required=True)
+def admin_password(password):
+
+	if(password):
+		file_ = open('app/pass.md', 'w')
+		file_.write('---\n')
+		file_.write('pass: ' + bcrypt.generate_password_hash(password).decode('utf-8')  + "\n")
+		file_.write('---\n')
+		file_.close()
+
 
 def run_data_read():
 	app.maintenance = False

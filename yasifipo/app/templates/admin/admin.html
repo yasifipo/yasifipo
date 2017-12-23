@@ -11,4 +11,5 @@ Admin
 <form action="{{ url_for('admin.reloading') }}" method="post">
   <button type="submit" name="submit" value="reloading" >Reload Data</button>
 </form>
+<a href='{{ url_for('admin.logout')}}'>Logout</a>
 {% endblock %}

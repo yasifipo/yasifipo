@@ -16,6 +16,7 @@ No database, using only filesystem
 
 # Installation
 TODO
+* create admin password : python3 app/manage.py admin_password -p <password>
 
 # how to run
 *  python3 app/manage.py run -d path/to/data/

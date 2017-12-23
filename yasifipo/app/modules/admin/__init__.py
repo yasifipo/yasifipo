@@ -1,4 +1,6 @@
 from flask import Blueprint
+from flask_login import login_required, login_user, logout_user
+from app import bcrypt
 
 admin = Blueprint('admin', __name__, template_folder='templates')
 
@@ -8,13 +10,15 @@ from modules.tag import *
 from modules.prez import *
 from modules.post import *
 
+from .user import *
+
 @admin.route('/')
-#TODO login required
+@login_required
 def admin_root():
 	return render_template('admin/admin.html')
 
 @admin.route('/reloading', methods=['POST'])
-#TODO login required
+@login_required
 def reloading():
 
 	app.maintenance = True
@@ -47,3 +51,26 @@ def reloading():
 	app.maintenance = False
 
 	return redirect(url_for('admin.admin_root'))
+
+@admin.route('/login', methods=['GET', 'POST'])
+def login():
+	if request.method == 'GET':
+		return render_template('admin/login.html')
+
+	password = request.form['password']
+
+	user = None
+	if bcrypt.check_password_hash(get_password_hash(), password):
+		user = User()
+
+	if user is None:
+		return redirect(url_for('admin.login'))
+
+	login_user(user)
+	return redirect(request.args.get('next') or url_for('render_root'))
+
+@admin.route('/logout')
+@login_required
+def logout():
+	logout_user()
+	return redirect(url_for('render_root'))
