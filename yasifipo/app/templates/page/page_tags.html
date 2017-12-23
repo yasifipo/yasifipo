@@ -19,7 +19,7 @@
 {% endif %}
 {% endif %}
 
-{% for tag_type in page.tags.values() %}
+{% for tag_type in page.tags %}
 <h1><a href="{{tag_type.url}}">{{tag_type.description}}</a></h1>
 {% for tag in tag_type.tags %}
 {% if tag.items|length > 0 %}
