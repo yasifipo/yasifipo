@@ -1,9 +1,5 @@
 # v0.01a
 
-  * favicon
-	  * favicon
-		* favicon for subdirectory
-
   * COLLECTION: README to update
 	* POST: README to update
 	* ALL: basic template + css
@@ -11,7 +7,7 @@
     *  each type of data
     *  templates
 
-	* POST: Post series
+
 
 
 
@@ -19,7 +15,7 @@
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
   * ALL: ALL: verify that a slug/rule is not used already
 
-
+	* POST: Post series
 
 # next
   * ALL: yaml editor
