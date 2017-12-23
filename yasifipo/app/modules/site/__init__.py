@@ -6,6 +6,7 @@ from .objects import *
 from .view.urls import *
 
 from os.path import isdir, isfile
+from os import urandom
 from frontmatter import load
 
 import pathspec
@@ -176,6 +177,8 @@ def load_config():
 	app.config['SITEDATA_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
 	app.config['COLLECTION_DIR'] = app.config['DATA_DIR'] + "collections/" # / after
 	app.config['TEMPLATES_DIR'] = app.config['DATA_DIR'] + "templates/" # / after
+
+	app.config['SECRET_KEY'] = urandom(24)
 
 def templates_loader():
 	my_loader = jinja2.ChoiceLoader([
