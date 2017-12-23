@@ -8,7 +8,7 @@
     *  templates
 
 
-
+  * BUG: when multiple collection --> bad sorting (cf TODO inside code)
 
 
 # v0.01b
