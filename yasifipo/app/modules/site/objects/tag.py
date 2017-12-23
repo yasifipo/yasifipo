@@ -51,6 +51,7 @@ class Tag():
 	def get_items(self):
 		# retrieve all objects linked to this tag
 		items = {}
+		items_collections = {}
 		for obj in app.yasifipo["tags"]["data"][self.type.tagtype][self.tag]['data'][self.lang].values():
 			with open(obj['file'], encoding='utf-8') as fil_:
 				yaml = load(fil_)
@@ -85,24 +86,35 @@ class Tag():
 					items[item.type] = ItemType(item.type, app.yasifipo['config']['sorting_item_type'][item.type])
 				items[item.type].items.append(item)
 			else:
-				if obj['subtype'] not in items.keys():
-					items[obj['subtype']] = ItemType(item.type, app.yasifipo['config']['sorting_item_type'][item.type], obj['subtype'])
-				items[obj['subtype']].items.append(item)
+				if item.type not in items_collections.keys():
+					#fake only 1 collection, in order to know how to sort
+					if obj['subtype'] not in items.keys():
+						items[obj['subtype']] = ItemType(item.type, app.yasifipo['config']['sorting_item_type'][item.type], obj['subtype'])
+					items[obj['subtype']].items.append(item)
+				if obj['subtype'] not in items_collections.keys():
+						items_collections[obj['subtype']] = ItemType(item.type, app.yasifipo["collections"][obj['subtype']]['conf']['sort'], obj['subtype'])
+				items_collections[obj['subtype']].items.append(item)
 
 		items_list = items.values()
 		items_list = sorted(items_list, key=lambda k: k.sort)
+		items_collections_list = items_collections.values()
+		items_collections_list = sorted(items_collections_list, key=lambda k: k.sort)
 
-		#TODO bug when multiple collection --> bad sorting 
+
+		collection_done = False
 		for typ_ in items_list:
 			if typ_.type != "collection":
 				self.items.extend(sorted(typ_.items, key= lambda k: k.sort))
 			else:
-				if app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "sort":
-					self.items.extend(sorted(typ_.items, key= lambda k: k.sort))
-				elif app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "date":
-					tab = sorted(typ_.items, key= lambda k: k.date)
-					tab.reverse()
-					self.items.extend(tab)
+				if collection_done == False:
+					for typ_sub in items_collections_list:
+						if app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "sort":
+							self.items.extend(sorted(typ_sub.items, key= lambda k: k.sort))
+						elif app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "date":
+							tab = sorted(typ_sub.items, key= lambda k: k.date)
+							tab.reverse()
+							self.items.extend(tab)
+				collection_done = True
 
 
 class ItemType():

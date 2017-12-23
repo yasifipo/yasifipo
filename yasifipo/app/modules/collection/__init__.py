@@ -36,6 +36,7 @@ def init_collection_data():
 				app.yasifipo["collections"][coll['slug']]['conf'] = {}
 				app.yasifipo["collections"][coll['slug']]['conf']['output_url'] = 'output_url' in coll.keys() and coll['output_url'] == True
 				app.yasifipo["collections"][coll['slug']]['conf']['sorting']      = coll['sorting']
+				app.yasifipo["collections"][coll['slug']]['conf']['sort']         = coll['sort']
 
 				get_collection_data(app.config['COLLECTION_DIR'] + "/" + coll['directory'], coll)
 
