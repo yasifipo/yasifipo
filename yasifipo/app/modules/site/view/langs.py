@@ -106,7 +106,7 @@ def set_lang(yaml, lang_=None):
 
 	return lang
 
-def get_langs_from_ref(ref_):
+def get_langs_from_ref(ref_, current_lang):
 	langs = []
 	if 'ref' in ref_.keys():
 		ref = ref_['ref']
@@ -114,7 +114,10 @@ def get_langs_from_ref(ref_):
 			if app.yasifipo["langs"][lang['lang']]["draft"] == True:
 				if app.config['DISPLAY_ALL'] == False:
 					continue
-			langs.append({'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["files"][app.yasifipo["refs"][ref][lang['lang']]['file']])})
+			curr_lang = False
+			if current_lang == lang['lang']:
+				curr_lang = True
+			langs.append({'current_lang': curr_lang, 'descr':app.yasifipo["langs"][lang['lang']]['descr'], 'sort': app.yasifipo["langs"][lang['lang']]['sort'], 'url': yasifipo_url_for('render_file', path=app.yasifipo["files"][app.yasifipo["refs"][ref][lang['lang']]['file']])})
 	return sorted(langs, key=lambda k: k['sort'])
 
 def get_langs_from_tag(tag_type, tag):

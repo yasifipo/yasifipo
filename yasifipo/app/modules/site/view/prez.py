@@ -77,7 +77,7 @@ def render_prez_chapter(file_, data):
 		page.toc = get_children(file_, True)
 
 	page.lang = set_lang(yaml, data['lang'])
-	page.langs = get_langs_from_ref(yaml)
+	page.langs = get_langs_from_ref(yaml, page.lang)
 
 	if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 		page.display['tags'] = False
@@ -120,7 +120,7 @@ def render_prez_prez(file_, data):
 
 		page.lang = set_lang(yaml, data['lang'])
 
-		page.langs = get_langs_from_ref(yaml)
+		page.langs = get_langs_from_ref(yaml, page.lang)
 
 		if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 			page.display['tags'] = False
@@ -176,7 +176,7 @@ def render_prez_page(file_, data):
 
 		page.lang = set_lang(yaml, data['lang'])
 
-		page.langs = get_langs_from_ref(yaml)
+		page.langs = get_langs_from_ref(yaml, page.lang)
 
 		if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 			page.display['tags'] = False

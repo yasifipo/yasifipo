@@ -19,7 +19,7 @@ def render_collection(file_, data_):
 
 		page.lang = set_lang(yaml)
 
-		page.langs = get_langs_from_ref(yaml)
+		page.langs = get_langs_from_ref(yaml, page.lang)
 
 		if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 			page.display['tags'] = False
