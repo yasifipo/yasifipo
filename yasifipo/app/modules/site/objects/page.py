@@ -91,12 +91,18 @@ class Page():
 
 
 	def get_total_post_nb(self):
+		if self.lang not in app.yasifipo["posts"].keys():
+			return 0
 		return len(app.yasifipo["posts"][self.lang])
 
 	def get_total_collection_post_nb(self, collection):
+		if self.lang not in app.yasifipo["collections"][collection]['data'].keys():
+			return 0
 		return len(app.yasifipo["collections"][collection]['data'][self.lang])
 
 	def get_total_prezs_nb(self):
+		if self.lang not in app.yasifipo["prezs"].keys():
+			return 0
 		return len(app.yasifipo["prezs"][self.lang])
 
 	def get_partial_posts(self, start, nb):
