@@ -35,7 +35,7 @@ def render_collection(file_, data_):
 			layout = app.yasifipo["config"]["layout_collection"]
 
 		coll = [ i for i in app.yasifipo["collections"][data_['collection']]['data'][page.lang] if i['file'] == file_][0] #TODO check perf issue here
-		page.collection = CollectionPost(coll['file'], coll['date'], url=True)
+		page.collection = CollectionPost(coll['file'], coll['date'], page.lang, url=True)
 		page.collection.get_prev_next(coll['prev'], coll['next'])
 
 		get_lists(page, yaml, request)

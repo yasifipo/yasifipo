@@ -56,7 +56,7 @@ class Page():
 		if self.lang not in app.yasifipo["posts"].keys():
 			return []
 		for post_it in app.yasifipo["posts"][self.lang]:
-			post = Post(post_it['file'],post_it['date'])
+			post = Post(post_it['file'],post_it['date'], self.lang)
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
 			posts.append(post)
@@ -69,7 +69,7 @@ class Page():
 		if self.lang not in app.yasifipo["collections"][collection.name]['data'].keys():
 			return []
 		for coll_it in app.yasifipo["collections"][collection.name]['data'][self.lang]:
-			coll = CollectionPost(coll_it['file'],coll_it['date'], url=collection.url_generated)
+			coll = CollectionPost(coll_it['file'],coll_it['date'], self.lang, url=collection.url_generated)
 			coll.get_prev_next(coll_it['prev'], coll_it['next'])
 
 			collection_posts.append(coll)
@@ -120,7 +120,7 @@ class Page():
 			nb = len(app.yasifipo["posts"][self.lang]) - start
 
 		for post_it in app.yasifipo["posts"][self.lang][start:start+nb]:
-			post = Post(post_it['file'],post_it['date'])
+			post = Post(post_it['file'],post_it['date'], self.lang)
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
 			posts.append(post)
@@ -142,7 +142,7 @@ class Page():
 			nb = len(app.yasifipo["collections"][collection.name]['data'][self.lang]) - start
 
 		for coll_it in app.yasifipo["collections"][collection.name]['data'][self.lang][start:start+nb]:
-			coll = CollectionPost(coll_it['file'],coll_it['date'], url=collection.url_generated)
+			coll = CollectionPost(coll_it['file'],coll_it['date'], self.lang, url=collection.url_generated)
 			coll.get_prev_next(coll_it['prev'], coll_it['next'])
 
 			collection_posts.append(coll)
