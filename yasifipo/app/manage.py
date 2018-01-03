@@ -38,6 +38,11 @@ def freeze(data_path, display_all):
 
 	load_config()
 	run_data_read()
+
+	if 'dont_freeze' in app.yasifipo['config'] and app.yasifipo['config']['dont_freeze'] == True:
+		print("Can't freeze. Check config")
+		return
+		
 	templates_loader()
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
