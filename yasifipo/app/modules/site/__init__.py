@@ -11,6 +11,8 @@ from frontmatter import load
 
 import pathspec
 
+from flask import send_from_directory
+
 
 def init_site_data():
 	register_rules()
@@ -36,8 +38,15 @@ def init_file_data():
 		for key in yaml.keys():
 			app.yasifipo['config']['sorting_item_type'][key] = int(yaml[key])
 
+
+def yasifipo_send_static_file(filename):
+	if isfile(app.config['STATIC_DIR'] + filename):
+		return send_from_directory(app.config['STATIC_DIR'], filename)
+	return app.send_static_file(filename)
+
 def register_rules():
 
+	app.yasifipo_send_static_file = yasifipo_send_static_file
 
 # static rule
 	app.static_folder = 'static'
@@ -48,7 +57,7 @@ def register_rules():
 
 	app.add_url_rule(
 						rule=app.static_url_path + '/<path:filename>',
-						endpoint='static', view_func=app.send_static_file
+						endpoint='static', view_func=app.yasifipo_send_static_file
 						)
 
 # General rule
@@ -177,6 +186,7 @@ def load_config():
 	app.config['SITEDATA_DIR'] = app.config['DATA_DIR'] + "site_data/" # / after
 	app.config['COLLECTION_DIR'] = app.config['DATA_DIR'] + "collections/" # / after
 	app.config['TEMPLATES_DIR'] = app.config['DATA_DIR'] + "templates/" # / after
+	app.config['STATIC_DIR']    = app.config['DATA_DIR'] + "static/"  # / after
 
 	app.config['SECRET_KEY'] = urandom(24)
 

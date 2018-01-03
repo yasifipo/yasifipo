@@ -2,11 +2,11 @@
 
   * COLLECTION: README to update
 	* POST: README to update
-	* ALL: basic template + css
+	* PREZ: css
   * ALL: example _data : to be completed:
     *  each type of data
-    *  templates
-
+    
+  * manage GET / POST registration
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
@@ -14,10 +14,25 @@
 
 	* POST: Post series
 
+	* ALL: Menu management
+
+# v0.01c
+	* PLUGIN management
+  * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost (by plugin)?
+
+
+# v0.01d
+  * PAGE: children for pages (to be able to construct ToC)
+  * ALL: category parents
+
+# v0.01e
+
+  * ALL: all server stuff
+
 # next
   * ALL: yaml editor
-  * ALL: category parents
-  * PAGE: children for pages (to be able to construct ToC)
-  * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost (by plugin)?
-	* PLUGIN management
   * ALL: see TARGET file
+  * ALL: comment system
+	* ALL: fast generation
+    * freeze only needed (cf mail)
+    * check template / _data update (cf mail)
