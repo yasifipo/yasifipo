@@ -9,25 +9,44 @@
 
 {% block body %}
 
-<h1><a href="{{ page.tag.type.url }}">{{page.tag.type.description}}</a></h1>
-<h1><a href="{{ page.tag.url }}">{{page.tag.description}}</a></h1>
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32">
+	<h1><a href="{{ page.tag.url }}">{{page.tag.description}}</a></h1>
+</header>
 
-{% if page.display['langs'] %}
-{% if page.langs|length > 1 %}
-<div>
-	{% for lang in page.langs %}
-	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Grid -->
+<div class="w3-row">
+
+<div class="w3-col l8 s12">
+
+<div class="w3-card w3-margin">
+	<div class="w3-container w3-padding w3-light-grey">
+		<h4><a href="{{ page.tag.url }}">{{page.tag.description}}</a>  (<a href="{{ page.tag.type.url }}">{{page.tag.type.description}}</a>)</h4>
+	</div>
+	<div class="w3-container w3-white">
+	{% for item in page.tag.items %}
+	{% if item.url %}
+		<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+	{% else %}
+		{{item.title}} ({{ item.type_description }})<br/>
+	{% endif %}
 	{% endfor %}
-</div>
-{% endif %}
-{% endif %}
+	</div>
 
-{% for item in page.tag.items %}
-{% if item.url %}
-	<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
-{% else %}
-	{{item.title}} ({{ item.type_description }})<br/>
-{% endif %}
-{% endfor %}
+</div>
+</div>
+
+<!--  sidebar -->
+<div class="w3-col l4">
+{% include 'includes/sidebar.html' %}
+</div>
+
+</div>
+
+</div>
 
 {% endblock %}

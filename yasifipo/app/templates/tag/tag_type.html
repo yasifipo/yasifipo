@@ -9,29 +9,55 @@
 
 {% block body %}
 
-<h1><a href="{{ page.tag_type.url }}">{{page.tag_type.description}}</a></h1>
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32">
+	<h1><a href="{{ page.tag_type.url }}">{{page.tag_type.description}}</a></h1>
+</header>
 
-{% if page.display['langs'] %}
-{% if page.langs|length > 1 %}
-<div>
-	{% for lang in page.langs %}
-	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
-	{% endfor %}
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Grid -->
+<div class="w3-row">
+
+<div class="w3-col l8 s12">
+
+	<div class="w3-card w3-margin">
+		<div class="w3-container w3-padding w3-light-grey">
+			<h4><a href="{{page.tag_type.url}}">{{page.tag_type.description}}</a></h4>
+		</div>
+		<div class="w3-container w3-white">
+			{% for tag in page.tag_type.tags %}
+			{% if tag.items|length > 0 %}
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding w3-light-grey">
+						<h4><a href="{{tag.url}}">{{tag.description}}</a></h4>
+					</div>
+					<div class="w3-container w3-white">
+						{% for item in tag.items %}
+						{% if item.url %}
+							<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
+						{% else %}
+							{{item.title}} ({{ item.type_description }})<br/>
+						{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+
 </div>
-{% endif %}
-{% endif %}
 
-{% for tag in page.tag_type.tags %}
-{% if tag.items|length > 0 %}
-<h1><a href="{{tag.url}}">{{tag.description}}</a><br/></h1>
-{% for item in tag.items %}
-{% if item.url %}
-	<a href="{{item.url}}">{{item.title}}</a> ({{ item.type_description }})<br/>
-{% else %}
-	{{item.title}} ({{ item.type_description }})<br/>
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
+<!--  sidebar -->
+<div class="w3-col l4">
+{% include 'includes/sidebar.html' %}
+</div>
+
+</div>
+
+</div>
 
 {% endblock %}

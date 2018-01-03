@@ -9,45 +9,77 @@
 
 {% block body %}
 {% if page.display['cucumber'] == True %}
-{% if page.cucumber|length > 1 %}
-<div class='cucumber-toc'>
-{% for i in page.cucumber %}
-<a href="{{i['url']}}">{{i['title']}}</a> {% if i != page.cucumber[page.cucumber|length -1] %} > {% endif %}
-{% endfor %}
-</div>
+{% include 'includes/cucumber.html' %}
 {% endif %}
-{% endif %}
-{% if page.display['langs'] %}
-{% if page.langs|length > 1 %}
-<div>
-	{% for lang in page.langs %}
-	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
-	{% endfor %}
-</div>
-{% endif %}
-{% endif %}
-{% if page.display['tags'] %}
-{% for tag_type in page.tags_display %}
-<a href="{{ tag_type.url }}">{{ tag_type.description }}</a><br/>
-{% for tag in tag_type.tags %}
-<a href="{{tag.url}}">{{ tag.description }}</a> {% if loop.last == False %} - {% endif %}
-{% endfor %}
-<br/>
-{% endfor %}
-{% endif %}
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32">
+  <h1><b>{{page.title}}</b></h1>
+</header>
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Grid -->
+<div class="w3-row">
 
 {{page.content}}
 
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+
+{% if page.posts.posts|length == 0 %}
+{{ i18n['navigation']['nothing'][page.lang] }}
+{% endif %}
+
 {% for post in page.posts.posts %}
-<div>
-<a href="{{ post.url }}">{{ post.title }}</a>
+<div class="w3-card-4 w3-margin w3-white">
+
+	<div class="w3-container">
+		<h3><b>{{ post.title }}</b></h3>
+		<h5><span class="w3-opacity">{{ post.date }}</span></h5>
+	</div>
+
+	<div class="w3-container">
+	  <p><a href="{{ post.url }}" class="w3-button w3-padding-large w3-white w3-border"><b>{{ i18n['navigation']['readmore'][page.lang] }}</b></a></p>
+	</div>
+  <div class="w3-container">
+    {% for tag_type in post.display_tags %}
+        <a href="{{ tag_type.url }}">{{ tag_type.description }}</a>:
+        {% for tag in tag_type.tags %}
+    		<span class="w3-tag w3-light-grey w3-small w3-margin-bottom"><a href="{{tag.url}}">{{ tag.description }}</a></span>
+    		{% endfor %}
+        <br/>
+    {% endfor %}
+  </div>
+
 </div>
 {% endfor %}
-{% if page.posts.prev_url %}
-<a href="{{ page.posts.prev_url }}">{{ i18n['navigation']['prev'][page.lang] }}</a>
+
+{% if  page.posts.prev_url or page.posts.next_url%}
+<div class="w3-container">
+	<p>
+	{% if page.posts.prev_url %}
+	<a href="{{ page.posts.prev_url }}" class="w3-button w3-padding-large w3-grey w3-border">{{ i18n['navigation']['prev'][page.lang] }}</a>
+	{% endif %}
+	{% if page.posts.next_url %}
+	<a href="{{ page.posts.next_url }}" class="w3-button w3-padding-large w3-grey w3-border">{{ i18n['navigation']['next'][page.lang] }}</a>
+	{% endif %}
+	</p>
+</div>
 {% endif %}
-{% if page.posts.next_url %}
-<a href="{{ page.posts.next_url }}">{{ i18n['navigation']['next'][page.lang] }}</a>
-{% endif %}
+
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!--  sidebar -->
+<div class="w3-col l4">
+{% include 'includes/sidebar.html' %}
+</div>
+
+</div>
+
+</div>
 
 {% endblock %}

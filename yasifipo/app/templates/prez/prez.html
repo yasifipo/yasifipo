@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_prez.html" %}
 
 {% block additional_scripts %}
 <link rel="stylesheet" href="{{ page.theme['reveal_css']}}">
@@ -13,7 +13,7 @@
 {% block body %}
 <div class="yasifipo">
 {% if page.display['cucumber'] == True %}
-<div class='cucumber'>
+<div class='cucumber-prez'>
 {% for i in page.cucumber %}
 <a href="{{i['url']}}">{{i['title']}}</a> >
 {% endfor %}

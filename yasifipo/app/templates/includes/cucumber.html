@@ -1,0 +1,7 @@
+{% if page.cucumber|length > 1 %}
+<div class='cucumber'>
+{% for i in page.cucumber %}
+<a href="{{i['url']}}">{{i['title']}}</a> {% if i != page.cucumber[page.cucumber|length -1] %} > {% endif %}
+{% endfor %}
+</div>
+{% endif %}

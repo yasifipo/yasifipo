@@ -1,0 +1,39 @@
+<!-- Langs -->
+{% if page.display['langs'] %}
+{% if page.langs|length > 1 %}
+<div class="w3-card w3-margin">
+	<div class="w3-container w3-padding">
+		<h4>Langs</h4>
+	</div>
+	<div class="w3-container w3-white">
+	<p>
+	{% for lang in page.langs %}
+	{% if lang['current_lang'] %}
+		<span class="w3-tag w3-black w3-small w3-margin-bottom"><a href="{{ lang['url'] }}">{{ lang['descr'] }}</a></span>
+	{% else %}
+		<span class="w3-tag w3-light-grey w3-small w3-margin-bottom"><a href="{{ lang['url'] }}">{{ lang['descr'] }}</a></span>
+	{% endif %}
+	{% endfor %}
+	</p>
+</div>
+{% endif %}
+{% endif %}
+</div>
+
+<!-- Labels / tags -->
+{% if page.display['tags'] %}
+{% for tag_type in page.tags_display %}
+<div class="w3-card w3-margin">
+	<div class="w3-container w3-padding">
+		<h4><a href="{{ tag_type.url }}">{{ tag_type.description }}</a><br/></h4>
+	</div>
+	<div class="w3-container w3-white">
+	<p>
+		{% for tag in tag_type.tags %}
+		<span class="w3-tag w3-light-grey w3-small w3-margin-bottom"><a href="{{tag.url}}">{{ tag.description }}</a></span>
+		{% endfor %}
+	</p>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
