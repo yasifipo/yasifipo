@@ -1,6 +1,7 @@
 import os
 from app import manager
 from app import bcrypt
+from app import app
 from main import app
 from flask_frozen import Freezer
 from flask_script import Option
@@ -13,6 +14,7 @@ from modules.init import *
 from modules.post import *
 from modules.collection import *
 from modules.admin import admin
+from modules.request_post.views import *
 
 freezer = Freezer(app)
 
@@ -42,7 +44,7 @@ def freeze(data_path, display_all):
 	if 'dont_freeze' in app.yasifipo['config'] and app.yasifipo['config']['dont_freeze'] == True:
 		print("Can't freeze. Check config")
 		return
-		
+
 	templates_loader()
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
@@ -113,6 +115,7 @@ def run_data_read():
 	init_page_data()
 	init_post_data()
 	init_collection_data()
+	setattr(app.post, "default_post", default_post) # default post result
 
 if __name__ == '__main__':
 	manager.run()

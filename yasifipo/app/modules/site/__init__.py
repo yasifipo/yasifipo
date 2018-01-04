@@ -65,7 +65,7 @@ def register_rules():
 						rule='/<path:path>/',
 						view_func=render_file,
 						defaults={},
-						methods=['GET']
+						methods=['GET', 'POST']
 						)
 
 # Root rule
@@ -75,14 +75,14 @@ def register_rules():
 								rule='/',
 								view_func=render_root,
 								defaults={},
-								methods=['GET']
+								methods=['GET', 'POST']
 								)
 	else:
 		app.add_url_rule(
 							rule='/',
 							view_func=render_root,
 							defaults={},
-							methods=['GET']
+							methods=['GET', 'POST']
 							)
 # File rule
 	app.add_url_rule(
@@ -111,7 +111,7 @@ def init_site_data_files():
 	app.yasifipo["sitedata"] = SiteData(app.config["SITEDATA_DIR"])
 
 
-def yasifipo_register(type_, rule, id_, data={}):
+def yasifipo_register(type_, rule, id_, data={}, post=None):
 
 	if rule != "/" and type_ in ["prez-chapter", "prez", "prez-single", "prez-course", "prez-page"]:
 		rule = rule[1:-1]
@@ -125,12 +125,18 @@ def yasifipo_register(type_, rule, id_, data={}):
 
 	app.yasifipo["files"][id_] = rule
 
+	if post is not None:
+		app.yasifipo["ids"][rule]['post'] = post
+
 	# Root management
 	if rule == "/":
 
 		app.yasifipo["root"]['id'] = id_
 		app.yasifipo["root"]['type'] = type_
 		app.yasifipo["root"]['data'] = data
+
+		if post is not None:
+			app.yasifipo["root"]['post'] = post
 
 def check_server(yaml):
 	if 'server' in yaml.keys():

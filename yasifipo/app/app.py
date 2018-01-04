@@ -4,6 +4,8 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from config import Configuration
 
+from modules.request_post import PostMethod
+
 # static rule will be generated later
 app = Flask(__name__, static_url_path=None, static_folder=None)
 app.config.from_object(Configuration)
@@ -14,3 +16,5 @@ login_manager.init_app(app)
 login_manager.login_view = 'admin.login'
 
 bcrypt = Bcrypt(app)
+
+app.post = PostMethod()

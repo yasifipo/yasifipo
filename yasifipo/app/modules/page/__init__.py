@@ -93,7 +93,12 @@ def get_page_data(directory, current_slug, parenting):
 					url = '/'
 				else:
 					url = yaml['url']
-				yasifipo_register('page', url, directory + "/" + file_, {})
+					
+				if 'post' in yaml.keys():
+					post = yaml['post']
+				else:
+					post = None
+				yasifipo_register('page', url, directory + "/" + file_, {}, post)
 
 				if 'redirect' in yaml.keys():
 					reds = []

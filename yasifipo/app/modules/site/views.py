@@ -1,7 +1,10 @@
 from app import app
 from flask import send_from_directory, redirect, render_template
+from flask import request
 
 from .view import *
+
+from modules.request_post.views import *
 
 import os.path
 
@@ -40,7 +43,12 @@ def render_file(path):
 		elif app.yasifipo["ids"][path]['type'] == "tag":
 			return render_tag(app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "page":
-			return render_page(app.yasifipo["ids"][path]['id'])
+			if request.method == 'GET':
+				return render_page(app.yasifipo["ids"][path]['id'])
+			elif request.method == 'POST':
+				if 'post' not in app.yasifipo["ids"][path].keys():
+					return render_template('site/bad_method.html')
+				return render_request_post(app.yasifipo["ids"][path]['id'], app.yasifipo["ids"][path]['post'], request)
 		elif app.yasifipo["ids"][path]['type'] == "post":
 			return render_post(app.yasifipo["ids"][path]['id'])
 		elif app.yasifipo["ids"][path]['type'] == "collection":
