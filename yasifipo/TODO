@@ -1,16 +1,14 @@
 # v0.01a
 
-  * COLLECTION: README to update
-	* POST: README to update
 	* PREZ: css
   * ALL: example _data : to be completed:
     *  each type of data
-    
-  * manage GET / POST registration
+
+  *  manage with wgsi
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)
-  * ALL: ALL: verify that a slug/rule is not used already
+  * ALL: verify that a slug/rule is not used already
 
 	* POST: Post series
 

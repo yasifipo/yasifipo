@@ -7,18 +7,26 @@ No database, using only filesystem
 
 # Features
 *  Multisite
+*  Multirepository
 *  Multilanguage
 
 # Modules
 *  prez, generate complete courses (including Table of content) presentations using reveal.js
 *  pages, generate pages website
 *  blog, generate blog posts
+*  collections, generic data
 
 # Installation
-TODO
-* create admin password : python3 app/manage.py admin_password -p <password>
+*  Use virtualenv to create an new env with python3:
+  * virtualenv env
+*  Enter into virtualenv:
+  *  source env/bin/activate
+*  Update dependencies:
+  *  pip install -r yasifipo/requirements.txt
+*  cd yasifipo/yasifipo
+*  Create admin password : python3 app/manage.py admin_password -p <password>
 
-# how to run
+# how to run (testing)
 *  python3 app/manage.py run -d path/to/data/
 *  python3 app/manage.py freeze -d path/to/data/
 
@@ -30,11 +38,29 @@ TODO
   *  python3 app/manage.py example -d path/to/data
   *  python3 app/manage.py run -d path/to/data
 
+# How to run (server side)
+TODO
+
 # Docs
 List of all existing yaml files
 
 ## _data/config/config.md
-TODO
+*  yasifipo_server: name of server url
+*  yasifipo_subdirectory: subdirectory in url, for example _docs_ for serving at example.com/docs/
+*  prez_url_prefix: prefix for all prez
+*  post_url_prefix: prefix for all blog post
+*  post_default_url: default url for posts, if not set
+*  collection_default_url:  default url for collections, if not set
+*  default_lang: default language
+*  reveal_default_theme: default reveal theme if not set
+*  layout_page: default layout
+*  layout_post: default layout
+*  layout_prez: default layout
+*  layout_chapter: default layout
+*  layout_prez_page: default layout
+*  layout_collection: default layout
+*  site_version: version of the website
+*  dont_freeze: If set to _True_, you can't freeze your website
 
 ## _data/config/file_ignore.txt
 This file is not a yaml file. Follow the .gitgnore syntax and way of working, ignoring some file in directories
@@ -108,6 +134,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data
 *  content (not part of yaml): content of page (in markdown language)
+*  post: optional, name of function to call if page request method is POST
 
 ## Post file
 *  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
@@ -140,11 +167,30 @@ Create your table of content by creating a directory tree. Each path must have a
 *  content (not part of yaml): content of post (in markdown language)
 
 ## _data/tags/summary.md
-TODO
+Contains list of available tag types (table of __tag__ in yaml)
+
+*  descr: description (1 by language)
+*  directory: name of directory that contains tags of this type
+*  slug: unique identifier of this tag type
+*  sort: Used to sort tag type when needed
+*  url:
+  *  mass: url for list of tag of this type (1 by language)
+  *  url: url prefix for tags of this type
 
 ## _data/tags/tags/xxx.md
-TODO
+*  descr: description (1 by language)
+*  slug: unique identifier of the tag (for a given type)
+*  url: url of the tag (will be added with prefix of tag type)
+*  sort: Used to sort tag inside a tag type
 
 ## _data/collections/summary.md
 Contains list of all available collection (table of __collection__ in yaml)  
-TODO
+
+*  description: 1 by language
+*  directory: directory of given collection
+*  slug: unique identifier of the collection
+*  sorting: how collection items are sorted. Available values are:
+  *  date
+  *  sort
+*  sort: How to sort collection types
+*  output_url: If set to False, no url will be generated
