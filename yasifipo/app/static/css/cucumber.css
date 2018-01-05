@@ -1,5 +1,6 @@
 .yasifipo {
   position: absolute;
+	display: block;
   z-index: 99;
 }
 

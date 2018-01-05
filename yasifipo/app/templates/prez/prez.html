@@ -11,7 +11,9 @@
 {% endblock %}
 
 {% block body %}
-<div class="yasifipo">
+
+
+<div class="yasifipo" id='cucumber'>
 {% if page.display['cucumber'] == True %}
 <div class='cucumber-prez'>
 {% for i in page.cucumber %}
@@ -20,28 +22,13 @@
 <a href="">{{page.title}}</a>
 </div>
 {% endif %}
-
-{% if page.display['langs'] == True %}
-{% if langs|length > 1 %}
-<div>
-	{% for lang in langs %}
-	<a href="{{ lang['url'] }}">{{ lang['descr'] }}</a>
-	{% endfor %}
+<button class="w3-button w3-light-grey w3-xlarge" onclick="w3_open()">☰</button>
 </div>
-{% endif %}
-{% endif %}
 
-{% if page.display['tags'] %}
-<div>
-{% for tag_type in page.tags_display %}
-<a href="{{ tag_type.url }}">{{ tag_type.description }}</a><br/>
-{% for tag in tag_type.tags %}
-<a href="{{tag.url}}">{{ tag.description }}</a> {% if loop.last == False %} - {% endif %}
-{% endfor %}
-<br/>
-{% endfor %}
-</div>
-{% endif %}
+<div class="w3-col l4 w3-light-grey" style="display:none" id="sidebar">
+<button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+
+{% include 'includes/sidebar.html' %}
 </div>
 
 <div class="reveal-viewport">
@@ -64,4 +51,16 @@
 <script>
 	Reveal.initialize(conf);
 </script>
+
+<script>
+function w3_open() {
+    document.getElementById("cucumber").style.display = "none";
+    document.getElementById("sidebar").style.display = "block";
+}
+function w3_close() {
+	  document.getElementById("cucumber").style.display = "block";
+    document.getElementById("sidebar").style.display = "none";
+}
+</script>
+
 {% endblock %}
