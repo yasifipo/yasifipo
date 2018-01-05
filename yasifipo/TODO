@@ -1,7 +1,10 @@
 # v0.01a
 
   * ALL: example _data : to be completed:
-    *  each type of data
+    *  blog posts
+    *  prez (with reveal & page-prez)
+    *  single prez
+    *  menu
 
   *  manage with wgsi
 
@@ -11,7 +14,7 @@
 
 	* POST: Post series
 
-	* ALL: Menu management
+  * ALL: date util (for readable date)
 
 # v0.01c
 	* PLUGIN management

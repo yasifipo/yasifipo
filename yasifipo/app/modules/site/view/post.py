@@ -40,6 +40,8 @@ def render_post(file_):
 		page.post = Post(post['file'], post['date'], page.lang)
 		page.post.get_prev_next(post['prev'], post['next'])
 
+		page.get_menus(yaml)
+
 	page.get_generated_time()
 	return render_template( layout,
 							site=app.yasifipo["sitedata"],

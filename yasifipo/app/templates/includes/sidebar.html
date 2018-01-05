@@ -21,6 +21,23 @@
 {% endif %}
 
 
+<!-- Menu -->
+{% for menu in page.menus %}
+<div class="w3-card w3-margin">
+	<div class="w3-container w3-padding w3-light-grey">
+		<h4>{{menu.description}}</h4>
+	</div>
+	<div class="w3-container w3-white">
+	<p>
+	{% for item in menu.items %}
+		<a href="{{item.url}}">{{item.description}}</a><br/>
+	{% endfor %}
+	</p>
+</div>
+</div>
+{% endfor %}
+
+
 <!-- Labels / tags -->
 {% if page.display['tags'] %}
 {% for tag_type in page.tags_display %}

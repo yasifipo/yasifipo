@@ -9,6 +9,7 @@ from modules.page import *
 from modules.tag import *
 from modules.prez import *
 from modules.post import *
+from modules.menu import *
 
 from .user import *
 
@@ -37,6 +38,7 @@ def reloading():
 	app.yasifipo['collections'] = {} #collections
 	app.yasifipo['prezs'] = {}
 	app.yasifipo["sitedata"] = None
+	app.yasifipo["menu"] = {} #menus
 
 	init_file_data()
 	init_i18n_data()
@@ -47,6 +49,7 @@ def reloading():
 	init_page_data()
 	init_post_data()
 	init_collection_data()
+	init_menu_data()
 
 	app.maintenance = False
 

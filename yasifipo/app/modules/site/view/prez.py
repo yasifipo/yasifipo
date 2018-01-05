@@ -97,6 +97,8 @@ def render_prez_chapter(file_, data):
 
 	get_lists(page, yaml, request)
 
+	page.get_menus(yaml)
+
 	if 'layout' in yaml.keys():
 		layout = 'prez/' + yaml['layout']
 	else:
@@ -157,6 +159,8 @@ def render_prez_prez(file_, data):
 
 		get_lists(page, yaml, request)
 
+		page.get_menus(yaml)
+
 		if 'layout' in yaml.keys():
 			layout = 'prez/' + yaml['layout']
 		else:
@@ -194,6 +198,8 @@ def render_prez_page(file_, data):
 		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
 
 		get_lists(page, yaml, request)
+
+		page.get_menus(yaml)
 
 		if 'layout' in yaml.keys():
 			layout = 'prez/' + yaml['layout']

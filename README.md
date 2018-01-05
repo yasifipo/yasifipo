@@ -189,3 +189,6 @@ Contains list of all available collection (table of __collection__ in yaml)
   *  sort
 *  sort: How to sort collection types
 *  output_url: If set to False, no url will be generated
+
+## _data/menu/xxx.md
+TODO

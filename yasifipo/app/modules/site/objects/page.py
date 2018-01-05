@@ -8,6 +8,7 @@ from .tag import *
 from .post import *
 from .collection import *
 from .prez import *
+from .menu import *
 
 class Page():
 	def __init__(self, type_, yaml={}):
@@ -222,6 +223,17 @@ class Page():
 
 			self.tags.append(tag_type)
 		self.tags = sorted(self.tags, key=lambda k: k.sort)
+
+	def get_menus(self, yaml):
+		self.menus = []
+		if "menu" in yaml.keys():
+			menus = []
+			if type(yaml['menu']).__name__ == "str":
+				menus.append(yaml['menu'])
+			else:
+				menus = yaml['menu']
+			for menu in menus:
+				self.menus.append(Menu(menu, self.lang))
 
 class Data():
 	def __init__(self, yaml):

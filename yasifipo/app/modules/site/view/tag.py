@@ -20,6 +20,9 @@ def render_tag(data):
 	page.langs = get_langs_from_tag(data['tag_type'], data['tag'], page.lang)
 
 	page.tag.get_items()
+
+	page.get_menus(yaml)	
+
 	page.get_generated_time()
 	return render_template('tag/tag.html',
 							site=app.yasifipo["sitedata"],

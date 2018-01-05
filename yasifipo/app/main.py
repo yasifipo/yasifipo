@@ -21,3 +21,4 @@ app.yasifipo['posts'] = {} #posts
 app.yasifipo['collections'] = {} #collections
 app.yasifipo['prezs'] = {}
 app.yasifipo["sitedata"] = None
+app.yasifipo["menu"] = {} #menus

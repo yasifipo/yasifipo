@@ -40,6 +40,8 @@ def render_collection(file_, data_):
 
 		get_lists(page, yaml, request)
 
+		page.get_menus(yaml)
+
 	page.get_generated_time()
 	return render_template( layout,
 							site=app.yasifipo["sitedata"],
