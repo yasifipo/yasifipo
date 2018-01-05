@@ -141,13 +141,14 @@ def get_collection_data(directory, yaml_coll):
 
 				date, in_key, in_filename = get_date(yaml, file_)
 				if 'output_url' in yaml_coll.keys() and yaml_coll['output_url'] == True:
-					if date is None:
-						print("WARNING: can't get date for file " + file_)
-						continue
+					if yaml_coll['sorting'] == "date":
+						if date is None:
+							print("WARNING: can't get date for file " + file_)
+							continue
 
-				if is_in_future(date):
-					if app.config['DISPLAY_ALL'] == False:
-						continue
+						if is_in_future(date):
+							if app.config['DISPLAY_ALL'] == False:
+								continue
 
 				if 'output_url' in yaml_coll.keys() and yaml_coll['output_url'] == True:
 					if 'url' in yaml.keys():
