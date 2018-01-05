@@ -30,13 +30,8 @@ No database, using only filesystem
 *  python3 app/manage.py run -d path/to/data/
 *  python3 app/manage.py freeze -d path/to/data/
 
-# Want some example ?  
-*  Minimal example
+# Want some example / initialized project ?  
   *  python3 app/manage.py init -d path/to/data
-  *  python3 app/manage.py run -d path/to/data
-*  Complete example of each feature
-  *  python3 app/manage.py example -d path/to/data
-  *  python3 app/manage.py run -d path/to/data
 
 # How to run (server side)
 TODO
