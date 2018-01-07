@@ -87,15 +87,6 @@ def init(data_path):
 
 	init_yasifipo_minimal(os.path.abspath(data_path))
 
-@manager.option('-d', '--data', dest='data_path', required=True)
-def example(data_path):
-
-	if isdir(os.path.abspath(data_path)):
-		print('Path already exists ... Exiting wihout example copy')
-		return
-
-	init_yasifipo_example(os.path.abspath(data_path))
-
 @manager.option('-p', '--password', dest='password', required=True)
 def admin_password(password):
 
