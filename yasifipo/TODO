@@ -5,6 +5,7 @@
     *  prez (with reveal & page-prez)
     *  single prez
     *  menu
+		*  plugins
 
   *  manage with wgsi
 
@@ -17,7 +18,10 @@
   * ALL: date util (for readable date)
 
 # v0.01c
-	* PLUGIN management
+	* PLUGIN management:
+	  *  define more in api
+		*  define some needed callback (register, ...)
+
   * CATEGORY:  default cat if not provided --> No, but a way to retrieve all not cat pages/prez/toc/single/blogpost (by plugin)?
 
 
