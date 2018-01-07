@@ -56,7 +56,7 @@ def render_file(path):
 		else:
 			return render_template('site/bad_type.html')
 	else:
-		return render_template('site/404.html')
+		return render_template('site/404.html'), 404
 
 def render_root():
 	if app.maintenance == True:
@@ -87,4 +87,4 @@ def render_root():
 		else:
 			return render_template('site/bad_type.html')
 	else:
-		return render_template('site/404.html')
+		return render_template('site/404.html'), 404
