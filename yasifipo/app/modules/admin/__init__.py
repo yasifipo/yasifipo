@@ -11,6 +11,7 @@ from modules.prez import *
 from modules.post import *
 from modules.menu import *
 from modules.plugin import *
+from modules.api import *
 
 from .user import *
 
@@ -53,6 +54,7 @@ def reloading():
 	init_post_data()
 	init_collection_data()
 	init_menu_data()
+	init_api()
 
 	app.maintenance = False
 

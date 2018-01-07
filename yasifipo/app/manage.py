@@ -17,6 +17,7 @@ from modules.admin import admin
 from modules.request_post.views import *
 from modules.menu import *
 from modules.plugin import *
+from modules.api import *
 
 freezer = Freezer(app)
 
@@ -119,6 +120,7 @@ def run_data_read():
 	init_post_data()
 	init_collection_data()
 	init_menu_data()
+	init_api()
 	setattr(app.post, "default_post", default_post) # default post result
 
 if __name__ == '__main__':
