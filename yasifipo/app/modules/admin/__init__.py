@@ -10,6 +10,7 @@ from modules.tag import *
 from modules.prez import *
 from modules.post import *
 from modules.menu import *
+from modules.plugin import *
 
 from .user import *
 
@@ -39,7 +40,9 @@ def reloading():
 	app.yasifipo['prezs'] = {}
 	app.yasifipo["sitedata"] = None
 	app.yasifipo["menu"] = {} #menus
+	app.plugins = {}
 
+	init_plugins()
 	init_file_data()
 	init_i18n_data()
 	init_lang_data()

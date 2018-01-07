@@ -194,6 +194,7 @@ def load_config():
 	app.config['TEMPLATES_DIR'] = app.config['DATA_DIR'] + "templates/" # / after
 	app.config['STATIC_DIR']    = app.config['DATA_DIR'] + "static/"  # / after
 	app.config['MENU_DIR']      = app.config['DATA_DIR'] + "menu/"  # / after
+	app.config['PLUGIN_DIR']    = app.config['DATA_DIR'] + "plugin/"  # / after
 
 
 	app.config['SECRET_KEY'] = urandom(24)

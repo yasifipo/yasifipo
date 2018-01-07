@@ -16,6 +16,7 @@ from modules.collection import *
 from modules.admin import admin
 from modules.request_post.views import *
 from modules.menu import *
+from modules.plugin import *
 
 freezer = Freezer(app)
 
@@ -107,6 +108,7 @@ def admin_password(password):
 
 def run_data_read():
 	app.maintenance = False
+	init_plugins()
 	init_file_data()
 	init_i18n_data()
 	init_lang_data()

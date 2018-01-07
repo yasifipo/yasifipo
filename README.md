@@ -129,7 +129,9 @@ Create your table of content by creating a directory tree. Each path must have a
 *  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data
 *  content (not part of yaml): content of page (in markdown language)
-*  post: optional, name of function to call if page request method is POST
+*  post: optional, name of function to call if page request method is POST:
+  *  coming from a plugin, must be <PluginName>/<MethodName>
+	*  coming from core yasifipo, must be <MethodName> (registered on app.post)
 
 ## Post file
 *  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
