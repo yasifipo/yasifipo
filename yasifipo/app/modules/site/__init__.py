@@ -40,6 +40,9 @@ def init_file_data():
 
 
 def yasifipo_send_static_file(filename):
+	for plugin in app.plugins.keys():
+		if isfile(app.config['PLUGIN_DIR'] + plugin + "/static/" + filename):
+			return send_from_directory(app.config['PLUGIN_DIR'] + plugin + "/static/", filename)
 	if isfile(app.config['STATIC_DIR'] + filename):
 		return send_from_directory(app.config['STATIC_DIR'], filename)
 	return app.send_static_file(filename)
