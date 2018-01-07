@@ -3,8 +3,18 @@ url: ''
 title: Home
 static: img
 ref: home
+tag: tag1
+category: [cat1, cat2]
 ---
 
 # Yasifipo
 
-Documentation is coming...
+You can find here some examples:
+
+*  [Children page][1]
+*  [Test Collection list][2]
+
+
+
+[1]: /children/
+[2]: /collections/

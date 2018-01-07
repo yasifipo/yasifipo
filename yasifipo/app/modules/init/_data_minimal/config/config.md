@@ -1,6 +1,6 @@
 ---
-yasifipo_server: test.example.com
-yasifipo_subdirectory: '' # without any /, or '' for using root 
+yasifipo_server: example.yasifipo.net
+yasifipo_subdirectory: '' # without any /, or '' for using root
 
 prez_url_prefix: '' # 'slug' without any /
 post_url_prefix: '' # 'slug' without any /
@@ -19,4 +19,5 @@ layout_prez_page: 'prez/page.html'
 layout_collection: 'collection/collection.html'
 
 site_version: 0.0.1
+dont_freeze: False
 ---

@@ -1,0 +1,21 @@
+---
+url: 'fr'
+title: Accueil
+static: img
+ref: home
+tag: tag1
+category: [cat1, cat2]
+lang: fr
+---
+
+# Yasifipo
+
+Tu peux trouver ici quelques exemples:
+
+*  [Page enfant][1]
+*  [Liste de la collection Test][2]
+
+
+
+[1]: /fr/children/
+[2]: /fr/collections/

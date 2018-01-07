@@ -1,0 +1,10 @@
+---
+url: 'fr/collections'
+title: Collections
+static: img
+ref: page_collection
+layout: page_collections.html
+collections:
+  coll_test: True
+lang: fr
+---
