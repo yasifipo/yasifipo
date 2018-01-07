@@ -42,13 +42,12 @@ def freeze(data_path, display_all):
 		app.config['DISPLAY_ALL'] = False
 
 	load_config()
+	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read()
 
 	if 'dont_freeze' in app.yasifipo['config'] and app.yasifipo['config']['dont_freeze'] == True:
 		print("Can't freeze. Check config")
 		return
-
-	templates_loader()
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
 		app.config['FREEZER_DESTINATION'] = app.config['FREEZER_DESTINATION'] + "/" + app.yasifipo['config']['yasifipo_subdirectory']
@@ -68,8 +67,8 @@ def run(data_path, display_all):
 		app.config['DISPLAY_ALL'] = False
 
 	load_config()
+	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read()
-	templates_loader()
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
 		app.register_blueprint(admin, url_prefix="/" + app.yasifipo['config']['yasifipo_subdirectory'] + "/admin")
@@ -100,6 +99,7 @@ def admin_password(password):
 
 def run_data_read():
 	app.maintenance = False
+	init_api()
 	init_plugins()
 	init_file_data()
 	init_i18n_data()
@@ -111,7 +111,6 @@ def run_data_read():
 	init_post_data()
 	init_collection_data()
 	init_menu_data()
-	init_api()
 	setattr(app.post, "default_post", default_post) # default post result
 
 if __name__ == '__main__':

@@ -43,6 +43,7 @@ def reloading():
 	app.yasifipo["menu"] = {} #menus
 	app.plugins = {}
 
+	init_api()
 	init_plugins()
 	init_file_data()
 	init_i18n_data()
@@ -54,7 +55,6 @@ def reloading():
 	init_post_data()
 	init_collection_data()
 	init_menu_data()
-	init_api()
 
 	app.maintenance = False
 

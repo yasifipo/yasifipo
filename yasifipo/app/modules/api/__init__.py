@@ -9,6 +9,7 @@ class YasifipoApi():
 
 # register some function to be used in plugins
 		setattr(self, "url_for", yasifipo_url_for)
+		setattr(self, "add_template_folder", plugin_add_template)
 
 def init_api():
 	app.api = YasifipoApi()

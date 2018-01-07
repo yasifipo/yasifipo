@@ -199,9 +199,12 @@ def load_config():
 
 	app.config['SECRET_KEY'] = urandom(24)
 
-def templates_loader():
+def plugin_add_template(plugin, path):
+	templates_add_loader(app.config['PLUGIN_DIR'] + plugin.__class__.__name__ + "/" + path + "/")
+
+def templates_add_loader(path):
 	my_loader = jinja2.ChoiceLoader([
-	    jinja2.FileSystemLoader(app.config['TEMPLATES_DIR']),
+	    jinja2.FileSystemLoader(path),
 	    app.jinja_loader,
 	])
 	app.jinja_loader = my_loader
