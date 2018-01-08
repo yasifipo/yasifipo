@@ -194,3 +194,6 @@ Contains list of all available collection (table of __collection__ in yaml)
 
 ## _data/menu/xxx.md
 TODO
+
+## _data/rule/xxx.md
+TODO

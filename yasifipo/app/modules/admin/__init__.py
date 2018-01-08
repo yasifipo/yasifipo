@@ -12,6 +12,7 @@ from modules.post import *
 from modules.menu import *
 from modules.plugin import *
 from modules.api import *
+from modules.rule import *
 
 from .user import *
 
@@ -50,6 +51,7 @@ def reloading():
 	init_lang_data()
 	init_tag_data()
 	#No init_site_data --> path already registered
+	init_rules()
 	init_prez_data()
 	init_page_data()
 	init_post_data()

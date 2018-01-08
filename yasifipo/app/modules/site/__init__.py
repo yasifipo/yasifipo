@@ -198,6 +198,7 @@ def load_config():
 	app.config['STATIC_DIR']    = app.config['DATA_DIR'] + "static/"  # / after
 	app.config['MENU_DIR']      = app.config['DATA_DIR'] + "menu/"  # / after
 	app.config['PLUGIN_DIR']    = app.config['DATA_DIR'] + "plugin/"  # / after
+	app.config['RULE_DIR']    = app.config['DATA_DIR'] + "rule/"  # / after
 
 
 	app.config['SECRET_KEY'] = urandom(24)

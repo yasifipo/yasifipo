@@ -18,6 +18,7 @@ from modules.request_post.views import *
 from modules.menu import *
 from modules.plugin import *
 from modules.api import *
+from modules.rule import *
 
 freezer = Freezer(app)
 
@@ -106,6 +107,7 @@ def run_data_read():
 	init_lang_data()
 	init_tag_data()
 	init_site_data()
+	init_rules()
 	init_prez_data()
 	init_page_data()
 	init_post_data()
