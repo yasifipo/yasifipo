@@ -35,5 +35,5 @@ def init_rules():
 
 
 					else:
-						#TODO, no general rules for new
+						#TODO, no general rules for now
 						pass

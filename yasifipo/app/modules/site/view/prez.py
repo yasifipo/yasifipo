@@ -129,6 +129,10 @@ def render_prez_prez(file_, data):
 		else:
 			page.tags_display = page.get_tags_display(yaml)
 
+		page.display['sidebar'] = True
+		if 'display_sidebar' in yaml.keys() and yaml['display_sidebar'] == False:
+			page.display['sidebar'] = False
+
 		theme = {}
 		if 'theme' in yaml.keys():
 			theme['theme'] = yasifipo_url_for('static', filename='css/theme/'+yaml['theme']+'.css')

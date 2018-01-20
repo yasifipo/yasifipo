@@ -22,14 +22,18 @@
 <a href="">{{page.title}}</a>
 </div>
 {% endif %}
+{% if page.display['sidebar'] == True %}
 <button class="w3-button w3-light-grey w3-xlarge" onclick="w3_open()">☰</button>
+{% endif %}
 </div>
 
+{% if page.display['sidebar'] == True %}
 <div class="w3-col l4 w3-light-grey" style="display:none" id="sidebar">
 <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
 
 {% include 'includes/sidebar.html' %}
 </div>
+{% endif %}
 
 <div class="reveal-viewport">
 	<div class="reveal">
