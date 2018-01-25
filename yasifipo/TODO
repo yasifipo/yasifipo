@@ -8,7 +8,7 @@
 		*  plugins
     *  rules
 
-  *  manage with wgsi
+  *  manage with wgsi : param _data & display_all
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)

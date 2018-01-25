@@ -103,6 +103,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  page: optional, prez is displayed as a page, not with reveal presentation mode
 *  display_tags: optional. If set to False, tags are not displayed
+*  display_sidebar: optional. If set to False, in reveal presentations, does not display button to open siderbar
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 *  sort: optional. Will be used for sorting when displaying tag items
 *  all keys will be available on page.data

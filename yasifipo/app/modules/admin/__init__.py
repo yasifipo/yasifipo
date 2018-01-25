@@ -13,6 +13,7 @@ from modules.menu import *
 from modules.plugin import *
 from modules.api import *
 from modules.rule import *
+from modules.collection import *
 
 from .user import *
 

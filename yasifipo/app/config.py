@@ -11,3 +11,5 @@ class Configuration(object):
 	FREEZER_DESTINATION = 'build'
 
 	VERSION = "0.0.1"
+
+	DISPLAY_ALL = False
