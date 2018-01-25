@@ -9,6 +9,7 @@
     *  rules
 
   *  manage with wgsi : param _data & display_all
+  *  menu in tag & tag_type pages
 
 # v0.01b
   * ALL: check all yaml, that mandatory are present / format (exple: sort is INT)

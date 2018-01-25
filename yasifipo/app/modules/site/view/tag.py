@@ -21,8 +21,6 @@ def render_tag(data):
 
 	page.tag.get_items()
 
-	page.get_menus(yaml)	
-
 	page.get_generated_time()
 	return render_template('tag/tag.html',
 							site=app.yasifipo["sitedata"],
