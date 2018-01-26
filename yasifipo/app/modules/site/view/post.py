@@ -27,7 +27,7 @@ def render_post(file_):
 			page.tags_display = page.get_tags_display(yaml)
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
+		page.content = Markup(markdown(yaml.content, app.yasifipo["markdown_process"]))
 
 		if 'layout' in yaml.keys():
 			layout = 'post/' + yaml['layout']

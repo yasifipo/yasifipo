@@ -17,6 +17,7 @@ from flask import send_from_directory
 def init_site_data():
 	register_rules()
 	init_site_data_files()
+	app.yasifipo["markdown_process"].insert(0, FreezeUrlExtension())
 
 def init_file_data():
 	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', encoding='utf-8') as fh:

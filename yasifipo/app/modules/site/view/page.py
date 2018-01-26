@@ -47,7 +47,7 @@ def render_page(file_):
 			layout = app.yasifipo["config"]["layout_page"]
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content, [FreezeUrlExtension()]))
+		page.content = Markup(markdown(yaml.content, app.yasifipo["markdown_process"]))
 
 		page.get_menus(yaml)
 

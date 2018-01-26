@@ -4,15 +4,20 @@ import sys
 import importlib
 from os.path import isdir
 from os import listdir
+from .after_render import *
 
 
 def init_plugins():
 	app.pluginmanager = YasifipoPluginManager(app.config['PLUGIN_DIR'])
-
+	app.yasifipo["markdown_process"].append(AfterRenderExtension())
 
 class YasifipoPlugin():
 	def __init__(self):
 		pass
+
+	def after_render(self, root):
+		# method to be overriden in any plugins
+		return root
 
 
 class YasifipoPluginManager():

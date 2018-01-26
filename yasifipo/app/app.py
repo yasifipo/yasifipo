@@ -37,4 +37,5 @@ app.yasifipo['collections'] = {} #collections
 app.yasifipo['prezs'] = {}
 app.yasifipo["sitedata"] = None
 app.yasifipo["menu"] = {} #menus
+app.yasifipo["markdown_process"] = []
 app.plugins = {}
