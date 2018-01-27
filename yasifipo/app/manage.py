@@ -5,7 +5,8 @@ from app import app
 from flask_frozen import Freezer
 from flask_script import Option
 
-from run import *
+from main import *
+from modules.site import *
 
 freezer = Freezer(app)
 
@@ -14,6 +15,9 @@ def url_generator():
 	for i in app.yasifipo['ids'].keys():
 		if app.yasifipo['ids'][i]['type'] == 'img':
 			yield 'return_file', {'id_': i}
+		elif app.yasifipo['ids'][i]['type'] == "redirect":
+			yield 'render_file', {'path': app.yasifipo['ids'][i]['data']['url']}
+			# TODO : currently, redirection does'nt work for freeze
 		else:
 			yield 'render_file', {'path': i}
 
@@ -31,7 +35,7 @@ def freeze(data_path, display_all):
 
 	load_config()
 	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
-	run_data_read()
+	run_data_read(app)
 
 	if 'dont_freeze' in app.yasifipo['config'] and app.yasifipo['config']['dont_freeze'] == True:
 		print("Can't freeze. Check config")
@@ -56,7 +60,7 @@ def run(data_path, display_all):
 
 	load_config()
 	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
-	run_data_read()
+	run_data_read(app)
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
 		app.register_blueprint(admin, url_prefix="/" + app.yasifipo['config']['yasifipo_subdirectory'] + "/admin")
