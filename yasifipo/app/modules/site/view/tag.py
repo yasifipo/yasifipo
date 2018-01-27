@@ -21,6 +21,9 @@ def render_tag(data):
 
 	page.tag.get_items()
 
+	for plugin in app.plugins.values():
+		plugin.before_render(page, None, data=data)
+
 	page.get_generated_time()
 	return render_template('tag/tag.html',
 							site=app.yasifipo["sitedata"],

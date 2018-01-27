@@ -104,6 +104,9 @@ def render_prez_chapter(file_, data):
 	else:
 		layout = app.yasifipo["config"]["layout_chapter"]
 
+	for plugin in app.plugins.values():
+		plugin.before_render(page, file_, data=data)
+
 	page.get_generated_time()
 	return render_template(layout,
 							site=app.yasifipo["sitedata"],
@@ -170,6 +173,9 @@ def render_prez_prez(file_, data):
 		else:
 			layout = app.yasifipo["config"]["layout_prez"]
 
+		for plugin in app.plugins.values():
+			plugin.before_render(page, file_, data=data)
+
 		page.get_generated_time()
 		return render_template(layout,
 								site=app.yasifipo["sitedata"],
@@ -209,6 +215,9 @@ def render_prez_page(file_, data):
 			layout = 'prez/' + yaml['layout']
 		else:
 			layout = app.yasifipo["config"]["layout_prez_page"]
+
+		for plugin in app.plugins.values():
+			plugin.before_render(page, file_, data=data)
 
 		page.get_generated_time()
 		return render_template( layout,

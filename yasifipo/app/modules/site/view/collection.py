@@ -42,6 +42,9 @@ def render_collection(file_, data_):
 
 		page.get_menus(yaml)
 
+	for plugin in app.plugins.values():
+		plugin.before_render(page, file_, data=data_)
+
 	page.get_generated_time()
 	return render_template( layout,
 							site=app.yasifipo["sitedata"],

@@ -19,6 +19,9 @@ class YasifipoPlugin():
 		# method to be overriden in any plugins
 		return root
 
+	def before_render(self, page, file_=None, data={}):
+		# method to be overriden in any plugins
+		pass
 
 class YasifipoPluginManager():
 	def __init__(self, path):

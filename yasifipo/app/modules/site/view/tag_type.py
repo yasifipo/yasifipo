@@ -22,6 +22,9 @@ def render_tag_type(data):
 	page.tag_type.get_tags()
 	page.tag_type.get_tags_items()
 
+	for plugin in app.plugins.values():
+		plugin.before_render(page, None, data=data)
+
 	page.get_generated_time()
 	return render_template('tag/tag_type.html',
 							site=app.yasifipo["sitedata"],
