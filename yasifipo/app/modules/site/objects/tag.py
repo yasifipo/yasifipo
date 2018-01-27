@@ -108,9 +108,9 @@ class Tag():
 			else:
 				if collection_done == False:
 					for typ_sub in items_collections_list:
-						if app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "sort":
+						if app.yasifipo["collections"][typ_sub.subtype]['conf']['sorting'] == "sort":
 							self.items.extend(sorted(typ_sub.items, key= lambda k: k.sort))
-						elif app.yasifipo["collections"][obj['subtype']]['conf']['sorting'] == "date":
+						elif app.yasifipo["collections"][typ_sub.subtype]['conf']['sorting'] == "date":
 							tab = sorted(typ_sub.items, key= lambda k: k.date)
 							tab.reverse()
 							self.items.extend(tab)
