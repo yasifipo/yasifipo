@@ -12,6 +12,8 @@ from frontmatter import load
 import pathspec
 
 from flask import send_from_directory
+from flask import Markup
+from markdown import markdown
 
 
 def init_site_data():
@@ -213,3 +215,7 @@ def templates_add_loader(path):
 	    app.jinja_loader,
 	])
 	app.jinja_loader = my_loader
+
+@app.template_filter()
+def gmarkdown(text):
+	return Markup(markdown(text, app.yasifipo["markdown_process"]))
