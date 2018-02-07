@@ -1,7 +1,7 @@
 ---
 descr:
   en: "Category 2"
-  fr: "Categorie 2"
+  fr: "Catégorie 2"
 slug: cat2
 url:
   en: en/category2

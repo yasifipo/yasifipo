@@ -3,7 +3,7 @@ tags:
 - tag:
   descr:
     en: Category
-    fr: Categorie
+    fr: Catégorie
   directory: categories
   sort: 1
   slug: category
