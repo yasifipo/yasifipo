@@ -31,6 +31,7 @@ def get_page_data(directory, current_slug, parenting):
 	files = []
 	dirs  = []
 	statics = []
+	static_files = []
 	for file_ in files_:
 		if isfile(directory + "/" + file_):
 			if app.spec.match_file(file_):
@@ -93,7 +94,7 @@ def get_page_data(directory, current_slug, parenting):
 					url = '/'
 				else:
 					url = yaml['url']
-					
+
 				if 'post' in yaml.keys():
 					post = yaml['post']
 				else:
@@ -116,6 +117,13 @@ def get_page_data(directory, current_slug, parenting):
 					statics.append(yaml['static'])
 					register_static_img(directory + "/" + yaml['static'], yaml['url'], yaml['static'])
 
+				# register static files folder if needed
+				if 'files' in yaml.keys():
+					if not exists(directory + "/" + yaml['files'] + "/"):
+						makedirs(directory + "/" + yaml['files'] + "/")
+					static_files.append(yaml['files'])
+					register_static_img(directory + "/" + yaml['files'], yaml['url'], "")
+
 			else:
 				print("WARNING : page without url defined : " + directory + "/" + file_)
 
@@ -124,6 +132,9 @@ def get_page_data(directory, current_slug, parenting):
 	for file_ in dirs:
 
 		if file_ in statics:
+			continue
+
+		if file_ in static_files:
 			continue
 
 		# recursive call

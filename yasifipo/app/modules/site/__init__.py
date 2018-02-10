@@ -160,7 +160,10 @@ def check_server(yaml):
 def register_static_img(directory, current_url, static_url):
 	listfile_static = listdir(directory)
 	if current_url == "":
-		url =  "/" + static_url
+		if static_url != "":
+			url =  "/" + static_url
+		else:
+			url = ""
 	else:
 		url = "/" + current_url + "/" + static_url
 	for file_img in listfile_static:

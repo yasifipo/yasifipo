@@ -118,6 +118,8 @@ Create your table of content by creating a directory tree. Each path must have a
 *  title: mandatory, title of page
 *  lang: optionnal, lang of page. default_lang will be used if not set
 *  ref: optional (but mandatory if to display cucumber), used to identify pages regarding language (same page in 2 different languages must have same _ref_ field)
+*  static: optional, name of folder that can contains files like images
+*  files: optional, name of folder that can contains files like images, but render at same level than page, not on subdir
 *  parent: optional, ref of parent page (for cucumber display)
 *  display_cucumber: optional, will not display cucumber if set to False
 *  server: optional, can be a str or list: server (or list of server) where page will be published
