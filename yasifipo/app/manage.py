@@ -40,6 +40,10 @@ def freeze(data_path, display_all):
 	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read(app)
 
+	# override build directory based on data config (no more on app config)
+	if 'freeze_dir' in app.yasifipo['config']:
+		app.config['FREEZER_DESTINATION'] = app.config['DATA_DIR'] + app.yasifipo['config']['freeze_dir']
+
 	if 'dont_freeze' in app.yasifipo['config'] and app.yasifipo['config']['dont_freeze'] == True:
 		print("Can't freeze. Check config")
 		return
