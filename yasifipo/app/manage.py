@@ -33,6 +33,9 @@ def freeze(data_path, display_all):
 	else:
 		app.config['DISPLAY_ALL'] = False
 
+	# change build directory based on data dir
+	app.config['FREEZER_DESTINATION'] = app.config['DATA_DIR'] + app.config['FREEZER_DESTINATION']
+
 	load_config()
 	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read(app)
