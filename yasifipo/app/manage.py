@@ -44,6 +44,10 @@ def freeze(data_path, display_all):
 	if 'freeze_dir' in app.yasifipo['config']:
 		app.config['FREEZER_DESTINATION'] = app.config['DATA_DIR'] + app.yasifipo['config']['freeze_dir']
 
+	# manage not deleted files/dir in build directory, based on data config
+	if 'freeze_destignation_ignore' in app.yasifipo['config']:
+		app.config['FREEZER_DESTINATION_IGNORE'] = app.yasifipo['config']['freeze_destignation_ignore']
+
 	if 'dont_freeze' in app.yasifipo['config'] and app.yasifipo['config']['dont_freeze'] == True:
 		print("Can't freeze. Check config")
 		return
