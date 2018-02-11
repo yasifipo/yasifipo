@@ -14,6 +14,8 @@ from .url import *
 from modules.utils.date import *
 
 def init_post_data():
+	if not isdir(app.config['POST_DIR']):
+		return
 	get_post_data(app.config['POST_DIR'])
 
 	for lang in app.yasifipo["posts"].keys():
