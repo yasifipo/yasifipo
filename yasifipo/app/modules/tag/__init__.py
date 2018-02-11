@@ -69,6 +69,9 @@ def init_tag_data():
 	app.yasifipo["tags"]["conf"] = {}
 	app.yasifipo["tags"]["data"] = {}
 
+	if not isdir(app.config['TAG_DIR']):
+		return
+
 	with open(app.config['TAG_DIR'] + "/summary.md", encoding='utf-8') as fil_tag:
 		yaml = load(fil_tag)
 		if not yaml['tags']:
