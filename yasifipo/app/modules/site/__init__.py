@@ -99,6 +99,8 @@ def register_rules():
 						)
 
 def init_i18n_data():
+	if not isdir(app.config["I18N_DIR"]):
+		return
 	listfile = listdir(app.config["I18N_DIR"])
 	for file_ in listfile:
 		if isfile(app.config["I18N_DIR"] + "/" + file_):
