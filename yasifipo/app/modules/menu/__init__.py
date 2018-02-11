@@ -1,12 +1,14 @@
 from app import app
 from os import listdir
-from os.path import isfile
+from os.path import isfile, isdir
 
 from frontmatter import load
 
 import pathspec
 
 def init_menu_data():
+	if not isdir(app.config["MENU_DIR"]):
+		return
 	listfile = listdir(app.config["MENU_DIR"])
 	for file_ in listfile:
 		if isfile(app.config["MENU_DIR"] + "/" + file_):
