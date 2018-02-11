@@ -10,6 +10,8 @@ from modules.site import *
 from modules.tag import *
 
 def init_page_data():
+	if not isdir(app.config['PAGE_DIR']):
+		return
 	parenting = get_page_data(app.config['PAGE_DIR'], "", [])
 	for item in parenting:
 		if item[1] not in app.yasifipo["refs"].keys():
