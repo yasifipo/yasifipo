@@ -7,3 +7,4 @@ from .collection import *
 from .urls import *
 from .langs import *
 from .list import *
+from .redirection import *

@@ -25,7 +25,10 @@ def render_file(path):
 
 	if path in app.yasifipo["ids"].keys():
 		if app.yasifipo["ids"][path]['type'] == "redirect":
-			return redirect(yasifipo_url_for('render_file', path=app.yasifipo["ids"][path]["data"]['url']), code=301)
+			if yasifipo_is_server():
+				return redirect(yasifipo_url_for('render_file', path=app.yasifipo["ids"][path]["data"]['url']), code=301)
+			else:
+				return render_redirection(yasifipo_url_for('render_file', path=app.yasifipo["ids"][path]["data"]['url']))
 		elif app.yasifipo["ids"][path]['type'] == "prez-chapter":
 			return render_prez_chapter(app.yasifipo["ids"][path]['id'], app.yasifipo["ids"][path]["data"])
 		elif app.yasifipo["ids"][path]['type'] == "prez-course":
