@@ -8,6 +8,8 @@ from .after_render import *
 
 
 def init_plugins():
+	if not isdir(app.config['PLUGIN_DIR']):
+		return
 	app.pluginmanager = YasifipoPluginManager(app.config['PLUGIN_DIR'])
 	app.yasifipo["markdown_process"].append(AfterRenderExtension())
 
