@@ -116,6 +116,8 @@ def init_i18n_data():
 						app.yasifipo["i18n"][yaml['slug']][slug][lang] = yaml['labels'][slug][lang]
 
 def init_site_data_files():
+	if not isdir(app.config["SITEDATA_DIR"]):
+		return
 	app.yasifipo["sitedata"] = SiteData(app.config["SITEDATA_DIR"])
 
 
