@@ -12,6 +12,8 @@ from frontmatter import load
 from slugify import slugify
 
 def init_prez_data():
+	if not isdir(app.config['PREZ_DIR']):
+		return
 	with open(app.config['PREZ_DIR'] + "/summary.md", encoding='utf-8') as fil_prez:
 		yaml = load(fil_prez)
 		if not yaml['presentations']:
