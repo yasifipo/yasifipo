@@ -3,12 +3,24 @@ from app import manager
 from app import bcrypt
 from app import app
 from flask_frozen import Freezer
+from flask import render_template
 from flask_script import Option
 
 from main import *
 from modules.site import *
+from os.path import isdir
 
 freezer = Freezer(app)
+
+def generate_redirection(id, url):
+	#TODO for https
+	html = render_template('site/redirect.html', link="http://" + app.yasifipo['config']['yasifipo_server'] + "/" + url)
+
+	if not isdir(app.config['FREEZER_DESTINATION'] + "/" + id):
+		os.makedirs(app.config['FREEZER_DESTINATION'] + "/" + id)
+	fil_ = open(app.config['FREEZER_DESTINATION'] + "/" + id + "/index.html", "w")
+	fil_.write(html)
+	fil_.close()
 
 @freezer.register_generator
 def url_generator():
@@ -16,8 +28,7 @@ def url_generator():
 		if app.yasifipo['ids'][i]['type'] == 'img':
 			yield 'return_file', {'id_': i}
 		elif app.yasifipo['ids'][i]['type'] == "redirect":
-			yield 'render_file', {'path': app.yasifipo['ids'][i]['data']['url']}
-			# TODO : currently, redirection does'nt work for freeze
+			generate_redirection(i, yasifipo_url_for('render_file', path=app.yasifipo['ids'][i]['data']['url']))
 		else:
 			yield 'render_file', {'path': i}
 
