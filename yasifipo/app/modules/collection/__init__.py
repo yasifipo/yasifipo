@@ -11,6 +11,8 @@ from .url import *
 from modules.utils.date import *
 
 def init_collection_data():
+	if not isdir(app.config['COLLECTION_DIR']):
+		return
 	with open(app.config['COLLECTION_DIR'] + "/summary.md", encoding='utf-8') as fil_collection:
 		yaml = load(fil_collection)
 		if not yaml['collections']:
