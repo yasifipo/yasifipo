@@ -19,8 +19,9 @@ def init_collection_data():
 			return
 		for coll in yaml['collections']:
 
-			if check_server(coll) == False:
-				continue
+			_serv, _resource = check_server(coll)
+			if _serv == False:
+				continue #No resource management for now
 
 			if 'draft' in coll.keys() and coll['draft'] == True:
 				if app.config['DISPLAY_ALL'] == False:
@@ -126,8 +127,9 @@ def get_collection_data(directory, yaml_coll):
 					with open(directory + "/" + file_, encoding='utf-8') as fil_:
 						yaml = load(fil_)
 
-				if check_server(yaml) == False:
-					continue
+				_serv, _resource = check_server(yaml)
+				if _serv == False:
+					continue # No resource management for now
 
 				if 'draft' in yaml.keys() and yaml['draft'] == True:
 					if app.config['DISPLAY_ALL'] == False:

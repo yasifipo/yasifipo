@@ -20,7 +20,8 @@ def url_generator():
 
 @manager.option('-d', '--data', dest='data_path', default=None)
 @manager.option('-a', '--all', dest='display_all', default=False)
-def freeze(data_path, display_all):
+@manager.option('-s', '--server', dest='runtime_server', default=None)
+def freeze(data_path, display_all, runtime_server):
 
 	if data_path:
 		app.config['DATA_DIR'] = os.path.abspath(data_path) + "/"
@@ -34,6 +35,12 @@ def freeze(data_path, display_all):
 	app.config['FREEZER_DESTINATION'] = app.config['DATA_DIR'] + app.config['FREEZER_DESTINATION']
 
 	load_config()
+	
+	if runtime_server:
+		app.config['RUNTIME_SERVER'] = runtime_server
+	else:
+		app.config['RUNTIME_SERVER'] = None
+
 	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read(app)
 
@@ -56,7 +63,8 @@ def freeze(data_path, display_all):
 
 @manager.option('-d', '--data', dest='data_path', default=None)
 @manager.option('-a', '--all', dest='display_all', default=False)
-def run(data_path, display_all):
+@manager.option('-s', '--server', dest='runtime_server', default=None)
+def run(data_path, display_all, runtime_server):
 
 	if data_path:
 		app.config['DATA_DIR'] = os.path.abspath(data_path) + "/"
@@ -67,6 +75,12 @@ def run(data_path, display_all):
 		app.config['DISPLAY_ALL'] = False
 
 	load_config()
+
+	if runtime_server:
+		app.config['RUNTIME_SERVER'] = runtime_server
+	else:
+		app.config['RUNTIME_SERVER'] = None
+
 	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read(app)
 

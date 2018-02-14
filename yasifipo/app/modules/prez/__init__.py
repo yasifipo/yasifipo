@@ -20,8 +20,9 @@ def init_prez_data():
 			return
 		for prez in yaml['presentations']:
 
-			if check_server(prez) == False:
-				continue
+			_serv, _resource = check_server(prez)
+			if _serv == False:
+				continue # No resource management for now
 
 			if 'draft' in prez.keys() and prez['draft'] == True:
 				if app.config['DISPLAY_ALL'] == False:

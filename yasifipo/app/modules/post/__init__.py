@@ -24,11 +24,29 @@ def init_post_data():
 		cpt = 0
 		for it in app.yasifipo["posts"][lang]:
 			if cpt != 0:
-				it['next'] = {'file': app.yasifipo["posts"][lang][cpt-1]['file'], 'date': app.yasifipo["posts"][lang][cpt-1]['date']}
+				cpt_resource = -1
+				while 1:
+					if cpt_resource < 0:
+						it['next'] = None
+						break
+					if app.yasifipo["posts"][lang][cpt_resource]['resource'] is not None:
+						cpt_resource = cpt_resource - 1
+					else:
+						it['next'] = {'file': app.yasifipo["posts"][lang][cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
+						break
 			else:
 				it['next'] = None
 			if cpt != len(app.yasifipo["posts"][lang])-1:
-				it['prev'] = {'file': app.yasifipo["posts"][lang][cpt+1]['file'], 'date': app.yasifipo["posts"][lang][cpt+1]['date']}
+				cpt_resource = 1
+				while 1:
+					if cpt_resource > len(app.yasifipo["posts"][lang]) -1:
+						it['prev'] = None
+						break
+					if app.yasifipo["posts"][lang][cpt_resource]['resource'] is not None:
+						cpt_resource = cpt_resource + 1
+					else:
+						it['prev'] = {'file': app.yasifipo["posts"][lang][cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
+						break
 			else:
 				it['prev'] = None
 			cpt += 1
@@ -73,7 +91,8 @@ def get_post_data(directory):
 				with open(directory + "/" + file_, encoding='utf-8') as fil_:
 					yaml = load(fil_)
 
-			if check_server(yaml) == False:
+			_serv, _resource = check_server(yaml)
+			if _serv == False and _resource == False:
 				continue
 
 			if 'draft' in yaml.keys() and yaml['draft'] == True:
@@ -127,17 +146,24 @@ def get_post_data(directory):
 			else:
 				url = new_url
 
-			set_post(lang, directory + "/" + file_, date)
-			yasifipo_register('post', url, directory + "/" + file_, {})
+			if _serv == True:
+				set_post(lang, directory + "/" + file_, date, None)
+				yasifipo_register('post', url, directory + "/" + file_, {})
+			else:
+				if _resource == True: #should be always the case
+					url = app.yasifipo['config']['resources'][yaml['server']]['root'] + "/" + url
+					set_post(lang, directory + "/" + file_, date, url)
+					# No registration here
 
-			if 'redirect' in yaml.keys():
-				reds = []
-				if type(yaml['redirect']).__name__ == "str":
-					reds.append(yaml['redirect'])
-				else:
-					reds = yaml['redirect']
-				for red in reds:
-					yasifipo_register('redirect', red, None, {'url': url})
+			if _serv == True:
+				if 'redirect' in yaml.keys():
+					reds = []
+					if type(yaml['redirect']).__name__ == "str":
+						reds.append(yaml['redirect'])
+					else:
+						reds = yaml['redirect']
+					for red in reds:
+						yasifipo_register('redirect', red, None, {'url': url})
 
 			# register static folder if needed
 			if 'static' in yaml.keys():
@@ -157,12 +183,13 @@ def get_post_data(directory):
 		# recursive call
 		get_post_data(directory + "/" + file_)
 
-def set_post(lang, file_, date):
+def set_post(lang, file_, date, resource=None):
 	if lang not in app.yasifipo["posts"].keys():
 		app.yasifipo["posts"][lang] = []
 
 	app.yasifipo["posts"][lang].append({
 									'file': file_,
 									'lang': lang,
-									'date': date
+									'date': date,
+									'resource': resource
 									})

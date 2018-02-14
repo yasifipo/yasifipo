@@ -35,6 +35,32 @@ def init_file_data():
 				for it in yaml[key]:
 					app.yasifipo['config'][key].append(it)
 
+
+	# manage resource / server
+	if type(app.yasifipo['config']['yasifipo_resource_server']).__name__ == "list":
+		if app.yasifipo['config']['yasifipo_server'] in app.yasifipo['config']['yasifipo_resource_server']:
+			app.yasifipo['config']['yasifipo_resource_server'].remove(app.yasifipo['config']['yasifipo_server'])
+	else: # string, only 1 resource server
+		if app.yasifipo['config']['yasifipo_server'] == app.yasifipo['config']['yasifipo_resource_server']:
+			app.yasifipo['config']['yasifipo_resource_server'] = ''
+
+	# if runtime server was not overriden in arguments call, use server from config file
+	if not app.config['RUNTIME_SERVER']:
+		app.config['RUNTIME_SERVER'] = app.yasifipo['config']['yasifipo_server']
+
+
+	# manage resource information
+	if isfile(app.config['CONFIG_DIR'] + 'resources.md'):
+		with open(app.config['CONFIG_DIR'] + 'resources.md', encoding='utf-8') as file_:
+			yaml = load(file_)
+			if 'resources' in yaml.keys() and type(yaml['resources']).__name__ == "list":
+				app.yasifipo['config']['resources'] = {}
+				for it in yaml['resources']:
+					app.yasifipo['config']['resources'][it['slug']] = {}
+					for key in it.keys():
+						app.yasifipo['config']['resources'][it['slug']][key] = it[key]
+
+
 	with open(app.config['CONFIG_DIR'] + 'sorting_item_type.md', encoding='utf-8') as file_:
 		yaml = load(file_)
 		app.yasifipo['config']['sorting_item_type'] = {}
@@ -149,17 +175,58 @@ def yasifipo_register(type_, rule, id_, data={}, post=None):
 			app.yasifipo["root"]['post'] = post
 
 def check_server(yaml):
-	if 'server' in yaml.keys():
-		if type(yaml['server']).__name__ == 'str':
-			if (yaml['server'] != app.yasifipo["config"]["yasifipo_server"]):
-				return False
-		elif type(yaml['server']).__name__ == 'list':
-			if app.yasifipo["config"]["yasifipo_server"] not in yaml['server']:
-				return False
-		else:
-			return False
+	server = True
+	resource = False
 
-	return True
+
+	if 'server' in yaml.keys():
+
+		if type(yaml['server']).__name__ == 'str':
+			# Server
+			if (yaml['server'] == app.config['RUNTIME_SERVER']):
+				server = True
+			else:
+				server = False
+
+			# Resource
+			if type(app.yasifipo["config"]["yasifipo_resource_server"]).__name__ == 'str':
+				if (yaml['server'] == app.yasifipo["config"]["yasifipo_resource_server"]):
+					resource = True
+				else:
+					resource = False
+			elif type(app.yasifipo["config"]["yasifipo_resource_server"]).__name__ == 'list':
+				if yaml['server'] in app.yasifipo["config"]["yasifipo_resource_server"]:
+					resource = True
+				else:
+					resource = False
+			else:
+				resource = False
+
+		elif type(yaml['server']).__name__ == 'list':
+
+			# Server
+			if app.config['RUNTIME_SERVER'] in yaml['server']:
+				server = True
+			else:
+				server = False
+
+			# Resource
+			resource = False
+			for res_serv in app.yasifipo["config"]["yasifipo_resource_server"]:
+				if res_serv in yaml['server']:
+					resource = True
+					break
+
+		else:
+			server = False
+			resource = False
+
+		return server, resource
+
+	else:
+		server = True
+		return server, resource
+
 
 def register_static_img(directory, current_url, static_url):
 	listfile_static = listdir(directory)

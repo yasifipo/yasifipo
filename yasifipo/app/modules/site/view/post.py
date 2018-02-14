@@ -37,7 +37,7 @@ def render_post(file_):
 		get_lists(page, yaml, request)
 
 		post = [ i for i in app.yasifipo["posts"][page.lang] if i['file'] == file_][0] #TODO check perf issue here
-		page.post = Post(post['file'], post['date'], page.lang)
+		page.post = Post(post['file'], post['date'], page.lang, None)
 		page.post.get_prev_next(post['prev'], post['next'])
 
 		page.get_menus(yaml)

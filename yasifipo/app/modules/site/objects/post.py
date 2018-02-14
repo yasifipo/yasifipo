@@ -15,19 +15,23 @@ class Posts():
 		self.posts = posts
 
 class Post():
-	def __init__(self, file_, date, lang):
+	def __init__(self, file_, date, lang, resource):
 		self.file_ = file_
 		self.date  = date
-		self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
+		self.resource = (resource is not None)
+		if not self.resource:
+			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
+		else:
+			self.url = resource
 		self.next  = None
 		self.prev  = None
 		self.lang  = lang
 
 	def get_prev_next(self, prev, next):
 		if prev:
-			self.prev = Post(prev['file'], prev['date'], self.lang)
+			self.prev = Post(prev['file'], prev['date'], self.lang, False)
 		if next:
-			self.next = Post(next['file'], next['date'], self.lang)
+			self.next = Post(next['file'], next['date'], self.lang, False)
 
 	def get_full(self):
 		with open(self.file_, encoding='utf-8') as fil_:

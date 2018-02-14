@@ -57,7 +57,7 @@ class Page():
 		if self.lang not in app.yasifipo["posts"].keys():
 			return []
 		for post_it in app.yasifipo["posts"][self.lang]:
-			post = Post(post_it['file'],post_it['date'], self.lang)
+			post = Post(post_it['file'],post_it['date'], self.lang, post_it['resource'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
 			posts.append(post)
@@ -121,7 +121,7 @@ class Page():
 			nb = len(app.yasifipo["posts"][self.lang]) - start
 
 		for post_it in app.yasifipo["posts"][self.lang][start:start+nb]:
-			post = Post(post_it['file'],post_it['date'], self.lang)
+			post = Post(post_it['file'],post_it['date'], self.lang, post_it['resource'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
 			posts.append(post)

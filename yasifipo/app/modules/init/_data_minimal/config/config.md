@@ -1,5 +1,6 @@
 ---
 yasifipo_server: example.yasifipo.net
+yasifipo_resource_server: ['example-resource.yasifipo.net', 'example2-resource.yasifipo.net']
 yasifipo_subdirectory: '' # without any /, or '' for using root
 
 prez_url_prefix: '' # 'slug' without any /

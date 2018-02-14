@@ -66,8 +66,9 @@ def get_page_data(directory, current_slug, parenting):
 				if not exists(directory + "/img/"):
 					makedirs(directory + "/img/")
 
-			if check_server(yaml) == False:
-				continue
+			_serv, _resource = check_server(yaml)
+			if _serv == False:
+				continue # No resource management for now
 
 			if 'draft' in yaml.keys() and yaml['draft'] == True:
 				if app.config['DISPLAY_ALL'] == False:
