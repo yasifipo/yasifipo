@@ -20,6 +20,8 @@ def init_site_data():
 	register_rules()
 	init_site_data_files()
 	app.yasifipo["markdown_process"].insert(0, FreezeUrlExtension())
+	app.yasifipo["markdown_process"].insert(0, 'markdown.extensions.tables')
+	app.yasifipo["markdown_process"].insert(0, 'extra')
 
 def init_file_data():
 	with open(app.config['CONFIG_DIR'] + 'file_ignore.txt', encoding='utf-8') as fh:
