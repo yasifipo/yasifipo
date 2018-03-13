@@ -4,12 +4,14 @@ from flask import render_template
 from frontmatter import load
 from flask import Markup
 from markdown import markdown
+from jinja2 import Environment
 
 from .urls import *
 from .langs import *
 from .list import *
 
 from modules.site.objects import *
+from modules.site.view.filters import *
 
 def render_page(file_):
 
@@ -47,13 +49,15 @@ def render_page(file_):
 			layout = app.yasifipo["config"]["layout_page"]
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content, app.yasifipo["markdown_process"]))
+		env = Environment()
+		env.filters['youtube'] = youtube
+		page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
 
 		page.get_menus(yaml)
 
 	for plugin in app.plugins.values():
 		plugin.before_render(page, file_)
-		
+
 	page.get_generated_time()
 	return render_template(layout,
 							site=app.yasifipo["sitedata"],

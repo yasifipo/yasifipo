@@ -4,6 +4,7 @@ from flask import render_template, request
 from frontmatter import load
 from flask import Markup
 from markdown import markdown
+from jinja2 import Environment
 
 from os.path import dirname
 
@@ -11,8 +12,8 @@ from .urls import *
 from .langs import *
 from .list import *
 
-
 from modules.site.objects import *
+from modules.site.view.filters import *
 
 # recursive fonction to construct ToC
 def get_children(file_, first_level):
@@ -91,7 +92,9 @@ def render_prez_chapter(file_, data):
 		page.cucumber = []
 
 	page.title = yaml['title']
-	page.content = Markup(markdown(yaml.content, app.yasifipo["markdown_process"]))
+	env = Environment()
+	env.filters['youtube'] = youtube
+	page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
@@ -205,7 +208,9 @@ def render_prez_page(file_, data):
 			page.cucumber = []
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content, app.yasifipo["markdown_process"]))
+		env = Environment()
+		env.filters['youtube'] = youtube
+		page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
 
 		get_lists(page, yaml, request)
 

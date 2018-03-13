@@ -4,12 +4,14 @@ from flask import render_template
 from frontmatter import load
 from flask import Markup
 from markdown import markdown
+from jinja2 import Environment
 
 from .urls import *
 from .langs import *
 from .list import *
 
 from modules.site.objects import *
+from modules.site.view.filters import *
 
 def render_post(file_):
 	with open(file_, encoding='utf-8') as data:
@@ -27,7 +29,9 @@ def render_post(file_):
 			page.tags_display = page.get_tags_display(yaml)
 
 		page.title   = yaml['title']
-		page.content = Markup(markdown(yaml.content, app.yasifipo["markdown_process"]))
+		env = Environment()
+		env.filters['youtube'] = youtube
+		page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
 
 		if 'layout' in yaml.keys():
 			layout = 'post/' + yaml['layout']

@@ -291,7 +291,3 @@ def templates_add_loader(path):
 	    app.jinja_loader,
 	])
 	app.jinja_loader = my_loader
-
-@app.template_filter()
-def gmarkdown(text):
-	return Markup(markdown(text, app.yasifipo["markdown_process"]))
