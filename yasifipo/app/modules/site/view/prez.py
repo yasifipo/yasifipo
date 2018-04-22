@@ -94,7 +94,8 @@ def render_prez_chapter(file_, data):
 	page.title = yaml['title']
 	env = Environment()
 	env.filters['youtube'] = youtube
-	page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
+	env.filters['include'] = include
+	page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
@@ -210,7 +211,8 @@ def render_prez_page(file_, data):
 		page.title   = yaml['title']
 		env = Environment()
 		env.filters['youtube'] = youtube
-		page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
+		env.filters['include'] = include
+		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
 
 		get_lists(page, yaml, request)
 

@@ -239,6 +239,9 @@ def read_prez_data(directory, up_directory, current_slug, lang):
 			with open(directory + "/" + file_, encoding='utf-8') as fil_:
 				yaml = load(fil_)
 
+				if 'include' in yaml.keys() and yaml['include'] == True:
+					continue
+
 				#if there is no header on file, create it
 				if len(yaml.keys()) == 0:
 					with open(directory + "/" + file_, "w", encoding='utf-8') as fil_write:

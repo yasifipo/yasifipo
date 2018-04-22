@@ -72,6 +72,8 @@ def get_post_data(directory):
 		with open(directory + "/" + file_, encoding='utf-8') as fil_:
 			yaml = load(fil_)
 
+			if 'include' in yaml.keys() and yaml['include'] == True:
+				continue
 
 			#if there is no header on file, create it
 			if len(yaml.keys()) == 0:

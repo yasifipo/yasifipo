@@ -47,6 +47,9 @@ def get_page_data(directory, current_slug, parenting):
 		with open(directory + "/" + file_, encoding='utf-8') as fil_:
 			yaml = load(fil_)
 
+			if 'include' in yaml.keys() and yaml['include'] == True:
+				continue
+
 			if current_slug == "":
 				next_slug = slugify(file_)
 			else:

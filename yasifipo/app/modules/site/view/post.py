@@ -31,7 +31,9 @@ def render_post(file_):
 		page.title   = yaml['title']
 		env = Environment()
 		env.filters['youtube'] = youtube
-		page.content = Markup(markdown(env.from_string(yaml.content).render(), app.yasifipo["markdown_process"]))
+		env.filters['include'] = include
+		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
+
 
 		if 'layout' in yaml.keys():
 			layout = 'post/' + yaml['layout']
