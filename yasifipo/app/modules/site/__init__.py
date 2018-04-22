@@ -283,9 +283,17 @@ def load_config():
 	app.config['SECRET_KEY'] = urandom(24)
 
 def plugin_add_template(plugin, path):
+	#TODO : data must be stored for now, and register really after main run_data_read function
+	# to be sure that things are registered in good order (app/templates/ --> _data/templates/theme/ --> plugin templates)
+	# Then, to find a templates, search will be done on this order : plugin / data / app
 	templates_add_loader(app.config['PLUGIN_DIR'] + plugin.__class__.__name__ + "/" + path + "/")
 
-def templates_add_loader(path):
+def templates_add_loader(path, init=False):
+
+	if init == True:
+		app.jinja_loader = jinja2.ChoiceLoader([jinja2.FileSystemLoader(path)])
+		return
+
 	my_loader = jinja2.ChoiceLoader([
 	    jinja2.FileSystemLoader(path),
 	    app.jinja_loader,

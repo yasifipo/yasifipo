@@ -9,6 +9,7 @@ post_default_url: <lang>/<year>/<month>/ # with / at end, but without / at begin
 collection_default_url: <lang>/<year>/<month>/ # with / at end, but without / at beginning
 
 default_lang: 'en'
+theme: 'default'
 
 reveal_default_theme: "yasifipo"
 

@@ -35,14 +35,15 @@ def freeze(data_path, display_all, runtime_server):
 	app.config['FREEZER_DESTINATION'] = app.config['DATA_DIR'] + app.config['FREEZER_DESTINATION']
 
 	load_config()
-	
+
 	if runtime_server:
 		app.config['RUNTIME_SERVER'] = runtime_server
 	else:
 		app.config['RUNTIME_SERVER'] = None
 
-	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read(app)
+	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/", init=True)
+	templates_add_loader(app.config['TEMPLATES_DIR'] + app.yasifipo["config"]["theme"]) #must be before Plugin registration
 
 	# override build directory based on data config (no more on app config)
 	if 'freeze_dir' in app.yasifipo['config']:
@@ -81,8 +82,9 @@ def run(data_path, display_all, runtime_server):
 	else:
 		app.config['RUNTIME_SERVER'] = None
 
-	templates_add_loader(app.config['TEMPLATES_DIR']) #must be before Plugin registration
 	run_data_read(app)
+	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/", init=True)
+	templates_add_loader(app.config['TEMPLATES_DIR'] + app.yasifipo["config"]["theme"]) #must be before Plugin registration
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
 		app.register_blueprint(admin, url_prefix="/" + app.yasifipo['config']['yasifipo_subdirectory'] + "/admin")
