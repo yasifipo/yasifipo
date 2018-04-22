@@ -56,6 +56,7 @@ List of all existing yaml files
 *  layout_collection: default layout
 *  site_version: version of the website
 *  dont_freeze: If set to _True_, you can't freeze your website
+*  theme: directory of theme
 
 ## _data/config/file_ignore.txt
 This file is not a yaml file. Follow the .gitgnore syntax and way of working, ignoring some file in directories
@@ -106,6 +107,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  display_sidebar: optional. If set to False, in reveal presentations, does not display button to open siderbar
 *  layout: optional. Set the layout (in templates/prez folder). If not set, default is used
 *  sort: optional. Will be used for sorting when displaying tag items
+*  include: optional, if set to True, file will not be taken into account, but can be used for include filter
 *  all keys will be available on page.data
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
@@ -123,6 +125,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  parent: optional, ref of parent page (for cucumber display)
 *  display_cucumber: optional, will not display cucumber if set to False
 *  server: optional, can be a str or list: server (or list of server) where page will be published
+*  include: optional, if set to True, file will not be taken into account, but can be used for include filter
 *  (any tag): optional
 *  display_tags: optional. If set to False, tags are not displayed
 *  redirect (str or tab) : urls redirected to url by 301 redirection
@@ -146,6 +149,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  (any tag): optional
 *  display_tags: optional. If set to False, tags are not displayed
 *  server: optional, can be a str or list: server (or list of server) where page will be published
+*  include: optional, if set to True, file will not be taken into account, but can be used for include filter
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  all keys will be available on page.post.data
@@ -161,6 +165,7 @@ Create your table of content by creating a directory tree. Each path must have a
 *  (any tag): optional
 *  display_tags: optional. If set to False, tags are not displayed
 *  server: optional, can be a str or list: server (or list of server) where page will be published
+*  include: optional, if set to True, file will not be taken into account, but can be used for include filter
 *  layout: optional. Set the layout (in templates/page folder). If not set, default is used
 *  redirect (str or tab) : urls redirected to url by 301 redirection
 *  all keys will be available on page.post.data
@@ -200,3 +205,8 @@ TODO
 
 ## _data/rule/xxx.md
 TODO
+
+## filters
+
+*  youtube: example --> {{  'buRXPNrFdgk'|youtube }}
+*  include: example --> {{ 'tab_detail.md'|include }}
