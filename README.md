@@ -18,7 +18,7 @@ No database, using only filesystem
 
 # Installation
 *  Use virtualenv to create an new env with python3:
-  * virtualenv env
+  * virtualenv env -p /usr/bin/python3
 *  Enter into virtualenv:
   *  source env/bin/activate
 *  Update dependencies:
