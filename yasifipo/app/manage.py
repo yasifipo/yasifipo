@@ -42,7 +42,7 @@ def freeze(data_path, display_all, runtime_server):
 		app.config['RUNTIME_SERVER'] = None
 
 	run_data_read(app)
-	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/", init=True)
+	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/" + app.config["APPLICATION_TEMPLATE"] + "/", init=True)
 	templates_add_loader(app.config['TEMPLATES_DIR'] + app.yasifipo["config"]["theme"]) #must be before Plugin registration
 
 	# override build directory based on data config (no more on app config)
@@ -83,7 +83,7 @@ def run(data_path, display_all, runtime_server):
 		app.config['RUNTIME_SERVER'] = None
 
 	run_data_read(app)
-	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/", init=True)
+	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/"  + app.config["APPLICATION_TEMPLATE"] + "/", init=True)
 	templates_add_loader(app.config['TEMPLATES_DIR'] + app.yasifipo["config"]["theme"]) #must be before Plugin registration
 
 	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':

@@ -10,6 +10,8 @@ class Configuration(object):
 	FREEZER_RELATIVE_URLS = True
 	FREEZER_DESTINATION = 'build'
 
+	APPLICATION_TEMPLATE = 'default'
+
 	VERSION = "0.0.1"
 
 	DISPLAY_ALL = False

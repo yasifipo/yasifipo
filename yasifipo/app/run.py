@@ -4,7 +4,7 @@ from modules.site import *
 from main import *
 
 load_config()
-templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/", init=True)
+templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/"  + app.config["APPLICATION_TEMPLATE"] + "/", init=True)
 run_data_read(app)
 templates_add_loader(app.config['TEMPLATES_DIR'] + app.yasifipo["config"]["theme"]) #must be before Plugin registration
 
