@@ -47,7 +47,8 @@ def init_file_data():
 			app.yasifipo['config']['yasifipo_resource_server'] = ''
 
 	# if runtime server was not overriden in arguments call, use server from config file
-	if not app.config['RUNTIME_SERVER']:
+	# or if runtime server is not set (coming from run.py)
+	if not 'RUNTIME_SERVER' in app.config.keys() or not app.config['RUNTIME_SERVER']:
 		app.config['RUNTIME_SERVER'] = app.yasifipo['config']['yasifipo_server']
 
 
