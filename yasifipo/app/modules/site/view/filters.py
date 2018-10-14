@@ -4,10 +4,15 @@ from app import app
 from flask import render_template
 
 from os.path import dirname, join
+from .urls import *
 
 @app.template_filter()
 def gmarkdown(text):
 	return Markup(markdown(text, app.yasifipo["markdown_process"]))
+
+@app.template_filter()
+def yasifipo(text):
+	return yasifipo_url_for('render_file', path=app.yasifipo["files"][app.config['DATA_DIR'] + text])
 
 @app.template_filter()
 def youtube(text):
