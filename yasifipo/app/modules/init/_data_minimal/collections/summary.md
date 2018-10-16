@@ -4,8 +4,8 @@ collections:
   description:
     en: "Collection Test"
     fr: "Collection Test FR"
-  directory: coll_test
-  slug: coll_test
+  directory: tool_dir
+  slug: tools
   sorting: sort
   sort: 1
   output_url: True
