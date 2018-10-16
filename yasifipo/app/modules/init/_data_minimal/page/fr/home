@@ -18,6 +18,6 @@ Tu peux trouver ici quelques exemples:
 
 
 
-[1]: /fr/children/
-[2]: /fr/collections/
-[3]: /fr/single/
+[1]: {{ 'page//fr/children.md'|yasifipo }}
+[2]: {{ 'page//fr/page_collection'|yasifipo }}
+[3]: {{ 'prez/single/prez-fr.md'|yasifipo }}

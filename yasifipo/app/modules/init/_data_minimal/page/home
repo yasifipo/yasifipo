@@ -17,6 +17,6 @@ You can find here some examples:
 
 
 
-[1]: /children/
-[2]: /collections/
-[3]: /en/single/
+[1]: {{ 'page//children.md'|yasifipo }}
+[2]: {{ 'page//page_collection'|yasifipo }}
+[3]: {{ 'prez/single/prez-en.md'|yasifipo }}
