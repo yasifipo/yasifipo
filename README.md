@@ -18,13 +18,14 @@ No database, using only filesystem
 
 # Installation
 *  Use virtualenv to create an new env with python3:  
-  *  virtualenv env -p /usr/bin/python3  
+> virtualenv env -p /usr/bin/python3  
 *  Enter into virtualenv:  
-  *  source env/bin/activate  
+> source env/bin/activate  
 *  Update dependencies:  
-  *  pip install -r yasifipo/requirements.txt  
+> pip install -r yasifipo/requirements.txt  
 *  cd yasifipo/yasifipo  
-*  Create admin password : python3 app/manage.py admin_password -p <password>  
+*  Create admin password
+> python3 app/manage.py admin_password -p <password>  
 
 # how to run (testing)
 *  python3 app/manage.py run -d path/to/data/
@@ -112,8 +113,8 @@ Create your table of content by creating a directory tree. Each path must have a
 *  posts: optional. If set to True, all posts are retrieved and available in page.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  collections: optional. Must be a tab. Each item must be a collection tag. If set to True, all collection posts are retrieved and available in page.<collectionname>.posts ; If set to an INT, pagination is setup with split every number set in this value
 *  content (not part of yaml): content of reveal.js presentation. By default:
-  *  ~~~ is used for horizontal separator
-  *  ~~ is used for vertical separator
+  *  3 ~ is used for horizontal separator
+  *  2 ~ is used for vertical separator
 
 ## page file
 *  url: mandatory, url of page
@@ -136,8 +137,8 @@ Create your table of content by creating a directory tree. Each path must have a
 *  all keys will be available on page.data
 *  content (not part of yaml): content of page (in markdown language)
 *  post: optional, name of function to call if page request method is POST:
-  *  coming from a plugin, must be <PluginName>/<MethodName>
-	*  coming from core yasifipo, must be <MethodName> (registered on app.post)
+  * coming from a plugin, must be <PluginName>/<MethodName>
+  * coming from core yasifipo, must be <MethodName> (registered on app.post)
 
 ## Post file
 *  url: optional. If not set, will use default url config. In that case, filename must start with the date (YYYYMMDD), if date tag is not set
@@ -179,8 +180,8 @@ Contains list of available tag types (table of __tag__ in yaml)
 *  slug: unique identifier of this tag type
 *  sort: Used to sort tag type when needed
 *  url:
-  *  mass: url for list of tag of this type (1 by language)
-  *  url: url prefix for tags of this type
+ * mass: url for list of tag of this type (1 by language)
+ * url: url prefix for tags of this type
 
 ## _data/tags/tags/xxx.md
 *  descr: description (1 by language)
@@ -195,8 +196,8 @@ Contains list of all available collection (table of __collection__ in yaml)
 *  directory: directory of given collection
 *  slug: unique identifier of the collection
 *  sorting: how collection items are sorted. Available values are:
-  *  date
-  *  sort
+ *  date
+ *  sort
 *  sort: How to sort collection types
 *  output_url: If set to False, no url will be generated
 
