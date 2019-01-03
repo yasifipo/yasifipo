@@ -1,8 +1,8 @@
 # Yasifipo
 
-Yet Another Simple File Posting Organizer
-Still in heavy development. Do not use in production for now
-Yasifipo is running using python & Flask
+Yet Another Simple File Posting Organizer  
+Still in heavy development. Do not use in production for now  
+Yasifipo is running using python & Flask  
 No database, using only filesystem
 
 # Features
@@ -17,14 +17,14 @@ No database, using only filesystem
 *  collections, generic data
 
 # Installation
-*  Use virtualenv to create an new env with python3:
-  * virtualenv env -p /usr/bin/python3
-*  Enter into virtualenv:
-  *  source env/bin/activate
-*  Update dependencies:
-  *  pip install -r yasifipo/requirements.txt
-*  cd yasifipo/yasifipo
-*  Create admin password : python3 app/manage.py admin_password -p <password>
+*  Use virtualenv to create an new env with python3:  
+  *  virtualenv env -p /usr/bin/python3  
+*  Enter into virtualenv:  
+  *  source env/bin/activate  
+*  Update dependencies:  
+  *  pip install -r yasifipo/requirements.txt  
+*  cd yasifipo/yasifipo  
+*  Create admin password : python3 app/manage.py admin_password -p <password>  
 
 # how to run (testing)
 *  python3 app/manage.py run -d path/to/data/
