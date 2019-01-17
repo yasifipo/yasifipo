@@ -2,6 +2,7 @@ import re
 from frontmatter import load
 from app import app
 from flask import render_template
+from flask import Markup
 
 from os.path import dirname, join
 from .urls import *
