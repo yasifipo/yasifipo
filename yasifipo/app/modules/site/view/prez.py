@@ -137,9 +137,14 @@ def render_prez_prez(file_, data):
 		else:
 			page.tags_display = page.get_tags_display(yaml)
 
-		page.display['sidebar'] = True
-		if 'display_sidebar' in yaml.keys() and yaml['display_sidebar'] == False:
-			page.display['sidebar'] = False
+		if "default" in app.yasifipo["config"] and "display_sidebar" in app.yasifipo["config"]["default"]:
+			page.display['sidebar'] = app.yasifipo["config"]["default"]["display_sidebar"]
+		else: # No default in configuration
+			page.display['sidebar'] = True
+
+		# Overidde default for sidebar
+		if 'display_sidebar' in yaml.keys():
+			page.display['sidebar'] = yaml['display_sidebar']
 
 		theme = {}
 		if 'theme' in yaml.keys():

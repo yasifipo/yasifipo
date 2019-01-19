@@ -24,4 +24,7 @@ site_version: 0.0.1
 dont_freeze: False
 freeze_dir: build
 freeze_destination_ignore: []
+
+default:
+  display_sidebar: True
 ---
