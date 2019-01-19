@@ -22,30 +22,30 @@ def init_post_data():
 		app.yasifipo["posts"][lang] = sorted(app.yasifipo["posts"][lang], key=lambda k: k['date'])
 		app.yasifipo["posts"][lang].reverse()
 		cpt = 0
-		for it in app.yasifipo["posts"][lang]:
+		for it_cpt, it in enumerate(app.yasifipo["posts"][lang]):
 			if cpt != 0:
-				cpt_resource = -1
+				cpt_resource = 1
 				while 1:
-					if cpt_resource < 0:
+					if cpt_resource > len(app.yasifipo["posts"][lang]) -1:
 						it['next'] = None
 						break
-					if app.yasifipo["posts"][lang][cpt_resource]['resource'] is not None:
-						cpt_resource = cpt_resource - 1
+					if app.yasifipo["posts"][lang][it_cpt]['resource'] is not None:
+						cpt_resource = cpt_resource + 1
 					else:
-						it['next'] = {'file': app.yasifipo["posts"][lang][cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
+						it['next'] = {'file': app.yasifipo["posts"][lang][it_cpt - cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
 						break
 			else:
 				it['next'] = None
-			if cpt != len(app.yasifipo["posts"][lang])-1:
+			if cpt != len(app.yasifipo["posts"][lang]) - 1:
 				cpt_resource = 1
 				while 1:
 					if cpt_resource > len(app.yasifipo["posts"][lang]) -1:
 						it['prev'] = None
 						break
-					if app.yasifipo["posts"][lang][cpt_resource]['resource'] is not None:
+					if app.yasifipo["posts"][lang][it_cpt]['resource'] is not None:
 						cpt_resource = cpt_resource + 1
 					else:
-						it['prev'] = {'file': app.yasifipo["posts"][lang][cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
+						it['prev'] = {'file': app.yasifipo["posts"][lang][it_cpt + cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
 						break
 			else:
 				it['prev'] = None
