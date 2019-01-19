@@ -95,6 +95,7 @@ def render_prez_chapter(file_, data):
 	env = Environment()
 	env.filters['yasifipo'] = yasifipo
 	env.filters['youtube'] = youtube
+	env.filters['onlydate'] = onlydate
 	env.filters['include'] = include
 	page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
 
@@ -218,6 +219,7 @@ def render_prez_page(file_, data):
 		env = Environment()
 		env.filters['yasifipo'] = yasifipo
 		env.filters['youtube'] = youtube
+		env.filters['onlydate'] = onlydate
 		env.filters['include'] = include
 		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
 

@@ -20,6 +20,10 @@ def youtube(text):
 	return render_template('includes/filters/youtube.html', id=text)
 
 @app.template_filter()
+def onlydate(text):
+	return str(text)[:10]
+
+@app.template_filter()
 def include(text):
 	with open(text) as fil_include:
 		yaml_include = load(fil_include)
