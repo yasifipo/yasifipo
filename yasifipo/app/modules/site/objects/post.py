@@ -29,9 +29,9 @@ class Post():
 
 	def get_prev_next(self, prev, next):
 		if prev:
-			self.prev = Post(prev['file'], prev['date'], self.lang, False)
+			self.prev = Post(prev['file'], prev['date'], self.lang, None)
 		if next:
-			self.next = Post(next['file'], next['date'], self.lang, False)
+			self.next = Post(next['file'], next['date'], self.lang, None)
 
 	def get_full(self):
 		with open(self.file_, encoding='utf-8') as fil_:
