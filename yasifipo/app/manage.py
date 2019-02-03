@@ -64,7 +64,8 @@ def freeze(data_path, display_all, runtime_server):
 	# Manage files that are only copied (for example static files)
 	if 'freeze_copy_dir' in app.yasifipo['config']:
 		for dir in app.yasifipo['config']['freeze_copy_dir']:
-			rmtree(app.config['FREEZER_DESTINATION'] + "/" + dir)
+			if os.path.isdir(app.config['FREEZER_DESTINATION'] + "/" + dir):
+				rmtree(app.config['FREEZER_DESTINATION'] + "/" + dir)
 			copytree(app.config['DATA_DIR'] + dir, app.config['FREEZER_DESTINATION'] + "/" + dir)
 			# ignore all file that will be copied, to not delete them just after
 			app.config['FREEZER_DESTINATION_IGNORE'].append(dir)
