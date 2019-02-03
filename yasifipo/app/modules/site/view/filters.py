@@ -16,6 +16,10 @@ def yasifipo(text):
 	return yasifipo_url_for('render_file', path=app.yasifipo["files"][app.config['DATA_DIR'] + text])
 
 @app.template_filter()
+def static(text):
+	return yasifipo_url_for('static', filename=text)
+
+@app.template_filter()
 def youtube(text):
 	return render_template('includes/filters/youtube.html', id=text)
 

@@ -9,7 +9,7 @@ from .post import *
 from .collection import *
 from .prez import *
 from .menu import *
-from ..view.filters import yasifipo
+from ..view.filters import yasifipo, static
 
 class Page():
 	def __init__(self, type_, yaml={}):
@@ -236,7 +236,7 @@ class Page():
 			for menu in menus:
 				self.menus.append(Menu(menu, self.lang))
 
-		# Convert url if needed, using yasifipo filter
+		# Convert url if needed, using yasifipo filter or static filter
 		for menu in self.menus:
 			for item in menu.items:
 				try:
@@ -244,6 +244,8 @@ class Page():
 					tab = text.split("|")
 					if "yasifipo" in tab[1]:
 						item.url = yasifipo(tab[0][1:-1])
+					elif "static" in tab[1]:
+						item.url = static(tab[0][1:-1])
 				except:
 					pass # If this is a "normal" url
 
