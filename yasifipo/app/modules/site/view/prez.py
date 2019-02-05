@@ -98,7 +98,7 @@ def render_prez_chapter(file_, data):
 	env.filters['onlydate'] = onlydate
 	env.filters['include'] = include
 	env.filters['static'] = static
-	page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
+	page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), extensions=app.yasifipo["markdown_process"]))
 
 	page.toc_css = yasifipo_url_for('static', filename='css/toc.css')
 
@@ -223,7 +223,7 @@ def render_prez_page(file_, data):
 		env.filters['onlydate'] = onlydate
 		env.filters['include'] = include
 		env.filters['static'] = static
-		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
+		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), extensions=app.yasifipo["markdown_process"]))
 
 		get_lists(page, yaml, request)
 

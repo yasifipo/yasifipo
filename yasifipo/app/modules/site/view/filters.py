@@ -9,7 +9,7 @@ from .urls import *
 
 @app.template_filter()
 def gmarkdown(text):
-	return Markup(markdown(text, app.yasifipo["markdown_process"]))
+	return Markup(markdown(text, extensions=app.yasifipo["markdown_process"]))
 
 @app.template_filter()
 def yasifipo(text):

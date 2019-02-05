@@ -35,7 +35,7 @@ def render_post(file_):
 		env.filters['onlydate'] = onlydate
 		env.filters['include'] = include
 		env.filters['static'] = static
-		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), app.yasifipo["markdown_process"]))
+		page.content = Markup(markdown(env.from_string(pre_filter({'file':file_}, yaml.content)).render(), extensions=app.yasifipo["markdown_process"]))
 
 
 		if 'layout' in yaml.keys():
