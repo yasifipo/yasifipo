@@ -174,7 +174,14 @@ def render_prez_prez(file_, data):
 				page.cucumber = []
 
 		page.title   = yaml['title']
-		page.content = Markup(yaml.content)
+
+		env = Environment()
+		env.filters['yasifipo'] = yasifipo
+		env.filters['youtube'] = youtube
+		env.filters['onlydate'] = onlydate
+		env.filters['include'] = include
+		env.filters['static'] = static
+		page.content = env.from_string(pre_filter({'file':file_}, yaml.content)).render()
 
 		get_lists(page, yaml, request)
 
