@@ -181,7 +181,7 @@ def render_prez_prez(file_, data):
 		env.filters['onlydate'] = onlydate
 		env.filters['include'] = include
 		env.filters['static'] = static
-		page.content = env.from_string(pre_filter({'file':file_}, yaml.content)).render()
+		page.content = Markup(env.from_string(pre_filter({'file':file_}, yaml.content)).render())
 
 		get_lists(page, yaml, request)
 
