@@ -26,10 +26,10 @@ def init_post_data():
 			if cpt != 0:
 				cpt_resource = 1
 				while 1:
-					if cpt_resource > len(app.yasifipo["posts"][lang]) -1:
+					if it_cpt - cpt_resource < 0:
 						it['next'] = None
 						break
-					if app.yasifipo["posts"][lang][it_cpt]['resource'] is not None:
+					if app.yasifipo["posts"][lang][it_cpt - cpt_resource]['resource'] is not None:
 						cpt_resource = cpt_resource + 1
 					else:
 						it['next'] = {'file': app.yasifipo["posts"][lang][it_cpt - cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
@@ -39,10 +39,10 @@ def init_post_data():
 			if cpt != len(app.yasifipo["posts"][lang]) - 1:
 				cpt_resource = 1
 				while 1:
-					if cpt_resource > len(app.yasifipo["posts"][lang]) -1:
+					if it_cpt + cpt_resource > len(app.yasifipo["posts"][lang]) -1:
 						it['prev'] = None
 						break
-					if app.yasifipo["posts"][lang][it_cpt]['resource'] is not None:
+					if app.yasifipo["posts"][lang][it_cpt + cpt_resource]['resource'] is not None:
 						cpt_resource = cpt_resource + 1
 					else:
 						it['prev'] = {'file': app.yasifipo["posts"][lang][it_cpt + cpt_resource]['file'], 'date': app.yasifipo["posts"][lang][cpt_resource]['date']}
