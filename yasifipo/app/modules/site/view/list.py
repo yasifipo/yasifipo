@@ -24,6 +24,29 @@ def get_lists(page, yaml, request):
 		if next_url:
 			page.posts.next_url = request.base_url + next_url
 
+	if 'externals' in yaml.keys() and type(yaml['externals']).__name__ == "bool" and yaml['externals'] == True:
+		externals = page.get_externals()
+		page.get_full_externals(externals)
+
+		page.externals = Externals()
+		page.externals.set_externals(externals)
+
+	elif 'externals' in yaml.keys() and type(yaml['externals']).__name__ == "int":
+		start = request.args.get('page', default= 0, type = int)
+
+		start, externals = page.get_partial_externals(start, yaml['externals'])
+		page.get_full_externals(externals)
+
+		page.externals = Externals()
+		page.externals.set_externals(externals)
+
+		prev_url = page.get_prev_url('external', start, start + yaml['externals'])
+		if prev_url:
+			page.externals.prev_url = request.base_url + prev_url
+		next_url = page.get_next_url(start, start - yaml['externals'])
+		if next_url:
+			page.externals.next_url = request.base_url + next_url
+
 	if 'collections' in yaml.keys():
 		for coll in yaml['collections'].keys():
 			if type(yaml['collections'][coll]).__name__ == "bool" and yaml['collections'][coll] == True:

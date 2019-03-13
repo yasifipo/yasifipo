@@ -11,6 +11,7 @@ from modules.menu import *
 from modules.plugin import *
 from modules.api import *
 from modules.rule import *
+from modules.external import *
 
 def run_data_read(app):
 	app.maintenance = False
@@ -27,4 +28,5 @@ def run_data_read(app):
 	init_post_data()
 	init_collection_data()
 	init_menu_data()
+	init_external_data()
 	setattr(app.post, "default_post", default_post) # default post result

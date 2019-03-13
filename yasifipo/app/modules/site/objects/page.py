@@ -6,6 +6,7 @@ from frontmatter import load
 
 from .tag import *
 from .post import *
+from .external import *
 from .collection import *
 from .prez import *
 from .menu import *
@@ -64,6 +65,18 @@ class Page():
 			posts.append(post)
 		return posts
 
+	def get_externals(self):
+		posts = []
+		if self.lang not in app.yasifipo["externals"]["data"]["posts"].keys():
+			return []
+		for post_it in app.yasifipo["externals"]["data"]["posts"][self.lang]:
+			post = External(post_it['file'], post_it['date'], self.lang, post_it['url'])
+			post.set_title(post_it['title'])
+			post.set_ext_name(post_it['ext'])
+			post.get_prev_next(post_it['prev'], post_it['next'])
+			posts.append(post)
+		return posts
+
 	def get_collection_posts(self, collection):
 		collection_posts  = []
 		if collection.name not in app.yasifipo["collections"].keys():
@@ -97,6 +110,11 @@ class Page():
 			return 0
 		return len(app.yasifipo["posts"][self.lang])
 
+	def get_total_external_nb(self):
+		if self.lang not in app.yasifipo["externals"]["data"]["posts"].keys():
+			return 0
+		return len(app.yasifipo["externals"]["data"]["posts"][self.lang])
+
 	def get_total_collection_post_nb(self, collection):
 		if self.lang not in app.yasifipo["collections"][collection]['data'].keys():
 			return 0
@@ -106,6 +124,28 @@ class Page():
 		if self.lang not in app.yasifipo["prezs"].keys():
 			return 0
 		return len(app.yasifipo["prezs"][self.lang])
+
+	def get_partial_externals(self, start, nb):
+		posts = []
+		if self.lang not in app.yasifipo["externals"]["data"]["posts"].keys():
+			return 0, posts
+
+		if start < 0:
+			start = 0
+
+		if start >= self.get_total_external_nb():
+			start = 0
+
+		if start + nb > self.get_total_external_nb():
+			nb = len(app.yasifipo["externals"]["data"]["posts"][self.lang]) - start
+
+		for post_it in app.yasifipo["externals"]["data"]["posts"][self.lang][start:start+nb]:
+			post = External(post_it['file'],post_it['date'], self.lang, post_it['resource'])
+			post.get_prev_next(post_it['prev'], post_it['next'])
+
+			posts.append(post)
+
+		return start, posts
 
 	def get_partial_posts(self, start, nb):
 		posts = []
@@ -181,6 +221,12 @@ class Page():
 			else:
 				text = '?page=' + str(end)
 				return text
+		elif type_ == 'external':
+			if end>= self.get_total_external_nb():
+				return None
+			else:
+				text = '?page=' + str(end)
+				return text
 		elif type_ == 'collection':
 			if end >= self.get_total_collection_post_nb(collection):
 				return None
@@ -205,6 +251,10 @@ class Page():
 	def get_full_posts(self, posts):
 		for post in posts:
 			post.get_full()
+
+	def get_full_externals(self, posts):
+		for post in posts:
+			post.get_full(post)
 
 	def get_full_collection_posts(self, collection, posts):
 		for coll in posts:

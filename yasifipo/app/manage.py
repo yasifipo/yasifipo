@@ -8,6 +8,7 @@ from flask_script import Option
 
 from main import *
 from modules.site import *
+from modules.external import *
 
 freezer = Freezer(app)
 
@@ -102,6 +103,38 @@ def run(data_path, display_all, runtime_server):
 		app.register_blueprint(admin, url_prefix="/admin")
 
 	app.run()
+
+@manager.option('-o', '--output', dest='output', required=True)
+@manager.option('-d', '--data', dest='data_path', default=None)
+@manager.option('-a', '--all', dest='display_all', default=False)
+@manager.option('-s', '--server', dest='runtime_server', default=None)
+def export(output, data_path, display_all, runtime_server):
+
+	if data_path:
+		app.config['DATA_DIR'] = os.path.abspath(data_path) + "/"
+
+	if display_all:
+		app.config['DISPLAY_ALL'] = True
+	else:
+		app.config['DISPLAY_ALL'] = False
+
+	load_config()
+
+	if runtime_server:
+		app.config['RUNTIME_SERVER'] = runtime_server
+	else:
+		app.config['RUNTIME_SERVER'] = None
+
+	run_data_read(app)
+	templates_add_loader(app.config['APPLICATION_DIR'] + "/" + "templates/"  + app.config["APPLICATION_TEMPLATE"] + "/", init=True)
+	templates_add_loader(app.config['TEMPLATES_DIR'] + app.yasifipo["config"]["theme"]) #must be before Plugin registration
+
+	if 'yasifipo_subdirectory' in app.yasifipo['config'] and app.yasifipo['config']['yasifipo_subdirectory'] != '':
+		app.register_blueprint(admin, url_prefix="/" + app.yasifipo['config']['yasifipo_subdirectory'] + "/admin")
+	else:
+		app.register_blueprint(admin, url_prefix="/admin")
+
+	export_all(output)
 
 @manager.option('-d', '--data', dest='data_path', required=True)
 def init(data_path):

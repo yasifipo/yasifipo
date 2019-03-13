@@ -14,6 +14,7 @@ from modules.plugin import *
 from modules.api import *
 from modules.rule import *
 from modules.collection import *
+from modules.external import *
 
 from .user import *
 
@@ -44,6 +45,9 @@ def reloading():
 	app.yasifipo["sitedata"] = None
 	app.yasifipo["menu"] = {} #menus
 	app.yasifipo["markdown_process"] = []
+	app.yasifipo['externals'] = {}
+	app.yasifipo['externals']['conf'] = {}
+	app.yasifipo['externals']['data'] = {}
 	app.plugins = {}
 
 	init_api()
@@ -59,6 +63,7 @@ def reloading():
 	init_post_data()
 	init_collection_data()
 	init_menu_data()
+	init_external_data()
 
 	app.maintenance = False
 

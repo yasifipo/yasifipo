@@ -38,4 +38,7 @@ app.yasifipo['prezs'] = {}
 app.yasifipo["sitedata"] = None
 app.yasifipo["menu"] = {} #menus
 app.yasifipo["markdown_process"] = []
+app.yasifipo['externals'] = {}
+app.yasifipo['externals']['conf'] = {}
+app.yasifipo['externals']['data'] = {}
 app.plugins = {}
