@@ -6,6 +6,10 @@ def importing_post(ext, data):
 
     for lang in data:
 
+        # Do not import post that are not in a known lang here
+        if lang not in [lg['lang'] for lg in app.yasifipo['langs'].values()]:
+            continue
+
         lang = set_lang({'lang':lang})
 
         for post in data[lang]:
