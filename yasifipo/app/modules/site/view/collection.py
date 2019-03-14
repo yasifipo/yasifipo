@@ -26,7 +26,10 @@ def render_collection(file_, data_):
 		if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 			page.display['tags'] = False
 		else:
-			page.tags_display = page.get_tags_display(yaml)
+			if 'display_tags' in app.yasifipo["config"]["default"].keys() and app.yasifipo["config"]["default"]["display_tags"] == False:
+				page.display['tags'] = False
+			else:
+				page.tags_display = page.get_tags_display(yaml)
 
 		page.title   = yaml['title']
 		env = Environment()

@@ -83,7 +83,10 @@ def render_prez_chapter(file_, data):
 	if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 		page.display['tags'] = False
 	else:
-		page.tags_display = page.get_tags_display(yaml)
+		if 'display_tags' in app.yasifipo["config"]["default"].keys() and app.yasifipo["config"]["default"]["display_tags"] == False:
+			page.display['tags'] = False
+		else:
+			page.tags_display = page.get_tags_display(yaml)
 
 	if 'display_cucumber' not in yaml.keys() or ('display_cucumber' in yaml.keys() and yaml['display_cucumber'] != False):
 		page.display['cucumber'] = True
@@ -137,7 +140,10 @@ def render_prez_prez(file_, data):
 		if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 			page.display['tags'] = False
 		else:
-			page.tags_display = page.get_tags_display(yaml)
+			if 'display_tags' in app.yasifipo["config"]["default"].keys() and app.yasifipo["config"]["default"]["display_tags"] == False:
+				page.display['tags'] = False
+			else:
+				page.tags_display = page.get_tags_display(yaml)
 
 		if "default" in app.yasifipo["config"] and "display_sidebar" in app.yasifipo["config"]["default"]:
 			page.display['sidebar'] = app.yasifipo["config"]["default"]["display_sidebar"]
@@ -214,7 +220,10 @@ def render_prez_page(file_, data):
 		if 'display_tags' in yaml.keys() and yaml['display_tags'] == False:
 			page.display['tags'] = False
 		else:
-			page.tags_display = page.get_tags_display(yaml)
+			if 'display_tags' in app.yasifipo["config"]["default"].keys() and app.yasifipo["config"]["default"]["display_tags"] == False:
+				page.display['tags'] = False
+			else:
+				page.tags_display = page.get_tags_display(yaml)
 
 
 		if 'display_cucumber' not in yaml.keys() or ('display_cucumber' in yaml.keys() and yaml['display_cucumber'] != False):

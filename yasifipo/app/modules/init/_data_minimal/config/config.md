@@ -30,4 +30,5 @@ freeze_destination_ignore: []
 
 default:
   display_sidebar: True
+  display_tags: False
 ---
