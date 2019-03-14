@@ -109,13 +109,14 @@ def init_tag_data():
 				app.yasifipo["tags"]["conf"][tag['slug']]['urls']['url'][lang] = tag['url']['url'][lang]
 
 	# register mass urls
-	for tag in app.yasifipo["tags"]["conf"].keys():
-		for lang in app.yasifipo["tags"]["conf"][tag]["urls"]['mass'].keys():
-			if app.yasifipo["langs"][lang]["draft"] == True:
-				if app.config['DISPLAY_ALL'] == False:
-					continue
-			rule = app.yasifipo["tags"]["conf"][tag]["urls"]['mass'][lang]
-			yasifipo_register("tag_type", rule, None, {'tag_type': tag, 'lang':lang})
+	if app.yasifipo["config"]["generate_tag_type_url"] == True:
+		for tag in app.yasifipo["tags"]["conf"].keys():
+			for lang in app.yasifipo["tags"]["conf"][tag]["urls"]['mass'].keys():
+				if app.yasifipo["langs"][lang]["draft"] == True:
+					if app.config['DISPLAY_ALL'] == False:
+						continue
+				rule = app.yasifipo["tags"]["conf"][tag]["urls"]['mass'][lang]
+				yasifipo_register("tag_type", rule, None, {'tag_type': tag, 'lang':lang})
 
 	# reading tag data
 	for tag_type in app.yasifipo["tags"]["conf"].keys():
@@ -131,14 +132,15 @@ def init_tag_data():
 
 
 	# register each tag of each tag_type
-	for tag_type in app.yasifipo["tags"]["data"].keys():
-		for tag in app.yasifipo["tags"]["data"][tag_type].keys():
-			for lang in app.yasifipo["tags"]["data"][tag_type][tag]['url'].keys():
-				if app.yasifipo["langs"][lang]["draft"] == True:
-					if app.config['DISPLAY_ALL'] == False:
-						continue
-				rule = app.yasifipo["tags"]["data"][tag_type][tag]['url'][lang]
-				yasifipo_register("tag", rule, None, {'tag_type': tag_type, 'tag': tag, 'lang': lang })
+	if app.yasifipo["config"]["generate_tag_url"] == True:
+		for tag_type in app.yasifipo["tags"]["data"].keys():
+			for tag in app.yasifipo["tags"]["data"][tag_type].keys():
+				for lang in app.yasifipo["tags"]["data"][tag_type][tag]['url'].keys():
+					if app.yasifipo["langs"][lang]["draft"] == True:
+						if app.config['DISPLAY_ALL'] == False:
+							continue
+					rule = app.yasifipo["tags"]["data"][tag_type][tag]['url'][lang]
+					yasifipo_register("tag", rule, None, {'tag_type': tag_type, 'tag': tag, 'lang': lang })
 
 def fill_tag_data(file_, tag_type):
 	with open(app.config['TAG_DIR'] + "/" + app.yasifipo["tags"]["conf"][tag_type]['directory'] + "/" + file_, encoding='utf-8') as fil_tag:
