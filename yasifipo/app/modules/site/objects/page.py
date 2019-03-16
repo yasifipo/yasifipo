@@ -54,11 +54,24 @@ class Page():
 
 		return sorted([i[1] for i in items.items()], key=lambda k: k.sort)
 
-	def get_posts(self):
+	def get_posts(self, yaml):
 		posts = []
 		if self.lang not in app.yasifipo["posts"].keys():
 			return []
 		for post_it in app.yasifipo["posts"][self.lang]:
+
+			# check if there is some filter
+			keep_it = False
+			if 'filter' in yaml.keys():
+				for tag_type in yaml['filter'].keys():
+					if tag_type in app.yasifipo['tags']['data'].keys():
+						if post_it['file'] in app.yasifipo['tags']['data'][tag_type][yaml['filter'][tag_type]]['data'][self.lang].keys():
+							keep_it = True
+							break
+
+			if keep_it is False:
+				continue
+
 			post = Post(post_it['file'],post_it['date'], self.lang, post_it['resource'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
 
@@ -147,7 +160,7 @@ class Page():
 
 		return start, posts
 
-	def get_partial_posts(self, start, nb):
+	def get_partial_posts(self, start, nb, yaml):
 		posts = []
 		if self.lang not in app.yasifipo["posts"].keys():
 			return 0, posts
@@ -162,6 +175,21 @@ class Page():
 			nb = len(app.yasifipo["posts"][self.lang]) - start
 
 		for post_it in app.yasifipo["posts"][self.lang][start:start+nb]:
+
+
+			# check if there is some filter
+			keep_it = False
+			if 'filter' in yaml.keys():
+				for tag_type in yaml['filter'].keys():
+					if tag_type in app.yasifipo['tags']['data'].keys():
+						if post_it['file'] in app.yasifipo['tags']['data'][tag_type][yaml['filter'][tag_type]]['data'][self.lang].keys():
+							keep_it = True
+							break
+
+			if keep_it is False:
+				continue
+
+
 			post = Post(post_it['file'],post_it['date'], self.lang, post_it['resource'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
 

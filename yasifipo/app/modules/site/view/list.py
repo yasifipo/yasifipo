@@ -2,7 +2,7 @@ from modules.site.objects import *
 
 def get_lists(page, yaml, request):
 	if 'posts' in yaml.keys() and type(yaml['posts']).__name__ == "bool" and yaml['posts'] == True:
-		posts = page.get_posts()
+		posts = page.get_posts(yaml)
 		page.get_full_posts(posts)
 
 		page.posts = Posts()
@@ -11,7 +11,7 @@ def get_lists(page, yaml, request):
 	elif 'posts' in yaml.keys() and type(yaml['posts']).__name__ == "int":
 		start = request.args.get('page', default= 0, type = int)
 
-		start, posts = page.get_partial_posts(start, yaml['posts'])
+		start, posts = page.get_partial_posts(start, yaml['posts'], yaml)
 		page.get_full_posts(posts)
 
 		page.posts = Posts()
