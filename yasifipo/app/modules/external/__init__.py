@@ -17,6 +17,9 @@ def init_external_data():
     app.yasifipo['externals']['data']["posts"] = {}
     for ext in app.yasifipo['externals']['conf'].values():
 
+        if "self" in ext.keys() and type(ext['self']).__name__ == "bool" and ext['self'] == True:
+            continue
+
         if not isfile(ext['path']):
             print("ERROR external file not found " + ext['path'])
             continue
@@ -26,6 +29,14 @@ def init_external_data():
 
             if 'posts' in json_.keys():
                 importing_post(ext['slug'], json_['posts'])
+
+
+    # Importing own posts into external
+    for ext in app.yasifipo['externals']['conf'].values():
+        if not ("self" in ext.keys() and type(ext['self']).__name__ == "bool" and ext['self'] == True):
+            continue
+
+        importing_own_post(ext)
 
 
     # After reading all externals site
