@@ -180,17 +180,19 @@ class Page():
 
 
 			# check if there is some filter
-			keep_it = False
 			if 'filter' in yaml.keys():
+				keep_it = False
 				for tag_type in yaml['filter'].keys():
 					if tag_type in app.yasifipo['tags']['data'].keys():
 						if post_it['file'] in app.yasifipo['tags']['data'][tag_type][yaml['filter'][tag_type]]['data'][self.lang].keys():
 							keep_it = True
 							break
 
+			else:
+				keep_it = True
+
 			if keep_it is False:
 				continue
-
 
 			post = Post(post_it['file'],post_it['date'], self.lang, post_it['resource'])
 			post.get_prev_next(post_it['prev'], post_it['next'])
