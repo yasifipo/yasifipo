@@ -212,3 +212,4 @@ TODO
 *  yasifipo: example --> {{ 'page//link/to/file'|yasifipo }}
 *  youtube: example --> {{  'buRXPNrFdgk'|youtube }}
 *  include: example --> {{ 'tab_detail.md'|include }}
+*  onlydate: example --> {{ post.date|onlydate }}
