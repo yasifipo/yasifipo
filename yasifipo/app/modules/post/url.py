@@ -13,7 +13,7 @@ def url_mapping(date, yaml, filename, url):
 		lang = yaml['lang']
 
 	url = url.replace('<year>', str(date.year))
-	url = url.replace('<month>', str(date.month))
+	url = url.replace('<month>', str(date.month).zfill(2))
 	url = url.replace('<day>', str(date.day))
 	url = url.replace('<lang>', lang)
 
