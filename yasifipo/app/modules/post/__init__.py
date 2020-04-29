@@ -154,7 +154,8 @@ def get_post_data(directory):
 			else:
 				if _resource == True: #should be always the case
 					url = app.yasifipo['config']['resources'][yaml['server']]['root'] + "/" + url
-					set_post(lang, directory + "/" + file_, date, url)
+					display_resource = app.yasifipo['config']['resources'][yaml['server']]['display']
+					set_post(lang, directory + "/" + file_, date, url, display_resource)
 					# No registration here
 
 			if _serv == True:
@@ -185,7 +186,7 @@ def get_post_data(directory):
 		# recursive call
 		get_post_data(directory + "/" + file_)
 
-def set_post(lang, file_, date, resource=None):
+def set_post(lang, file_, date, resource=None, display_resource=None):
 	if lang not in app.yasifipo["posts"].keys():
 		app.yasifipo["posts"][lang] = []
 
@@ -193,5 +194,5 @@ def set_post(lang, file_, date, resource=None):
 									'file': file_,
 									'lang': lang,
 									'date': date,
-									'resource': resource
+									'resource': {'url': resource, 'display': display_resource},
 									})

@@ -18,11 +18,12 @@ class Post():
 	def __init__(self, file_, date, lang, resource):
 		self.file_ = file_
 		self.date  = date
-		self.resource = (resource is not None)
+		self.resource = None
+		self.resource = resource['display'] if resource is not None else None
 		if not self.resource:
 			self.url   = yasifipo_url_for('render_file', path=app.yasifipo["files"][self.file_])
 		else:
-			self.url = resource
+			self.url = resource['url']
 		self.next  = None
 		self.prev  = None
 		self.lang  = lang
