@@ -14,6 +14,7 @@ import pathspec
 from flask import send_from_directory
 from flask import Markup
 from markdown import markdown
+from markdown_include.include import MarkdownInclude
 
 
 def init_site_data():
@@ -21,6 +22,9 @@ def init_site_data():
 	init_site_data_files()
 	app.yasifipo["markdown_process"].insert(0, FreezeUrlExtension())
 	app.yasifipo["markdown_process"].insert(0, 'markdown.extensions.tables')
+
+	markdown_include = MarkdownInclude(configs={'base_path':app.config["DATA_DIR"]})
+	app.yasifipo["markdown_process"].insert(0, markdown_include)
 	app.yasifipo["markdown_process"].insert(0, 'extra')
 
 def init_file_data():
