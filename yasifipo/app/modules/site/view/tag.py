@@ -12,6 +12,8 @@ def render_tag(data):
 
 	page.lang = data['lang']
 
+	page.app = app
+
 	page.tag = Tag(data['tag_type'], data['tag'], page.lang)
 
 	page.title = page.tag.description

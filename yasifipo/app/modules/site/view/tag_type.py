@@ -12,6 +12,8 @@ def render_tag_type(data):
 
 	page.lang = data['lang']
 
+	page.app = app
+
 	page.tag_type = TagType(data['tag_type'], page.lang)
 
 	# retrieve other langs for this tag
