@@ -22,6 +22,7 @@ def render_page(file_):
 
 		page.lang = set_lang(yaml)
 
+		page.app = app
 
 		page.langs = get_langs_from_ref(yaml, page.lang)
 
